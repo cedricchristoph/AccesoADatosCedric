@@ -72,15 +72,7 @@ public class FXMLDocumentController implements Initializable {
         if (gestor.isSaved()) {
             close();
         } else {
-            Alert alert = new Alert(AlertType.CONFIRMATION);
-            alert.setTitle("No ha guardado su archivo");
-            alert.setHeaderText("¿Quiere guardar su archivo antes de cerrar la aplicación?");
-            ButtonType buttonSi = new ButtonType("Si");
-            ButtonType buttonNo = new ButtonType("No");
-            ButtonType buttonCancel = new ButtonType("Cancel");
-            alert.getButtonTypes().setAll(buttonSi, buttonNo, buttonCancel);
-            Optional<ButtonType> result = alert.showAndWait();
-            if (result.get() == buttonSi)
+            if (guardarAntes())
                 try {
                     gestor.guardarArchivo(textArea.getText());
                     labelStatus.setText(gestor.getPathFile().toString() + " | Saved");
@@ -88,7 +80,7 @@ public class FXMLDocumentController implements Initializable {
                 } catch (Exception ex) {
                     labelStatus.setText(ex.getMessage());
                 }
-            else if (result.get() == buttonNo)
+            else
                 close();
         }
     }
@@ -119,22 +111,15 @@ public class FXMLDocumentController implements Initializable {
         if (gestor.isSaved()) {
             System.exit(0);
         } else {
-            Alert alert = new Alert(AlertType.CONFIRMATION);
-            alert.setTitle("No ha guardado su archivo");
-            alert.setHeaderText("¿Quiere guardar su archivo antes de cerrar la aplicación?");
-            ButtonType buttonSi = new ButtonType("Si");
-            ButtonType buttonNo = new ButtonType("No");
-            ButtonType buttonCancel = new ButtonType("Cancel");
-            alert.getButtonTypes().setAll(buttonSi, buttonNo, buttonCancel);
-            Optional<ButtonType> result = alert.showAndWait();
-            if (result.get() == buttonSi)
+            if (guardarAntes()) {
                 try {
                     gestor.guardarArchivo(textArea.getText());
                 } catch (Exception ex) {
                     labelStatus.setText(ex.getMessage());
                 }
-            else if (result.get() == buttonNo)
+            } else {
                 System.exit(0);
+            }
         }
     }
 
@@ -142,6 +127,9 @@ public class FXMLDocumentController implements Initializable {
     private void archivoPressed(ActionEvent event) {
     }
    
+    /**
+     * Cierra el fichero
+     */
     private void close() {
         textArea.setText("");
         labelStatus.setText("Not saved yet");
@@ -154,4 +142,21 @@ public class FXMLDocumentController implements Initializable {
         labelStatus.setText("Not saved yet");
     }
     
+    /**
+     * Función que devuelve el resultado de una ventana emergente
+     * @return Booleano
+     */
+    private boolean guardarAntes() {
+        Alert alert = new Alert(AlertType.CONFIRMATION);
+        alert.setTitle("No ha guardado su archivo");
+        alert.setHeaderText("¿Quiere guardar su archivo antes?");
+        ButtonType buttonSi = new ButtonType("Si");
+        ButtonType buttonNo = new ButtonType("No");
+        alert.getButtonTypes().setAll(buttonSi, buttonNo);
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == buttonSi)
+            return true;
+        return false;
+    }
+
 }

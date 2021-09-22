@@ -50,7 +50,6 @@ public class Gestor {
         return saved;
     }
     
-
     public void setFileChooser(FileChooser fileChooser) {
         this.fileChooser = fileChooser;
     }
@@ -71,6 +70,9 @@ public class Gestor {
      * Methods
      */
     
+    /**
+     * Método para iniciar una nueva estancia (un nuevo documento)
+     */
     public void newArchivo() {
         fileChooser = null;
         selectedFile = null;
@@ -78,6 +80,10 @@ public class Gestor {
         saved = false;
     }
     
+    /**
+     * Método para abrir el archivo
+     * @throws Exception 
+     */
     public void abrirArchivo() throws Exception {
         fileChooser = new FileChooser();
         selectedFile = fileChooser.showOpenDialog(null);
@@ -87,6 +93,11 @@ public class Gestor {
             throw new Exception("No se seleccionó ningún archivo");
     }
     
+    /**
+     * Función que devuelve el contenido del fichero que se ha abierto
+     * @return String contenido
+     * @throws Exception 
+     */
     public String getContenidoArchivo() throws Exception {
         try {
             String contenido = "";
@@ -101,6 +112,11 @@ public class Gestor {
         }
     }
     
+    /**
+     * Método para guardar el archivo de texto
+     * @param contenido Contenido del fichero a guardar
+     * @throws Exception 
+     */
     public void guardarArchivo(String contenido) throws Exception {
         if (selectedFile == null)
             selectedFile = useSaveFileChooser();
@@ -114,6 +130,10 @@ public class Gestor {
         } 
     }
     
+    /**
+     * Función que devuelve FILE seleccionado por FileChooser
+     * @return 
+     */
     public File useSaveFileChooser() {
         fileChooser = new FileChooser();
         return fileChooser.showSaveDialog(null);
