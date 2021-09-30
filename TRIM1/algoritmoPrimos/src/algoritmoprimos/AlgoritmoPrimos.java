@@ -5,9 +5,6 @@
  */
 package algoritmoprimos;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Formatter;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -20,7 +17,7 @@ public class AlgoritmoPrimos {
     final static int PROGRESS_CHECK = 1000;
     static int actual;
     static int antiguo;
-    
+    static Algoritmo algoritmo;
     /**
      * @param args the command line arguments
      */
@@ -33,9 +30,11 @@ public class AlgoritmoPrimos {
                 limit = scanner.nextInt();
                 System.out.println("");
                 if (!(limit == 0)) {
-                    Algoritmo algoritmo = new Algoritmo(limit);
+                    algoritmo = new Algoritmo(limit);
                     algoritmo.iniciarAlgoritmo();
                 } else {
+                    Gestor gestor = new Gestor();
+                    gestor.guardar(algoritmo.getResultadosPrimos());
                     System.exit(0);
                 }
             } catch (InputMismatchException e) {

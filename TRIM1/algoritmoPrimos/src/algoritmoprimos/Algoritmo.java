@@ -16,6 +16,7 @@ public class Algoritmo {
     final static int PROGRESS_CHECK = 5000;
     static int antiguo;
     int limit;
+    ArrayList<Integer> resultadosPrimos;
     
     /**
      * Constructor de la clase Algoritmo
@@ -24,12 +25,16 @@ public class Algoritmo {
     public Algoritmo(int limit) {
         this.limit = limit;
     }
+
+    public ArrayList<Integer> getResultadosPrimos() {
+        return resultadosPrimos;
+    }
     
     /**
      * Metodo para iniciar el algoritmo
      */
     public void iniciarAlgoritmo() {
-        ArrayList<Integer> resultadosPrimos = new ArrayList<>();
+        resultadosPrimos = new ArrayList<>();
         int counter = 0;
         antiguo = 2;
         for (int i = 2; i < limit; i++) {
@@ -41,7 +46,7 @@ public class Algoritmo {
             if (esPrimo(i))
                 resultadosPrimos.add(i);
         }
-        System.out.println("\nAlgoritmo completado ( " + limit + " / " + limit + " ) 100.00%\n\nResultados:");
+        System.out.println("\nAlgoritmo completado ( " + limit + " / " + limit + " ) 100,00%\n\nResultados:");
         System.out.println("Existen " + resultadosPrimos.size() + " numeros primos en los primeros " + limit + " numeros");
     }
     
