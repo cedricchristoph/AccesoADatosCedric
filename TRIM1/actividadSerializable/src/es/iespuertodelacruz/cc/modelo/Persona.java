@@ -13,18 +13,29 @@ import java.io.Serializable;
  */
 public class Persona implements Serializable {
     
+    /**
+     * Variables
+     */
     private String nombre;
     private int edad;
     private int alturaCm;
     private Dni dni;
 
-    public Persona(String nombre, int edad, int alturaCm, Dni dni) {
+    /**
+     * Constructor de la clase.
+     * @param dni
+     * @param nombre
+     * @param edad
+     * @param alturaCm 
+     */
+    public Persona(Dni dni, String nombre, int edad, int alturaCm) {
         this.nombre = nombre;
         this.edad = edad;
         this.alturaCm = alturaCm;
         this.dni = dni;
     }
 
+    // Getters & Setters
     public String getNombre() {
         return nombre;
     }
@@ -57,5 +68,14 @@ public class Persona implements Serializable {
         this.dni = dni;
     }
     
+    /**
+     * Metodo para recibir los datos de la persona como String
+     * @return 
+     */
+    public String getDataRow() {
+        // FORMATO: dni;nombre;edad;altura
+        String dataRow = getDni().toString() + ";" + getNombre() + ";" + getEdad() + ";" + getAlturaCm();
+        return dataRow;
+    }
     
 }
