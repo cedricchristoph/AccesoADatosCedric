@@ -7,11 +7,19 @@ package es.iespuertodelacruz.cc.modelo;
  */
 public class Persona {
     
+    String dni;
     String nombre;
     String apellido;
     int edad;
     
     public Persona(){}
+
+    public Persona(String dni, String nombre, String apellido, int edad) {
+        this.dni = dni;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.edad = edad;
+    }
 
     public Persona(String nombre, String apellido, int edad) {
         this.nombre = nombre;
@@ -19,6 +27,10 @@ public class Persona {
         this.edad = edad;
     }
 
+    public String getDni() {
+        return dni;
+    }
+    
     public String getNombre() {
         return nombre;
     }
@@ -29,6 +41,10 @@ public class Persona {
 
     public int getEdad() {
         return edad;
+    }
+
+    public void setDni(String dni) {
+        this.dni = dni;
     }
 
     public void setNombre(String nombre) {
@@ -43,6 +59,10 @@ public class Persona {
         this.edad = edad;
     }
     
-    
+    public String getDataRow() {
+        // FORMATO: nombre;apellido;dni;edad;altura;peso
+        String dataRow = getNombre() + ";" + getApellido() + ";" + getDni() + ";" + getEdad();
+        return dataRow;
+    }
     
 }

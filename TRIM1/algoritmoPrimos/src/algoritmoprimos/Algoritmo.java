@@ -13,8 +13,8 @@ import java.util.ArrayList;
  */
 public class Algoritmo {
     
-    final static int PROGRESS_CHECK = 5000;
-    static int antiguo;
+    final int PROGRESS_CHECK = 5000;
+    int antiguo;
     int limit;
     ArrayList<Integer> resultadosPrimos;
     

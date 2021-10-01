@@ -19,12 +19,13 @@ public class registropersona extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("src/es/iespuertodelacruz/cc/vista/FXMLPrincipal.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/es/iespuertodelacruz/cc/vista/FXMLPrincipal.fxml"));
         
         Scene scene = new Scene(root);
         
         stage.setScene(scene);
         stage.show();
+        
     }
 
     /**
