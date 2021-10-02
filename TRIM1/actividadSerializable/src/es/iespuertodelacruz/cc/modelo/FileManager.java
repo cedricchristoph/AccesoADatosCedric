@@ -38,15 +38,15 @@ public class FileManager {
      * Metodo para escribir una Persona serializado en el fichero indicado
      * @param persona 
      */
-    public void write(Persona persona) {
+    public void write(ArrayList<Persona> personas) {
         try (
                 FileOutputStream fos = new FileOutputStream(fichero.toFile());
                 BufferedOutputStream bos = new BufferedOutputStream(fos);
-                ObjectOutputStream oos = new ObjectOutputStream(bos);) 
-        {
+                ObjectOutputStream oos = new ObjectOutputStream(bos);) {
 
-            
-            oos.writeObject(persona);
+            for (Persona p : personas) {
+                oos.writeObject(p);
+            }
 
         } catch (FileNotFoundException ex) {
             ex.printStackTrace();

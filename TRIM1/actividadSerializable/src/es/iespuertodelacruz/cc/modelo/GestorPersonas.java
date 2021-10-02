@@ -31,7 +31,10 @@ public class GestorPersonas {
     
     public void addPersona(Persona persona) {
         personas.add(persona);
-        manager.write(persona);
+    }
+    
+    public void guardar() {
+        manager.write(personas);
     }
     
     public void addPersona(String datarow) {
