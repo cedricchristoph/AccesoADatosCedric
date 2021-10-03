@@ -5,28 +5,40 @@
  */
 package es.iespuertodelacruz.cc.modelo;
 
+import java.io.UnsupportedEncodingException;
+
 /**
  *
  * @author cedric christoph
  */
 public class Persona {
     
+    public final Integer BLOCK_SIZE = DATA_SIZE * 3;
     public static final Integer DATA_SIZE = 50;
-    public static final Integer BLOCK_SIZE = DATA_SIZE * 3;
     
-    String dni;
-    String nombre;
-    String apellidos;
+    private String dni;
+    private String nombre;
+    private String apellidos;
 
+    /**
+     * Constructor por defecto.
+     */
     public Persona() {
     }
 
+    /**
+     * Constructor de la clase Persona
+     * @param dni Dni de la persona
+     * @param nombre Nombre de la persona
+     * @param apellidos Apellidos de la persona
+     */
     public Persona(String dni, String nombre, String apellidos) {
         this.dni = dni;
         this.nombre = nombre;
         this.apellidos = apellidos;
     }
 
+    // Getters & Setters
     public String getDni() {
         return dni;
     }
@@ -51,15 +63,24 @@ public class Persona {
         this.apellidos = apellidos;
     }
     
-    public String toDataRow() {
-        return fill(getDni()) + ";" + fill(getNombre()) + ";" + fill(getApellidos());
+    /**
+     * Funcion que devuelve la informacion de la persona como array de bytes
+     * @return Devuelve array de bytes
+     */
+    public byte[] toByteArray() {
+        String str;
+        byte[] output = null;
+        byte[] source = null;
+        try {
+            str = (getDni()) + ";" + (getNombre()) + ";" + (getApellidos());
+            output = new byte[BLOCK_SIZE];
+            source = str.getBytes("utf-8");
+            output[0] = (byte) source.length;
+            System.arraycopy(source, 0, output, 1, source.length);
+        } catch (UnsupportedEncodingException ex) {
+        }
+        return output;
     }
     
-    private String fill(String input) {
-        while (input.length() < DATA_SIZE) {
-            input += " ";
-        }
-        return input;
-    }
     
 }
