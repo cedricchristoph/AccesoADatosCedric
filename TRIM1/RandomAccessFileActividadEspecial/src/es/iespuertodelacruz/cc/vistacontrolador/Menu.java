@@ -88,8 +88,12 @@ public class Menu {
         nombre = scanner.nextLine();
         System.out.println("Introduzca apellidos:");
         apellidos = scanner.nextLine();
-        gestor.addPersona(new Persona (dni, nombre, apellidos));
-        System.out.println("✔ Guardado e indexado\n");
+        if (gestor.get(dni) == null) {
+            gestor.addPersona(new Persona (dni, nombre, apellidos));
+            System.out.println("✔ Guardado e indexado\n");
+        } else {
+            System.out.println("Este DNI ya existe\n");
+        }
     }
     
     /**
