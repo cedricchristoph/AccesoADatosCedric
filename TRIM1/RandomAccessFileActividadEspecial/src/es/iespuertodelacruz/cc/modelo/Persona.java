@@ -65,7 +65,12 @@ public class Persona {
     
     /**
      * Funcion que devuelve la informacion de la persona como array de bytes
+     * 
+     * FORMATO: byte[0] indica LENGTH de datos
+     *          byte[1-149] son los datos de la persona
+     * 
      * @return Devuelve array de bytes
+     * 
      */
     public byte[] toByteArray() {
         String str;
