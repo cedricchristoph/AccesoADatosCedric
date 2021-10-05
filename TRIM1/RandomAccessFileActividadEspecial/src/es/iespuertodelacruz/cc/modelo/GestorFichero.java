@@ -11,6 +11,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 /**
  *
  * @author cedric christoph
@@ -47,6 +50,29 @@ public class GestorFichero {
            
         }
         return false;
+    }
+    
+    public boolean remove(String dni) {
+        Integer indexPos = getIndexedValue(dni);
+        List<String> lines;
+        byte[] zeroData = new byte[BLOCK_SIZE];
+        try (RandomAccessFile raf = new RandomAccessFile(dataFile.toFile(), "rw")) {
+            raf.seek(indexPos);
+            raf.write(zeroData);
+        } 
+        catch (FileNotFoundException ex) {return false;} 
+        catch (IOException ex) {return false;}
+        try (BufferedWriter writer = Files.newBufferedWriter(indexFile)) {
+            lines = Files.readAllLines(indexFile);
+            String output = "";
+            for (String line : lines)
+                if (line.split(";")[0].equals(dni)) {
+                    
+                } else
+                    output += line + "\n";
+            writer.write(output);
+        } catch (IOException ex) {return false;}
+        return true;       
     }
      
     /**

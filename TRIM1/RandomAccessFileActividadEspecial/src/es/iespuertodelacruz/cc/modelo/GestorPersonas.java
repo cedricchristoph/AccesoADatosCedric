@@ -54,6 +54,11 @@ public class GestorPersonas {
         personas.remove(personas.stream().filter(p -> p.getDni().equals(dni)).findFirst().get());
     }
     
+    public boolean removePersona(Persona persona) {
+        personas.remove(persona);
+        return gestor.remove(persona.getDni());
+    }
+    
     /**
      * Metodo para encontrar una persona a traves de su dni del fichero de bytes
      * @param dni Dni de la persona a encontrar

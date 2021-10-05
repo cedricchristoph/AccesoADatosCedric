@@ -52,6 +52,9 @@ public class Menu {
                     case 2:
                         encontrarPersona();
                         break;
+                    case 3:
+                        eliminarPersona();
+                        break;
                     default:
                         System.exit(0);
                 }
@@ -70,6 +73,7 @@ public class Menu {
                 "=================================================\n" +
                 "  ( 1 ) -- Crear nueva persona\n" +
                 "  ( 2 ) -- Encontrar una persona en el fichero\n" +
+                "  ( 3 ) -- Eliminar persona  !! EXPERIMENTAL !!\n" +
                 "  ( 0 ) -- Salir\n\n"
         );
     }
@@ -110,6 +114,20 @@ public class Menu {
             System.out.println("============================\n");
         } else {
             System.out.println("No se pudo encontrar la persona");
+        }
+    }
+    
+    
+    private void eliminarPersona() {
+        scanner = new Scanner(System.in);
+        System.out.println("Introduzca dni de la persona a eliminar");
+        String dni = scanner.nextLine();
+        Persona persona;
+        if ((persona = gestor.get(dni)) != null) {
+            if (gestor.removePersona(persona))
+                System.out.println("\nSe ha elminado correctamente la persona con DNI " + dni);
+            else
+                System.out.println("\nOcurrió un error al intentar eliminar la persona con DNI " + dni);
         }
     }
 }
