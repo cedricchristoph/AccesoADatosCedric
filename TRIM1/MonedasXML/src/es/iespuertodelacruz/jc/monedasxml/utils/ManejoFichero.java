@@ -27,15 +27,15 @@ public class ManejoFichero {
         file = new File(nombre);
     }
     
-    public boolean agregarTexto(String texto){
+    public boolean append(String texto){
         return false;
     }
     
-    public boolean borrarYAgregar(String texto){
+    public boolean write(String texto){
         return false;    
     }
     
-    public String leerTodo(){
+    public String readAll(){
         return null;
     }
     

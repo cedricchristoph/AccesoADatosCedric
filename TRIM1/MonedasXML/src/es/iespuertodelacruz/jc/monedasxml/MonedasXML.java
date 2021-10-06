@@ -64,10 +64,10 @@ public class MonedasXML {
         //mf.agregarTexto(mXML.objToStringXML(m2));
         System.out.println("---- lectura ----");
         System.out.println(
-                mf.leerTodo()
+                mf.readAll()
         );
         
-        Moneda m3 = monedaXML.stringXMLToObj(mf.leerTodo());
+        Moneda m3 = monedaXML.stringXMLToObj(mf.readAll());
         System.out.println(m3);
         
     }
