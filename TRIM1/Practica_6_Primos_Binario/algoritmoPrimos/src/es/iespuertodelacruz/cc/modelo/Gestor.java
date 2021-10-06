@@ -37,11 +37,13 @@ public class Gestor {
      * @param numeros Los resultados
      */
     public void guardar(ArrayList<Integer> numeros) {
+        ArrayList<Byte> bytes = new ArrayList<>();
+        numeros.stream().forEach(i -> bytes.add(i.byteValue()));
         try {
             FileOutputStream fis = new FileOutputStream(fichero.toFile());
             DataOutputStream dos = new DataOutputStream(fis);
-            for (int i = 0; i < numeros.size(); i++) {
-                dos.writeInt(numeros.get(i));
+            for (int i = 0; i < bytes.size(); i++) {
+                dos.writeInt(bytes.get(i));
             }
             dos.close();
         } catch (FileNotFoundException ex) {
