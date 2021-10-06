@@ -61,7 +61,7 @@ public class Persona {
     
     public String getDataRow() {
         // FORMATO: nombre;apellido;dni;edad;altura;peso
-        String dataRow = getNombre() + ";" + getApellido() + ";" + getDni() + ";" + getEdad();
+        String dataRow = getNombre() + ";" + getApellido() + ";" + getDni() + ";" + getEdad() + "\n";
         return dataRow;
     }
     

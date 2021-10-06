@@ -13,6 +13,8 @@ import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
+import java.util.ArrayList;
 
 /**
  *
@@ -37,6 +39,30 @@ public class ManejarFichero {
         } catch (IOException ex) {
             ex.printStackTrace();
         }    
+    }
+    
+    public boolean guardarPersonas(ArrayList<Persona> personas) {
+        try (BufferedWriter writer = Files.newBufferedWriter(fichero, StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING)) {
+            for (Persona persona : personas) {
+                writer.write(persona.getDataRow());
+            }
+        } catch (IOException ex) {
+            return false;
+        }
+        return true;
+    }
+    
+    public ArrayList<Persona> getPersonas() {
+        ArrayList<Persona> lista = new ArrayList<>();
+        try (BufferedReader reader = Files.newBufferedReader(fichero)) {
+            String strPersona;
+            while ((strPersona = reader.readLine()) != null) {
+                String datos[] = strPersona.split(";");
+                lista.add(new Persona(datos[2], datos[0], datos[1], Integer.parseInt(datos[3])));
+            }
+        } catch (IOException ex) {
+        }
+        return lista;
     }
     
     public Persona getPersona(String dni) {
