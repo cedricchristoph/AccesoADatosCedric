@@ -12,16 +12,12 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 /**
  *
  * @author cedric christoph
  */
 public class GestorFichero {
-    
-    public final Integer BLOCK_SIZE = Persona.DATA_SIZE * 3;
-    
+
     private final Path indexFile;
     private final Path dataFile;
 
@@ -41,24 +37,37 @@ public class GestorFichero {
      * @param dni String dni de la persona para el indexado
      * @return Devuelve true solo si se ha guardado e indexado correctamente
      */
-    public boolean append(byte[] data, String dni) {
-        try (FileOutputStream fos = new FileOutputStream(dataFile.toFile(), true)) {
-            fos.write(data);
+    public boolean append(char[] data, String dni) {
+        try (RandomAccessFile raf = new RandomAccessFile(dataFile.toFile(), "rw")) {
+            raf.seek(raf.length());
+            raf.writeChars(new String(data));
             appendIndex(dni);
             return true;
-        } catch (IOException ex) {
-           
+        } catch (IOException ex) { 
+            return false;
         }
-        return false;
+//        try (FileOutputStream fos = new FileOutputStream(dataFile.toFile(), true)) {
+//            fos.write(data);
+//            appendIndex(dni);
+//            return true;
+//        } catch (IOException ex) {
+//           
+//        }
+//        return false;
     }
     
+    /**
+     * Metodo que elimina un registro del fichero binario y reescribe el fichero de indexado
+     * @param dni Dni de la persona a eliminar
+     * @return Devuelve true y solo true si se ha borrado correctamente
+     */
     public boolean remove(String dni) {
         Integer indexPos = getIndexedValue(dni);
         List<String> lines;
-        byte[] zeroData = new byte[BLOCK_SIZE];
+        char[] zeroData = new char[RegistroPersona.CHAR_BLOCK_SIZE];
         try (RandomAccessFile raf = new RandomAccessFile(dataFile.toFile(), "rw")) {
             raf.seek(indexPos);
-            raf.write(zeroData);
+            raf.writeChars(new String(zeroData));
         } 
         catch (FileNotFoundException ex) {return false;} 
         catch (IOException ex) {return false;}
@@ -80,17 +89,16 @@ public class GestorFichero {
      * @param id Identificador de la persona (Dni)
      * @return Devuelve objeto persona o null si no se encontro la persona
      */
-    public Persona get(String id) {
+    public RegistroPersona get(String id) {
         Integer index;
         if ((index = getIndexedValue(id)) != null) {
-            Integer filePos = index * BLOCK_SIZE;
+            Integer filePos = index * RegistroPersona.BLOCK_SIZE;
             try (RandomAccessFile raf = new RandomAccessFile(dataFile.toFile(), "r")) {
                 raf.seek(filePos);
-                byte readLength = raf.readByte();
-                byte[] dataAsBytes = new byte[readLength];
-                raf.read(dataAsBytes);
-                String data[] = new String(dataAsBytes).split(";");
-                return new Persona(data[0], data[1], data[2]);
+                char[] contenido = new char[RegistroPersona.CHAR_BLOCK_SIZE];
+                for (int i = 0; i < contenido.length; i++)
+                    contenido[i] = raf.readChar();
+                return new RegistroPersona(new String(contenido));
             } catch (FileNotFoundException ex) {
 
             } catch (IOException ex) {

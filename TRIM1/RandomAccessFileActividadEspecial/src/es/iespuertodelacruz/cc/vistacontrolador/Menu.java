@@ -93,7 +93,7 @@ public class Menu {
         System.out.println("Introduzca apellidos:");
         apellidos = scanner.nextLine();
         if (gestor.get(dni) == null) {
-            gestor.addPersona(new Persona (dni, nombre, apellidos));
+            gestor.add(new Persona (dni, nombre, apellidos));
             System.out.println("✔ Guardado e indexado\n");
         } else {
             System.out.println("Este DNI ya existe\n");
@@ -124,7 +124,7 @@ public class Menu {
         String dni = scanner.nextLine();
         Persona persona;
         if ((persona = gestor.get(dni)) != null) {
-            if (gestor.removePersona(persona))
+            if (gestor.remove(persona))
                 System.out.println("\nSe ha elminado correctamente la persona con DNI " + dni);
             else
                 System.out.println("\nOcurrió un error al intentar eliminar la persona con DNI " + dni);

@@ -61,31 +61,6 @@ public class Persona {
 
     public void setApellidos(String apellidos) {
         this.apellidos = apellidos;
-    }
-    
-    /**
-     * Funcion que devuelve la informacion de la persona como array de bytes
-     * 
-     * FORMATO: byte[0] indica LENGTH de datos
-     *          byte[1-149] son los datos de la persona
-     * 
-     * @return Devuelve array de bytes
-     * 
-     */
-    public byte[] toByteArray() {
-        String str;
-        byte[] output = null;
-        byte[] source = null;
-        try {
-            str = (getDni()) + ";" + (getNombre()) + ";" + (getApellidos());
-            output = new byte[BLOCK_SIZE];
-            source = str.getBytes("utf-8");
-            output[0] = (byte) source.length;
-            System.arraycopy(source, 0, output, 1, source.length);
-        } catch (UnsupportedEncodingException ex) {
-        }
-        return output;
-    }
-    
+    }   
     
 }

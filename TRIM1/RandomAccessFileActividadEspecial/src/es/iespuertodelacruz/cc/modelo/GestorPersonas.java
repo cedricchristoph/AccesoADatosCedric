@@ -41,20 +41,20 @@ public class GestorPersonas {
      * Metodo para añadir una persona a la lista y al fichero
      * @param p Persona a añadir
      */
-    public void addPersona(Persona p) {
+    public void add(Persona p) {
         personas.add(p);
-        gestor.append(p.toByteArray(), p.getDni());
+        gestor.append(new RegistroPersona(p).toCharArray(), p.getDni());
     }
     
     /**
      * Metodo para eliminar una persona de la lista
      * @param dni 
      */
-    public void removePersona(String dni) {
+    public void remove(String dni) {
         personas.remove(personas.stream().filter(p -> p.getDni().equals(dni)).findFirst().get());
     }
     
-    public boolean removePersona(Persona persona) {
+    public boolean remove(Persona persona) {
         personas.remove(persona);
         return gestor.remove(persona.getDni());
     }
@@ -65,6 +65,9 @@ public class GestorPersonas {
      * @return Devuelve el objeto persona o null si no se ha encontrado la persona
      */
     public Persona get(String dni) {
-        return gestor.get(dni);
+        RegistroPersona rp = gestor.get(dni);
+        if (rp == null)
+            return null;
+        return rp.toPersona();
     }
 }
