@@ -73,7 +73,7 @@ public class Menu {
                 "=================================================\n" +
                 "  ( 1 ) -- Crear nueva persona\n" +
                 "  ( 2 ) -- Encontrar una persona en el fichero\n" +
-                "  ( 3 ) -- Eliminar persona  !! EXPERIMENTAL !!\n" +
+                "  ( 3 ) -- Eliminar persona\n" +
                 "  ( 0 ) -- Salir\n\n"
         );
     }
