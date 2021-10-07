@@ -22,18 +22,20 @@ import javax.xml.bind.Unmarshaller;
 public class MonedaXML implements JavaToXMLString<Moneda>{
 
     @Override
-    public String objToStringXML(Moneda m) {
-        String textoXML = null;
-
-        return textoXML;
+    public String objToStringXML(Moneda obj) {
+        try {
+            JAXBContext context2 = JAXBContext.newInstance(Moneda.class);
+        } catch (JAXBException ex) {
+           
+        }
+        return null;
     }
 
     @Override
-    public Moneda stringXMLToObj(String textoXML) {
-        Moneda m = null;
-
-        
-        return m;
+    public Moneda stringXMLToObj(String texto) {
+        return null;
     }
+
+
     
 }

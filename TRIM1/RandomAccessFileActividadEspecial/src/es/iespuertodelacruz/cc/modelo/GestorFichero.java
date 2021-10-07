@@ -4,7 +4,6 @@ package es.iespuertodelacruz.cc.modelo;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.nio.file.Files;
@@ -63,22 +62,27 @@ public class GestorFichero {
      */
     public boolean remove(String dni) {
         Integer indexPos = getIndexedValue(dni);
-        List<String> lines;
+        List<String> lines = null;
         char[] zeroData = new char[RegistroPersona.CHAR_BLOCK_SIZE];
+        zeroData = fillWithSpaces(zeroData);
         try (RandomAccessFile raf = new RandomAccessFile(dataFile.toFile(), "rw")) {
             raf.seek(indexPos);
             raf.writeChars(new String(zeroData));
         } 
         catch (FileNotFoundException ex) {return false;} 
         catch (IOException ex) {return false;}
-        try (BufferedWriter writer = Files.newBufferedWriter(indexFile)) {
+        try {
             lines = Files.readAllLines(indexFile);
+        } catch (IOException ex) {}
+        try (BufferedWriter writer = Files.newBufferedWriter(indexFile, StandardOpenOption.TRUNCATE_EXISTING)) {
             String output = "";
-            for (String line : lines)
+            for (String line : lines) {
+                System.out.println(output);
                 if (line.split(";")[0].equals(dni)) {
                     
                 } else
                     output += line + "\n";
+            }
             writer.write(output);
         } catch (IOException ex) {return false;}
         return true;       
@@ -125,10 +129,15 @@ public class GestorFichero {
      * @return Integer posicion
      */
     private Integer getIndexPosition() {
-        try {
-            return Files.readAllLines(indexFile).size();
+        Integer output = 0;
+        try (BufferedReader reader = Files.newBufferedReader(indexFile)) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                output = Integer.parseInt(line.split(";")[1]);
+            }
+            return output + 1;
         } catch (IOException ex) {}
-        return 0;
+        return output;
     } 
     
     /**
@@ -150,4 +159,10 @@ public class GestorFichero {
         return null;
     }
     
+    private char[] fillWithSpaces(char[] array) {
+        for (int i = 0; i < array.length; i++) {
+            array[i] = ' ';
+        }
+        return array;
+    }
 }
