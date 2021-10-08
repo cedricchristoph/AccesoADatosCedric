@@ -5,12 +5,11 @@
  */
 package es.iespuertodelacruz.jc.monedasxml.xml;
 
-import es.iespuertodelacruz.jc.monedasxml.entities.Moneda;
+import es.iespuertodelacruz.jc.monedasxml.entities.Almacen;
+import es.iespuertodelacruz.jc.monedasxml.entities.Historico;
 import java.io.OutputStream;
 import java.io.StringReader;
 import java.io.StringWriter;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
@@ -18,21 +17,21 @@ import javax.xml.bind.Unmarshaller;
 
 /**
  *
- * @author carlos
+ * @author Cedric Christoph
  */
-public class MonedaXML implements JavaToXMLString<Moneda>{
+public class AlmacenXML implements JavaToXMLString<Almacen> {
 
     @Override
-    public String objToStringXML(Moneda moneda) {
+    public String objToStringXML(Almacen almacen) {
         JAXBContext contexto;
         Marshaller marshaller;
         OutputStream os = null;
         StringWriter sw = new StringWriter();
         try {
-            contexto = JAXBContext.newInstance(moneda.getClass());
+            contexto = JAXBContext.newInstance(almacen.getClass());
             marshaller = contexto.createMarshaller();
             marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
-            marshaller.marshal(moneda, sw);
+            marshaller.marshal(almacen, sw);
         } catch (JAXBException ex) {
             System.out.println(ex);
         } finally {
@@ -41,25 +40,26 @@ public class MonedaXML implements JavaToXMLString<Moneda>{
     }
 
     @Override
-    public Moneda stringXMLToObj(String textoXml) {
+    public Almacen stringXMLToObj(String textoXml) {
         JAXBContext contexto;
         Marshaller marshaller;
         StringReader sr = new StringReader(textoXml);
-        Moneda moneda = null;
+        Almacen almacen = null;
         try {
-            contexto = JAXBContext.newInstance(Moneda.class);
+            contexto = JAXBContext.newInstance(Almacen.class);
             marshaller = contexto.createMarshaller();
             marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT,
                     Boolean.TRUE);
             Unmarshaller unmarshaller = contexto.createUnmarshaller();
-            moneda = (Moneda) unmarshaller.unmarshal(sr);
+            almacen = (Almacen) unmarshaller.unmarshal(sr);
         } catch (JAXBException ex) {
             System.out.println(ex);
         } finally {
-            return moneda;
+            return almacen;
         }
     }
 
-
+    
+    
     
 }

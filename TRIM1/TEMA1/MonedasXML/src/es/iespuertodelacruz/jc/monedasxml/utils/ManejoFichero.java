@@ -5,13 +5,12 @@
  */
 package es.iespuertodelacruz.jc.monedasxml.utils;
 
-import java.io.File;
+import java.io.BufferedWriter;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -20,11 +19,11 @@ import java.util.logging.Logger;
 public class ManejoFichero {
     
     
-    File file;
+    Path file;
     
     
     public ManejoFichero(String nombre){
-        file = new File(nombre);
+        file = Paths.get(nombre);
     }
     
     public boolean append(String texto){
@@ -32,7 +31,12 @@ public class ManejoFichero {
     }
     
     public boolean write(String texto){
-        return false;    
+        try (BufferedWriter writer = Files.newBufferedWriter(file, StandardOpenOption.TRUNCATE_EXISTING, StandardOpenOption.CREATE)) {
+            writer.write(texto);
+            return true;
+        } catch (IOException ex) {
+            return false;
+        }   
     }
     
     public String readAll(){
