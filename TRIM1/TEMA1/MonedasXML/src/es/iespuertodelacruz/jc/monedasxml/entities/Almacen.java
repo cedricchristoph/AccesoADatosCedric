@@ -26,7 +26,14 @@ public class Almacen {
     public ArrayList<Moneda> getMonedas() {
         return monedas;
     }
-
+    
+    public Moneda getMoneda(Integer id) {
+        try {
+            return monedas.stream().filter(m -> m.getIdMoneda() == id).findFirst().get();
+        } catch (Exception e) {
+            return null;
+        }
+    }
     
     private void setMonedas(ArrayList<Moneda> monedas) {
         this.monedas = monedas;

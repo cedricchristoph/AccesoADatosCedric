@@ -5,12 +5,15 @@
  */
 package es.iespuertodelacruz.jc.monedasxml.utils;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -40,7 +43,16 @@ public class ManejoFichero {
     }
     
     public String readAll(){
-        return null;
+        String output = "";
+        String line;
+        try (BufferedReader reader = Files.newBufferedReader(file)) {
+            while ((line = reader.readLine()) != null) {
+                output += line;
+            }
+            return output;
+        } catch (IOException ex) {
+           return null;
+        }
     }
     
 }

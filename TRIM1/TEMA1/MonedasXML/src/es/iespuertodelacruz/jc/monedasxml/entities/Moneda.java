@@ -64,6 +64,10 @@ public class Moneda implements Serializable{
         this.pais = pais;
     }
     
+    public void addHistorico(Historico h) {
+        historicos.add(h);
+    }
+    
     @Override
     public String toString(){
         
