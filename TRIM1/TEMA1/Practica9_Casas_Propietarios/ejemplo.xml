@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<casas>
+    <casa>
+        <direccion>C/Teide 7</direccion>
+        <idCasa>0</idCasa>
+        <propietarios>
+            <apellidos>Christoph</apellidos>
+            <dni>X8741949V</dni>
+            <nombre>Cedric</nombre>
+        </propietarios>
+        <propietarios>
+            <apellidos>Christoph</apellidos>
+            <dni>12345678A</dni>
+            <nombre>Kerstin</nombre>
+        </propietarios>
+        <tipoCasa>PISO</tipoCasa>
+    </casa>
+    <casa>
+        <direccion>C/ABC 1</direccion>
+        <idCasa>1</idCasa>
+        <propietarios>
+            <apellidos>Sosa</apellidos>
+            <dni>87654321B</dni>
+            <nombre>Jesus</nombre>
+        </propietarios>
+        <tipoCasa>VILLA</tipoCasa>
+    </casa>
+    <casa>
+        <direccion>C/Realejo 5</direccion>
+        <idCasa>2</idCasa>
+        <propietarios>
+            <apellidos>Christoph</apellidos>
+            <dni>12345678A</dni>
+            <nombre>Kerstin</nombre>
+        </propietarios>
+        <propietarios>
+            <apellidos>Christoph</apellidos>
+            <dni>X8741949V</dni>
+            <nombre>Cedric</nombre>
+        </propietarios>
+        <tipoCasa>CASA</tipoCasa>
+    </casa>
+</casas>
