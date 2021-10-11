@@ -5,13 +5,13 @@
  */
 package es.iespuertodelacruz.cc.vistacontrolador;
 
+import es.iespuertodelacruz.cc.xml.ListaCasasXML;
 import es.iespuertodelacruz.cc.entities.Casa;
 import es.iespuertodelacruz.cc.entities.ListaCasas;
 import es.iespuertodelacruz.cc.entities.ListaPropietarios;
 import es.iespuertodelacruz.cc.entities.Propietario;
 import es.iespuertodelacruz.cc.entities.TipoCasa;
 import es.iespuertodelacruz.cc.utils.FileManager;
-import java.util.Date;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -47,7 +47,11 @@ public class Menu {
                 input = Integer.parseInt(scanner.nextLine());
                 validar(input);
             } catch (InputMismatchException e) {
-                System.out.println("Por favor introduzca solo numeros\n");
+                System.out.println("ERROR: Por favor introduzca solo numeros\n");
+            } catch (NumberFormatException e) {
+                System.out.println("ERROR: Por favor introduzca solo numeros\n");
+            } catch (Exception e) {
+                System.out.println("ERROR: " + e.getMessage());
             }
         }
     }
