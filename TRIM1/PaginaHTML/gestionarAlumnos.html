@@ -55,7 +55,7 @@
                     <div class="text-center text-md-left">
                         <a class="btn btn-primary" onclick="document.getElementById('contact-form').submit();">Agregar</a>
                     </div>
-                  </form>
+                </form>
             </div>
             <div class="col description border-round">
                 <h4><b>Borrar alumno</b></h4>
@@ -66,17 +66,41 @@
                     <div class="text-center text-md-left">
                         <a class="btn btn-primary" onclick="document.getElementById('contact-form').submit();">Borrar</a>
                     </div>
-                  </form>
+                </form>
             </div>
             <div class="col description border-round">
                 <h4><b>Editar alumno</b></h4>
+                <small>Rellene este formulario para editar un alumno ya registrado en el sistema</small>
+                <form class="container">
+                    <label>DNI</label>
+                    <input type="text" name="dni" placeholder="DNI*"><br/>
+                    <label>Nombre</label>
+                    <input type="text" name="nombre" placeholder="Nombre*"><br/>
+                    <label>Apellidos</label>
+                    <input type="text" name="apellidos" placeholder="Apellidos"><br/>
+                    <label>Nacimiento</label>
+                    <input type="text" name="fechaNacimiento" placeholder="Fecha de nacimiento"><br/>
+                    <div class="text-center text-md-left">
+                        <a class="btn btn-primary" onclick="document.getElementById('contact-form').submit();">Actualizar</a>
+                    </div>
+                </form>
             </div>
             <div class="col description border-round">
                 <h4><b>Mostrar alumno</b></h4>
+                <small>Introduzca los datos del alumno a mostrar</small>
+                <form class="container">
+                    <label>DNI</label>
+                    <input type="text" name="dni" placeholder="DNI*"><br/>
+                    <label>Nombre</label>
+                    <input type="text" name="nombre" placeholder="Nombre*"><br/>
+                    <div class="text-center text-md-left">
+                        <a class="btn btn-primary" onclick="document.getElementById('contact-form').submit();">Mostrar</a>
+                    </div>
+                </form>
             </div>
         </div>
-        
-
+        <div style="margin: auto; width: 50%;">
+            ​<textarea id="txtArea" rows="8" cols="100" class="container"></textarea>
+        </div>
     </body>
-
 </html>

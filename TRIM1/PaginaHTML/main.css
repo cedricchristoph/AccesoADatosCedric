@@ -58,6 +58,7 @@ body {
     border-radius: 25px;
     padding: 25px;
     margin: 15px; 
+    text-decoration: none;
 }
 
 .selection h4 p{
