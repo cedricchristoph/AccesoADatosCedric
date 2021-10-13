@@ -48,7 +48,7 @@ body {
 .position-page-center {
     left: 50%;
 	position: absolute;
-	top: 50%;
+	top: 55%;
 	transform: translate(-50%, -55%);
 }
 
@@ -99,4 +99,16 @@ input {
     float: right; 
     width: 250px;
     margin-left: 1px;
+}
+
+.page-footer {
+    background-color: white;
+    color: #ccc;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+}
+.footer-copyright {
+    color: rgb(31, 31, 31);
+    padding: 10px 0;
 }
