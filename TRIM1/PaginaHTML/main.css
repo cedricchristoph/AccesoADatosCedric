@@ -52,6 +52,11 @@ body {
 	transform: translate(-50%, -55%);
 }
 
+div a {
+    color: #242424;
+    text-decoration: none;
+}
+
 .selection {
 	text-align: center;
     background-color: #ebebeb;
@@ -67,6 +72,8 @@ body {
 
 .selection:hover {
     background-color: #2682bf;
+    color: #242424;
+    text-decoration: none;
 }
 
 .svg-white {
