@@ -72,7 +72,7 @@ div a {
 
 .selection:hover {
     background-color: #2682bf;
-    color: #242424;
+    color: #FFFF;
     text-decoration: none;
 }
 
@@ -86,8 +86,8 @@ div a {
 }
 
 .container {
-    margin: 10px;
-    padding: 2px;
+    margin: 15px;
+    padding: 1px;
     clear: both;
 }
 
@@ -111,4 +111,13 @@ input {
 .footer-copyright {
     color: rgb(31, 31, 31);
     padding: 10px 0;
+}
+
+.position-bottom-right {
+    position: absolute;
+    right:    0;
+    bottom:   0;
+    margin-right: 15px;
+    margin-bottom: 15px;
+    padding: 5px;
 }
