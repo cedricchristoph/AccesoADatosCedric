@@ -8,12 +8,23 @@
     	<servlet-name>Principal</servlet-name>
     	<servlet-class>es.iespuertodelacruz.cc.foroirc.Principal</servlet-class>
     </servlet>
+    <servlet>
+    	<description>
+    	</description>
+    	<display-name>EnviarMensaje</display-name>
+    	<servlet-name>EnviarMensaje</servlet-name>
+    	<servlet-class>es.iespuertodelacruz.cc.foroirc.EnviarMensaje</servlet-class>
+    </servlet>
     <servlet-mapping>
     	<servlet-name>Principal</servlet-name>
     	<url-pattern>/Principal</url-pattern>
 		<url-pattern>/principal</url-pattern>
-		<url-pattern>/enviarmensaje</url-pattern>
 		<url-pattern></url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+    	<servlet-name>EnviarMensaje</servlet-name>
+    	<url-pattern>/EnviarMensaje</url-pattern>
+		<url-pattern>/enviarmensaje</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>1</session-timeout>
