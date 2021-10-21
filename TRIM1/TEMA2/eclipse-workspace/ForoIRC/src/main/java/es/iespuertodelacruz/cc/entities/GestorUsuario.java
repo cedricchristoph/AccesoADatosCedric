@@ -15,11 +15,17 @@ public class GestorUsuario {
 	}
 	
 	public Usuario get(String id) {
-		return usuarios.stream().filter(u -> u.getId().equals(id)).findFirst().get();
+		try {
+			return usuarios.stream().filter(u -> u.getId().equals(id)).findFirst().get();
+		} catch (Exception e) {
+			return null;
+		}
 	}
 	
 	public void remove(String id) {
-		usuarios.remove(get(id));
+		Usuario userToRemove = get(id);
+		if (userToRemove != null)
+			usuarios.remove(get(id));
 	}
 	
 	public Vector<Usuario> getAll() {

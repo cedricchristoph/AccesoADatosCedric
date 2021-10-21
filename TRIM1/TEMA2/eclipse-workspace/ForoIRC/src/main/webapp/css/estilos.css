@@ -4,52 +4,55 @@
  	min-width: 400px;
  	height: 600px;
  	overflow: scroll;
- 	background: #E0CDB9;
- 		
- 		
+ 	background-color: white;
  	padding: 10px;
-
 	grid-row: 1/3;
-
-
 }
-
 
 p{
 	text-align: justify;
 	text-indent: 2rem;
 }
+
 .cabecera{
 	text-align: center;
 }
 
 .principal{
-	min-width: 700px;
+	min-width: 500px;
 	max-width: 1300px;
 	margin: auto;
 	display: grid;
 	grid-template-columns: 5fr 1fr;
 	grid-auto-rows: minmax(200px, auto);
 	grid-gap: 10px;
-	background: lightgray;
-	padding: 20px;
+	background: #f0f0f0;
+	padding: 10px;
 }
 
 .form{
 	padding: 10px;
 	grid-column: 2/3;
-	background: #E9E9C2;
+	background-color: white;
 }
 
 .conectados{
 	padding: 20px;
-	background: #ABD2C6;
-                             margin: 0;
-                             overflow: scroll;
+	background: white;
+    margin: 0;
+    overflow: scroll;
 }
 
-.btn-disconnect {
-	background-color: red;
+.btn-primary {
+	background-color: #d5dee6;
+	text-decoration: none;
+	border-radius: 10px;
+    padding: 10px; 
+    margin: 5px;
+    color: black;
+}
+.btn-primary:hover {
+    background-color: #5fbade;
 }
 
 #nombre{

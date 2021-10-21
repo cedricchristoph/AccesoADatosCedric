@@ -32,31 +32,41 @@ public class EnviarMensaje extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
 		ServletContext context = request.getServletContext();
 		GestorUsuario gestor = (GestorUsuario) request.getServletContext().getAttribute(Globals.ATTRIBUTE_USERS);
 		Usuario user = null;
-		try {
-			user = gestor.get(request.getSession().getId());
-		} catch (Exception e) {}
-		if (user == null) {
-			// Crear usuario para actual sesion
-			String nombre = (String) request.getParameter(Globals.FIELD_NOMBRE);
-			user = new Usuario(request.getSession().getId(), nombre);
-			gestor.add(user);
-			context.setAttribute(Globals.ATTRIBUTE_USERS, gestor);
-		}
 		String userMessage = (String) request.getParameter(Globals.FIELD_MENSAJE);
-		// Si el mensaje esta vacio se reenvia de vuelta a la pagina sin enviar ningun mensaje
+		// Si el mensaje esta vacio se reenvia de vuelta a la pagina sin enviar ningun
+		// mensaje
 		if (userMessage == null || userMessage.isEmpty()) {
 			response.sendRedirect(Globals.JSP_VISTA);
 			return;
 		}
+		try {
+			user = gestor.get(request.getSession().getId());
+		} catch (Exception e) {
+		}
+		if (user == null) {
+			// Crear usuario para actual sesion
+			String nombre = (String) request.getParameter(Globals.FIELD_NOMBRE);
+			if (nombre == null || nombre.isEmpty()) {
+				response.sendRedirect(Globals.JSP_VISTA);
+				return;
+			}
+			user = new Usuario(request.getSession().getId(), nombre);
+			gestor.add(user);
+			context.setAttribute(Globals.ATTRIBUTE_USERS, gestor);
+		}
+		
 		Mensaje message = new Mensaje(user, userMessage);
-		// Si el mensaje no es vacio y se establecio el nombre de usuario se procede a enviar el mensaje.
+		
+		// Tras el filtrado anterior procedemos a enviar el mensaje
 		Vector<Mensaje> mensajes = (Vector<Mensaje>) context.getAttribute(Globals.ATTRIBUTE_MENSAJES);
 		mensajes.add(message);
 		context.setAttribute(Globals.ATTRIBUTE_MENSAJES, mensajes);
 		request.getSession().setAttribute(Globals.ATTRIBUTE_USERNAME, user.getNombre());
+		
 		//request.getRequestDispatcher(Globals.JSP_VISTA).forward(request, response);
 		response.sendRedirect(Globals.SERVLET_PRINCIPAL);
 	}

@@ -25,10 +25,10 @@ public class DisconnectUser extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
    
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+    /**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ServletContext context = request.getServletContext();
 		GestorUsuario gestor = (GestorUsuario) context.getAttribute(Globals.ATTRIBUTE_USERS);
 		Usuario user = gestor.get(request.getSession().getId());
@@ -40,5 +40,4 @@ public class DisconnectUser extends HttpServlet {
 			response.sendRedirect(Globals.SERVLET_PRINCIPAL);
 		}
 	}
-
 }

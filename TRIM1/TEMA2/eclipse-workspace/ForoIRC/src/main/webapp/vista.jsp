@@ -19,16 +19,18 @@
 		
 		<div class="foro">
 			<c:forEach var="mensaje" items="${mensajes}">
-				<label>${mensaje}</label><br/>		
+				<div>${mensaje}</div>	
 			</c:forEach>
 		</div>
 
-		<ul class="conectados">
-		<label>Conectados</label>
-			<c:forEach var="u" items="${connected}">
-				<li>${u}</li>
-			</c:forEach>
-		</ul>
+		<div class="conectados">
+			<h4>Conectados</h4>
+			<ul>
+				<c:forEach var="u" items="${connected}">
+					<li class="nombreUsuario">${u}</li>
+				</c:forEach>
+			</ul>
+		</div>
 
 		<form class="form" action="enviarmensaje" method="POST">
 			<label for="nombre">Nombre: </label> 
@@ -37,14 +39,12 @@
 					<input type="text" name="nombre" id="nombre" value=""/>
 				</c:when>
 				<c:otherwise>
-					<label> ${user} </label>
+					<span> ${user} </span>
 				</c:otherwise>
 			</c:choose>
 			<textarea name="mensaje" id="mensaje" cols="20" rows="10"></textarea>
-			<input type="submit" value="Enviar" />
-		</form>
-		<form class="btn-disconnect" action="disconnect" method="POST">
-			<input type="submit" value="Desconectar" />
+			<input class="btn-primary" type="submit" value="Enviar" />
+			<a href="disconnect" class="btn-primary">Desconectar</a>
 		</form>
 	</div>
 </body>
