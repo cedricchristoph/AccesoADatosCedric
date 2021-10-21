@@ -30,19 +30,19 @@
 			</c:forEach>
 		</ul>
 
-
 		<form action="enviarmensaje" method="POST">
-			<label for="nombre">Nombre: </label> <input type="text" name="nombre"
-				id="nombre" value="" />
+			<label for="nombre">Nombre: </label> 
+			<c:choose>
+				<c:when test="${empty user}">
+					<input type="text" name="nombre" id="nombre" value=""/>
+				</c:when>
+				<c:otherwise>
+					<label> ${user} </label>
+				</c:otherwise>
+			</c:choose>
 			<textarea name="mensaje" id="mensaje" cols="20" rows="10"></textarea>
 			<input type="submit" value="Enviar" />
 		</form>
 	</div>
-
-
-
-
-
-
 </body>
 </html>

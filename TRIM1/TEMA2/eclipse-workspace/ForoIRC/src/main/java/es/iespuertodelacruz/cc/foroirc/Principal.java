@@ -17,6 +17,7 @@ public class Principal extends HttpServlet {
     
 	ArrayList<String> mensajes;
 	ArrayList<String> conectados;
+	
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -52,7 +53,6 @@ public class Principal extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ServletContext context = request.getServletContext();
 		String user = null;
-		//user = (String) request.getAttribute(Globals.ATTRIBUTE_USERNAME);
 		user = (String) request.getSession().getAttribute(Globals.ATTRIBUTE_USERNAME);
 		if (user == null) {
 			// Crear usuario para actual sesion
@@ -73,7 +73,8 @@ public class Principal extends HttpServlet {
 		ArrayList<String> mensajes = (ArrayList<String>) context.getAttribute(Globals.ATTRIBUTE_MENSAJES);
 		mensajes.add(message);
 		context.setAttribute(Globals.ATTRIBUTE_MENSAJES, mensajes);
-		request.getRequestDispatcher(Globals.JSP_VISTA).forward(request, response);
+		//request.getRequestDispatcher(Globals.JSP_VISTA).forward(request, response);
+		response.sendRedirect(Globals.JSP_VISTA);
 	}
 
 }
