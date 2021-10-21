@@ -24,17 +24,18 @@
 		</div>
 
 		<ul class="conectados">
-
+		<label>Conectados</label>
+			<c:forEach var="u" items="${connected}">
+				<li>${u}</li>
+			</c:forEach>
 		</ul>
 
 
 		<form action="enviarmensaje" method="POST">
-
-			<label for="nombre">nombre: </label> <input type="text" name="nombre"
+			<label for="nombre">Nombre: </label> <input type="text" name="nombre"
 				id="nombre" value="" />
 			<textarea name="mensaje" id="mensaje" cols="20" rows="10"></textarea>
 			<input type="submit" value="Enviar" />
-
 		</form>
 	</div>
 

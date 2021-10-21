@@ -12,6 +12,7 @@
     	<servlet-name>Principal</servlet-name>
     	<url-pattern>/Principal</url-pattern>
 		<url-pattern>/principal</url-pattern>
+		<url-pattern>/enviarmensaje</url-pattern>
 		<url-pattern></url-pattern>
     </servlet-mapping>
     <session-config>
