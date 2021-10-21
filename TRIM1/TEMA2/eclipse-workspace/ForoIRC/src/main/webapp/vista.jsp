@@ -30,7 +30,7 @@
 			</c:forEach>
 		</ul>
 
-		<form action="enviarmensaje" method="POST">
+		<form class="form" action="enviarmensaje" method="POST">
 			<label for="nombre">Nombre: </label> 
 			<c:choose>
 				<c:when test="${empty user}">
@@ -42,6 +42,9 @@
 			</c:choose>
 			<textarea name="mensaje" id="mensaje" cols="20" rows="10"></textarea>
 			<input type="submit" value="Enviar" />
+		</form>
+		<form class="btn-disconnect" action="disconnect" method="POST">
+			<input type="submit" value="Desconectar" />
 		</form>
 	</div>
 </body>

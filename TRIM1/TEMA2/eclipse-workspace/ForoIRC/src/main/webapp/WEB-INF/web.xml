@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app version="2.4" xmlns="http://Java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+<web-app version="2.4" xmlns="http://JAVA.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
     <display-name>ForoIRC</display-name>
     <servlet>
     	<description>
@@ -15,6 +15,13 @@
     	<servlet-name>EnviarMensaje</servlet-name>
     	<servlet-class>es.iespuertodelacruz.cc.foroirc.EnviarMensaje</servlet-class>
     </servlet>
+    <servlet>
+    	<description>
+    	</description>
+    	<display-name>DisconnectUser</display-name>
+    	<servlet-name>DisconnectUser</servlet-name>
+    	<servlet-class>es.iespuertodelacruz.cc.foroirc.DisconnectUser</servlet-class>
+    </servlet>
     <servlet-mapping>
     	<servlet-name>Principal</servlet-name>
     	<url-pattern>/Principal</url-pattern>
@@ -26,10 +33,16 @@
     	<url-pattern>/EnviarMensaje</url-pattern>
 		<url-pattern>/enviarmensaje</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+    	<servlet-name>DisconnectUser</servlet-name>
+    	<url-pattern>/DisconnectUser</url-pattern>
+		<url-pattern>/disconnect</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>1</session-timeout>
     </session-config>
     <welcome-file-list>
         <welcome-file>principal</welcome-file>
         </welcome-file-list>
-    </web-app>
+  
+</web-app>
