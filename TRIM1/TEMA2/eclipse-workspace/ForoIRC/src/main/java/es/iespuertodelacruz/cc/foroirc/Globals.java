@@ -1,20 +1,25 @@
 package es.iespuertodelacruz.cc.foroirc;
 
+import es.iespuertodelacruz.cc.entities.FileManager;
+
 public class Globals {
 
 	/* ATTRIBUTES */
-	public static String ATTRIBUTE_MENSAJES = "mensajes";
-	public static String ATTRIBUTE_USERS = "usuarios";
-	public static String ATTRIBUTE_USERNAME = "user";
-	public static String ATTRIBUTE_CONNECTED_USERS = "connected";
+	public static final String ATTRIBUTE_MENSAJES = "mensajes";
+	public static final String ATTRIBUTE_USERS = "usuarios";
+	public static final String ATTRIBUTE_USERNAME = "user";
+	public static final String ATTRIBUTE_CONNECTED_USERS = "connected";
 	
 	/* FORM FIELDS */
-	public static String FIELD_MENSAJE = "mensaje";
-	public static String FIELD_NOMBRE = "nombre";
+	public static final String FIELD_MENSAJE = "mensaje";
+	public static final String FIELD_NOMBRE = "nombre";
 	
 	/* PAGES */
-	public static String JSP_VISTA = "vista.jsp";
+	public static final String JSP_VISTA = "vista.jsp";
 	
 	/* SERVLETS */
-	public static String SERVLET_PRINCIPAL = "principal";
+	public static final String SERVLET_PRINCIPAL = "principal";
+	
+	/* OBJECTS */
+	public static final String FILE_MANAGER_CHAT = "filemanagerchat";
 }

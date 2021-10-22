@@ -20,7 +20,11 @@ public class Mensaje {
 
 	@Override
 	public String toString() {
-		return "[" + user.getNombre() + "]: " + mensaje;
+		try {
+			return "[" + user.getNombre() + "]: " + mensaje;
+		} catch (Exception e) {
+			return mensaje;
+		}
 	}
 	
 	/**
