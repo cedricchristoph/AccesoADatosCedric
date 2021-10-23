@@ -5,6 +5,8 @@ import es.iespuertodelacruz.cc.entities.FileManager;
 public class Globals {
 
 	/* ATTRIBUTES */
+	public static final String ATTRIBUTE_MENSAJES_OLD = "mensajesold";
+	public static final String ATTRIBUTE_MENSAJES_NEW = "mensajesnew";
 	public static final String ATTRIBUTE_MENSAJES = "mensajes";
 	public static final String ATTRIBUTE_USERS = "usuarios";
 	public static final String ATTRIBUTE_USERNAME = "user";

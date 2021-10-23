@@ -43,6 +43,7 @@ public class EnviarMensaje extends HttpServlet {
 			response.sendRedirect(Globals.JSP_VISTA);
 			return;
 		}
+		// Averiguar si la sesion tiene un usuario asignado
 		try {
 			user = gestor.get(request.getSession().getId());
 		} catch (Exception e) {
@@ -57,17 +58,20 @@ public class EnviarMensaje extends HttpServlet {
 			user = new Usuario(request.getSession().getId(), nombre);
 			gestor.add(user);
 			context.setAttribute(Globals.ATTRIBUTE_USERS, gestor);
+			request.getSession().setAttribute(Globals.ATTRIBUTE_USERNAME, user.getNombre());
 		}
 		
 		Mensaje message = new Mensaje(user, userMessage);
 		
 		// Tras el filtrado anterior procedemos a enviar el mensaje
 		Vector<Mensaje> mensajes = (Vector<Mensaje>) context.getAttribute(Globals.ATTRIBUTE_MENSAJES);
+		Vector<Mensaje> mensajesNew = (Vector<Mensaje>) context.getAttribute(Globals.ATTRIBUTE_MENSAJES_NEW);
 		mensajes.add(message);
+		mensajesNew.add(message);
 		context.setAttribute(Globals.ATTRIBUTE_MENSAJES, mensajes);
-		request.getSession().setAttribute(Globals.ATTRIBUTE_USERNAME, user.getNombre());
+		context.setAttribute(Globals.ATTRIBUTE_MENSAJES_NEW, mensajesNew);
 		
-		//request.getRequestDispatcher(Globals.JSP_VISTA).forward(request, response);
+		
 		response.sendRedirect(Globals.SERVLET_PRINCIPAL);
 	}
 

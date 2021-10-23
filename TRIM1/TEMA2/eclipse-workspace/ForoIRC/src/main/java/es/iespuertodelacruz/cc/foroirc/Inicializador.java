@@ -7,6 +7,7 @@ import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
 import es.iespuertodelacruz.cc.entities.FileManager;
+import es.iespuertodelacruz.cc.entities.GestorUsuario;
 import es.iespuertodelacruz.cc.entities.Mensaje;
 
 /**
@@ -31,19 +32,25 @@ public class Inicializador implements ServletContextListener {
      */
     public void contextDestroyed(ServletContextEvent sce)  { 
          // TODO Auto-generated method stub
-    	 Vector<Mensaje> mensajes = (Vector<Mensaje>) sce.getServletContext().getAttribute(Globals.ATTRIBUTE_MENSAJES);
-    	 gestor.write(mensajes);
+    	 Vector<Mensaje> mensajes = (Vector<Mensaje>) sce.getServletContext().getAttribute(Globals.ATTRIBUTE_MENSAJES_NEW);
+    	 gestor.append(mensajes);
     }
 
 	/**
      * @see ServletContextListener#contextInitialized(ServletContextEvent)
      */
     public void contextInitialized(ServletContextEvent sce)  { 
-         // TODO Auto-generated method stub
+        // Cargar mensajes anteriores
     	pathToWeb = "/tmp/chat.txt";
     	gestor = new FileManager(pathToWeb);
     	sce.getServletContext().setAttribute(Globals.FILE_MANAGER_CHAT, gestor);
-    	sce.getServletContext().setAttribute(Globals.ATTRIBUTE_MENSAJES, gestor.loadAll());
+    	Vector<Mensaje> mensajesOld = gestor.loadAll();
+    	sce.getServletContext().setAttribute(Globals.ATTRIBUTE_MENSAJES_OLD, mensajesOld);
+    	sce.getServletContext().setAttribute(Globals.ATTRIBUTE_MENSAJES, mensajesOld);
+    	sce.getServletContext().setAttribute(Globals.ATTRIBUTE_MENSAJES_NEW, new Vector<Mensaje>());
+    	
+    	// Cargar gestor de usuarios
+    	sce.getServletContext().setAttribute(Globals.ATTRIBUTE_USERS, new GestorUsuario());
     }
 	
 }

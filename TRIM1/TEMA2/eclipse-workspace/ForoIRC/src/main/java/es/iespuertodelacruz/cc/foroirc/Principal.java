@@ -39,10 +39,6 @@ public class Principal extends HttpServlet {
 		// TODO Auto-generated method stub
 		ServletContext context = request.getServletContext();
 		gestor = (GestorUsuario) context.getAttribute(Globals.ATTRIBUTE_USERS);
-		if (gestor == null) {
-			gestor = new GestorUsuario();
-			context.setAttribute(Globals.ATTRIBUTE_USERS, gestor);
-		}
 		mensajes = null;
 		conectados = null;
 		mensajes = (Vector<Mensaje>) context.getAttribute(Globals.ATTRIBUTE_MENSAJES);

@@ -36,8 +36,19 @@ public class FileManager {
 		}
 	}
 	
-	public void write(Vector<Mensaje> mensajes) {
+	public void writeAll(Vector<Mensaje> mensajes) {
 		try (BufferedWriter writer = Files.newBufferedWriter(file, StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING)) {
+			for (Mensaje mensaje : mensajes) {
+				writer.write(mensaje.toString() + "\n");
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void append(Vector<Mensaje> mensajes) {
+		try (BufferedWriter writer = Files.newBufferedWriter(file, StandardOpenOption.CREATE, StandardOpenOption.APPEND)) {
 			for (Mensaje mensaje : mensajes) {
 				writer.write(mensaje.toString() + "\n");
 			}
