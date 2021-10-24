@@ -31,11 +31,14 @@ public class DisconnectUser extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ServletContext context = request.getServletContext();
 		GestorUsuario gestor = (GestorUsuario) context.getAttribute(Globals.ATTRIBUTE_USERS);
+		// Averiguamos si el usuario existe en nuestro gestor de usuario
 		Usuario user = gestor.get(request.getSession().getId());
+		// Si el usuario tuvo una sesion lo desconectamos
 		if (user != null) {
 			gestor.remove(request.getSession().getId());
 			request.getSession().invalidate();
 		}
+		// Redireccionamos al servlet principal
 		response.sendRedirect(Globals.SERVLET_PRINCIPAL);
 	}
 }

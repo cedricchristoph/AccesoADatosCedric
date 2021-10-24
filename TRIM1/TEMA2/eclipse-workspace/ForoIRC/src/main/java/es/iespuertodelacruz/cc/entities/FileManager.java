@@ -9,16 +9,30 @@ import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.Vector;
 
+/**
+ * Clase encargada a guardar en ficheros la informacion que se le proporciona
+ * @author Cedric Christoph
+ *
+ */
 public class FileManager {
 
-	// String pathToWeb = getServletContext().getRealPath(File.separator);
-	
+	/**
+	 * Variables de la clase FileManager
+	 */
 	Path file;
 	
+	/**
+	 * Constructor de la clase FileManager
+	 * @param ruta
+	 */
 	public FileManager(String ruta) {
 		file = (Paths.get(ruta));
 	}
 	
+	/**
+	 * Funcion que devuelve el contenido de chat de una copia de seguridad
+	 * @return Vector<Mensaje> que incluye todos los mensajes guardados en la copia de seguridad
+	 */
 	public Vector<Mensaje> loadAll() {
 		Vector<Mensaje> mensajes = new Vector<Mensaje>();
 		try (BufferedReader reader = Files.newBufferedReader(file)) {
@@ -30,14 +44,18 @@ public class FileManager {
 			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			
 		} finally {
 			return mensajes;
 		}
 	}
 	
+	/**
+	 * Metodo para reescribir un fichero entero e introducir una copia de seguridad
+	 * @param mensajes Mensajes a ser asegurados
+	 */
 	public void writeAll(Vector<Mensaje> mensajes) {
-		try (BufferedWriter writer = Files.newBufferedWriter(file, StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING)) {
+		try (BufferedWriter writer = Files.newBufferedWriter(file, StandardOpenOption.CREATE_NEW, StandardOpenOption.TRUNCATE_EXISTING)) {
 			for (Mensaje mensaje : mensajes) {
 				writer.write(mensaje.toString() + "\n");
 			}
@@ -47,6 +65,10 @@ public class FileManager {
 		}
 	}
 	
+	/**
+	 * Metodo para añadir mensajes a una copia de seguridad sin reescribir todos los mensajes anteriores
+	 * @param mensajes Mensajes añadir a la copia de seguridad
+	 */
 	public void append(Vector<Mensaje> mensajes) {
 		try (BufferedWriter writer = Files.newBufferedWriter(file, StandardOpenOption.CREATE, StandardOpenOption.APPEND)) {
 			for (Mensaje mensaje : mensajes) {

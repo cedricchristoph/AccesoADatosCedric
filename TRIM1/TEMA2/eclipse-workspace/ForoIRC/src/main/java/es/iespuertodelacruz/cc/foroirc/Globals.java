@@ -2,10 +2,14 @@ package es.iespuertodelacruz.cc.foroirc;
 
 import es.iespuertodelacruz.cc.entities.FileManager;
 
+/**
+ * Clase que contiene todas las variables/constantes globales de la aplicacion
+ * @author Cedric Christoph
+ *
+ */
 public class Globals {
 
 	/* ATTRIBUTES */
-	public static final String ATTRIBUTE_MENSAJES_OLD = "mensajesold";
 	public static final String ATTRIBUTE_MENSAJES_NEW = "mensajesnew";
 	public static final String ATTRIBUTE_MENSAJES = "mensajes";
 	public static final String ATTRIBUTE_USERS = "usuarios";
@@ -24,4 +28,7 @@ public class Globals {
 	
 	/* OBJECTS */
 	public static final String FILE_MANAGER_CHAT = "filemanagerchat";
+	
+	/* CONSTANTES */
+	public static final long TIMEOUT = (60000*5); // milisegundos: 1 minuto * 5
 }

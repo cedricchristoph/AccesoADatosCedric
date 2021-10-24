@@ -1,5 +1,10 @@
 package es.iespuertodelacruz.cc.entities;
 
+/**
+ * 
+ * @author Cedric Christoph
+ *
+ */
 public class Mensaje {
 
 	/**
@@ -18,6 +23,9 @@ public class Mensaje {
 		this.mensaje = mensaje;
 	}
 
+	/**
+	 * Funcion que devuelve el mensaje completo incluido el nombre de usuario entre []
+	 */
 	@Override
 	public String toString() {
 		try {

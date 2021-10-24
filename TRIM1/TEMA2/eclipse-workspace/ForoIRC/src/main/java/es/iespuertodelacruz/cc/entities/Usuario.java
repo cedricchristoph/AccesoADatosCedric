@@ -1,5 +1,8 @@
 package es.iespuertodelacruz.cc.entities;
 
+/**
+ * @author Cedric Christoph
+ */
 public class Usuario {
 
 	/**

@@ -16,6 +16,7 @@ import es.iespuertodelacruz.cc.entities.Usuario;
 
 /**
  * Servlet implementation class Principal
+ * @author Cedric Christoph
  */
 public class Principal extends HttpServlet {
 	private static final long serialVersionUID = 1L;
