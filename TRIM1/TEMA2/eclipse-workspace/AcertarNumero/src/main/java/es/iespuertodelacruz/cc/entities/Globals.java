@@ -21,6 +21,7 @@ public class Globals {
 	public static final String ATTRIBUTE_SESSION_USER = "sessionuser";
 	public static final String ATTRIBUTE_SESSION_WIN = "ganador";
 	public static final String ATTRIBUTE_SESSION_NUMBERS = "numeros";
+	public static final String ATTRIBUTE_SESSION_LAST_NUMBER = "lastnumber";
 	
 	/* PARAMETER (form fields) */
 	public static final String PARAMETER_NOMBRE = "nombre";

@@ -52,6 +52,10 @@ public class GestorUsuario {
 			usuarios.remove(get(id));
 	}
 	
+	public void resetAllNumbers() {
+		usuarios.stream().forEach(u -> u.clearNumeros());
+	}
+	
 	/**
 	 * Funcion que devuelve la lista entera de usuarios conectados
 	 * @return Vector<Usuario> Usuarios conectados

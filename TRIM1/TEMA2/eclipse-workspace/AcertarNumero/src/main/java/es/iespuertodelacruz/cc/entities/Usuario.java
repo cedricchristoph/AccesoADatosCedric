@@ -44,7 +44,12 @@ public class Usuario {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}	
-	
+	public ArrayList<Numero> getNumeros() {
+		return numeros;
+	}
+	public void setNumeros(ArrayList<Numero> numeros) {
+		this.numeros = numeros;
+	}
 	@Override
 	public String toString() {
 		return nombre;

@@ -34,10 +34,12 @@ public class Inicializador implements ServletContextListener {
          // Creamos todos los gestores y variables necesarias a contexto de aplicacion
     	GestorUsuario gestorUsuario = new GestorUsuario();
     	NumberController controlador = new NumberController(Globals.nuevoNumeroSecreto());
+    	System.out.println(controlador.getSecreto().getNumber());
     	
     	// Establecemos los atributos
     	sce.getServletContext().setAttribute(Globals.ATTRIBUTE_APP_GESTOR_USUARIOS, gestorUsuario);
     	sce.getServletContext().setAttribute(Globals.ATTRIBUTE_APP_NUMBER_CONTROLLER, controlador);
+    	sce.getServletContext().setAttribute(Globals.ATTRIBUTE_APP_NUMBER, controlador.getSecreto());
     }
 	
 }

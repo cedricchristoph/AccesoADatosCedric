@@ -3,7 +3,7 @@ package es.iespuertodelacruz.cc.entities;
 public class Numero {
 
 	private long milis;
-	private int number;
+	public int number;
 	
 	public Numero(long milis, int number) {
 		this.milis = milis;
