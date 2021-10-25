@@ -81,7 +81,7 @@ public class Averiguar extends HttpServlet {
 					break;
 				case 2:
 					System.out.println("acertado!");
-					user.clearNumeros();
+					gestorUsuario.resetAllNumbers();
 					controlador.setSecreto(Globals.nuevoNumeroSecreto());
 					context.setAttribute(Globals.ATTRIBUTE_APP_NUMBER, controlador.getSecreto());
 					request.getSession().setAttribute(Globals.ATTRIBUTE_SESSION_NUMBERS, user.getNumeros());
