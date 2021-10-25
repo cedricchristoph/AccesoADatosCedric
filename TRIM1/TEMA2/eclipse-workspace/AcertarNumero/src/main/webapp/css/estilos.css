@@ -1,0 +1,9 @@
+@charset "UTF-8";
+
+.top {
+	color: blue;
+}
+
+.top p {
+	size: 16px;
+}

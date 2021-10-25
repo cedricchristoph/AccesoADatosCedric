@@ -1,11 +1,14 @@
 package es.iespuertodelacruz.cc.entities;
 
+import java.util.ArrayList;
+
 public class Usuario {
 	/**
 	 * Variables de clase Usuario
 	 */
 	String id;
 	String nombre;
+	ArrayList<Numero> numeros;
 	
 	/**
 	 * Constructor de la clase Usuario
@@ -15,6 +18,15 @@ public class Usuario {
 	public Usuario(String id, String nombre) {
 		this.id = id;
 		this.nombre = nombre;
+		numeros = new ArrayList<Numero>();
+	}
+	
+	public void addNumero(Numero numero) {
+		numeros.add(numero);
+	}
+	
+	public void clearNumeros() {
+		numeros = new ArrayList<Numero>();
 	}
 	
 	/**
@@ -32,4 +44,9 @@ public class Usuario {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}	
+	
+	@Override
+	public String toString() {
+		return nombre;
+	}
 }
