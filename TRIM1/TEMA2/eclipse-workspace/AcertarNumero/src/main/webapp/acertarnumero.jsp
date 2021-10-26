@@ -20,7 +20,7 @@
 			<h4><b>¡Enhorabuena!</b></h4>
 			<p>¡Has averiguado el número secreto!</p>
 			<p>Numero: <b>${lastnumber}</b></p>
-			<form action="averiguar" method="GET">
+			<form action="principal" method="GET">
 				<input type="submit" name="replay" value="Seguir averiguando"/>
 			</form>
 			<a href="/AcertarNumero/disconnect" class="button">Salir</a>
@@ -28,7 +28,10 @@
 		<c:if test="${not ganador}">
 			<p>¡Averigua el número secreto que se está buscando!</p>
 			<p>${sessionuser}, ¿podrás ser más rápido que los demás?</p>
-			<form action="averiguar" method="POST">
+			<c:if test="${not empty lastwinner}">
+				<p>Último ganador: <b>${lastwinner}</b></p>
+			</c:if>
+			<form action="principal" method="POST">
 				<label for="numero">Número:</label> <input name="numero" id="numero"
 					value="" type="text" /> 
 					<input name="enviar" id="enviar" type="submit" />

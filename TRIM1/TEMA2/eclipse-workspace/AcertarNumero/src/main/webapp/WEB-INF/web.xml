@@ -24,6 +24,13 @@
     	<servlet-name>Averiguar</servlet-name>
     	<servlet-class>es.iespuertodelacruz.cc.acertarnumero.Averiguar</servlet-class>
     </servlet>
+    <servlet>
+    	<description>
+    	</description>
+    	<display-name>Principal</display-name>
+    	<servlet-name>Principal</servlet-name>
+    	<servlet-class>es.iespuertodelacruz.cc.acertarnumero.Principal</servlet-class>
+    </servlet>
     <servlet-mapping>
     	<servlet-name>RegistrarUsuario</servlet-name>
     	<url-pattern>/registrarusuario</url-pattern>
@@ -39,12 +46,17 @@
     	<url-pattern>/Averiguar</url-pattern>
 		<url-pattern>/averiguar</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+    	<servlet-name>Principal</servlet-name>
+    	<url-pattern>/Principal</url-pattern>
+		<url-pattern>/principal</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
         </session-timeout>
     </session-config>
     <welcome-file-list>
-        <welcome-file>registrarusuario</welcome-file>
+        <welcome-file>principal</welcome-file>
         </welcome-file-list>
     </web-app>

@@ -16,6 +16,7 @@ public class Globals {
 	public static final String ATTRIBUTE_APP_NUMBER = "numerosecreto";
 	public static final String ATTRIBUTE_APP_NUMBER_CONTROLLER = "numbercontroller";
 	public static final String ATTRIBUTE_APP_GESTOR_USUARIOS = "gestorusuarios";
+	public static final String ATTRIBUTE_APP_LAST_WINNER = "lastwinner";
 	
 	/* SESSION ATTRIBUTES */
 	public static final String ATTRIBUTE_SESSION_USER = "sessionuser";

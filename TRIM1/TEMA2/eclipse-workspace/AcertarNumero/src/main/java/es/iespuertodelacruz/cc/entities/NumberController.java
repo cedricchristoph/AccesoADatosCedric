@@ -30,7 +30,7 @@ public class NumberController {
 		}
 	}
 	
-	public Numero getSecreto() {
+	public synchronized Numero getSecreto() {
 		return secreto;
 	}
 

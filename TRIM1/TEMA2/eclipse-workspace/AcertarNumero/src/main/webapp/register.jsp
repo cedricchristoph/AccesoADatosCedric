@@ -18,7 +18,7 @@
 		<h2>Registrar</h2>
 		<p>Para poder participar en el juego es necesario que se registre.</p>
 	</div>
-	<form action="registrarusuario" method="POST">
+	<form action="principal" method="POST">
 		<label for="nombre">Nombre:</label>
 		<input name="nombre" id="nombre" value="" type="text"/>
 		<input name="enviar" id="enviar" type="submit"/>
