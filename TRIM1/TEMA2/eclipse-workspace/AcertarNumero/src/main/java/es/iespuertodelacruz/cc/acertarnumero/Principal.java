@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import es.iespuertodelacruz.cc.entities.FileManager;
 import es.iespuertodelacruz.cc.entities.GestorUsuario;
 import es.iespuertodelacruz.cc.entities.Globals;
 import es.iespuertodelacruz.cc.entities.NumberController;
@@ -63,6 +64,7 @@ public class Principal extends HttpServlet {
 		HttpSession session = request.getSession();
 		GestorUsuario gestorUsuario = (GestorUsuario) context.getAttribute(Globals.ATTRIBUTE_APP_GESTOR_USUARIOS);
 		NumberController controlador = (NumberController) context.getAttribute(Globals.ATTRIBUTE_APP_NUMBER_CONTROLLER);
+		FileManager fileManager = (FileManager) context.getAttribute(Globals.ATTRIBUTE_APP_NUMBER_FILE_MANAGER);
 		
 		Usuario user = null;
 		// Recibir atributo usuario en la sesion
@@ -120,6 +122,7 @@ public class Principal extends HttpServlet {
 					case 2:
 						gestorUsuario.resetAllNumbers();
 						controlador.setSecreto(Globals.nuevoNumeroSecreto());
+						fileManager.write(controlador.getSecreto());
 						context.setAttribute(Globals.ATTRIBUTE_APP_NUMBER, controlador.getSecreto());
 						context.setAttribute(Globals.ATTRIBUTE_APP_LAST_WINNER, user.getNombre());
 						session.setAttribute(Globals.ATTRIBUTE_SESSION_NUMBERS, user.getNumeros());
