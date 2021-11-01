@@ -2,6 +2,12 @@ package es.iespuertodelacruz.cc.entities;
 
 import java.util.Date;
 
+/**
+ * Clase que contiene todas las variables/atributos/parametros de contexto de aplicacion, sesion, request y nombres de ficheros
+ * Ademas contiene el metodo global para generar un numero aleatorio para numero secreto
+ * @author cedric
+ *
+ */
 public class Globals {
 
 	/* JSPs */
@@ -9,15 +15,15 @@ public class Globals {
 	public static final String JSP_ACERTAR_NUMERO = "acertarnumero.jsp";
 	
 	/* Servlets */
-	public static final String SERVLET_REGISTRAR_USUARIO = "registrarusuario";
-	public static final String SERVLET_HISTORIAL = "historial";
+	public static final String SERVLET_PRINCIPAL = "principal";
+	//public static final String SERVLET_REGISTRAR_USUARIO = "registrarusuario";
+	//public static final String SERVLET_HISTORIAL = "historial";
 	
 	/* APPLICATION ATTRIBUTES */
 	public static final String ATTRIBUTE_APP_NUMBER = "numerosecreto";
 	public static final String ATTRIBUTE_APP_NUMBER_CONTROLLER = "numbercontroller";
 	public static final String ATTRIBUTE_APP_GESTOR_USUARIOS = "gestorusuarios";
 	public static final String ATTRIBUTE_APP_LAST_WINNER = "lastwinner";
-	public static final String ATTRIBUTE_APP_NUMBER_FILE_MANAGER = "filemanager";
 	
 	/* SESSION ATTRIBUTES */
 	public static final String ATTRIBUTE_SESSION_USER = "sessionuser";

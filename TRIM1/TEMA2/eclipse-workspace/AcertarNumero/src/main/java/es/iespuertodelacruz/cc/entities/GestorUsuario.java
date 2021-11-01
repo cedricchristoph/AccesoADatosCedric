@@ -52,6 +52,9 @@ public class GestorUsuario {
 			usuarios.remove(get(id));
 	}
 	
+	/**
+	 * Metodo para vaciar las listas de numeros de todos los usuarios conectados
+	 */
 	public synchronized void resetAllNumbers() {
 		usuarios.stream().forEach(u -> u.clearNumeros());
 	}

@@ -34,9 +34,9 @@ public class FileManager {
 	 * Metodo para reescribir un fichero entero e introducir una copia de seguridad
 	 * @param mensajes Mensajes a ser asegurados
 	 */
-	public void write(Numero secreto) {		
+	public void write(String data) {		
 		try (BufferedWriter writer = Files.newBufferedWriter(file, StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING)) {
-			writer.write(secreto.getMilis() + ";" + secreto.getNumber());
+			writer.write(data);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -44,13 +44,15 @@ public class FileManager {
 	}
 	
 	/**
-	 * Funcion que devuelve el numero secreto guardado en secreto.txt
-	 * @return Numero secreto
+	 * Funcion que devuelve la primera linea de un fichero
+	 * @return String
 	 */
-	public Numero read() {
+	public String readFirstLine() {
 		try (BufferedReader reader = Files.newBufferedReader(file)) {
-			String data[] = reader.readLine().split(";");
-			return new Numero(Long.parseLong(data[0]), Integer.parseInt(data[1]));
+			String line;
+			if((line = reader.readLine()) != null) {
+				return line;
+			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

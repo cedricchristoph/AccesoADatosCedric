@@ -45,8 +45,8 @@ public class Principal extends HttpServlet {
 		Usuario user = null;
 		user = gestorUsuario.get(request.getSession().getId());
 		if (user != null) {
-			request.getSession().setAttribute(Globals.ATTRIBUTE_SESSION_WIN, false);
 			request.getRequestDispatcher(Globals.JSP_ACERTAR_NUMERO).forward(request, response);
+			session.setAttribute(Globals.ATTRIBUTE_SESSION_WIN, false);
 		} else {
 			request.getRequestDispatcher(Globals.JSP_REGISTRAR_USUARIO).forward(request, response);
 		}
@@ -64,7 +64,6 @@ public class Principal extends HttpServlet {
 		HttpSession session = request.getSession();
 		GestorUsuario gestorUsuario = (GestorUsuario) context.getAttribute(Globals.ATTRIBUTE_APP_GESTOR_USUARIOS);
 		NumberController controlador = (NumberController) context.getAttribute(Globals.ATTRIBUTE_APP_NUMBER_CONTROLLER);
-		FileManager fileManager = (FileManager) context.getAttribute(Globals.ATTRIBUTE_APP_NUMBER_FILE_MANAGER);
 		
 		Usuario user = null;
 		// Recibir atributo usuario en la sesion
@@ -74,13 +73,13 @@ public class Principal extends HttpServlet {
 		if (user == null) {
 			String nombre = request.getParameter(Globals.PARAMETER_NOMBRE);
 			if (nombre == null || nombre.isEmpty())
-				response.sendRedirect(Globals.JSP_REGISTRAR_USUARIO);
+				response.sendRedirect(Globals.SERVLET_PRINCIPAL);
 			else {
 				user = new Usuario(session.getId(), nombre);
 				gestorUsuario.add(user);
 				session.setAttribute(Globals.ATTRIBUTE_SESSION_USER, user);
 				session.setAttribute(Globals.ATTRIBUTE_SESSION_WIN, false);
-				response.sendRedirect(Globals.JSP_ACERTAR_NUMERO);
+				response.sendRedirect(Globals.SERVLET_PRINCIPAL);
 			}
 		} else {
 			/*
@@ -93,7 +92,7 @@ public class Principal extends HttpServlet {
 				numberParameter = Integer.parseInt(request.getParameter(Globals.PARAMETER_NUMERO));
 			} catch (Exception e) {
 				/* Si no nos proporciono el parametro numero lo reenviamos a la pagina de juego */
-				response.sendRedirect(Globals.JSP_ACERTAR_NUMERO);
+				response.sendRedirect(Globals.SERVLET_PRINCIPAL);
 				return;
 			}
 			Numero numero = new Numero(actualMillis, numberParameter);
@@ -105,7 +104,7 @@ public class Principal extends HttpServlet {
 				session.setAttribute(Globals.ATTRIBUTE_SESSION_WIN, false);
 			
 			if (numberParameter < 0)
-				response.sendRedirect(Globals.SERVLET_HISTORIAL);
+				response.sendRedirect(Globals.SERVLET_PRINCIPAL);
 			else {
 				switch (controlador.check(numero)) {
 					case -1:
@@ -122,7 +121,7 @@ public class Principal extends HttpServlet {
 					case 2:
 						gestorUsuario.resetAllNumbers();
 						controlador.setSecreto(Globals.nuevoNumeroSecreto());
-						fileManager.write(controlador.getSecreto());
+						controlador.save();
 						context.setAttribute(Globals.ATTRIBUTE_APP_NUMBER, controlador.getSecreto());
 						context.setAttribute(Globals.ATTRIBUTE_APP_LAST_WINNER, user.getNombre());
 						session.setAttribute(Globals.ATTRIBUTE_SESSION_NUMBERS, user.getNumeros());
@@ -131,7 +130,7 @@ public class Principal extends HttpServlet {
 						break;
 				}
 			}
-			response.sendRedirect(Globals.JSP_ACERTAR_NUMERO);
+			response.sendRedirect(Globals.SERVLET_PRINCIPAL);
 		}
 	}
 

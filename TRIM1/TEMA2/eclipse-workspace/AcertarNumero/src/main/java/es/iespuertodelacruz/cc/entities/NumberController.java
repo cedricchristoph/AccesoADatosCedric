@@ -1,11 +1,22 @@
 package es.iespuertodelacruz.cc.entities;
 
+/**
+ * Clase encargada de gestionar el numero secreto del juego
+ * @author Cedric Christoph
+ *
+ */
 public class NumberController {
 
+	private FileManager fileManager;
 	private Numero secreto;
 	
-	public NumberController(Numero secreto) {
+	public NumberController(String rutaFichero) {
+		fileManager = new FileManager(rutaFichero);
+	}
+	
+	public NumberController(Numero secreto, String rutaFichero) {
 		this.secreto = secreto;
+		fileManager = new FileManager(rutaFichero);
 	}
 
 	/**
@@ -38,4 +49,29 @@ public class NumberController {
 		this.secreto = secreto;
 	}
 	
+	/**
+	 * Metodo que guarda el NumberController en un fichero secreto
+	 */
+	public void save() {
+		fileManager.write(secreto.getMilis() + ";" + secreto.getNumber());
+	}
+
+	/**
+	 * Metodo que carga los datos de NumberController de un fichero secreto
+	 * @return True si se pudo cargar datos, False si no
+	 */
+	public boolean load() {
+		try {
+			String data[] = fileManager.readFirstLine().split(";");
+			if (data != null) {
+				setSecreto(new Numero(Long.parseLong(data[0]), Integer.parseInt(data[1])));
+				return true;
+			} else {
+				return false;
+			}
+		} catch (Exception e) {
+			return false;
+		}
+	}
+
 }

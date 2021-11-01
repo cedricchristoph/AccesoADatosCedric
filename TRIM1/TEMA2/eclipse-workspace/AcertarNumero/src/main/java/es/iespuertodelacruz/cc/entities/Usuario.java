@@ -2,6 +2,11 @@ package es.iespuertodelacruz.cc.entities;
 
 import java.util.ArrayList;
 
+/**
+ * Clase encargada de gestionar los datos relacionados con el usuario
+ * @author Cedric Christoph
+ *
+ */
 public class Usuario {
 	/**
 	 * Variables de clase Usuario
@@ -21,10 +26,17 @@ public class Usuario {
 		numeros = new ArrayList<Numero>();
 	}
 	
+	/**
+	 * Metodo para añadir un numero a la lista de numeros de un usuario
+	 * @param numero Numero a añadir
+	 */
 	public void addNumero(Numero numero) {
 		numeros.add(numero);
 	}
 	
+	/**
+	 * Metodo para vaciar la lista de numeros de un usuario
+	 */
 	public void clearNumeros() {
 		numeros = new ArrayList<Numero>();
 	}

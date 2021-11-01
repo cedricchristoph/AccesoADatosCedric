@@ -1,5 +1,10 @@
 package es.iespuertodelacruz.cc.entities;
 
+/**
+ * Clase que contiene la informacion de un Numero
+ * @author Cedric Christoph
+ *
+ */
 public class Numero {
 
 	private long milis;

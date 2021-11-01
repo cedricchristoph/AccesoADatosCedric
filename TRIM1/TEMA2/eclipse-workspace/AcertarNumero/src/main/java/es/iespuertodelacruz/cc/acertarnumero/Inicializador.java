@@ -34,24 +34,20 @@ public class Inicializador implements ServletContextListener {
      */
     public void contextInitialized(ServletContextEvent sce)  { 
     	String realPath = sce.getServletContext().getRealPath("/");
-    	FileManager fileManager = new FileManager(realPath + "WEB-INF/secreto.txt");
-    	NumberController controlador;
-    	Numero secreto = fileManager.read();
-    	if (secreto != null)
-    		controlador = new NumberController(secreto);
-    	else
-    		controlador = new NumberController(Globals.nuevoNumeroSecreto());
-    	
+    	String secretoPath = realPath + "WEB-INF/secreto.txt";
+    	NumberController controlador = new NumberController(secretoPath);
+    	if (!controlador.load()) {
+    		controlador = new NumberController(Globals.nuevoNumeroSecreto(), secretoPath);
+    		controlador.save();
+    	}
          // Creamos todos los gestores y variables necesarias a contexto de aplicacion
     	GestorUsuario gestorUsuario = new GestorUsuario();
-    	fileManager.write(controlador.getSecreto());
     	System.out.println(controlador.getSecreto().getNumber());
     	
     	// Establecemos los atributos
     	sce.getServletContext().setAttribute(Globals.ATTRIBUTE_APP_GESTOR_USUARIOS, gestorUsuario);
     	sce.getServletContext().setAttribute(Globals.ATTRIBUTE_APP_NUMBER_CONTROLLER, controlador);
     	sce.getServletContext().setAttribute(Globals.ATTRIBUTE_APP_NUMBER, controlador.getSecreto());
-    	sce.getServletContext().setAttribute(Globals.ATTRIBUTE_APP_NUMBER_FILE_MANAGER, fileManager);
     }
 	
 }
