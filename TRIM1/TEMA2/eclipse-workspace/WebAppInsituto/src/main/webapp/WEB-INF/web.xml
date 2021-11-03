@@ -1,6 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="2.4" xmlns="http://Java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
-    <display-name>WebAppInsituto</display-name>
+	<listener>
+		<listener-class>es.iespuertodelacruz.cc.webappinstituto.listeners.ServletLifecycle</listener-class>
+	</listener>
+    <servlet>
+    	<display-name>Alumnos</display-name>
+    	<servlet-name>Alumnos</servlet-name>
+    	<servlet-class>es.iespuertodelacruz.cc.webappinstituto.servlets.alumnos.Alumnos</servlet-class>
+    </servlet>
+    <servlet>
+    	<description>
+    	</description>
+    	<display-name>Asignaturas</display-name>
+    	<servlet-name>Asignaturas</servlet-name>
+    	<servlet-class>es.iespuertodelacruz.cc.webappinstituto.servlets.asignaturas.Asignaturas</servlet-class>
+    </servlet>
+    <servlet>
+    	<description>
+    	</description>
+    	<display-name>Matriculas</display-name>
+    	<servlet-name>Matriculas</servlet-name>
+    	<servlet-class>es.iespuertodelacruz.cc.webappinstituto.servlets.matriculas.Matriculas</servlet-class>
+    </servlet>
+    <servlet-mapping>
+    	<servlet-name>Alumnos</servlet-name>
+    	<url-pattern>/Alumnos</url-pattern>
+		<url-pattern>/alumnos</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+    	<servlet-name>Asignaturas</servlet-name>
+    	<url-pattern>/Asignaturas</url-pattern>
+		<url-pattern>/asignaturas</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+    	<servlet-name>Matriculas</servlet-name>
+    	<url-pattern>/Matriculas</url-pattern>
+		<url-pattern>/matriculas</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30

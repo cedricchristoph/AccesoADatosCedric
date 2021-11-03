@@ -26,13 +26,13 @@
                         <a class="nav-link" href="index.jsp"><img src="icons/house.svg"/>&nbsp;Inicio</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="gestionarAlumnos.jsp"><img src="icons/file-earmark-person.svg"/>&nbsp;Gestionar alumnos</a>
+                        <a class="nav-link" href="alumnos"><img src="icons/file-earmark-person.svg"/>&nbsp;Gestionar alumnos</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="gestionarAsignaturas.jsp"><img src="icons/book.svg"/>&nbsp;Gestionar asignaturas</a>
+                        <a class="nav-link" href="asignaturas"><img src="icons/book.svg"/>&nbsp;Gestionar asignaturas</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="gestionarMatriculas.jsp"><img src="icons/file-earmark-text-fill.svg"/>&nbsp;Gestionar matrÃ­culas</a>
+                        <a class="nav-link" href="matriculas"><img src="icons/file-earmark-text-fill.svg"/>&nbsp;Gestionar matrÃ­culas</a>
                     </li>
                 </ul>
             </div>
@@ -46,7 +46,7 @@
             <div class="col description border-round">
                 <h4><b>Agregar alumno</b></h4>
                 <small>Rellene este formulario para registrar un nuevo alumno al sistema</small>
-                <form class="container">
+                <form class="container" action="addAlumno" method="POST">
                     <label>DNI</label>
                     <input type="text" name="dni" placeholder="DNI*"><br/>
                     <label>Nombre</label>
@@ -63,7 +63,7 @@
             <div class="col description border-round">
                 <h4><b>Borrar alumno</b></h4>
                 <small>Introduzca DNI del alumno a eliminar del sistema</small>
-                <form class="container">
+                <form class="container" action="deleteAlumno" method="POST">
                     <label>DNI</label>
                     <input type="text" name="dni" placeholder="DNI*"><br/>
                     <div class="text-center text-md-left container">
@@ -74,7 +74,7 @@
             <div class="col description border-round">
                 <h4><b>Editar alumno</b></h4>
                 <small>Rellene este formulario para editar un alumno ya registrado en el sistema</small>
-                <form class="container">
+                <form class="container" action="updateAlumno" method="POST">
                     <label>DNI</label>
                     <input type="text" name="dni" placeholder="DNI*"><br/>
                     <label>Nombre</label>
@@ -91,7 +91,7 @@
             <div class="col description border-round">
                 <h4><b>Mostrar alumno</b></h4>
                 <small>Introduzca los datos del alumno a mostrar</small>
-                <form class="container">
+                <form class="container" action="showAlumno" method="POST">
                     <label>DNI</label>
                     <input type="text" name="dni" placeholder="DNI*"><br/>
                     <label>Nombre</label>
@@ -103,10 +103,10 @@
             </div>
         </div>
         <div style="margin: auto; width: 50%;">
-            â<textarea id="txtArea" rows="5" cols="100" class="container"></textarea>
+            <textarea id="txtArea" rows="5" cols="100" class="container"></textarea>
         </div>
     </body>
     <footer class="page-footer">
-        <div class="footer-copyright text-center">Â© 2021 Copyright: Cedric Christoph</div>
+        <div class="footer-copyright text-center">© 2021 Copyright: Cedric Christoph</div>
     </footer>
 </html>

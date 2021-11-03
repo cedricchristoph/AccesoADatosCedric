@@ -27,13 +27,13 @@
                         <a class="nav-link" href="index.jsp"><img src="icons/house.svg"/>&nbsp;Inicio</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="gestionarAlumnos.jsp"><img src="icons/file-earmark-person.svg"/>&nbsp;Gestionar alumnos</a>
+                        <a class="nav-link" href="alumnos"><img src="icons/file-earmark-person.svg"/>&nbsp;Gestionar alumnos</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="gestionarAsignaturas.jsp"><img src="icons/book.svg"/>&nbsp;Gestionar asignaturas</a>
+                        <a class="nav-link" href="asignaturas"><img src="icons/book.svg"/>&nbsp;Gestionar asignaturas</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="gestionarMatriculas.jsp"><img src="icons/file-earmark-text-fill.svg"/>&nbsp;Gestionar matrÃ­culas</a>
+                        <a class="nav-link" href="matriculas"><img src="icons/file-earmark-text-fill.svg"/>&nbsp;Gestionar matrículas</a>
                     </li>
                 </ul>
             </div>
@@ -42,27 +42,27 @@
             <h3><img src="icons/building.svg"/>&nbsp;Gestionar Instituto</h3>
         </div>
         <div class="description border-round position-page-center">
-            <a href="gestionarAlumnos.jsp">
+            <a href="alumnos">
                 <div class= "selection" type="button">
                     <img src="icons/file-earmark-person.svg"/>
                     <h4>Gestionar alumnos</h4>
                 </div>
             </a>
-            <a href="#">
+            <a href="asignaturas">
                 <div class="selection" type="button">
                     <img src="icons/book.svg"/>
                     <h4>Gestionar asignaturas</h4>
                 </div>
             </a>
-            <a href="gestionarMatriculas.jsp">
+            <a href="matriculas">
                 <div class="selection" type="button">
                     <img src="icons/file-earmark-text-fill.svg"/>
-                    <h4>Gestionar matrÃ­culas</h4>
+                    <h4>Gestionar matrículas</h4>
                 </div>
             </a>
         </div>
     </body>
     <footer class="page-footer">
-        <div class="footer-copyright text-center">Â© 2021 Copyright: Cedric Christoph</div>
+        <div class="footer-copyright text-center">© 2021 Copyright: Cedric Christoph</div>
     </footer>
 </html>

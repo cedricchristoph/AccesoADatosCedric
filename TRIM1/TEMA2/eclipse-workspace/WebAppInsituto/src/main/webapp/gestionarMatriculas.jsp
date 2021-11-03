@@ -26,31 +26,31 @@
                         <a class="nav-link" href="index.jsp"><img src="icons/house.svg"/>&nbsp;Inicio</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="gestionarAlumnos.jsp"><img src="icons/file-earmark-person.svg"/>&nbsp;Gestionar alumnos</a>
+                        <a class="nav-link" href="alumnos"><img src="icons/file-earmark-person.svg"/>&nbsp;Gestionar alumnos</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="gestionarAsignaturas.jsp"><img src="icons/book.svg"/>&nbsp;Gestionar asignaturas</a>
+                        <a class="nav-link" href="asignaturas"><img src="icons/book.svg"/>&nbsp;Gestionar asignaturas</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="gestionarMatriculas.jsp"><img src="icons/file-earmark-text-fill.svg"/>&nbsp;Gestionar matrÃ­culas</a>
+                        <a class="nav-link" href="matriculas"><img src="icons/file-earmark-text-fill.svg"/>&nbsp;Gestionar matrí­culas</a>
                     </li>
                 </ul>
             </div>
         </nav>
 
         <div class="description">
-            <h3><img src="icons/file-earmark-text-fill.svg"/>&nbsp;Gestionar matrÃ­culas</h3>
+            <h3><img src="icons/file-earmark-text-fill.svg"/>&nbsp;Gestionar matrí­culas</h3>
         </div>
 
         <div class="row">
             <div class="col description border-round">
-                <h4><b>Agregar matrÃ­cula</b></h4>
+                <h4><b>Agregar matrícula</b></h4>
                 <small>Rellene este formulario para matricular un alumno</small>
                 <form class="container">
                     <label>DNI alumno</label>
                     <input type="text" name="dni" placeholder="DNI alumno*"><br/>
-                    <label>AÃ±o</label>
-                    <input type="text" name="year" placeholder="AÃ±o*"><br/>
+                    <label>Año</label>
+                    <input type="text" name="year" placeholder="Año*"><br/>
                     <label>Asignaturas</label>
                     <input type="text" name="asignaturas" placeholder="Asignaturas*"><br/>
                     <div class="text-center text-md-left container">
@@ -59,26 +59,26 @@
                 </form>
             </div>
             <div class="col description border-round">
-                <h4><b>Borrar matrÃ­cula</b></h4>
-                <small>Introduzca ID de la matrÃ­cula a eliminar del sistema</small>
+                <h4><b>Borrar matrícula</b></h4>
+                <small>Introduzca ID de la matrí­cula a eliminar del sistema</small>
                 <form class="container">
-                    <label>ID matrÃ­cula</label>
-                    <input type="text" name="idmatricula" placeholder="ID matrÃ­cula*"><br/>
+                    <label>ID matrí­cula</label>
+                    <input type="text" name="idmatricula" placeholder="ID matrícula*"><br/>
                     <div class="text-center text-md-left container">
-                        <a class="btn btn-primary position-bottom-right" onclick="document.getElementById('contact-form').submit();">Borrar matrÃ­cula</a>
+                        <a class="btn btn-primary position-bottom-right" onclick="document.getElementById('contact-form').submit();">Borrar matrícula</a>
                     </div>
                 </form>
             </div>
             <div class="col description border-round">
-                <h4><b>Editar matrÃ­cula</b></h4>
-                <small>Rellene este formulario para editar una matrÃ­cula del sistema</small>
+                <h4><b>Editar matrí­cula</b></h4>
+                <small>Rellene este formulario para editar una matrí­cula del sistema</small>
                 <form class="container">
-                    <label>ID matrÃ­cula</label>
-                    <input type="text" name="idmatriculaedit" placeholder="ID matrÃ­cula*"><br/>
+                    <label>ID matrícula</label>
+                    <input type="text" name="idmatriculaedit" placeholder="ID matrí­cula*"><br/>
                     <label>DNI alumno</label>
                     <input type="text" name="dniedit" placeholder="DNI alumno*"><br/>
-                    <label>AÃ±o</label>
-                    <input type="text" name="yearedit" placeholder="AÃ±o*"><br/>
+                    <label>Año</label>
+                    <input type="text" name="yearedit" placeholder="Año*"><br/>
                     <label>Asignaturas</label>
                     <input type="text" name="asignaturasedit" placeholder="Asignaturas*"><br/>
                     <div class="text-center text-md-left container">
@@ -88,10 +88,10 @@
             </div>
             <div class="col description border-round">
                 <h4><b>Mostrar matriculas</b></h4>
-                <small>Introduzca los datos para mostrar matrÃ­culas de un alumno</small>
+                <small>Introduzca los datos para mostrar matrículas de un alumno</small>
                 <form class="container">
-                    <label>AÃ±o</label>
-                    <input type="text" name="yearmostrar" placeholder="AÃ±o*"><br/>
+                    <label>Año</label>
+                    <input type="text" name="yearmostrar" placeholder="Año*"><br/>
                     <label>DNI alumno</label>
                     <input type="text" name="dnimostrar" placeholder="DNI alumno*"><br/>
                     <div class="text-center text-md-left container">
@@ -101,10 +101,10 @@
             </div>
         </div>
         <div style="margin: auto; width: 50%;">
-            â<textarea id="txtArea" rows="5" cols="100" class="container"></textarea>
+            <textarea id="txtArea" rows="5" cols="100" class="container"></textarea>
         </div>
     </body>
     <footer class="page-footer">
-        <div class="footer-copyright text-center">Â© 2021 Copyright: Cedric Christoph</div>
+        <div class="footer-copyright text-center">© 2021 Copyright: Cedric Christoph</div>
     </footer>
 </html>
