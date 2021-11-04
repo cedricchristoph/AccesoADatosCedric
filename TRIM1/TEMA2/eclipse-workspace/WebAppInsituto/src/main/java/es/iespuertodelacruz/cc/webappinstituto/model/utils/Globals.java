@@ -12,6 +12,7 @@ public class Globals {
 	public static final String JSP_ASIGNATURAS = "gestionarAsignaturas.jsp";
 	public static final String JSP_MATRICULAS = "gestionarMatriculas.jsp";
 	public static final String JSP_INICIO = "index.jsp";
+	public static final String JSP_LOGIN = "login.jsp";
 	
 	/* ATRIBUTOS SESION */
 	public static final String ATTRIBUTE_SESSION_DB_INSTANCE = "databaseinstance";
@@ -21,5 +22,7 @@ public class Globals {
 	
 	/* ATRIBUTOS APLICACION */
 	
-	
+	/* PARAMETROS */
+	public static final String PARAM_LOGIN_USER = "loginuser";
+	public static final String PARAM_LOGIN_PWD = "loginpwd";
 }

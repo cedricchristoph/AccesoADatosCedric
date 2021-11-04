@@ -22,6 +22,13 @@
     	<servlet-name>Matriculas</servlet-name>
     	<servlet-class>es.iespuertodelacruz.cc.webappinstituto.servlets.matriculas.Matriculas</servlet-class>
     </servlet>
+    <servlet>
+    	<description>
+    	</description>
+    	<display-name>Login</display-name>
+    	<servlet-name>Login</servlet-name>
+    	<servlet-class>es.iespuertodelacruz.cc.webappinstituto.servlets.Login</servlet-class>
+    </servlet>
     <servlet-mapping>
     	<servlet-name>Alumnos</servlet-name>
     	<url-pattern>/Alumnos</url-pattern>
@@ -37,12 +44,16 @@
     	<url-pattern>/Matriculas</url-pattern>
 		<url-pattern>/matriculas</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+    	<servlet-name>Login</servlet-name>
+    	<url-pattern>/Login</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
         </session-timeout>
     </session-config>
     <welcome-file-list>
-        <welcome-file>index.jsp</welcome-file>
+        <welcome-file>login.jsp</welcome-file>
         </welcome-file-list>
     </web-app>

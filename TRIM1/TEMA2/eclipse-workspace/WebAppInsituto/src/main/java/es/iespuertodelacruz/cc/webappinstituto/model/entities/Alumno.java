@@ -1,6 +1,6 @@
 package es.iespuertodelacruz.cc.webappinstituto.model.entities;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class Alumno {
 	
