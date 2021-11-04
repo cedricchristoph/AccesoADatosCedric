@@ -38,6 +38,10 @@ public class Lapiz {
 		this.numero = numero;
 	}
 
+	@Override
+	public String toString() {
+		return "(" + getId() + ") : " + getMarca() + "  Cantidad: " + getNumero();
+	}
 	
 	// Getters and setters
 	

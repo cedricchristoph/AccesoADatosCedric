@@ -21,6 +21,7 @@
         </c:if>
         <br/>
         <c:if test="${not empty resultados}">
+        	<h3>Resultados</h3>
         	<c:forEach var="r" items="${resultados}">
         		<p>${r}</p>
         	</c:forEach>

@@ -54,16 +54,22 @@ public class Search extends HttpServlet {
 				ArrayList<Lapiz> lapices = new ArrayList<Lapiz>();
 				if (!marca.isEmpty()) {
 					Statement stmt = conn.createStatement();
-					ResultSet rs = stmt.executeQuery("select idlapiz,marca,numero from lapices where marca=" + marca);
+					ResultSet rs = stmt.executeQuery("select idlapiz,marca,numero from lapices where marca = '" + marca + "'");
 					while (rs.next()) {
-						lapices.add(new Lapiz(rs.getInt(0), rs.getString(1), rs.getInt(2)));
+						lapices.add(new Lapiz(rs.getInt(1), rs.getString(2), rs.getInt(3)));
 					}
-					request.getSession().setAttribute(Globals.ATTRIBUTE_SESSION_RESULTADOS, lapices);
+					if (lapices.size() == 0)
+						request.getSession().setAttribute(Globals.ATTRIBUTE_SESSION_ERROR_MESSAGE, "No hubo resultados");
+					else
+						request.getSession().setAttribute(Globals.ATTRIBUTE_SESSION_ERROR_MESSAGE, "");
+				} else {
+					request.getSession().setAttribute(Globals.ATTRIBUTE_SESSION_ERROR_MESSAGE, "No has introducido ninguna marca");
 				}
+				request.getSession().setAttribute(Globals.ATTRIBUTE_SESSION_RESULTADOS, lapices);
 			} catch (SQLException e) {
 				request.getSession().setAttribute(Globals.ATTRIBUTE_SESSION_ERROR_MESSAGE, e.getMessage());
-				request.getRequestDispatcher(Globals.JSP_SEARCH);
 			}
+			response.sendRedirect(Globals.SERVLET_SEARCH);
 		}
 	}
 

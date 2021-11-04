@@ -46,7 +46,7 @@ public class GestorLapices {
 		ArrayList<Lapiz> lapices = new ArrayList<Lapiz>();
 		try (Connection conn = db.getConnection()){
 			Statement stmt = conn.createStatement();
-			ResultSet rs = stmt.executeQuery("select idlapiz,marca,numero from lapices where marca=" + marca);
+			ResultSet rs = stmt.executeQuery("select idlapiz,marca,numero from lapices where marca = '" + marca + "'");
 			while (rs.next()) {
 				lapices.add(new Lapiz(
 							rs.getInt("idlapiz"),

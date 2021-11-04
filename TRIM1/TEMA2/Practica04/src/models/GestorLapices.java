@@ -57,7 +57,7 @@ public class GestorLapices {
 		ArrayList<Lapiz> lapices = new ArrayList<Lapiz>();
 		try (Connection conn = db.getConnection()){
 			Statement stmt = conn.createStatement();
-			ResultSet rs = stmt.executeQuery("select idlapiz,marca,numero from lapices where marca=" + marca);
+			ResultSet rs = stmt.executeQuery("select idlapiz,marca,numero from lapices where marca = '" + marca + "'");
 			while (rs.next()) {
 				lapices.add(new Lapiz(
 							rs.getInt("idlapiz"),
@@ -73,11 +73,23 @@ public class GestorLapices {
 			return lapices;
 		}
 	}
-
-	public Lapiz saveLapiz(Lapiz m) throws SQLException {
+	
+	public boolean remove(int id) {
+		try (Connection conn = db.getConnection()){
+			Statement stmt = conn.createStatement();
+			stmt.executeUpdate("delete from lapices where idLapiz="+id);
+			return true;
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+			return false;
+		}
+	}
+	
+	public Lapiz insert(Lapiz m) throws SQLException {
 		Lapiz resultado = null;
 		Connection conexion = db.getConnection();
-		String sql2 = "INSERT INTO  lapices  (  marca,   numero)   VALUES(" + m.getMarca() + "," + m.getNumero() + ")";
+		String sql2 = "INSERT INTO  lapices  (marca, numero) VALUES ('" + m.getMarca() + "', '" + m.getNumero() + "')";
 		Statement st = conexion.createStatement();
 		st.executeUpdate(sql2, Statement.RETURN_GENERATED_KEYS);
 		ResultSet rs1 = st.getGeneratedKeys();
@@ -103,17 +115,6 @@ public class GestorLapices {
 			return false;
 		}
 	}
-	
-	public boolean remove(int id) {
-		try (Connection conn = db.getConnection()){
-			Statement stmt = conn.createStatement();
-			stmt.executeUpdate("delete from lapices where idLapiz="+id);
-			return true;
-		} catch (SQLException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-			return false;
-		}
-	}
+
 	
 }

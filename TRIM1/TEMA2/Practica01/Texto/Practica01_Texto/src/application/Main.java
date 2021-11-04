@@ -39,17 +39,21 @@ public class Main {
 
 		String marca = "";
 		System.out.println("Introduzca exit para terminar el programa.");
-		while (!marca.toLowerCase().equals("exit")) {
+		while (true) {
 			lapices = new ArrayList<Lapiz>();
 			System.out.println("Introduce una marca de lapices:");
 			marca = scanner.nextLine();
+			if (marca.toLowerCase().equals("exit"))
+				break;
 			Statement stmt;
 			try {
 				stmt = conn.createStatement();
-				ResultSet rs = stmt.executeQuery("select idlapiz,marca,numero from lapices where marca=" + marca);
+				ResultSet rs = stmt.executeQuery("select idlapiz,marca,numero from lapices where marca='" + marca + "'");
 				while (rs.next()) {
 					lapices.add(new Lapiz(rs.getInt("idlapiz"), rs.getString("marca"), rs.getInt("numero")));
 				}
+				if (lapices.size()==0)
+					System.out.println("No se encontro nada");
 				lapices.forEach(l -> System.out.println(l.getId() + " " + l.getMarca() + " " + l.getNumero()));
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block

@@ -47,13 +47,14 @@ public class Login extends HttpServlet {
 		if (conn == null) {
 			String username = request.getParameter(Globals.PARAM_USER);
 			String pwd = request.getParameter(Globals.PARAM_PWD);
+			System.out.println(username + " " + pwd);
 			MyDatabase db = new MyDatabase("oficina", username, pwd);
 			try {
 				conn = db.getConnection();
 				request.getSession().setAttribute(Globals.ATTRIBUTE_SESSION_CONN, conn);
 				response.sendRedirect(Globals.JSP_SEARCH);
 			} catch (SQLException e) {
-				request.getSession().setAttribute(Globals.ATTRIBUTE_SESSION_ERROR_MESSAGE, "No se pudo conectar al servidor");
+				request.getSession().setAttribute(Globals.ATTRIBUTE_SESSION_ERROR_MESSAGE, e.getMessage());
 				response.sendRedirect(Globals.JSP_INDEX);
 			}
 		}

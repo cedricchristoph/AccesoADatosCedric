@@ -13,7 +13,7 @@ public class Main {
 		MyDatabase.cargarDriverMysql();
 		
 		GestorLapices gl = new GestorLapices("oficina", "root", "1q2w3e4r");
-		ArrayList<Lapiz> lapices = gl.obtenerLapicesPorMarca("staedler");
+		ArrayList<Lapiz> lapices = gl.obtenerLapicesPorMarca("staedtler");
 		lapices.stream().forEach(l -> System.out.println(l.getId() + " "+ l.getMarca() + " " + l.getNumero()));
 		
 	}

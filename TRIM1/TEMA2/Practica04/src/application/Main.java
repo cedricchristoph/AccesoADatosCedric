@@ -39,6 +39,9 @@ public class Main {
 				case 4:
 					eliminarLapiz();
 					break;
+				case 5:
+					addLapiz();
+					break;
 				case 0:
 					System.exit(0);
 			}
@@ -108,7 +111,7 @@ public class Main {
 		int numero = Integer.parseInt(scanner.nextLine());
 		Lapiz lapiz = new Lapiz(marca, numero);
 		try {
-			lapiz = gl.saveLapiz(lapiz);
+			lapiz = gl.insert(lapiz);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

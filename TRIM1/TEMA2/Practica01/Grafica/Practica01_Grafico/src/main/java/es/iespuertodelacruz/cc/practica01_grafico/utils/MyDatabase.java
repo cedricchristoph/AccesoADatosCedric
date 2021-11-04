@@ -22,7 +22,7 @@ public class MyDatabase {
 		dbLocation = databaseLocation;
 		this.username = username;
 		this.pwd = pwd;
-		dbConnection = "jdbc:mysql://" + dbLocation + "?serverTimezone=UTC";
+		dbConnection = "jdbc:mysql://localhost:3306/" + dbLocation + "?serverTimezone=UTC";
 	}
 	
 	public Connection getConnection() throws SQLException {

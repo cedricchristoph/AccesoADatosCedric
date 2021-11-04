@@ -57,7 +57,7 @@ public class GestorLapices {
 		ArrayList<Lapiz> lapices = new ArrayList<Lapiz>();
 		try (Connection conn = db.getConnection()){
 			Statement stmt = conn.createStatement();
-			ResultSet rs = stmt.executeQuery("select idlapiz,marca,numero from lapices where marca=" + marca);
+			ResultSet rs = stmt.executeQuery("select idlapiz,marca,numero from lapices where marca = '" + marca + "'");
 			while (rs.next()) {
 				lapices.add(new Lapiz(
 							rs.getInt("idlapiz"),
@@ -77,7 +77,7 @@ public class GestorLapices {
 	public boolean update(Lapiz lapiz) {
 		try (Connection conn = db.getConnection()){
 			Statement stmt = conn.createStatement();
-			stmt.executeUpdate("update lapices SET marca=" + lapiz.getMarca() + ",numero=" + lapiz.getNumero() + "  where idLapiz=" + lapiz.getId());
+			stmt.executeUpdate("update lapices SET marca = '" + lapiz.getMarca() + "', numero = '" + lapiz.getNumero() + "'  where idLapiz = " + lapiz.getId());
 			return true;
 		} catch (SQLException e1) {
 			// TODO Auto-generated catch block
