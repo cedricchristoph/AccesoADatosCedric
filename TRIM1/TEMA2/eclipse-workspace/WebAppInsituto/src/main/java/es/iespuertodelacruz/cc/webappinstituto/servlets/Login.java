@@ -44,6 +44,7 @@ public class Login extends HttpServlet {
 			}
 			response.sendRedirect(Globals.JSP_INICIO);
 		} else {
+			request.getSession().setAttribute(Globals.ATTRIBUTE_SESSION_ERROR_MSG, "Conexión fallida");
 			response.sendRedirect(Globals.JSP_LOGIN);
 		}
 	}

@@ -6,6 +6,8 @@ public class Globals {
 	public static final String SERVLET_ALUMNOS = "alumnos";
 	public static final String SERVLET_ASIGNATURAS = "asignaturas";
 	public static final String SERVLET_MATRICULAS = "matriculas";
+	public static final String SERVLET_LOGIN = "login";
+	public static final String SERVLET_REGISTRAR = "registrar";
 	
 	/* JSPs */
 	public static final String JSP_ALUMNOS = "gestionarAlumnos.jsp";
@@ -13,6 +15,7 @@ public class Globals {
 	public static final String JSP_MATRICULAS = "gestionarMatriculas.jsp";
 	public static final String JSP_INICIO = "index.jsp";
 	public static final String JSP_LOGIN = "login.jsp";
+	public static final String JSP_REGISTRAR = "register.jsp";
 	
 	/* ATRIBUTOS SESION */
 	public static final String ATTRIBUTE_SESSION_DB_INSTANCE = "databaseinstance";
@@ -28,8 +31,16 @@ public class Globals {
 	public static final String PARAM_LOGIN_USER = "loginuser";
 	public static final String PARAM_LOGIN_PWD = "loginpwd";
 	
+	public static final String PARAM_REGISTRAR_USER = "registraruser";
+	public static final String PARAM_REGISTRAR_EMAIL = "registraremail";
+	public static final String PARAM_REGISTRAR_PWD = "registrarpwd";
+	
 	public static final String PARAM_ALUMNO_AGREGAR_DNI = "agregaralumnodni";
 	public static final String PARAM_ALUMNO_AGREGAR_NOMBRE = "agregaralumnonombre";
 	public static final String PARAM_ALUMNO_AGREGAR_APELLIDOS = "agregaralumnoapellidos";
 	public static final String PARAM_ALUMNO_AGREGAR_FECHA = "agregaralumnofecha";
+	
+	/* CREDENCIALES DE APLICACION PARA DDBB */
+	public static final String CONST_APP_USER = "webapp";
+	public static final String CONST_APP_PWD = "UrcZCb7qizCbeW2";
 }

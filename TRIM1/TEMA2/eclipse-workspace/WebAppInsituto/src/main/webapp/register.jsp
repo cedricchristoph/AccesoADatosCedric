@@ -20,18 +20,19 @@
             <h3>Gestionar Instituto</h3>
         </div>
         <div class="description border-round position-page-center">
-        	<h3><b>Login</b></h3>
-            <form action="login" method="POST" id="form-login">
-            	<label for="user">Usuario </label>
-            	<input type="text" name="loginuser" id="loginuser"/>
+        	<h3><b>Registrar</b></h3>
+            <form action="registrar" method="POST" id="form-login">
+            	<label for="registraruser">Usuario* </label>
+            	<input type="text" name="registraruser" id="registraruser"/>
             	<br/>
-            	<label for="pwd" method="POST">Contraseña </label>
-            	<input type="password" name="loginpwd" id="loginpwd"/>
+            	<label for="registraremail">Email </label>
+            	<input type="text" name="registraremail" id="registraremail"/>
             	<br/>
-            	<input type="submit" name="login" value="Acceder" class="btn btn-primary"/>
+            	<label for="registrarpwd" method="POST">Contraseña* </label>
+            	<input type="password" name="registrarpwd" id="registrarpwd"/>
+            	<br/>
+            	<input type="submit" name="login" value="Registrar" class="btn btn-primary"/>
             </form>
-            <br/><br/>
-            <a href="registrar">Crear cuenta</a>
         </div>
         <c:if test="${not empty errorMessage}">
         	<div class="popup-red position-page-center border-round">${errorMessage}</div>

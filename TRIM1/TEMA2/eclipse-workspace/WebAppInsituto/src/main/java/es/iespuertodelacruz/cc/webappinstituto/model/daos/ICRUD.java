@@ -1,5 +1,6 @@
 package es.iespuertodelacruz.cc.webappinstituto.model.daos;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import es.iespuertodelacruz.cc.webappinstituto.model.utils.MyDatabase;
@@ -9,8 +10,8 @@ public interface ICRUD<T,E> {
 	
 	T select(E id);
 	List<T> selectAll();
-	T insert(T entity);
-	boolean update(T entity);
-	boolean delete(E id);
+	T insert(T entity) throws SQLException;
+	boolean update(T entity) throws SQLException;
+	boolean delete(E id) throws SQLException;
 	
 }

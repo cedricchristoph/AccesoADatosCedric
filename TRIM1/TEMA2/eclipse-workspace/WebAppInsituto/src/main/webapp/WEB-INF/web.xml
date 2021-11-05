@@ -36,6 +36,13 @@
     	<servlet-name>AgregarAlumno</servlet-name>
     	<servlet-class>es.iespuertodelacruz.cc.webappinstituto.servlets.alumnos.AgregarAlumno</servlet-class>
     </servlet>
+    <servlet>
+    	<description>
+    	</description>
+    	<display-name>Registrar</display-name>
+    	<servlet-name>Registrar</servlet-name>
+    	<servlet-class>es.iespuertodelacruz.cc.webappinstituto.servlets.Registrar</servlet-class>
+    </servlet>
     <servlet-mapping>
     	<servlet-name>Alumnos</servlet-name>
     	<url-pattern>/Alumnos</url-pattern>
@@ -63,6 +70,11 @@
     <servlet-mapping>
     	<servlet-name>AgregarAlumno</servlet-name>
     	<url-pattern>/agregaralumno</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+    	<servlet-name>Registrar</servlet-name>
+    	<url-pattern>/Registrar</url-pattern>
+		<url-pattern>/registrar</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

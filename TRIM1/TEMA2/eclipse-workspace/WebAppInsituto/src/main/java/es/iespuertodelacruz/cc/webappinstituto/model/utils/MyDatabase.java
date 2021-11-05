@@ -6,39 +6,45 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import org.apache.commons.dbcp.BasicDataSource;
+
 public class MyDatabase {
 
 	private final String className = "com.mysql.cj.jdbc.Driver";
 	private final String dbLocation;
 	private final String dbConnection;
 	
-	private final String username;
-	private final String pwd;
+	BasicDataSource basicDataSource;
 	
-	private String command;
-	Connection conexion = null;
+	// USER: webapp PWD: UrcZCb7qizCbeW2
+	
+	public MyDatabase(String databaseLocation) {
+		dbLocation = databaseLocation;
+		dbConnection = "jdbc:mysql://localhost:3306/" + dbLocation + "?serverTimezone=UTC";
+		basicDataSource.setDriverClassName(className);
+	    basicDataSource.setUrl(dbConnection);
+	    basicDataSource.setUsername(Globals.CONST_APP_USER);
+	    basicDataSource.setPassword(Globals.CONST_APP_PWD);
+	}
 	
 	public MyDatabase(String databaseLocation, String username, String pwd) {
 		dbLocation = databaseLocation;
-		this.username = username;
-		this.pwd = pwd;
 		dbConnection = "jdbc:mysql://localhost:3306/" + dbLocation + "?serverTimezone=UTC";
+		
+		basicDataSource.setDriverClassName(className);
+	    basicDataSource.setUrl(dbConnection);
+	    basicDataSource.setUsername(username);
+	    basicDataSource.setPassword(pwd);
 	}
 	
 	public Connection getConnection() {
-		if (username == null || pwd == null)
-			return null;
-		if ((!(username.isEmpty()) && !(pwd.isEmpty()))) {
-			try {
-				return DriverManager.getConnection(dbConnection, username, pwd);
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-				return null;
-			}
-		} else {
-			return null;
-		}
+		Connection con = null;
+        try {
+            con = basicDataSource.getConnection();
+        } catch (SQLException ex) {
+            System.exit(1);
+        }        
+        return con;
 	}
 	
 	public static void cargarDriverMysql() {

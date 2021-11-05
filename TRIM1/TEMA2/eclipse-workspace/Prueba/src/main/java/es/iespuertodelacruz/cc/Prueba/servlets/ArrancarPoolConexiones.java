@@ -1,20 +1,18 @@
-package es.iespuertodelacruz.cc.webappinstituto.listeners;
+package es.iespuertodelacruz.cc.Prueba.servlets;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
-import es.iespuertodelacruz.cc.webappinstituto.model.utils.MyDatabase;
-
 /**
- * Application Lifecycle Listener implementation class ServletLifecycle
+ * Application Lifecycle Listener implementation class ArrancarPoolConexiones
  *
  */
-public class ServletLifecycle implements ServletContextListener {
+public class ArrancarPoolConexiones implements ServletContextListener {
 
     /**
      * Default constructor. 
      */
-    public ServletLifecycle() {
+    public ArrancarPoolConexiones() {
         // TODO Auto-generated constructor stub
     }
 
@@ -29,8 +27,7 @@ public class ServletLifecycle implements ServletContextListener {
      * @see ServletContextListener#contextInitialized(ServletContextEvent)
      */
     public void contextInitialized(ServletContextEvent sce)  { 
-         MyDatabase.cargarDriverMysql();
-         
+         // TODO Auto-generated method stub
     }
 	
 }

@@ -26,7 +26,6 @@ public class AlumnoDAO implements ICRUD<Alumno, Integer>{
 	@Override
 	public Alumno select(Integer id) {
 		try (Connection conn = db.getConnection()) {
-			Statement stmt = conn.createStatement();
 			String sql = "SELECT * FROM alumnos where id = ?";
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setInt(1, id);
@@ -59,28 +58,20 @@ public class AlumnoDAO implements ICRUD<Alumno, Integer>{
 	}
 	
 	@Override
-	public Alumno insert(Alumno entity) {
+	public Alumno insert(Alumno entity) throws SQLException {
 		try (Connection conn = db.getConnection()) {
-			String sql = "INSERT INTO alumnos (nombre, apellidos, fechanacimiento) VALUES (?,?,?)";
+			String sql = "INSERT INTO alumnos (dni, nombre, apellidos, fechanacimiento) VALUES (?,?,?,?)";
 			PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-			ps.setString(1, entity.getNombre());
-			ps.setString(2, entity.getApellidos());
-			ps.setDate(3, entity.getFechaNacimiento());
+			ps.setString(1, entity.getDni());
+			ps.setString(2, entity.getNombre());
+			ps.setString(3, entity.getApellidos());
+			ps.setLong(4, entity.getFechaNacimiento().getTime());
 			int affectedRows = ps.executeUpdate();
-			if (affectedRows > 0) {
-				try (ResultSet generatedKeys = ps.getGeneratedKeys()) {
-		            if (generatedKeys.next()) {
-		                entity.setDni(generatedKeys.getString(1));
-		            }
-		            else {
-		                throw new SQLException("Error. No se pudo crear el alumno. No se recibio ningun ID.");
-		            }
-		        }
-			} else {
+			if (affectedRows <= 0) {
 				throw new SQLException("Error. No se pudo crear el alumno. Ninguna fila afectada.");
 			}
 		} catch (SQLException e) {
-			throw new SQLException("Error al guardar alumno. No se pudo guardar.");
+			throw new SQLException(e.getMessage());
 		} finally {
 			return entity;
 		}
@@ -93,7 +84,7 @@ public class AlumnoDAO implements ICRUD<Alumno, Integer>{
 			PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 			ps.setString(1, entity.getNombre());
 			ps.setString(2, entity.getApellidos());
-			ps.setDate(3, entity.getFechaNacimiento());
+			ps.setLong(3, entity.getFechaNacimiento().getTime());
 			int affectedRows = ps.executeUpdate();
 			if (affectedRows > 0) {
 				return true;
@@ -101,7 +92,6 @@ public class AlumnoDAO implements ICRUD<Alumno, Integer>{
 				throw new SQLException("Error. No se pudo crear el alumno. Ninguna fila afectada.");
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
 			return false;
 		}
 	}

@@ -103,22 +103,21 @@
             </div>
         </div>
         <div style="margin: auto; width: 50%;">
-            <textarea id="txtArea" rows="5" cols="100" class="container"></textarea>
+            <textarea id="txtArea" rows="5" cols="100" class="container" value="${alumnoslist}"></textarea>
         </div>
-        
-        <c:if test="${not empty message}">
-        	<div class="popup-green">
-        		<p>${message}</p>
-        	</div>
-        </c:if>
-        <c:if test="${not empty message}">
-        	<div class="popup-red">
-        		<p>${errorMessage}</p>
-        	</div>
-        </c:if>
     </body>  
     
     <footer class="page-footer">
+    <c:if test="${not empty message}">
+        	<div class="popup-green position-page-center border-round">
+        		<p>${message}</p>
+        	</div>
+        </c:if>
+        <c:if test="${not empty errorMessage}">
+        	<div class="popup-red position-page-center border-round">
+        		<p>${errorMessage}</p>
+        	</div>
+        </c:if>
         <div class="footer-copyright text-center">© 2021 Copyright: Cedric Christoph</div>
     </footer>
 </html>

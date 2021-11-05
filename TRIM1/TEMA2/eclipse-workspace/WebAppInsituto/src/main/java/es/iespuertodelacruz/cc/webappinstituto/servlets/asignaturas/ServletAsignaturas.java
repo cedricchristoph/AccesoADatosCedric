@@ -31,6 +31,9 @@ public class ServletAsignaturas extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ServletContext context = request.getServletContext();
 		HttpSession session = request.getSession();
+		session.setAttribute(Globals.ATTRIBUTE_SESSION_ERROR_MSG, "");
+		session.setAttribute(Globals.ATTRIBUTE_SESSION_MSG, "");
+		
 		request.getRequestDispatcher(Globals.JSP_ASIGNATURAS).forward(request, response);
 	}
 }

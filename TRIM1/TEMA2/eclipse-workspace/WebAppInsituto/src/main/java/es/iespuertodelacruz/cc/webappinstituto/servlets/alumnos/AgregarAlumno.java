@@ -63,7 +63,6 @@ public class AgregarAlumno extends HttpServlet {
 				);
 				AlumnoDAO alumnoDao = new AlumnoDAO(db);
 				try {
-					System.out.println("Insertando");
 					alumno = alumnoDao.insert(alumno);
 					session.setAttribute(Globals.ATTRIBUTE_SESSION_MSG, "Alumno guardado correctamente");
 				} catch (Exception e) {

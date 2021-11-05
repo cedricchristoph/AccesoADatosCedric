@@ -117,6 +117,18 @@ input {
   top: auto;
   bottom: 10px;
   outline: none;
+  border: 1px solid green;
+  background-color: #ccf0d5;
+  color: black;
+}
+
+.popup-red {
+  top: auto;
+  bottom: 10px;
+  outline: none;
+  border: 1px solid red;
+  background-color: #f2c4c4;
+  color: black;
 }
 
 .position-bottom-right {
