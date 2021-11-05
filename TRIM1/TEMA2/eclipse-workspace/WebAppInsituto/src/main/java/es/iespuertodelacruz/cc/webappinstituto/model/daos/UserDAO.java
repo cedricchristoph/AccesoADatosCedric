@@ -19,7 +19,7 @@ public class UserDAO implements ICRUD<User, String> {
 	}
 	
 	public UserDAO(String dbLocation) {
-		this.db = new MyDatabase(dbLocation);
+		db = new MyDatabase(dbLocation);
 	}
 	
 	@Override
