@@ -46,17 +46,17 @@
             <div class="col description border-round">
                 <h4><b>Agregar alumno</b></h4>
                 <small>Rellene este formulario para registrar un nuevo alumno al sistema</small>
-                <form class="container" action="addAlumno" method="POST">
+                <form id="alumno-agregar-form" class="container" action="agregaralumno" method="POST">
                     <label>DNI</label>
-                    <input type="text" name="dni" placeholder="DNI*"><br/>
+                    <input type="text" name="agregaralumnodni" placeholder="DNI*"><br/>
                     <label>Nombre</label>
-                    <input type="text" name="nombre" placeholder="Nombre*"><br/>
+                    <input type="text" name="agregaralumnonombre" placeholder="Nombre*"><br/>
                     <label>Apellidos</label>
-                    <input type="text" name="apellidos" placeholder="Apellidos"><br/>
+                    <input type="text" name="agregaralumnoapellidos" placeholder="Apellidos"><br/>
                     <label>Nacimiento</label>
-                    <input type="text" name="fechaNacimiento" placeholder="Fecha de nacimiento"><br/>
+                    <input type="text" name="agregaralumnofecha" placeholder="Fecha de nacimiento"><br/>
                     <div class="text-center text-md-left container">
-                        <a class="btn btn-primary position-bottom-right" onclick="document.getElementById('contact-form').submit();">Agregar</a>
+                        <a class="btn btn-primary position-bottom-right" onclick="document.getElementById('alumno-agregar-form').submit();">Agregar</a>
                     </div>
                 </form>
             </div>
@@ -105,7 +105,19 @@
         <div style="margin: auto; width: 50%;">
             <textarea id="txtArea" rows="5" cols="100" class="container"></textarea>
         </div>
-    </body>
+        
+        <c:if test="${not empty message}">
+        	<div class="popup-green">
+        		<p>${message}</p>
+        	</div>
+        </c:if>
+        <c:if test="${not empty message}">
+        	<div class="popup-red">
+        		<p>${errorMessage}</p>
+        	</div>
+        </c:if>
+    </body>  
+    
     <footer class="page-footer">
         <div class="footer-copyright text-center">© 2021 Copyright: Cedric Christoph</div>
     </footer>

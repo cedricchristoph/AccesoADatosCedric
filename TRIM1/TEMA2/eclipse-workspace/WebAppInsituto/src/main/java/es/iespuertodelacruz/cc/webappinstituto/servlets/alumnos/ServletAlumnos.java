@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import es.iespuertodelacruz.cc.webappinstituto.model.utils.Globals;
+import es.iespuertodelacruz.cc.webappinstituto.model.utils.MyDatabase;
 
 /**
  * Servlet implementation class Alumnos
@@ -31,6 +32,13 @@ public class ServletAlumnos extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ServletContext context = request.getServletContext();
 		HttpSession session = request.getSession();
-		request.getRequestDispatcher(Globals.JSP_ALUMNOS).forward(request, response);
+		
+		MyDatabase db = (MyDatabase) session.getAttribute(Globals.ATTRIBUTE_SESSION_DB_INSTANCE);
+		if (db == null)
+			response.sendRedirect(Globals.JSP_LOGIN);
+		else {
+			request.getRequestDispatcher(Globals.JSP_ALUMNOS).forward(request, response);
+		}	
+		
 	}
 }

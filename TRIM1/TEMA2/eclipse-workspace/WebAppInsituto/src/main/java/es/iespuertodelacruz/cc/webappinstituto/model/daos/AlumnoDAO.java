@@ -57,7 +57,7 @@ public class AlumnoDAO implements ICRUD<Alumno, Integer>{
 			return alumnos;
 		}
 	}
-
+	
 	@Override
 	public Alumno insert(Alumno entity) {
 		try (Connection conn = db.getConnection()) {
@@ -80,7 +80,7 @@ public class AlumnoDAO implements ICRUD<Alumno, Integer>{
 				throw new SQLException("Error. No se pudo crear el alumno. Ninguna fila afectada.");
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new SQLException("Error al guardar alumno. No se pudo guardar.");
 		} finally {
 			return entity;
 		}

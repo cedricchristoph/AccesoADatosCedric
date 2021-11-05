@@ -6,21 +6,21 @@
     <servlet>
     	<display-name>Alumnos</display-name>
     	<servlet-name>Alumnos</servlet-name>
-    	<servlet-class>es.iespuertodelacruz.cc.webappinstituto.servlets.alumnos.Alumnos</servlet-class>
+    	<servlet-class>es.iespuertodelacruz.cc.webappinstituto.servlets.alumnos.ServletAlumnos</servlet-class>
     </servlet>
     <servlet>
     	<description>
     	</description>
     	<display-name>Asignaturas</display-name>
     	<servlet-name>Asignaturas</servlet-name>
-    	<servlet-class>es.iespuertodelacruz.cc.webappinstituto.servlets.asignaturas.Asignaturas</servlet-class>
+    	<servlet-class>es.iespuertodelacruz.cc.webappinstituto.servlets.asignaturas.ServletAsignaturas</servlet-class>
     </servlet>
     <servlet>
     	<description>
     	</description>
     	<display-name>Matriculas</display-name>
     	<servlet-name>Matriculas</servlet-name>
-    	<servlet-class>es.iespuertodelacruz.cc.webappinstituto.servlets.matriculas.Matriculas</servlet-class>
+    	<servlet-class>es.iespuertodelacruz.cc.webappinstituto.servlets.matriculas.ServletMatriculas</servlet-class>
     </servlet>
     <servlet>
     	<description>
@@ -28,6 +28,13 @@
     	<display-name>Login</display-name>
     	<servlet-name>Login</servlet-name>
     	<servlet-class>es.iespuertodelacruz.cc.webappinstituto.servlets.Login</servlet-class>
+    </servlet>
+    <servlet>
+    	<description>
+    	</description>
+    	<display-name>AgregarAlumno</display-name>
+    	<servlet-name>AgregarAlumno</servlet-name>
+    	<servlet-class>es.iespuertodelacruz.cc.webappinstituto.servlets.alumnos.AgregarAlumno</servlet-class>
     </servlet>
     <servlet-mapping>
     	<servlet-name>Alumnos</servlet-name>
@@ -47,10 +54,19 @@
     <servlet-mapping>
     	<servlet-name>Login</servlet-name>
     	<url-pattern>/Login</url-pattern>
+    	<url-pattern>/login</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+    	<servlet-name>AgregarAlumno</servlet-name>
+    	<url-pattern>/AgregarAlumno</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+    	<servlet-name>AgregarAlumno</servlet-name>
+    	<url-pattern>/agregaralumno</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
-            30
+            10
         </session-timeout>
     </session-config>
     <welcome-file-list>

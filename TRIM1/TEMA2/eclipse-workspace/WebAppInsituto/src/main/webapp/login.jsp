@@ -23,10 +23,10 @@
         	<h3><b>Login</b></h3>
             <form action="login" method="POST" id="form-login">
             	<label for="user">Usuario </label>
-            	<input type="text" name="user" id="user"/>
+            	<input type="text" name="loginuser" id="loginuser"/>
             	<br/>
             	<label for="pwd" method="POST">Contraseña </label>
-            	<input type="password" name="pwd" id="pwd"/>
+            	<input type="password" name="loginpwd" id="loginpwd"/>
             	<br/>
             	<input type="submit" name="login" value="Acceder" class="btn btn-primary"/>
             </form>

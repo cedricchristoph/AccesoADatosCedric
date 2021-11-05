@@ -113,6 +113,12 @@ input {
     padding: 10px 0;
 }
 
+.popup-green {
+  top: auto;
+  bottom: 10px;
+  outline: none;
+}
+
 .position-bottom-right {
     position: absolute;
     right:    0;

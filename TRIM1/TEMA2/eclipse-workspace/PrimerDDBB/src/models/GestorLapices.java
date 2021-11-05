@@ -40,7 +40,6 @@ public class GestorLapices {
 		} finally {
 			return lapices;
 		}
-		
 	}
 	
 }

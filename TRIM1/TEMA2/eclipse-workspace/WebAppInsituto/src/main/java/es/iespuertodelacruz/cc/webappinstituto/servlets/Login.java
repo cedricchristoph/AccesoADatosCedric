@@ -35,6 +35,7 @@ public class Login extends HttpServlet {
 		MyDatabase db = new MyDatabase("instituto", user, pwd);
 		Connection conn;
 		if ((conn = db.getConnection()) != null) {
+			request.getSession().setAttribute(Globals.ATTRIBUTE_SESSION_DB_INSTANCE, db);
 			try {
 				conn.close();
 			} catch (SQLException e) {

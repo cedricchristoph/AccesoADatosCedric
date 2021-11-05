@@ -26,7 +26,9 @@ public class MyDatabase {
 	}
 	
 	public Connection getConnection() {
-		if ((!(username == null) || !(username.isEmpty()) && (!(pwd == null) || !(pwd.isEmpty())))) {
+		if (username == null || pwd == null)
+			return null;
+		if ((!(username.isEmpty()) && !(pwd.isEmpty()))) {
 			try {
 				return DriverManager.getConnection(dbConnection, username, pwd);
 			} catch (SQLException e) {
