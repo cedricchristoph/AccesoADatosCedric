@@ -1,5 +1,9 @@
 package es.iespuertodelacruz.cc.webappinstituto.model.entities;
 
+import org.mindrot.jbcrypt.BCrypt;
+
+import es.iespuertodelacruz.cc.webappinstituto.model.utils.Globals;
+
 /**
  * Clase User
  * @author dama
@@ -25,15 +29,26 @@ public class User {
 	 * Constructor completo
 	 * @param user Nombre de usuario
 	 * @param email Email del usuario
-	 * @param hashPwd Contraseña en forma hash del usuario
+	 * @param plainPwd Contraseña del usuario en texto plano
 	 */
-	public User(String user, String email, String hashPwd) {
+	public User(String user, String email, String plainPwd, boolean hashPwd) {
 		super();
 		this.user = user;
 		this.email = email;
-		this.hashPwd = hashPwd;
+		if (hashPwd)
+			this.hashPwd = BCrypt.hashpw(plainPwd, BCrypt.gensalt(Globals.BCRYPT_SALTS));
+		else
+			this.hashPwd = plainPwd;
 	}
 
+	/**
+	 * Funcion que determina si la contraseña es correcta
+	 * @param plainPwd Contraseña en forma de texto plano
+	 * @return Devuelve true y solo true si la contraseña es correcta.
+	 */
+	public boolean checkPwd(String plainPwd) {
+		return BCrypt.checkpw(plainPwd, hashPwd);
+	}
 	
 	// Getters and Setters
 	

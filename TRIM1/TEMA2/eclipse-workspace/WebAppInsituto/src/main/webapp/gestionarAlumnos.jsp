@@ -63,11 +63,11 @@
             <div class="col description border-round">
                 <h4><b>Borrar alumno</b></h4>
                 <small>Introduzca DNI del alumno a eliminar del sistema</small>
-                <form class="container" action="deleteAlumno" method="POST">
-                    <label>DNI</label>
-                    <input type="text" name="dni" placeholder="DNI*"><br/>
+                <form class="container" action="borraralumno" method="POST" id="alumno-borrar-form">
+                    <label for="borraralumnodni">DNI</label>
+                    <input type="text" name="borraralumnodni" placeholder="DNI*"><br/>
                     <div class="text-center text-md-left container">
-                        <a class="btn btn-primary position-bottom-right" onclick="document.getElementById('contact-form').submit();">Borrar</a>
+                        <a class="btn btn-primary position-bottom-right" onclick="document.getElementById('alumno-borrar-form').submit();">Borrar</a>
                     </div>
                 </form>
             </div>
@@ -103,7 +103,7 @@
             </div>
         </div>
         <div style="margin: auto; width: 50%;">
-            <textarea id="txtArea" rows="5" cols="100" class="container" value="${alumnoslist}"></textarea>
+            <textarea id="txtArea" rows="5" cols="100" class="container">${alumnoslist}</textarea>
         </div>
     </body>  
     

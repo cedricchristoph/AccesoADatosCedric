@@ -20,7 +20,8 @@ public class MyDatabase {
 	
 	public MyDatabase(String databaseLocation) {
 		dbLocation = databaseLocation;
-		dbConnection = "jdbc:mysql://localhost:3306/" + dbLocation + "?serverTimezone=UTC";
+		dbConnection = "jdbc:mysql://localhost:3306/" + dbLocation + "?serverTimezone=UTC&characterEncoding=utf-8";
+		basicDataSource = new BasicDataSource();
 		basicDataSource.setDriverClassName(className);
 	    basicDataSource.setUrl(dbConnection);
 	    basicDataSource.setUsername(Globals.CONST_APP_USER);
@@ -29,8 +30,8 @@ public class MyDatabase {
 	
 	public MyDatabase(String databaseLocation, String username, String pwd) {
 		dbLocation = databaseLocation;
-		dbConnection = "jdbc:mysql://localhost:3306/" + dbLocation + "?serverTimezone=UTC";
-		
+		dbConnection = "jdbc:mysql://localhost:3306/" + dbLocation + "?serverTimezone=UTC&characterEncoding=utf-8";
+		basicDataSource = new BasicDataSource();
 		basicDataSource.setDriverClassName(className);
 	    basicDataSource.setUrl(dbConnection);
 	    basicDataSource.setUsername(username);
@@ -39,9 +40,11 @@ public class MyDatabase {
 	
 	public Connection getConnection() {
 		Connection con = null;
+		
         try {
             con = basicDataSource.getConnection();
         } catch (SQLException ex) {
+        	System.out.println(ex.getMessage());
             System.exit(1);
         }        
         return con;

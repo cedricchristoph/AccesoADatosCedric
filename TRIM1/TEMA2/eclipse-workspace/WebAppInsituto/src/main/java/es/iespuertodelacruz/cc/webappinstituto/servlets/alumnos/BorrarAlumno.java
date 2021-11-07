@@ -1,7 +1,6 @@
 package es.iespuertodelacruz.cc.webappinstituto.servlets.alumnos;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -11,42 +10,49 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import es.iespuertodelacruz.cc.webappinstituto.model.daos.AlumnoDAO;
-import es.iespuertodelacruz.cc.webappinstituto.model.entities.Alumno;
 import es.iespuertodelacruz.cc.webappinstituto.model.entities.User;
 import es.iespuertodelacruz.cc.webappinstituto.model.utils.Globals;
 import es.iespuertodelacruz.cc.webappinstituto.model.utils.MyDatabase;
 
 /**
- * Servlet implementation class Alumnos
+ * Servlet implementation class BorrarAlumno
  */
-public class ServletAlumnos extends HttpServlet {
+public class BorrarAlumno extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ServletAlumnos() {
+    public BorrarAlumno() {
         super();
         // TODO Auto-generated constructor stub
     }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ServletContext context = request.getServletContext();
 		HttpSession session = request.getSession();
 		
 		MyDatabase db = (MyDatabase) context.getAttribute(Globals.ATTRIBUTE_APP_DATABASE);
 		User user = (User) session.getAttribute(Globals.ATTRIBUTE_SESSION_USER);
-		if (user == null)
+		if (user == null) {
 			response.sendRedirect(Globals.JSP_LOGIN);
-		else {
-			AlumnoDAO alumnoDao = new AlumnoDAO(db);
-			ArrayList<Alumno> alumnos = (ArrayList<Alumno>) alumnoDao.selectAll();
-			session.setAttribute(Globals.ATTRIBUTE_SESSION_LIST_ALUMNOS, alumnos);
-			request.getRequestDispatcher(Globals.JSP_ALUMNOS).forward(request, response);
-		}	
-		
+		} else {
+			String paramDni = request.getParameter(Globals.PARAM_ALUMNO_BORRAR_DNI);
+			if (paramDni != null && !paramDni.isEmpty()) {
+				AlumnoDAO alumnoDao = new AlumnoDAO(db);
+				if (alumnoDao.delete(paramDni)) {
+					session.setAttribute(Globals.ATTRIBUTE_SESSION_MSG, "Se ha borrado el alumno con dni " + paramDni);
+				} else {
+					session.setAttribute(Globals.ATTRIBUTE_SESSION_ERROR_MSG, "No se ha podido borrar el alumno");
+				}
+			} else {
+				session.setAttribute(Globals.ATTRIBUTE_SESSION_ERROR_MSG, "Debe introducir un dni a borrar");
+			}
+		}
+		response.sendRedirect(Globals.SERVLET_ALUMNOS);
 	}
+
 }

@@ -43,6 +43,13 @@
     	<servlet-name>Registrar</servlet-name>
     	<servlet-class>es.iespuertodelacruz.cc.webappinstituto.servlets.Registrar</servlet-class>
     </servlet>
+    <servlet>
+    	<description>
+    	</description>
+    	<display-name>BorrarAlumno</display-name>
+    	<servlet-name>BorrarAlumno</servlet-name>
+    	<servlet-class>es.iespuertodelacruz.cc.webappinstituto.servlets.alumnos.BorrarAlumno</servlet-class>
+    </servlet>
     <servlet-mapping>
     	<servlet-name>Alumnos</servlet-name>
     	<url-pattern>/Alumnos</url-pattern>
@@ -76,12 +83,20 @@
     	<url-pattern>/Registrar</url-pattern>
 		<url-pattern>/registrar</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+    	<servlet-name>BorrarAlumno</servlet-name>
+    	<url-pattern>/BorrarAlumno</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+    	<servlet-name>BorrarAlumno</servlet-name>
+    	<url-pattern>/borraralumno</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             10
         </session-timeout>
     </session-config>
     <welcome-file-list>
-        <welcome-file>login.jsp</welcome-file>
+        <welcome-file>login</welcome-file>
         </welcome-file-list>
     </web-app>

@@ -32,6 +32,10 @@ public class Registrar extends HttpServlet {
     }
     
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    	HttpSession session = request.getSession();		
+		session.setAttribute(Globals.ATTRIBUTE_SESSION_ERROR_MSG, "");
+		session.setAttribute(Globals.ATTRIBUTE_SESSION_MSG, "");
+		
     	response.sendRedirect(Globals.JSP_REGISTRAR);
     }
     
@@ -41,28 +45,37 @@ public class Registrar extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ServletContext context = request.getServletContext();
 		HttpSession session = request.getSession();
+		MyDatabase db = (MyDatabase) context.getAttribute(Globals.ATTRIBUTE_APP_DATABASE);
 		
-		MyDatabase db = (MyDatabase) session.getAttribute(Globals.ATTRIBUTE_SESSION_DB_INSTANCE);
-		if (db == null) {			
-			String username = request.getParameter(Globals.PARAM_REGISTRAR_USER);
-			String email = request.getParameter(Globals.PARAM_REGISTRAR_EMAIL);
-			String strPwd = request.getParameter(Globals.PARAM_REGISTRAR_PWD);
-			if (username != null && !username.isEmpty() && strPwd != null && !strPwd.isEmpty()) {
-				String pwdHash = BCrypt.hashpw(strPwd, BCrypt.gensalt());
-				UserDAO userDao = new UserDAO("instituto");
-				try {
-					userDao.insert(new User(username, email, pwdHash));
-					session.setAttribute(Globals.ATTRIBUTE_SESSION_MSG, "Se ha registrado correctamente. Su cuenta aun tiene que ser activada por un administrador.");
-					response.sendRedirect(Globals.JSP_LOGIN);
-				} catch (SQLException e) {
-					session.setAttribute(Globals.ATTRIBUTE_SESSION_ERROR_MSG, e.getMessage());
-					response.sendRedirect(Globals.SERVLET_REGISTRAR);
+		String paramUser = request.getParameter(Globals.PARAM_REGISTRAR_USER);
+		String paramEmail = request.getParameter(Globals.PARAM_REGISTRAR_EMAIL);
+		String paramPwd = request.getParameter(Globals.PARAM_REGISTRAR_PWD);
+
+		try {
+			if (paramUser != null && !paramUser.isEmpty() && paramPwd != null && !paramPwd.isEmpty()) {
+				UserDAO userDao = new UserDAO(db);
+				User existing = userDao.select(paramUser);
+				if (existing != null) {
+					throw new Exception("El usuario ya existe");
+				} else {
+					User toRegister = new User(paramUser, paramEmail, paramPwd, true);
+					System.out.println(toRegister.getHashPwd());
+					User output;
+					if ((output = userDao.insert(toRegister)) != null) {
+						session.setAttribute(Globals.ATTRIBUTE_SESSION_MSG, "Se ha registrado correctamente. Espere a que un administrador active su cuenta");
+						response.sendRedirect(Globals.JSP_LOGIN);
+					} else {
+						throw new Exception("Ocurrió un error interno del servidor. No se creó su cuenta");
+					}
 				}
 			} else {
-				session.setAttribute(Globals.ATTRIBUTE_SESSION_ERROR_MSG, "Usuario y/o contraseña están vacíos");
-				response.sendRedirect(Globals.SERVLET_REGISTRAR);
+				throw new Exception("Por favor rellene los campos obligatorios");
 			}
+		} catch (Exception e) {
+			session.setAttribute(Globals.ATTRIBUTE_SESSION_ERROR_MSG, e.getMessage());
+			response.sendRedirect(Globals.JSP_REGISTRAR);
 		}
+
 	}
 
 }

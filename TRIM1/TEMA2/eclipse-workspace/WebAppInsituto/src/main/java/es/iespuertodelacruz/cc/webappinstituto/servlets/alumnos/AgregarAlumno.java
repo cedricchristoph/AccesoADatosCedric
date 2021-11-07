@@ -16,6 +16,7 @@ import es.iespuertodelacruz.cc.webappinstituto.model.utils.Globals;
 import es.iespuertodelacruz.cc.webappinstituto.model.utils.MyDatabase;
 import es.iespuertodelacruz.cc.webappinstituto.model.daos.AlumnoDAO;
 import es.iespuertodelacruz.cc.webappinstituto.model.entities.Alumno;
+import es.iespuertodelacruz.cc.webappinstituto.model.entities.User;
 
 /**
  * Servlet implementation class AgregarAlumno
@@ -38,40 +39,41 @@ public class AgregarAlumno extends HttpServlet {
 		ServletContext context = request.getServletContext();
 		HttpSession session = request.getSession();
 		
-		MyDatabase db = (MyDatabase) session.getAttribute(Globals.ATTRIBUTE_SESSION_DB_INSTANCE);
-		if (db == null) {
-			System.out.println("No estas logeado");
+		MyDatabase db = (MyDatabase) context.getAttribute(Globals.ATTRIBUTE_APP_DATABASE);
+		User user = (User) session.getAttribute(Globals.ATTRIBUTE_SESSION_USER);
+		if (user == null) {
 			response.sendRedirect(Globals.JSP_LOGIN);
 		} else {
-			String dni = request.getParameter(Globals.PARAM_ALUMNO_AGREGAR_DNI);
-			String nombre = request.getParameter(Globals.PARAM_ALUMNO_AGREGAR_NOMBRE);
-			String apellidos = request.getParameter(Globals.PARAM_ALUMNO_AGREGAR_APELLIDOS);
-			String strFechaNacimiento = request.getParameter(Globals.PARAM_ALUMNO_AGREGAR_FECHA);
-			Date fechaNacimientoSql = null;
 			try {
-				java.util.Date date = new SimpleDateFormat("dd/MM/yyyy").parse(strFechaNacimiento);
-				fechaNacimientoSql = new Date(date.getTime());
-			} catch (ParseException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}  
-			if (!dni.isEmpty() && !nombre.isEmpty() && !apellidos.isEmpty()
-					&& !(fechaNacimientoSql == null)) 
-			{
-				Alumno alumno = new Alumno(
-						dni, nombre, apellidos, fechaNacimientoSql
-				);
-				AlumnoDAO alumnoDao = new AlumnoDAO(db);
+				String dni = request.getParameter(Globals.PARAM_ALUMNO_AGREGAR_DNI);
+				String nombre = request.getParameter(Globals.PARAM_ALUMNO_AGREGAR_NOMBRE);
+				String apellidos = request.getParameter(Globals.PARAM_ALUMNO_AGREGAR_APELLIDOS);
+				String strFechaNacimiento = request.getParameter(Globals.PARAM_ALUMNO_AGREGAR_FECHA);
+				Date fechaNacimiento = null;
 				try {
-					alumno = alumnoDao.insert(alumno);
-					session.setAttribute(Globals.ATTRIBUTE_SESSION_MSG, "Alumno guardado correctamente");
-				} catch (Exception e) {
-					System.out.println(e.getMessage());
-					session.setAttribute(Globals.ATTRIBUTE_SESSION_ERROR_MSG, e.getMessage());
+					java.util.Date date = new SimpleDateFormat("dd/MM/yyyy").parse(strFechaNacimiento);
+					fechaNacimiento = new Date(date.getTime());
+				} catch (ParseException e) {
+					throw new Exception("Error al parsear la fecha de nacimiento");
 				}
+				if (dni != null && !dni.isEmpty() && nombre != null && !nombre.isEmpty() && fechaNacimiento != null) {
+					Alumno alumno = new Alumno(dni, nombre, apellidos, fechaNacimiento);
+					AlumnoDAO alumnoDao = new AlumnoDAO(db);
+					Alumno output = alumnoDao.insert(alumno);
+					if (output != null) {
+						session.setAttribute(Globals.ATTRIBUTE_SESSION_MSG, "Alumno guardado correctamente");
+						response.sendRedirect(Globals.JSP_ALUMNOS);
+					} else {
+						throw new Exception("No se pudo crear el alumno");
+					}
+				} else {
+					throw new Exception("Por favor rellene los campos obligatorios");
+				}
+			} catch (Exception e) {
+				response.sendRedirect(Globals.JSP_ALUMNOS);
+				session.setAttribute(Globals.ATTRIBUTE_SESSION_ERROR_MSG, e.getMessage());
 			}
-			response.sendRedirect(Globals.JSP_ALUMNOS);
-		}	
+		}
 	}
 
 }

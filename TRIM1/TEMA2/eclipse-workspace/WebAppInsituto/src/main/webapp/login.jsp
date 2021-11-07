@@ -33,6 +33,9 @@
             <br/><br/>
             <a href="registrar">Crear cuenta</a>
         </div>
+        <c:if test="${not empty message}">
+        	<div class="popup-green position-page-center border-round">${message}</div>
+        </c:if>
         <c:if test="${not empty errorMessage}">
         	<div class="popup-red position-page-center border-round">${errorMessage}</div>
         </c:if>

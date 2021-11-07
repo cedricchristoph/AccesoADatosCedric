@@ -3,6 +3,7 @@ package es.iespuertodelacruz.cc.webappinstituto.listeners;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
+import es.iespuertodelacruz.cc.webappinstituto.model.utils.Globals;
 import es.iespuertodelacruz.cc.webappinstituto.model.utils.MyDatabase;
 
 /**
@@ -30,7 +31,8 @@ public class ServletLifecycle implements ServletContextListener {
      */
     public void contextInitialized(ServletContextEvent sce)  { 
          MyDatabase.cargarDriverMysql();
-         
+         MyDatabase db = new MyDatabase("instituto");
+         sce.getServletContext().setAttribute(Globals.ATTRIBUTE_APP_DATABASE, db);
     }
 	
 }

@@ -11,7 +11,7 @@ import java.util.List;
 import es.iespuertodelacruz.cc.webappinstituto.model.entities.Alumno;
 import es.iespuertodelacruz.cc.webappinstituto.model.utils.MyDatabase;
 
-public class AlumnoDAO implements ICRUD<Alumno, Integer>{
+public class AlumnoDAO implements ICRUD<Alumno, String>{
 
 	MyDatabase db;
 	
@@ -24,11 +24,11 @@ public class AlumnoDAO implements ICRUD<Alumno, Integer>{
 	}
 	
 	@Override
-	public Alumno select(Integer id) {
+	public Alumno select(String id) {
 		try (Connection conn = db.getConnection()) {
-			String sql = "SELECT * FROM alumnos where id = ?";
+			String sql = "SELECT * FROM alumnos where dni = ?";
 			PreparedStatement ps = conn.prepareStatement(sql);
-			ps.setInt(1, id);
+			ps.setString(1, id);
 			ResultSet rs = ps.executeQuery();
 			while (rs.next())
 				return new Alumno(rs.getString("dni"), rs.getString("nombre"), rs.getString("apellidos"), rs.getDate("fechanacimiento"));
@@ -97,11 +97,11 @@ public class AlumnoDAO implements ICRUD<Alumno, Integer>{
 	}
 
 	@Override
-	public boolean delete(Integer id) {
+	public boolean delete(String id) {
 		try (Connection conn = db.getConnection()) {
-			String sql = "DELETE  FROM alumnos WHERE id = ?";
+			String sql = "DELETE  FROM alumnos WHERE dni = ?";
 			PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-			ps.setInt(1, id);
+			ps.setString(1, id);
 			int affectedRows = ps.executeUpdate();
 			if (affectedRows > 0) {
 				return true;

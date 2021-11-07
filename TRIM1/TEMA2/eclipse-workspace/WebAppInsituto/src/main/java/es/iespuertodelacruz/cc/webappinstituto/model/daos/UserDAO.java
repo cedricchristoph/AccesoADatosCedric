@@ -30,7 +30,7 @@ public class UserDAO implements ICRUD<User, String> {
 			ps.setString(1, id);
 			ResultSet rs = ps.executeQuery();
 			while (rs.next())
-				return new User(rs.getString("user"), rs.getString("email"), rs.getString("hash"));
+				return new User(rs.getString("user"), rs.getString("email"), rs.getString("hash"), false);
 			return null;
 		} catch (SQLException e) {
 			return null;
