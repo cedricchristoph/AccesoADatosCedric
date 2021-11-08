@@ -102,17 +102,46 @@
                 </form>
             </div>
         </div>
-        <div style="margin: auto; width: 50%;">
-            <textarea id="txtArea" rows="5" cols="100" class="container">${alumnoslist}</textarea>
-        </div>
-    </body>  
+
+	<div class="col">
+		<h3>Registros</h3>
+		<small>A continuacion puede ver una lista de los registros
+			encontrados en la base de datos.</small>
+		<table class="table">
+			<thead>
+				<tr>
+					<th scope="col">#</th>
+					<th scope="col">Nombre</th>
+					<th scope="col">Apellidos</th>
+					<th scope="col">Fecha Nacimiento</th>
+				</tr>
+			</thead>
+			<tbody>
+			<c:forEach var="alumno" items="alumnoslist">
+				<tr>
+					<td>a</td>
+					<td>aa</td>
+					<td>aaa</td>
+					<td>aaaa</td>
+				</tr>
+			</c:forEach>
+			</tbody>
+		</table>
+	</div>
     
     <footer class="page-footer">
-    <c:if test="${not empty message}">
+    	<c:if test="${not empty message}">
         	<div class="popup-green position-page-center border-round">
         		<p>${message}</p>
         	</div>
         </c:if>
+        
+        <c:if test="${not empty infoMessage}">
+        	<div class="popup-blue position-page-center border-round">
+        		<p>${infoMessage}</p>
+        	</div>
+        </c:if>
+        
         <c:if test="${not empty errorMessage}">
         	<div class="popup-red position-page-center border-round">
         		<p>${errorMessage}</p>

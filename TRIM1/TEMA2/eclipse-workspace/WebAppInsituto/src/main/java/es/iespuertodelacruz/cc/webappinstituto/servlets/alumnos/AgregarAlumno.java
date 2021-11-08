@@ -50,13 +50,13 @@ public class AgregarAlumno extends HttpServlet {
 				String apellidos = request.getParameter(Globals.PARAM_ALUMNO_AGREGAR_APELLIDOS);
 				String strFechaNacimiento = request.getParameter(Globals.PARAM_ALUMNO_AGREGAR_FECHA);
 				Date fechaNacimiento = null;
-				try {
-					java.util.Date date = new SimpleDateFormat("dd/MM/yyyy").parse(strFechaNacimiento);
-					fechaNacimiento = new Date(date.getTime());
-				} catch (ParseException e) {
-					throw new Exception("Error al parsear la fecha de nacimiento");
-				}
-				if (dni != null && !dni.isEmpty() && nombre != null && !nombre.isEmpty() && fechaNacimiento != null) {
+				if (dni != null && !dni.isEmpty() && nombre != null && !nombre.isEmpty() && strFechaNacimiento != null) {
+					try {
+						java.util.Date date = new SimpleDateFormat("dd/MM/yyyy").parse(strFechaNacimiento);
+						fechaNacimiento = new Date(date.getTime());
+					} catch (ParseException e) {
+						throw new Exception("Error al parsear la fecha de nacimiento");
+					}
 					Alumno alumno = new Alumno(dni, nombre, apellidos, fechaNacimiento);
 					AlumnoDAO alumnoDao = new AlumnoDAO(db);
 					Alumno output = alumnoDao.insert(alumno);

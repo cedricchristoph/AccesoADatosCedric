@@ -113,6 +113,15 @@ input {
     padding: 10px 0;
 }
 
+.popup-blue {
+  top: auto;
+  bottom: 10px;
+  outline: none;
+  border: 1px solid #2682bf;
+  background-color: #c7e9ff;
+  color: black;
+}
+
 .popup-green {
   top: auto;
   bottom: 10px;

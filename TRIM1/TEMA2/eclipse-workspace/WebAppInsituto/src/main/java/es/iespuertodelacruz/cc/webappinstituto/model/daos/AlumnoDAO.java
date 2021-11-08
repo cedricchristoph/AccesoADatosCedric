@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import es.iespuertodelacruz.cc.webappinstituto.model.entities.Alumno;
@@ -31,7 +32,7 @@ public class AlumnoDAO implements ICRUD<Alumno, String>{
 			ps.setString(1, id);
 			ResultSet rs = ps.executeQuery();
 			while (rs.next())
-				return new Alumno(rs.getString("dni"), rs.getString("nombre"), rs.getString("apellidos"), rs.getDate("fechanacimiento"));
+				return new Alumno(rs.getString("dni"), rs.getString("nombre"), rs.getString("apellidos"), new Date(rs.getLong("fechanacimiento")));
 			return null;
 		} catch (SQLException e) {
 			return null;
@@ -47,7 +48,7 @@ public class AlumnoDAO implements ICRUD<Alumno, String>{
 			ResultSet rs = stmt.executeQuery(sql);
 			while (rs.next()) {
 				alumnos.add(
-						new Alumno(rs.getString("dni"), rs.getString("nombre"), rs.getString("apellidos"), rs.getDate("fechanacimiento"))
+						new Alumno(rs.getString("dni"), rs.getString("nombre"), rs.getString("apellidos"), new Date(rs.getLong("fechanacimiento")))
 				);
 			}
 		} catch (SQLException e) {

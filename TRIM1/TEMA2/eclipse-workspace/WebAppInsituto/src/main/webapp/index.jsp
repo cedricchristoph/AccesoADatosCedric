@@ -63,6 +63,12 @@
         </div>
     </body>
     <footer class="page-footer">
+    	<c:if test="${not empty infoMessage}">
+        	<div class="popup-blue position-page-center border-round">
+        		<p>${infoMessage}</p>
+        	</div>
+        </c:if>
+    
         <div class="footer-copyright text-center">© 2021 Copyright: Cedric Christoph</div>
     </footer>
 </html>

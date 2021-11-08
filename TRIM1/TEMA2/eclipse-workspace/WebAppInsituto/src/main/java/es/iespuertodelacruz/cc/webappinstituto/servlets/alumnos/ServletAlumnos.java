@@ -2,6 +2,7 @@ package es.iespuertodelacruz.cc.webappinstituto.servlets.alumnos;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -43,7 +44,13 @@ public class ServletAlumnos extends HttpServlet {
 			response.sendRedirect(Globals.JSP_LOGIN);
 		else {
 			AlumnoDAO alumnoDao = new AlumnoDAO(db);
-			ArrayList<Alumno> alumnos = (ArrayList<Alumno>) alumnoDao.selectAll();
+			List<Alumno> alumnos = null;
+			alumnos = (ArrayList<Alumno>) alumnoDao.selectAll();
+			if (alumnos == null) {
+				session.setAttribute(Globals.ATTRIBUTE_SESSION_INFO_MSG, "No se encontró ningún registro");
+			} else {
+				session.setAttribute(Globals.ATTRIBUTE_SESSION_INFO_MSG, "Se encontraron " + alumnos.size() + " registro(s)");
+			}
 			session.setAttribute(Globals.ATTRIBUTE_SESSION_LIST_ALUMNOS, alumnos);
 			request.getRequestDispatcher(Globals.JSP_ALUMNOS).forward(request, response);
 		}	

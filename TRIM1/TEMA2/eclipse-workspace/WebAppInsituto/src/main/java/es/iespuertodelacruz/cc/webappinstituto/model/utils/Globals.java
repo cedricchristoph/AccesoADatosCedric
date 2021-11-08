@@ -3,9 +3,10 @@ package es.iespuertodelacruz.cc.webappinstituto.model.utils;
 public class Globals {
 
 	/* CREDENCIALES DE APLICACION PARA DDBB */
-	public static final String CONST_APP_USER = "webapp";
-	public static final String CONST_APP_PWD = "UrcZCb7qizCbeW2";
-	
+	//public static final String CONST_APP_USER = "webapp";
+	//public static final String CONST_APP_PWD = "UrcZCb7qizCbeW2";
+	public static final String CONST_APP_USER = "root";
+	public static final String CONST_APP_PWD = "1q2w3e4r";
 	/* SERVLETS */
 	public static final String SERVLET_ALUMNOS = "alumnos";
 	public static final String SERVLET_ASIGNATURAS = "asignaturas";
@@ -30,6 +31,7 @@ public class Globals {
 	public static final String ATTRIBUTE_SESSION_LIST_ASIGNATURAS = "asignaturaslist";
 	public static final String ATTRIBUTE_SESSION_LIST_MATRICULAS = "matriculaslist";
 	public static final String ATTRIBUTE_SESSION_ERROR_MSG = "errorMessage";
+	public static final String ATTRIBUTE_SESSION_INFO_MSG = "infoMessage";
 	public static final String ATTRIBUTE_SESSION_MSG = "message";
 	
 	/* ATRIBUTOS APLICACION */

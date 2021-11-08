@@ -61,7 +61,7 @@ public class Login extends HttpServlet {
 				System.out.println(account.getHashPwd());
 				if (account.checkPwd(pwd)) {
 					session.setAttribute(Globals.ATTRIBUTE_SESSION_USER, account);
-					session.setAttribute(Globals.ATTRIBUTE_SESSION_MSG, "¡Bienvenido " + account.getUser() + "!");
+					session.setAttribute(Globals.ATTRIBUTE_SESSION_INFO_MSG, "¡Bienvenido " + account.getUser() + "!");
 					response.sendRedirect(Globals.JSP_INICIO);
 				} else {
 					throw new Exception("Usuario y/o contraseña errónea");
