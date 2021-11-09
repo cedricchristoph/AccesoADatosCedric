@@ -50,6 +50,13 @@
     	<servlet-name>BorrarAlumno</servlet-name>
     	<servlet-class>es.iespuertodelacruz.cc.webappinstituto.servlets.alumnos.BorrarAlumno</servlet-class>
     </servlet>
+    <servlet>
+    	<description>
+    	</description>
+    	<display-name>EditarAlumno</display-name>
+    	<servlet-name>EditarAlumno</servlet-name>
+    	<servlet-class>es.iespuertodelacruz.cc.webappinstituto.servlets.alumnos.EditarAlumno</servlet-class>
+    </servlet>
     <servlet-mapping>
     	<servlet-name>Alumnos</servlet-name>
     	<url-pattern>/Alumnos</url-pattern>
@@ -90,6 +97,14 @@
     <servlet-mapping>
     	<servlet-name>BorrarAlumno</servlet-name>
     	<url-pattern>/borraralumno</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+    	<servlet-name>EditarAlumno</servlet-name>
+    	<url-pattern>/EditarAlumno</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+    	<servlet-name>EditarAlumno</servlet-name>
+    	<url-pattern>/editaralumno</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

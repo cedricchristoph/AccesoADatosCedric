@@ -6,7 +6,7 @@ public class Globals {
 	//public static final String CONST_APP_USER = "webapp";
 	//public static final String CONST_APP_PWD = "UrcZCb7qizCbeW2";
 	public static final String CONST_APP_USER = "root";
-	public static final String CONST_APP_PWD = "N0Acc3$$4U";
+	public static final String CONST_APP_PWD = "1q2w3e4r";
 	/* SERVLETS */
 	public static final String SERVLET_ALUMNOS = "alumnos";
 	public static final String SERVLET_ASIGNATURAS = "asignaturas";
@@ -50,6 +50,11 @@ public class Globals {
 	public static final String PARAM_ALUMNO_AGREGAR_FECHA = "agregaralumnofecha";
 	
 	public static final String PARAM_ALUMNO_BORRAR_DNI = "borraralumnodni";
+	
+	public static final String PARAM_ALUMNO_EDITAR_DNI = "editaralumnodni";
+	public static final String PARAM_ALUMNO_EDITAR_NOMBRE = "editaralumnonombre";
+	public static final String PARAM_ALUMNO_EDITAR_APELLIDOS = "editaralumnoapellidos";
+	public static final String PARAM_ALUMNO_EDITAR_FECHA = "editaralumnofecha";
 	
 	/* BCRYPT */
 	public static final int BCRYPT_SALTS = 10;

@@ -74,17 +74,17 @@
             <div class="col description border-round">
                 <h4><b>Editar alumno</b></h4>
                 <small>Rellene este formulario para editar un alumno ya registrado en el sistema</small>
-                <form class="container" action="updateAlumno" method="POST">
+                <form class="container" action="editaralumno" method="POST" id="alumno-editar-form">
                     <label>DNI</label>
-                    <input type="text" name="dni" placeholder="DNI*"><br/>
+                    <input type="text" name="editaralumnodni" placeholder="DNI*"><br/>
                     <label>Nombre</label>
-                    <input type="text" name="nombre" placeholder="Nombre*"><br/>
+                    <input type="text" name="editaralumnonombre" placeholder="Nombre*"><br/>
                     <label>Apellidos</label>
-                    <input type="text" name="apellidos" placeholder="Apellidos"><br/>
+                    <input type="text" name="editaralumnoapellidos" placeholder="Apellidos"><br/>
                     <label>Nacimiento</label>
-                    <input type="text" name="fechaNacimiento" placeholder="Fecha de nacimiento"><br/>
+                    <input type="text" name="editaralumnofecha" placeholder="Fecha de nacimiento"><br/>
                     <div class="text-center text-md-left container">
-                        <a class="btn btn-primary position-bottom-right" onclick="document.getElementById('contact-form').submit();">Actualizar</a>
+                        <a class="btn btn-primary position-bottom-right" onclick="document.getElementById('alumno-editar-form').submit();">Actualizar</a>
                     </div>
                 </form>
             </div>

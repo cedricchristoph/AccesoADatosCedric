@@ -27,7 +27,33 @@ public class Matricula {
 		this.year = year;
 		this.asignaturas = asignaturas;
 	}
-
+	
+	/**
+	 * Constructor para MatriculaDAO
+	 * @param id
+	 * @param alumno
+	 * @param year
+	 */
+	public Matricula(Integer id, Alumno alumno, int year) {
+		this.id = id;
+		this.alumno = alumno;
+		this.year = year;
+	}
+	
+	/**
+	 * Constructor completo
+	 * @param id
+	 * @param alumno
+	 * @param year
+	 * @param asignaturas
+	 */
+	public Matricula(Integer id, Alumno alumno, int year, ArrayList<Asignatura> asignaturas) {
+		this.id = id;
+		this.alumno = alumno;
+		this.year = year;
+		this.asignaturas = asignaturas;
+	}
+	
 	
 	// Getters and Setters
 	
