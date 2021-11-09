@@ -6,7 +6,7 @@ public class Globals {
 	//public static final String CONST_APP_USER = "webapp";
 	//public static final String CONST_APP_PWD = "UrcZCb7qizCbeW2";
 	public static final String CONST_APP_USER = "root";
-	public static final String CONST_APP_PWD = "1q2w3e4r";
+	public static final String CONST_APP_PWD = "N0Acc3$$4U";
 	/* SERVLETS */
 	public static final String SERVLET_ALUMNOS = "alumnos";
 	public static final String SERVLET_ASIGNATURAS = "asignaturas";

@@ -5,7 +5,7 @@ public class Asignatura {
 	/**
 	 * Variables de la clase asignatura
 	 */
-	private String siglas;
+	private Integer id;
 	private String nombre;
 	private String curso;
 	
@@ -18,30 +18,30 @@ public class Asignatura {
 	
 	/**
 	 * Constructor completo
-	 * @param siglas de la asignatura
+	 * @param id de la asignatura
 	 * @param nombre de la asignatura
 	 * @param curso al que se imparte esta asignatura
 	 */
-	public Asignatura(String siglas, String nombre, String curso) {
+	public Asignatura(Integer id, String nombre, String curso) {
 		super();
-		this.siglas = siglas;
+		this.id = id;
 		this.nombre = nombre;
 		this.curso = curso;
 	}
 
 	
 	// Getters and Setters
-	
-	public String getSiglas() {
-		return siglas;
-	}
-
-	public void setSiglas(String siglas) {
-		this.siglas = siglas;
-	}
 
 	public String getNombre() {
 		return nombre;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public void setNombre(String nombre) {

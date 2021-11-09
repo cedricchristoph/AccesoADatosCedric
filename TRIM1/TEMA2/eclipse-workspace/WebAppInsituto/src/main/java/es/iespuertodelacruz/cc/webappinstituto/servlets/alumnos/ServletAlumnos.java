@@ -49,10 +49,11 @@ public class ServletAlumnos extends HttpServlet {
 			if (alumnos == null) {
 				session.setAttribute(Globals.ATTRIBUTE_SESSION_INFO_MSG, "No se encontró ningún registro");
 			} else {
-				session.setAttribute(Globals.ATTRIBUTE_SESSION_INFO_MSG, "Se encontraron " + alumnos.size() + " registro(s)");
+				//session.setAttribute(Globals.ATTRIBUTE_SESSION_INFO_MSG, "Se encontraron " + alumnos.size() + " registro(s)");
 			}
 			session.setAttribute(Globals.ATTRIBUTE_SESSION_LIST_ALUMNOS, alumnos);
 			request.getRequestDispatcher(Globals.JSP_ALUMNOS).forward(request, response);
+			session.setAttribute(Globals.ATTRIBUTE_SESSION_MSG, "");
 		}	
 		
 	}

@@ -50,6 +50,7 @@ public class Login extends HttpServlet {
 		ServletContext context = request.getServletContext();
 		HttpSession session = request.getSession();
 		session.setAttribute(Globals.ATTRIBUTE_SESSION_ERROR_MSG, "");
+		session.setAttribute(Globals.ATTRIBUTE_SESSION_INFO_MSG, "");
 		session.setAttribute(Globals.ATTRIBUTE_SESSION_MSG, "");
 		
 		String user = request.getParameter(Globals.PARAM_LOGIN_USER);
@@ -60,8 +61,10 @@ public class Login extends HttpServlet {
 			if (account != null) {
 				System.out.println(account.getHashPwd());
 				if (account.checkPwd(pwd)) {
+					if (!account.isActive())
+						throw new Exception("Su cuenta aún no ha sido activada");
 					session.setAttribute(Globals.ATTRIBUTE_SESSION_USER, account);
-					session.setAttribute(Globals.ATTRIBUTE_SESSION_INFO_MSG, "¡Bienvenido " + account.getUser() + "!");
+					//session.setAttribute(Globals.ATTRIBUTE_SESSION_INFO_MSG, "¡Bienvenido " + account.getUser() + "!");
 					response.sendRedirect(Globals.JSP_INICIO);
 				} else {
 					throw new Exception("Usuario y/o contraseña errónea");

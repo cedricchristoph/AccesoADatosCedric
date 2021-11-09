@@ -46,13 +46,46 @@ public class AlumnoDAO implements ICRUD<Alumno, String>{
 			Statement stmt = conn.createStatement();
 			String sql = "SELECT * FROM alumnos";
 			ResultSet rs = stmt.executeQuery(sql);
-			while (rs.next()) {
-				alumnos.add(
-						new Alumno(rs.getString("dni"), rs.getString("nombre"), rs.getString("apellidos"), new Date(rs.getLong("fechanacimiento")))
-				);
-			}
+			while (rs.next()) 
+				alumnos.add(new Alumno(rs.getString("dni"), rs.getString("nombre"), 
+						rs.getString("apellidos"), new Date(rs.getLong("fechanacimiento"))));
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			return alumnos;
+		}
+	}
+	
+	public List<Alumno> selectByName(String name) {
+		List<Alumno> alumnos = new ArrayList<Alumno>();
+		try (Connection conn = db.getConnection()) {
+			String sql = "SELECT * FROM alumnos WHERE nombre LIKE %?%";
+			PreparedStatement ps = conn.prepareStatement(sql); 
+			ps.setString(1, name);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next())
+				alumnos.add(new Alumno(rs.getString("dni"), rs.getString("nombre"), 
+						rs.getString("apellidos"), new Date(rs.getLong("fechanacimiento"))));
+		} catch (SQLException e) {
+			
+		} finally {
+			return alumnos;
+		}
+	}
+	
+	public List<Alumno> selectBySurname(String apellido) {
+		List<Alumno> alumnos = new ArrayList<Alumno>();
+		try (Connection conn = db.getConnection()) {
+			String sql = "SELECT * FROM alumnos WHERE apellidos LIKE %?%";
+			PreparedStatement ps = conn.prepareStatement(sql); 
+			ps.setString(1, apellido);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next())
+				alumnos.add(new Alumno(rs.getString("dni"), rs.getString("nombre"), 
+						rs.getString("apellidos"), new Date(rs.getLong("fechanacimiento"))));
+		} catch (SQLException e) {
+			
 		} finally {
 			return alumnos;
 		}

@@ -45,6 +45,10 @@ body {
 	line-height: 1.5;
 }
 
+.text-left {
+	text-align: left;
+}
+
 .position-page-center {
     left: 50%;
 	position: absolute;

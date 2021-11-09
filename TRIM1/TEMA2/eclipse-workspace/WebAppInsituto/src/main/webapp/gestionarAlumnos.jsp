@@ -88,9 +88,9 @@
                     </div>
                 </form>
             </div>
-            <div class="col description border-round">
-                <h4><b>Mostrar alumno</b></h4>
-                <small>Introduzca los datos del alumno a mostrar</small>
+            <div class="col description border-round text-left">
+                <h4>Mostrar alumno</h4>
+                <small>Introduzca los datos del alumno a mostrar</small><br/>
                 <form class="container" action="showAlumno" method="POST">
                     <label>DNI</label>
                     <input type="text" name="dni" placeholder="DNI*"><br/>
@@ -103,7 +103,7 @@
             </div>
         </div>
 
-	<div class="col">
+	<div class="col description border-round">
 		<h3>Registros</h3>
 		<small>A continuacion puede ver una lista de los registros
 			encontrados en la base de datos.</small>
@@ -117,12 +117,12 @@
 				</tr>
 			</thead>
 			<tbody>
-			<c:forEach var="alumno" items="alumnoslist">
+			<c:forEach var="alumno" items="${alumnoslist}">
 				<tr>
-					<td>a</td>
-					<td>aa</td>
-					<td>aaa</td>
-					<td>aaaa</td>
+					<td><c:out value="${alumno.dni}"/></td>
+					<td><c:out value="${alumno.nombre}"/></td>
+					<td><c:out value="${alumno.apellidos}"/></td>
+					<td><c:out value="${alumno.fechaNacimiento}"/></td>
 				</tr>
 			</c:forEach>
 			</tbody>

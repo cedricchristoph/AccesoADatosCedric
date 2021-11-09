@@ -36,7 +36,7 @@ public class Registrar extends HttpServlet {
 		session.setAttribute(Globals.ATTRIBUTE_SESSION_ERROR_MSG, "");
 		session.setAttribute(Globals.ATTRIBUTE_SESSION_MSG, "");
 		
-    	response.sendRedirect(Globals.JSP_REGISTRAR);
+    	request.getRequestDispatcher(Globals.JSP_REGISTRAR).forward(request, response);;
     }
     
 	/**
@@ -58,7 +58,7 @@ public class Registrar extends HttpServlet {
 				if (existing != null) {
 					throw new Exception("El usuario ya existe");
 				} else {
-					User toRegister = new User(paramUser, paramEmail, paramPwd, true);
+					User toRegister = new User(paramUser, paramEmail, paramPwd, false, true);
 					System.out.println(toRegister.getHashPwd());
 					User output;
 					if ((output = userDao.insert(toRegister)) != null) {

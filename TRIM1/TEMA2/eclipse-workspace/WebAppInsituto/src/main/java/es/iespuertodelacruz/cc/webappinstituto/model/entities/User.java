@@ -17,6 +17,7 @@ public class User {
 	private String user;
 	private String email;
 	private String hashPwd;
+	private boolean active;
 	
 	/**
 	 * Constructor por defecto
@@ -30,11 +31,14 @@ public class User {
 	 * @param user Nombre de usuario
 	 * @param email Email del usuario
 	 * @param plainPwd Contraseña del usuario en texto plano
+	 * @param active Valor que indica si la cuenta esta activa o no
+	 * @param hashPwd Determina si plainPwd será encriptado o no
 	 */
-	public User(String user, String email, String plainPwd, boolean hashPwd) {
+	public User(String user, String email, String plainPwd, boolean active, boolean hashPwd) {
 		super();
 		this.user = user;
 		this.email = email;
+		this.active = active;
 		if (hashPwd)
 			this.hashPwd = BCrypt.hashpw(plainPwd, BCrypt.gensalt(Globals.BCRYPT_SALTS));
 		else
@@ -74,6 +78,14 @@ public class User {
 
 	public void setHashPwd(String hashPwd) {
 		this.hashPwd = hashPwd;
+	}
+
+	public boolean isActive() {
+		return active;
+	}
+
+	public void setActive(boolean active) {
+		this.active = active;
 	}
 	
 	
