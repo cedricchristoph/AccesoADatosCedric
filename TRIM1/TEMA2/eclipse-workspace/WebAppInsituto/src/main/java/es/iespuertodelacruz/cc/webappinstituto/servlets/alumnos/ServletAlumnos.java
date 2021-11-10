@@ -41,7 +41,7 @@ public class ServletAlumnos extends HttpServlet {
 		MyDatabase db = (MyDatabase) context.getAttribute(Globals.ATTRIBUTE_APP_DATABASE);
 		User user = (User) session.getAttribute(Globals.ATTRIBUTE_SESSION_USER);
 		if (user == null)
-			response.sendRedirect(Globals.JSP_LOGIN);
+			response.sendRedirect(Globals.SERVLET_LOGIN);
 		else {
 			AlumnoDAO alumnoDao = new AlumnoDAO(db);
 			List<Alumno> alumnos = null;
@@ -54,6 +54,7 @@ public class ServletAlumnos extends HttpServlet {
 			session.setAttribute(Globals.ATTRIBUTE_SESSION_LIST_ALUMNOS, alumnos);
 			request.getRequestDispatcher(Globals.JSP_ALUMNOS).forward(request, response);
 			session.setAttribute(Globals.ATTRIBUTE_SESSION_MSG, "");
+			session.setAttribute(Globals.ATTRIBUTE_SESSION_ERROR_MSG, "");
 		}	
 		
 	}

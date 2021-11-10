@@ -42,7 +42,7 @@ public class AgregarAlumno extends HttpServlet {
 		MyDatabase db = (MyDatabase) context.getAttribute(Globals.ATTRIBUTE_APP_DATABASE);
 		User user = (User) session.getAttribute(Globals.ATTRIBUTE_SESSION_USER);
 		if (user == null) {
-			response.sendRedirect(Globals.JSP_LOGIN);
+			response.sendRedirect(Globals.SERVLET_LOGIN);
 		} else {
 			try {
 				String dni = request.getParameter(Globals.PARAM_ALUMNO_AGREGAR_DNI);
@@ -62,7 +62,7 @@ public class AgregarAlumno extends HttpServlet {
 					Alumno output = alumnoDao.insert(alumno);
 					if (output != null) {
 						session.setAttribute(Globals.ATTRIBUTE_SESSION_MSG, "Alumno guardado correctamente");
-						response.sendRedirect(Globals.JSP_ALUMNOS);
+						response.sendRedirect(Globals.SERVLET_ALUMNOS);
 					} else {
 						throw new Exception("No se pudo crear el alumno");
 					}
@@ -70,8 +70,8 @@ public class AgregarAlumno extends HttpServlet {
 					throw new Exception("Por favor rellene los campos obligatorios");
 				}
 			} catch (Exception e) {
-				response.sendRedirect(Globals.JSP_ALUMNOS);
 				session.setAttribute(Globals.ATTRIBUTE_SESSION_ERROR_MSG, e.getMessage());
+				response.sendRedirect(Globals.SERVLET_ALUMNOS);
 			}
 		}
 	}

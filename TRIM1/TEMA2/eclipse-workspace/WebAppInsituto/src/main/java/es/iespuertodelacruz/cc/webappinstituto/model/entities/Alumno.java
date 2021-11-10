@@ -1,5 +1,7 @@
 package es.iespuertodelacruz.cc.webappinstituto.model.entities;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 public class Alumno {
@@ -34,6 +36,14 @@ public class Alumno {
 		this.fechaNacimiento = fechaNacimiento;
 	}
 
+	/**
+	 * Devuelve la fecha de nacimiento en formato dd/MM/yyyy
+	 * @return Fecha en formato dd/MM/yyyy
+	 */
+	public String getSimpleDate() {
+		SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");  
+		return formatter.format(fechaNacimiento);
+	}
 	
 	// Getters and Setters
 	

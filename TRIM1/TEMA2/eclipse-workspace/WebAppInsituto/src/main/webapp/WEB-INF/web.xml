@@ -57,6 +57,13 @@
     	<servlet-name>EditarAlumno</servlet-name>
     	<servlet-class>es.iespuertodelacruz.cc.webappinstituto.servlets.alumnos.EditarAlumno</servlet-class>
     </servlet>
+    <servlet>
+    	<description>
+    	</description>
+    	<display-name>Inicio</display-name>
+    	<servlet-name>Inicio</servlet-name>
+    	<servlet-class>es.iespuertodelacruz.cc.webappinstituto.servlets.Inicio</servlet-class>
+    </servlet>
     <servlet-mapping>
     	<servlet-name>Alumnos</servlet-name>
     	<url-pattern>/Alumnos</url-pattern>
@@ -106,12 +113,20 @@
     	<servlet-name>EditarAlumno</servlet-name>
     	<url-pattern>/editaralumno</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+    	<servlet-name>Inicio</servlet-name>
+    	<url-pattern>/Inicio</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+    	<servlet-name>Inicio</servlet-name>
+    	<url-pattern>/inicio</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             10
         </session-timeout>
     </session-config>
     <welcome-file-list>
-        <welcome-file>login</welcome-file>
+        <welcome-file>inicio</welcome-file>
         </welcome-file-list>
     </web-app>

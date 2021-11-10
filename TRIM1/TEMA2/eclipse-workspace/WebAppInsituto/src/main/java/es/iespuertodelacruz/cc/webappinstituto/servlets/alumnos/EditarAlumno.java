@@ -41,7 +41,7 @@ public class EditarAlumno extends HttpServlet {
 		MyDatabase db = (MyDatabase) context.getAttribute(Globals.ATTRIBUTE_APP_DATABASE);
 		User user = (User) session.getAttribute(Globals.ATTRIBUTE_SESSION_USER);
 		if (user == null) {
-			response.sendRedirect(Globals.JSP_LOGIN);
+			response.sendRedirect(Globals.SERVLET_LOGIN);
 		} else {
 			try {
 			String paramDni = request.getParameter(Globals.PARAM_ALUMNO_EDITAR_DNI);
@@ -57,7 +57,10 @@ public class EditarAlumno extends HttpServlet {
 					throw new Exception("Error al parsear la fecha de nacimiento");
 				}
 				Alumno alumno = new Alumno(paramDni, paramNombre, paramApellidos, fecha);
-				alumnoDao.update(alumno);
+				if (alumnoDao.update(alumno))
+					session.setAttribute(Globals.ATTRIBUTE_SESSION_MSG, "Se actualizó el registro de " + alumno.getDni());
+				else
+					throw new Exception("No se pudo actualizar el registro de " + alumno.getDni());
 			} else {
 				throw new Exception("Debe introducir un dni a editar");
 			}

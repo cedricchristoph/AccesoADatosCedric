@@ -16,14 +16,14 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous"></script>
 	
         <nav class="navbar navbar-expand-md">
-            <a class="navbar-brand" href="index.jsp"><img src="icons/building.svg"/>&nbsp;Gestionar Instituto</a>
+            <a class="navbar-brand" href="inicio"><img src="icons/building.svg"/>&nbsp;Gestionar Instituto</a>
             <button class="navbar-toggler navbar-dark" type="button" data-toggle="collapse" data-target="#main-navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="main-navigation">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="index.jsp"><img src="icons/house.svg"/>&nbsp;Inicio</a>
+                        <a class="nav-link" href="inicio"><img src="icons/house.svg"/>&nbsp;Inicio</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="alumnos"><img src="icons/file-earmark-person.svg"/>&nbsp;Gestionar alumnos</a>
@@ -32,7 +32,7 @@
                         <a class="nav-link" href="asignaturas"><img src="icons/book.svg"/>&nbsp;Gestionar asignaturas</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="matriculas"><img src="icons/file-earmark-text-fill.svg"/>&nbsp;Gestionar matrÃ­culas</a>
+                        <a class="nav-link" href="matriculas"><img src="icons/file-earmark-text-fill.svg"/>&nbsp;Gestionar matrículas</a>
                     </li>
                 </ul>
             </div>
@@ -122,7 +122,7 @@
 					<td><c:out value="${alumno.dni}"/></td>
 					<td><c:out value="${alumno.nombre}"/></td>
 					<td><c:out value="${alumno.apellidos}"/></td>
-					<td><c:out value="${alumno.fechaNacimiento}"/></td>
+					<td><c:out value="${alumno.getSimpleDate()}"/></td>
 				</tr>
 			</c:forEach>
 			</tbody>

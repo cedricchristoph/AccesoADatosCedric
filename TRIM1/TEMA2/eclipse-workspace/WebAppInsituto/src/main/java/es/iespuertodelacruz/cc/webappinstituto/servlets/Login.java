@@ -34,13 +34,14 @@ public class Login extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	HttpSession session = request.getSession();		
-		session.setAttribute(Globals.ATTRIBUTE_SESSION_ERROR_MSG, "");
-		session.setAttribute(Globals.ATTRIBUTE_SESSION_MSG, "");
 		User sessionUser = (User) session.getAttribute(Globals.ATTRIBUTE_SESSION_USER);
 		if (sessionUser != null)
 			request.getRequestDispatcher(Globals.JSP_INICIO).forward(request, response);
 		else
 			request.getRequestDispatcher(Globals.JSP_LOGIN).forward(request, response);
+		session.setAttribute(Globals.ATTRIBUTE_SESSION_ERROR_MSG, "");
+		session.setAttribute(Globals.ATTRIBUTE_SESSION_INFO_MSG, "");
+		session.setAttribute(Globals.ATTRIBUTE_SESSION_MSG, "");
     }
     
 	/**
@@ -49,9 +50,6 @@ public class Login extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ServletContext context = request.getServletContext();
 		HttpSession session = request.getSession();
-		session.setAttribute(Globals.ATTRIBUTE_SESSION_ERROR_MSG, "");
-		session.setAttribute(Globals.ATTRIBUTE_SESSION_INFO_MSG, "");
-		session.setAttribute(Globals.ATTRIBUTE_SESSION_MSG, "");
 		
 		String user = request.getParameter(Globals.PARAM_LOGIN_USER);
 		String pwd = request.getParameter(Globals.PARAM_LOGIN_PWD);
@@ -65,7 +63,7 @@ public class Login extends HttpServlet {
 						throw new Exception("Su cuenta aún no ha sido activada");
 					session.setAttribute(Globals.ATTRIBUTE_SESSION_USER, account);
 					//session.setAttribute(Globals.ATTRIBUTE_SESSION_INFO_MSG, "¡Bienvenido " + account.getUser() + "!");
-					response.sendRedirect(Globals.JSP_INICIO);
+					response.sendRedirect(Globals.SERVLET_INICIO);
 				} else {
 					throw new Exception("Usuario y/o contraseña errónea");
 				}	
@@ -74,7 +72,7 @@ public class Login extends HttpServlet {
 			}
 		} catch (Exception e) {
 			session.setAttribute(Globals.ATTRIBUTE_SESSION_ERROR_MSG, e.getMessage());
-			response.sendRedirect(Globals.JSP_LOGIN);
+			response.sendRedirect(Globals.SERVLET_LOGIN);
 		}
 	}
 

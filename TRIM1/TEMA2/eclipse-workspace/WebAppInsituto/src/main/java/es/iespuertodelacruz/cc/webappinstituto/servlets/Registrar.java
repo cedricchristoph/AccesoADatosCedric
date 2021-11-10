@@ -63,7 +63,7 @@ public class Registrar extends HttpServlet {
 					User output;
 					if ((output = userDao.insert(toRegister)) != null) {
 						session.setAttribute(Globals.ATTRIBUTE_SESSION_MSG, "Se ha registrado correctamente. Espere a que un administrador active su cuenta");
-						response.sendRedirect(Globals.JSP_LOGIN);
+						response.sendRedirect(Globals.SERVLET_LOGIN);
 					} else {
 						throw new Exception("Ocurrió un error interno del servidor. No se creó su cuenta");
 					}
@@ -73,7 +73,7 @@ public class Registrar extends HttpServlet {
 			}
 		} catch (Exception e) {
 			session.setAttribute(Globals.ATTRIBUTE_SESSION_ERROR_MSG, e.getMessage());
-			response.sendRedirect(Globals.JSP_REGISTRAR);
+			response.sendRedirect(Globals.JSP_LOGIN);
 		}
 
 	}

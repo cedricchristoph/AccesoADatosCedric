@@ -114,11 +114,12 @@ public class AlumnoDAO implements ICRUD<Alumno, String>{
 	@Override
 	public boolean update(Alumno entity) {
 		try (Connection conn = db.getConnection()) {
-			String sql = "UPDATE alumnos SET (nombre = ?, apellidos = ?, fechanacimiento = ?)";
+			String sql = "UPDATE alumnos SET (nombre = ?, apellidos = ?, fechanacimiento = ?) WHERE dni = ?";
 			PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 			ps.setString(1, entity.getNombre());
 			ps.setString(2, entity.getApellidos());
 			ps.setLong(3, entity.getFechaNacimiento().getTime());
+			ps.setString(4, entity.getDni());
 			int affectedRows = ps.executeUpdate();
 			if (affectedRows > 0) {
 				return true;

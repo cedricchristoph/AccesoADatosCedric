@@ -38,7 +38,7 @@ public class BorrarAlumno extends HttpServlet {
 		MyDatabase db = (MyDatabase) context.getAttribute(Globals.ATTRIBUTE_APP_DATABASE);
 		User user = (User) session.getAttribute(Globals.ATTRIBUTE_SESSION_USER);
 		if (user == null) {
-			response.sendRedirect(Globals.JSP_LOGIN);
+			response.sendRedirect(Globals.SERVLET_LOGIN);
 		} else {
 			String paramDni = request.getParameter(Globals.PARAM_ALUMNO_BORRAR_DNI);
 			if (paramDni != null && !paramDni.isEmpty()) {

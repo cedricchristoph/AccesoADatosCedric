@@ -34,10 +34,21 @@
             <a href="registrar">Crear cuenta</a>
         </div>
         <c:if test="${not empty message}">
-        	<div class="popup-green position-page-center border-round">${message}</div>
+        	<div class="popup-green position-page-center border-round">
+        		<p>${message}</p>
+        	</div>
         </c:if>
+        
+        <c:if test="${not empty infoMessage}">
+        	<div class="popup-blue position-page-center border-round">
+        		<p>${infoMessage}</p>
+        	</div>
+        </c:if>
+        
         <c:if test="${not empty errorMessage}">
-        	<div class="popup-red position-page-center border-round">${errorMessage}</div>
+        	<div class="popup-red position-page-center border-round">
+        		<p>${errorMessage}</p>
+        	</div>
         </c:if>
     </body>
     <footer class="page-footer">

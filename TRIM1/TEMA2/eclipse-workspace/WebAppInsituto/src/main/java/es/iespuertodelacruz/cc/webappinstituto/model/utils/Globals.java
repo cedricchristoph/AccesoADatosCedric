@@ -6,13 +6,14 @@ public class Globals {
 	//public static final String CONST_APP_USER = "webapp";
 	//public static final String CONST_APP_PWD = "UrcZCb7qizCbeW2";
 	public static final String CONST_APP_USER = "root";
-	public static final String CONST_APP_PWD = "1q2w3e4r";
+	public static final String CONST_APP_PWD = "N0Acc3$$4U";
 	/* SERVLETS */
 	public static final String SERVLET_ALUMNOS = "alumnos";
 	public static final String SERVLET_ASIGNATURAS = "asignaturas";
 	public static final String SERVLET_MATRICULAS = "matriculas";
 	public static final String SERVLET_LOGIN = "login";
 	public static final String SERVLET_REGISTRAR = "registrar";
+	public static final String SERVLET_INICIO = "inicio";
 	
 	/* JSPs */
 	public static final String JSP_ALUMNOS = "gestionarAlumnos.jsp";
