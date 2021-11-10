@@ -3,10 +3,12 @@ package es.iespuertodelacruz.cc.webappinstituto.model.utils;
 public class Globals {
 
 	/* CREDENCIALES DE APLICACION PARA DDBB */
-	//public static final String CONST_APP_USER = "webapp";
-	//public static final String CONST_APP_PWD = "UrcZCb7qizCbeW2";
-	public static final String CONST_APP_USER = "root";
-	public static final String CONST_APP_PWD = "1q2w3e4r";
+	public static final String CONST_APP_DBLOCATION = "instituto";
+	public static final String CONST_APP_USER = "webapp";
+	public static final String CONST_APP_PWD = "9pWrL9Ld2SipVjx";
+	//public static final String CONST_APP_USER = "root";
+	//public static final String CONST_APP_PWD = "1q2w3e4r";
+	
 	/* SERVLETS */
 	public static final String SERVLET_ALUMNOS = "alumnos";
 	public static final String SERVLET_ASIGNATURAS = "asignaturas";
@@ -40,13 +42,16 @@ public class Globals {
 	/* ATRIBUTOS APLICACION */
 	
 	/* PARAMETROS */
+		// PARAMETROS LOGIN
 	public static final String PARAM_LOGIN_USER = "loginuser";
 	public static final String PARAM_LOGIN_PWD = "loginpwd";
 	
+		// PARAMETROS REGISTRAR
 	public static final String PARAM_REGISTRAR_USER = "registraruser";
 	public static final String PARAM_REGISTRAR_EMAIL = "registraremail";
 	public static final String PARAM_REGISTRAR_PWD = "registrarpwd";
 	
+		// PARAMETROS ALUMNOS
 	public static final String PARAM_ALUMNO_AGREGAR_DNI = "agregaralumnodni";
 	public static final String PARAM_ALUMNO_AGREGAR_NOMBRE = "agregaralumnonombre";
 	public static final String PARAM_ALUMNO_AGREGAR_APELLIDOS = "agregaralumnoapellidos";
@@ -62,6 +67,19 @@ public class Globals {
 	public static final String PARAM_ALUMNO_BUSCAR_DNI = "buscaralumnodni";
 	public static final String PARAM_ALUMNO_BUSCAR_NOMBRE = "buscaralumnonombre";
 	
+		// PARAMETROS ASIGNATURAS
+	public static final String PARAM_ASIGNATURA_AGREGAR_NOMBRE = "asignaturaagregarnombre";
+	public static final String PARAM_ASIGNATURA_AGREGAR_CURSO = "asignaturaagregarcurso";
+	
+	public static final String PARAM_ASIGNATURA_BORRAR_ID = "asignaturaborrarid";
+	
+	public static final String PARAM_ASIGNATURA_EDITAR_ID = "editarasignaturaid";
+	public static final String PARAM_ASIGNATURA_EDITAR_NOMBRE = "editarasignaturanombre";
+	public static final String PARAM_ASIGNATURA_EDITAR_CURSO = "editarasignaturacurso";
+	
+	public static final String PARAM_ASIGNATURA_MOSTRAR_ID = "asignaturamostrarid";
+	public static final String PARAM_ASIGNATURA_MOSTRAR_NOMBRE = "asignaturamostrarnombre";
+	public static final String PARAM_ASIGNATURA_MOSTRAR_CURSO = "asignaturamostrarcurso";
 	/* BCRYPT */
 	public static final int BCRYPT_SALTS = 10;
 }

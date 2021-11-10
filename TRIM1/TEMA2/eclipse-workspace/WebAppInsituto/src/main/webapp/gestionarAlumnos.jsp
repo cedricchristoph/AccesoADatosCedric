@@ -4,7 +4,7 @@
    "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="es">
     <head>
-        <title>Gestionar Instituto // Gestionar Alumnos</title>
+        <title>Alumnos</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
@@ -90,7 +90,7 @@
                     </div>
                 </form>
             </div>
-            <div class="col description border-round text-left">
+            <div class="col description border-round">
                 <h4>Mostrar alumno</h4>
                 <small>Introduzca los datos del alumno a mostrar</small><br/>
                 <form class="container" action="mostraralumno" method="POST" id="alumno-buscar-form">
@@ -106,33 +106,34 @@
             </div>
         </div>
 
-	<div class="col description border-round">
-		<h3>Registros</h3>
-		<small>A continuacion puede ver una lista de los registros
-			encontrados en la base de datos.</small>
-            <br/>
-		<table class="table table-striped">
-			<thead style="background-color: #2682bf; color: white;">
-				<tr>
-					<th scope="col">#</th>
-					<th scope="col">Nombre</th>
-					<th scope="col">Apellidos</th>
-					<th scope="col">Fecha Nacimiento</th>
-				</tr>
-			</thead>
-			<tbody>
-			<c:forEach var="alumno" items="${alumnoslist}">
-				<tr>
-					<td><c:out value="${alumno.dni}"/></td>
-					<td><c:out value="${alumno.nombre}"/></td>
-					<td><c:out value="${alumno.apellidos}"/></td>
-					<td><c:out value="${alumno.getSimpleDate()}"/></td>
-				</tr>
-			</c:forEach>
-			</tbody>
-		</table>
-	</div>
-    <br/><br><br/>
+        <div class="col description border-round text-left">
+            <h3>Registros</h3>
+            <small>A continuacion puede ver una lista de los registros
+                encontrados en la base de datos.</small>
+                <br/>
+            <table class="table table-striped">
+                <thead style="background-color: #2682bf; color: white;">
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Apellidos</th>
+                        <th scope="col">Fecha Nacimiento</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <c:forEach var="alumno" items="${alumnoslist}">
+                    <tr>
+                        <td><c:out value="${alumno.dni}"/></td>
+                        <td><c:out value="${alumno.nombre}"/></td>
+                        <td><c:out value="${alumno.apellidos}"/></td>
+                        <td><c:out value="${alumno.getSimpleDate()}"/></td>
+                    </tr>
+                </c:forEach>
+                </tbody>
+            </table>
+        </div>
+        <br/><br><br/>
+    </body>
     <footer class="page-footer">
     	<c:if test="${not empty message}">
         	<div class="popup-green position-page-center border-round">

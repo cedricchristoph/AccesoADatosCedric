@@ -9,10 +9,11 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import es.iespuertodelacruz.cc.webappinstituto.contracts.AlumnoEntry;
 import es.iespuertodelacruz.cc.webappinstituto.model.entities.Alumno;
 import es.iespuertodelacruz.cc.webappinstituto.model.utils.MyDatabase;
 
-public class AlumnoDAO implements ICRUD<Alumno, String>{
+public class AlumnoDAO extends AlumnoEntry implements ICRUD<Alumno, String> {
 
 	MyDatabase db;
 	
@@ -27,12 +28,12 @@ public class AlumnoDAO implements ICRUD<Alumno, String>{
 	@Override
 	public Alumno select(String id) {
 		try (Connection conn = db.getConnection()) {
-			String sql = "SELECT * FROM alumnos where dni = ?";
+			String sql = "SELECT * FROM " + TABLE_NAME + " where " + DNI + " = ?";
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setString(1, id);
 			ResultSet rs = ps.executeQuery();
 			while (rs.next())
-				return new Alumno(rs.getString("dni"), rs.getString("nombre"), rs.getString("apellidos"), new Date(rs.getLong("fechanacimiento")));
+				return new Alumno(rs.getString(DNI), rs.getString(NOMBRE), rs.getString(APELLIDOS), new Date(rs.getLong(FECHANACIMIENTO)));
 			return null;
 		} catch (SQLException e) {
 			return null;
@@ -44,11 +45,11 @@ public class AlumnoDAO implements ICRUD<Alumno, String>{
 		List<Alumno> alumnos = new ArrayList<Alumno>();
 		try (Connection conn = db.getConnection()) {
 			Statement stmt = conn.createStatement();
-			String sql = "SELECT * FROM alumnos";
+			String sql = "SELECT * FROM " + TABLE_NAME;
 			ResultSet rs = stmt.executeQuery(sql);
 			while (rs.next()) 
-				alumnos.add(new Alumno(rs.getString("dni"), rs.getString("nombre"), 
-						rs.getString("apellidos"), new Date(rs.getLong("fechanacimiento"))));
+				alumnos.add(new Alumno(rs.getString(DNI), rs.getString(NOMBRE), 
+						rs.getString(APELLIDOS), new Date(rs.getLong(FECHANACIMIENTO))));
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -60,13 +61,13 @@ public class AlumnoDAO implements ICRUD<Alumno, String>{
 	public List<Alumno> selectByName(String name) {
 		List<Alumno> alumnos = new ArrayList<Alumno>();
 		try (Connection conn = db.getConnection()) {
-			String sql = "SELECT * FROM alumnos WHERE nombre LIKE ?";
+			String sql = "SELECT * FROM " + TABLE_NAME + " WHERE " + NOMBRE + " LIKE ?";
 			PreparedStatement ps = conn.prepareStatement(sql); 
 			ps.setString(1, "%" + name + "%");
 			ResultSet rs = ps.executeQuery();
 			while (rs.next())
-				alumnos.add(new Alumno(rs.getString("dni"), rs.getString("nombre"), 
-						rs.getString("apellidos"), new Date(rs.getLong("fechanacimiento"))));
+				alumnos.add(new Alumno(rs.getString(DNI), rs.getString(NOMBRE), 
+						rs.getString(APELLIDOS), new Date(rs.getLong(FECHANACIMIENTO))));
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -77,13 +78,13 @@ public class AlumnoDAO implements ICRUD<Alumno, String>{
 	public List<Alumno> selectBySurname(String apellido) {
 		List<Alumno> alumnos = new ArrayList<Alumno>();
 		try (Connection conn = db.getConnection()) {
-			String sql = "SELECT * FROM alumnos WHERE apellidos LIKE %?%";
+			String sql = "SELECT * FROM " + TABLE_NAME + " WHERE " + APELLIDOS + " LIKE ?";
 			PreparedStatement ps = conn.prepareStatement(sql); 
-			ps.setString(1, apellido);
+			ps.setString(1, "%" + apellido + "%");
 			ResultSet rs = ps.executeQuery();
 			while (rs.next())
-				alumnos.add(new Alumno(rs.getString("dni"), rs.getString("nombre"), 
-						rs.getString("apellidos"), new Date(rs.getLong("fechanacimiento"))));
+				alumnos.add(new Alumno(rs.getString(DNI), rs.getString(NOMBRE), 
+						rs.getString(APELLIDOS), new Date(rs.getLong(FECHANACIMIENTO))));
 		} catch (SQLException e) {
 			
 		} finally {
@@ -94,7 +95,7 @@ public class AlumnoDAO implements ICRUD<Alumno, String>{
 	@Override
 	public Alumno insert(Alumno entity) throws SQLException {
 		try (Connection conn = db.getConnection()) {
-			String sql = "INSERT INTO alumnos (dni, nombre, apellidos, fechanacimiento) VALUES (?,?,?,?)";
+			String sql = "INSERT INTO " + TABLE_NAME + " (" + DNI + ", " + NOMBRE + ", " + APELLIDOS + ", " + FECHANACIMIENTO + ") VALUES (?,?,?,?)";
 			PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 			ps.setString(1, entity.getDni());
 			ps.setString(2, entity.getNombre());
@@ -135,7 +136,7 @@ public class AlumnoDAO implements ICRUD<Alumno, String>{
 	@Override
 	public boolean delete(String id) {
 		try (Connection conn = db.getConnection()) {
-			String sql = "DELETE  FROM alumnos WHERE dni = ?";
+			String sql = "DELETE  FROM " + TABLE_NAME + " WHERE " + DNI + " = ?";
 			PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 			ps.setString(1, id);
 			int affectedRows = ps.executeUpdate();

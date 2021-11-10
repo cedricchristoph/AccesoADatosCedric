@@ -18,6 +18,16 @@ public class MyDatabase {
 	
 	// USER: webapp PWD: UrcZCb7qizCbeW2
 	
+	public MyDatabase() {
+		dbLocation = Globals.CONST_APP_DBLOCATION;
+		dbConnection = "jdbc:mysql://localhost:3306/" + dbLocation + "?serverTimezone=UTC&characterEncoding=utf-8";
+		basicDataSource = new BasicDataSource();
+		basicDataSource.setDriverClassName(className);
+	    basicDataSource.setUrl(dbConnection);
+	    basicDataSource.setUsername(Globals.CONST_APP_USER);
+	    basicDataSource.setPassword(Globals.CONST_APP_PWD);
+	}
+	
 	public MyDatabase(String databaseLocation) {
 		dbLocation = databaseLocation;
 		dbConnection = "jdbc:mysql://localhost:3306/" + dbLocation + "?serverTimezone=UTC&characterEncoding=utf-8";

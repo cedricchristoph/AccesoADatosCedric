@@ -6,11 +6,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
+import es.iespuertodelacruz.cc.webappinstituto.contracts.UserEntry;
 import es.iespuertodelacruz.cc.webappinstituto.model.entities.Alumno;
 import es.iespuertodelacruz.cc.webappinstituto.model.entities.User;
 import es.iespuertodelacruz.cc.webappinstituto.model.utils.MyDatabase;
 
-public class UserDAO implements ICRUD<User, String> {
+public class UserDAO extends UserEntry implements ICRUD<User, String> {
 
 	MyDatabase db;
 	
@@ -25,12 +26,12 @@ public class UserDAO implements ICRUD<User, String> {
 	@Override
 	public User select(String id) {
 		try (Connection conn = db.getConnection()) {
-			String sql = "SELECT * FROM users where user = ?";
+			String sql = "SELECT * FROM " + TABLE_NAME + " WHERE " + USER + " = ?";
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setString(1, id);
 			ResultSet rs = ps.executeQuery();
 			while (rs.next())
-				return new User(rs.getString("user"), rs.getString("email"), rs.getString("hash"), rs.getBoolean("active"), false);
+				return new User(rs.getString(USER), rs.getString(EMAIL), rs.getString(HASH), rs.getBoolean(ACTIVE), false);
 			return null;
 		} catch (SQLException e) {
 			return null;
@@ -46,7 +47,7 @@ public class UserDAO implements ICRUD<User, String> {
 	@Override
 	public User insert(User entity) throws SQLException {
 		try (Connection conn = db.getConnection()) {
-			String sql = "INSERT INTO users (user, email, hash, active) VALUES (?,?,?,?)";
+			String sql = "INSERT INTO " + TABLE_NAME + " (" + USER + ", " + EMAIL + ", " + HASH + ", " + ACTIVE + ") VALUES (?,?,?,?)";
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setString(1, entity.getUser());
 			ps.setString(2, entity.getEmail());
@@ -64,7 +65,7 @@ public class UserDAO implements ICRUD<User, String> {
 	@Override
 	public boolean update(User entity) throws SQLException {
 		try (Connection conn = db.getConnection()) {
-			String sql = "UPDATE users SET (email = ?, hash = ?) WHERE user = ?";
+			String sql = "UPDATE " + TABLE_NAME + " SET " + EMAIL + " = ?, " + HASH + " = ? WHERE " + USER + " = ?";
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setString(1, entity.getEmail());
 			ps.setString(2, entity.getHashPwd());
@@ -78,8 +79,16 @@ public class UserDAO implements ICRUD<User, String> {
 
 	@Override
 	public boolean delete(String id) throws SQLException {
-		// TODO Auto-generated method stub
-		return false;
+		try (Connection conn = db.getConnection()) {
+			String sql = "DELETE FROM " + TABLE_NAME + " WHERE " + USER + " = ?";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setString(1, id);
+			int ok = ps.executeUpdate();
+			return (ok > 0);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
 	}
 
 	

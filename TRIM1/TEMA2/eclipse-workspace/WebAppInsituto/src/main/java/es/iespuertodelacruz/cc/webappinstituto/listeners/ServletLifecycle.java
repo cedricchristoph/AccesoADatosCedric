@@ -31,7 +31,7 @@ public class ServletLifecycle implements ServletContextListener {
      */
     public void contextInitialized(ServletContextEvent sce)  { 
          MyDatabase.cargarDriverMysql();
-         MyDatabase db = new MyDatabase("instituto");
+         MyDatabase db = new MyDatabase();
          sce.getServletContext().setAttribute(Globals.ATTRIBUTE_APP_DATABASE, db);
     }
 	

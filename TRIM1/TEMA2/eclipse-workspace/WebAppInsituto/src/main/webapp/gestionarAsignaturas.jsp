@@ -5,7 +5,7 @@
 <html lang="es">
 
 <head>
-    <title>Gestionar Instituto // Gestionar Matriculas</title>
+    <title>Matriculas</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
@@ -54,16 +54,14 @@
         <div class="col description border-round">
             <h4><b>Agregar asignatura</b></h4>
             <small>Rellene este formulario para agregar una nueva asignatura al sistema</small>
-            <form class="container">
+            <form class="container" id="asignatura-agregar-form">
                 <label>Nombre asignatura</label>
-                <input type="text" name="nombre" placeholder="Nombre asignatura*"><br />
-                <label>Siglas (Identificador)</label>
-                <input type="text" name="siglas" placeholder="Siglas asignatura*"><br />
+                <input type="text" name="asignaturaagregarnombre" placeholder="Nombre asignatura*"><br />
                 <label>Curso</label>
-                <input type="text" name="curso" placeholder="Curso al que pertenece la asignatura"><br />
+                <input type="text" name="asignaturaagregarcurso" placeholder="Curso de la asignatura"><br />
                 <div class="text-center text-md-left container">
                     <a class="btn btn-primary position-bottom-right"
-                        onclick="document.getElementById('contact-form').submit();">Agregar</a>
+                        onclick="document.getElementById('asignatura-agregar-form').submit();">Agregar</a>
                 </div>
             </form>
         </div>
@@ -72,12 +70,12 @@
             <h4><b>Borrar asignatura</b></h4>
             <small>Rellene este formulario para eliminar una asignatura del sistema</small>
 
-            <form class="container">
-                <label>Siglas (Identificador)</label>
-                <input type="text" name="siglasdelete" placeholder="Siglas asignatura*"><br />
+            <form class="container" id="asignatura-borrar-form">
+                <label>Identificador&nbsp;</label>
+                <input type="text" name="asignaturaborrarid" placeholder="Identificador*"><br />
                 <div class="text-center text-md-left container">
                     <a class="btn btn-primary position-bottom-right"
-                        onclick="document.getElementById('contact-form').submit();">Borrar</a>
+                        onclick="document.getElementById('asignatura-borrar-form').submit();">Borrar</a>
                 </div>
             </form>
         </div>
@@ -86,16 +84,16 @@
             <h4><b>Editar asignatura</b></h4>
             <small>Rellene este formulario para editar una asignatura del sistema</small>
 
-            <form class="container">
-                <label>Siglas (Identificador)</label>
-                <input type="text" name="siglaseditar" placeholer="Siglas asignatura*"><br />
-                <label>Nombre asignatura</label>
-                <input type="text" name="nombre" placeholder="Nombre asignatura*"><br />
-                <label>Curso</label>
-                <input type="text" name="curso" placeholder="Curso al que pertenece la asignatura"><br />
+            <form class="container" id="asignatura-editar-form">
+                <label for="editarasignaturaid">Identificador&nbsp;</label>
+                <input type="text" name="editarasignaturaid" placeholer="Identificador*"/><br />
+                <label for="editarasignaturanombre">Nombre asignatura&nbsp;</label>
+                <input type="text" name="editarasignaturanombre" placeholder="Nombre asignatura*"><br />
+                <label for="editarasignaturacurso">Curso&nbsp;</label>
+                <input type="text" name="editarasignaturacurso" placeholder="Curso de la asignatura"><br />
                 <div class="text-center text-md-left container">
                     <a class="btn btn-primary position-bottom-right"
-                        onclick="document.getElementById('contact-form').submit();">Editar</a>
+                        onclick="document.getElementById('asignatura-editar-form').submit();">Editar</a>
                 </div>
             </form>
         </div>
@@ -104,16 +102,46 @@
             <h4><b>Mostrar asignatura</b></h4>
             <small>Rellene este formulario para ver una asignatura del sistema</small>
 
-            <form class="container">
-                <label>Siglas (Identificador)</label>
-                <input type="text" name="siglasmostrar" placeholer="Siglas asignatura*"><br />
-                <div class="text-center text-md-left container">
-                    <a class="btn btn-primary position-bottom-right"
-                        onclick="document.getElementById('contact-form').submit();">Mostrar</a>
+            <form class="container" id="asignatura-mostrar-form">
+                <label for="asignaturamostrarid">Identificador&nbsp;</label>
+                <input type="text" name="asignaturamostrarid" placeholer="Identificador"/><br />
+                <label for="asignaturamostrarnombre">Nombre&nbsp;</label>
+                <input type="text" name="asignaturamostrarnombre" placeholder="Nombre"/><br/>
+                <label for="asignaturamostrarcurso">Curso</label>
+                <input type="text" name="asignaturamostrarcurso" placeholder="Curso"/>
+                <div class="text-center text-md-left container position-bottom-right">
+                    <a class="btn btn-primary"
+                        onclick="document.getElementById('asignatura-mostrar-form').submit();">Mostrar</a>
+                        <a class="btn btn-primary" href="asignaturas">Reset</a>
                 </div>
             </form>
         </div>
     </div>
+    <div class="col description border-round text-left">
+		<h3>Registros</h3>
+		<small>A continuacion puede ver una lista de los registros
+			encontrados en la base de datos.</small>
+            <br/>
+		<table class="table table-striped">
+			<thead style="background-color: #2682bf; color: white;">
+				<tr>
+					<th scope="col">#</th>
+					<th scope="col">Nombre</th>
+					<th scope="col">Curso</th>
+				</tr>
+			</thead>
+			<tbody>
+			<c:forEach var="asignatura" items="${asignaturaslist}">
+				<tr>
+					<td><c:out value="${asignatura.id}"/></td>
+					<td><c:out value="${asignatura.nombre}"/></td>
+					<td><c:out value="${asignatura.curso}"/></td>
+				</tr>
+			</c:forEach>
+			</tbody>
+		</table>
+	</div>
+    <br/><br><br/>
 </body>
 <footer class="page-footer">
     <c:if test="${not empty message}">
