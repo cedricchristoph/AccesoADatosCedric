@@ -60,15 +60,15 @@ public class AlumnoDAO implements ICRUD<Alumno, String>{
 	public List<Alumno> selectByName(String name) {
 		List<Alumno> alumnos = new ArrayList<Alumno>();
 		try (Connection conn = db.getConnection()) {
-			String sql = "SELECT * FROM alumnos WHERE nombre LIKE %?%";
+			String sql = "SELECT * FROM alumnos WHERE nombre LIKE ?";
 			PreparedStatement ps = conn.prepareStatement(sql); 
-			ps.setString(1, name);
+			ps.setString(1, "%" + name + "%");
 			ResultSet rs = ps.executeQuery();
 			while (rs.next())
 				alumnos.add(new Alumno(rs.getString("dni"), rs.getString("nombre"), 
 						rs.getString("apellidos"), new Date(rs.getLong("fechanacimiento"))));
 		} catch (SQLException e) {
-			
+			e.printStackTrace();
 		} finally {
 			return alumnos;
 		}
@@ -114,7 +114,7 @@ public class AlumnoDAO implements ICRUD<Alumno, String>{
 	@Override
 	public boolean update(Alumno entity) {
 		try (Connection conn = db.getConnection()) {
-			String sql = "UPDATE alumnos SET (nombre = ?, apellidos = ?, fechanacimiento = ?) WHERE dni = ?";
+			String sql = "UPDATE alumnos SET nombre = ?, apellidos = ?, fechanacimiento = ? WHERE dni = ?";
 			PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 			ps.setString(1, entity.getNombre());
 			ps.setString(2, entity.getApellidos());
@@ -127,6 +127,7 @@ public class AlumnoDAO implements ICRUD<Alumno, String>{
 				throw new SQLException("Error. No se pudo crear el alumno. Ninguna fila afectada.");
 			}
 		} catch (SQLException e) {
+			e.printStackTrace();
 			return false;
 		}
 	}

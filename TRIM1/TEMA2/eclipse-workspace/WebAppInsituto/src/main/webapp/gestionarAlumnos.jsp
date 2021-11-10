@@ -35,6 +35,8 @@
                         <a class="nav-link" href="matriculas"><img src="icons/file-earmark-text-fill.svg"/>&nbsp;Gestionar matrículas</a>
                     </li>
                 </ul>
+                <small style="color: white; margin-left: 20px;">¡Hola <c:out value="${sessionuser.user}"></c:out>!&nbsp;&nbsp;</small>
+                <a href="logout" class="nav-link"><img src="icons/shutdown.png"/></a>
             </div>
         </nav>
 
@@ -91,13 +93,14 @@
             <div class="col description border-round text-left">
                 <h4>Mostrar alumno</h4>
                 <small>Introduzca los datos del alumno a mostrar</small><br/>
-                <form class="container" action="showAlumno" method="POST">
-                    <label>DNI</label>
-                    <input type="text" name="dni" placeholder="DNI*"><br/>
-                    <label>Nombre</label>
-                    <input type="text" name="nombre" placeholder="Nombre*"><br/>
-                    <div class="text-center text-md-left container">
-                        <a class="btn btn-primary position-bottom-right" onclick="document.getElementById('contact-form').submit();">Mostrar</a>
+                <form class="container" action="mostraralumno" method="POST" id="alumno-buscar-form">
+                    <label for="buscaralumnodni">DNI</label>
+                    <input type="text" name="buscaralumnodni" placeholder="DNI"><br/>
+                    <label for="buscaralumnonombre">Nombre</label>
+                    <input type="text" name="buscaralumnonombre" placeholder="Nombre"><br/>
+                    <div class="text-center text-md-left container position-bottom-right">
+                        <a class="btn btn-primary" onclick="document.getElementById('alumno-buscar-form').submit();">Mostrar</a>
+                        <a class="btn btn-primary" href="alumnos">Reset</a>
                     </div>
                 </form>
             </div>
@@ -107,8 +110,9 @@
 		<h3>Registros</h3>
 		<small>A continuacion puede ver una lista de los registros
 			encontrados en la base de datos.</small>
-		<table class="table">
-			<thead>
+            <br/>
+		<table class="table table-striped">
+			<thead style="background-color: #2682bf; color: white;">
 				<tr>
 					<th scope="col">#</th>
 					<th scope="col">Nombre</th>
@@ -128,7 +132,7 @@
 			</tbody>
 		</table>
 	</div>
-    
+    <br/><br><br/>
     <footer class="page-footer">
     	<c:if test="${not empty message}">
         	<div class="popup-green position-page-center border-round">

@@ -64,6 +64,20 @@
     	<servlet-name>Inicio</servlet-name>
     	<servlet-class>es.iespuertodelacruz.cc.webappinstituto.servlets.Inicio</servlet-class>
     </servlet>
+    <servlet>
+    	<description>
+    	</description>
+    	<display-name>Logout</display-name>
+    	<servlet-name>Logout</servlet-name>
+    	<servlet-class>es.iespuertodelacruz.cc.webappinstituto.servlets.Logout</servlet-class>
+    </servlet>
+    <servlet>
+    	<description>
+    	</description>
+    	<display-name>MostrarAlumno</display-name>
+    	<servlet-name>MostrarAlumno</servlet-name>
+    	<servlet-class>es.iespuertodelacruz.cc.webappinstituto.servlets.alumnos.MostrarAlumno</servlet-class>
+    </servlet>
     <servlet-mapping>
     	<servlet-name>Alumnos</servlet-name>
     	<url-pattern>/Alumnos</url-pattern>
@@ -120,6 +134,19 @@
     <servlet-mapping>
     	<servlet-name>Inicio</servlet-name>
     	<url-pattern>/inicio</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+    	<servlet-name>Logout</servlet-name>
+    	<url-pattern>/Logout</url-pattern>
+    	<url-pattern>/logout</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+    	<servlet-name>MostrarAlumno</servlet-name>
+    	<url-pattern>/MostrarAlumno</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+    	<servlet-name>MostrarAlumno</servlet-name>
+    	<url-pattern>/mostraralumno</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

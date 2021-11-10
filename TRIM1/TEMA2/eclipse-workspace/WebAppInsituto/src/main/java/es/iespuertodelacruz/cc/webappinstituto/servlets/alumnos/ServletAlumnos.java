@@ -45,17 +45,28 @@ public class ServletAlumnos extends HttpServlet {
 		else {
 			AlumnoDAO alumnoDao = new AlumnoDAO(db);
 			List<Alumno> alumnos = null;
-			alumnos = (ArrayList<Alumno>) alumnoDao.selectAll();
-			if (alumnos == null) {
-				session.setAttribute(Globals.ATTRIBUTE_SESSION_INFO_MSG, "No se encontró ningún registro");
-			} else {
-				//session.setAttribute(Globals.ATTRIBUTE_SESSION_INFO_MSG, "Se encontraron " + alumnos.size() + " registro(s)");
+
+			String paramSearchDni = request.getParameter("searchdni");
+			String paramSearchNombre = request.getParameter("searchnombre");
+			if (paramSearchDni != null && !paramSearchDni.isEmpty() && paramSearchNombre == null) {
+				alumnos = new ArrayList<Alumno>();
+				alumnos.add(alumnoDao.select(paramSearchDni));
+			}
+			if (paramSearchNombre != null && !paramSearchNombre.isEmpty() && paramSearchDni == null) {
+				alumnos = alumnoDao.selectByName(paramSearchNombre);
+			}
+			if (paramSearchNombre == null && paramSearchDni == null) {
+				alumnos = (ArrayList<Alumno>) alumnoDao.selectAll();
+				if (alumnos == null) {
+					session.setAttribute(Globals.ATTRIBUTE_SESSION_INFO_MSG, "No se encontró ningún registro");
+				}
 			}
 			session.setAttribute(Globals.ATTRIBUTE_SESSION_LIST_ALUMNOS, alumnos);
 			request.getRequestDispatcher(Globals.JSP_ALUMNOS).forward(request, response);
 			session.setAttribute(Globals.ATTRIBUTE_SESSION_MSG, "");
+			session.setAttribute(Globals.ATTRIBUTE_SESSION_INFO_MSG, "");
 			session.setAttribute(Globals.ATTRIBUTE_SESSION_ERROR_MSG, "");
-		}	
-		
+		}
+
 	}
 }

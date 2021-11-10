@@ -57,7 +57,6 @@ public class Login extends HttpServlet {
 		try {
 			User account = new UserDAO(db).select(user);
 			if (account != null) {
-				System.out.println(account.getHashPwd());
 				if (account.checkPwd(pwd)) {
 					if (!account.isActive())
 						throw new Exception("Su cuenta aún no ha sido activada");

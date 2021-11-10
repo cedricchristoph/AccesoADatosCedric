@@ -35,6 +35,8 @@
                         <a class="nav-link" href="matriculas"><img src="icons/file-earmark-text-fill.svg"/>&nbsp;Gestionar matrículas</a>
                     </li>
                 </ul>
+                <small style="color: white; margin-left: 20px;">¡Hola <c:out value="${sessionuser.user}"></c:out>!&nbsp;&nbsp;</small>
+                <a href="logout" class="nav-link"><img src="icons/shutdown.png"/></a>
             </div>
         </nav>
 

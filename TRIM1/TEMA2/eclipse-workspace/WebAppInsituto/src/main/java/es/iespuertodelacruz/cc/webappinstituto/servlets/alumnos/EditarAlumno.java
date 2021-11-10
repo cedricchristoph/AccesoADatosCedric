@@ -51,11 +51,18 @@ public class EditarAlumno extends HttpServlet {
 			java.util.Date fecha = null;
 			if (paramDni != null && !paramDni.isEmpty()) {
 				AlumnoDAO alumnoDao = new AlumnoDAO(db);
+				Alumno entity = alumnoDao.select(paramDni);
+				if (entity == null)
+					throw new Exception("No se encontró el alumno con dni " + paramDni);
 				try {
 					fecha = new SimpleDateFormat("dd/MM/yyyy").parse(paramFechaNacimiento);
 				} catch (ParseException e) {
-					throw new Exception("Error al parsear la fecha de nacimiento");
+					fecha = entity.getFechaNacimiento();
 				}
+				if (paramNombre != null && paramNombre.isEmpty())
+					paramNombre = entity.getNombre();
+				if (paramApellidos != null && paramApellidos.isEmpty())
+					paramApellidos = entity.getApellidos();
 				Alumno alumno = new Alumno(paramDni, paramNombre, paramApellidos, fecha);
 				if (alumnoDao.update(alumno))
 					session.setAttribute(Globals.ATTRIBUTE_SESSION_MSG, "Se actualizó el registro de " + alumno.getDni());

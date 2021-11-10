@@ -36,6 +36,8 @@
                         <a class="nav-link" href="matriculas"><img src="icons/file-earmark-text-fill.svg"/>&nbsp;Gestionar matrículas</a>
                     </li>
                 </ul>
+                <small style="color: white; margin-left: 20px;">¡Hola <c:out value="${sessionuser.user}"></c:out>!&nbsp;&nbsp;</small>
+                <a href="logout" class="nav-link"><img src="icons/shutdown.png"/></a>
             </div>
         </nav>
         <div class="description">
@@ -58,11 +60,6 @@
                 <div class="selection" type="button">
                     <img src="icons/file-earmark-text-fill.svg"/>
                     <h4>Gestionar matrículas</h4>
-                </div>
-            </a>
-            <a href="logout">
-                <div class="selection" type="button">
-                    <h5>Desconectar</h5>
                 </div>
             </a>
         </div>
