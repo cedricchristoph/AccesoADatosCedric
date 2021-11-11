@@ -4,7 +4,7 @@
    "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="es">
     <head>
-        <title>Gestionar Instituto // Gestionar Matriculas</title>
+        <title>Matriculas</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
@@ -48,64 +48,92 @@
             <div class="col description border-round">
                 <h4><b>Agregar matrícula</b></h4>
                 <small>Rellene este formulario para matricular un alumno</small>
-                <form class="container">
-                    <label>DNI alumno</label>
-                    <input type="text" name="dni" placeholder="DNI alumno*"><br/>
-                    <label>Año</label>
-                    <input type="text" name="year" placeholder="Año*"><br/>
-                    <label>Asignaturas</label>
-                    <input type="text" name="asignaturas" placeholder="Asignaturas*"><br/>
+                <form id="matricula-agregar-form" class="container" action="agregarmatricula" method="POST">
+                    <label for="matriculaagregardni">DNI alumno</label>
+                    <input type="text" name="matriculaagregardni" placeholder="12345678A"><br/>
+                    <label for="matriculaagregaryear">Año</label>
+                    <input type="text" name="matriculaagregaryear" placeholder="1995"><br/>
+                    <label for="matriculaagregaryear">Asignaturas</label>
+                    <input type="text" name="matriculaagregarasignaturas" placeholder="1,23,12,..."><br/>
                     <div class="text-center text-md-left container">
-                        <a class="btn btn-primary position-bottom-right" onclick="document.getElementById('contact-form').submit();">Matricular</a>
+                        <a class="btn btn-primary position-bottom-right" onclick="document.getElementById('matricula-agregar-form').submit();">Matricular</a>
                     </div>
                 </form>
             </div>
             <div class="col description border-round">
                 <h4><b>Borrar matrícula</b></h4>
-                <small>Introduzca ID de la matrí­cula a eliminar del sistema</small>
-                <form class="container">
-                    <label>ID matrí­cula</label>
-                    <input type="text" name="idmatricula" placeholder="ID matrícula*"><br/>
+                <small>Introduzca ID de la matrícula a eliminar del sistema</small>
+                <form id="matricula-borrar-form" class="container" action="borrarmatricula" method="POST">
+                    <label for="matriculaborrarid">ID matrícula</label>
+                    <input type="text" name="matriculaborrarid" placeholder="12"><br/>
                     <div class="text-center text-md-left container">
-                        <a class="btn btn-primary position-bottom-right" onclick="document.getElementById('contact-form').submit();">Borrar matrícula</a>
+                        <a class="btn btn-primary position-bottom-right" onclick="document.getElementById('matricula-borrar-form').submit();">Borrar matrícula</a>
                     </div>
                 </form>
             </div>
             <div class="col description border-round">
-                <h4><b>Editar matrí­cula</b></h4>
-                <small>Rellene este formulario para editar una matrí­cula del sistema</small>
-                <form class="container">
-                    <label>ID matrícula</label>
-                    <input type="text" name="idmatriculaedit" placeholder="ID matrí­cula*"><br/>
-                    <label>DNI alumno</label>
-                    <input type="text" name="dniedit" placeholder="DNI alumno*"><br/>
-                    <label>Año</label>
-                    <input type="text" name="yearedit" placeholder="Año*"><br/>
-                    <label>Asignaturas</label>
-                    <input type="text" name="asignaturasedit" placeholder="Asignaturas*"><br/>
+                <h4><b>Editar matrícula</b></h4>
+                <small>Rellene este formulario para editar una matrícula del sistema</small>
+                <form id="matricula-editar-form" class="container" action="editarmatricula" method="POST">
+                    <label for="matriculaeditarid">ID matrícula</label>
+                    <input type="text" name="matriculaeditarid" placeholder="ID matrícula*"><br/>
+                    <label for="matriculaeditardni">DNI alumno</label>
+                    <input type="text" name="matriculaeditardni" placeholder="DNI alumno*"><br/>
+                    <label for="matriculaeditaryear">Año</label>
+                    <input type="text" name="matriculaeditaryear" placeholder="Año*"><br/>
+                    <label for="matriculaeditarasignaturas">Asignaturas</label>
+                    <input type="text" name="matriculaeditarasignaturas" placeholder="Asignaturas*"><br/>
                     <div class="text-center text-md-left container">
-                        <a class="btn btn-primary position-bottom-right" onclick="document.getElementById('contact-form').submit();">Actualizar</a>
+                        <a class="btn btn-primary position-bottom-right" onclick="document.getElementById('matricula-editar-form').submit();">Actualizar</a>
                     </div>
                 </form>
             </div>
             <div class="col description border-round">
                 <h4><b>Mostrar matriculas</b></h4>
                 <small>Introduzca los datos para mostrar matrículas de un alumno</small>
-                <form class="container">
-                    <label>Año</label>
-                    <input type="text" name="yearmostrar" placeholder="Año*"><br/>
-                    <label>DNI alumno</label>
-                    <input type="text" name="dnimostrar" placeholder="DNI alumno*"><br/>
+                <form id="matricula-mostrar-form" class="container" action="mostrarmatricula" method="POST">
+                    <label for="matriculamostraryear">Año</label>
+                    <input type="text" name="matriculamostraryear" placeholder="Año*"><br/>
+                    <label for="matriculamostrardni">DNI alumno</label>
+                    <input type="text" name="matriculamostrardni" placeholder="DNI alumno*"><br/>
                     <div class="text-center text-md-left container">
-                        <a class="btn btn-primary position-bottom-right" onclick="document.getElementById('contact-form').submit();">Mostrar</a>
+                        <a class="btn btn-primary position-bottom-right" onclick="document.getElementById('matricula-mostrar-form').submit();">Mostrar</a>
                     </div>
                 </form>
             </div>
         </div>
-        <div style="margin: auto; width: 50%;">
-            <textarea id="txtArea" rows="5" cols="100" class="container"></textarea>
+        <div class="col description border-round text-left">
+            <h3>Registros</h3>
+            <small>A continuacion puede ver una lista de los registros
+                encontrados en la base de datos.</small>
+                <br/>
+            <table class="table table-striped">
+                <thead style="background-color: #2682bf; color: white;">
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">DNI</th>
+                        <th scope="col">Año</th>
+                        <th scope="col">Asignaturas</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <c:forEach var="matricula" items="${matriculaslist}">
+                    <tr>
+                        <td><c:out value="${matricula.id}"/></td>
+                        <td><c:out value="${matricula.alumno.dni}"/></td>
+                        <td><c:out value="${matricula.year}"/></td>
+                        <td>
+                            <c:forEach var="asignatura" items="${matricula.asignaturas}">
+                                <c:out value="${asignatura.nombre}"></c:out>&nbsp;
+                            </c:forEach>
+                        </td>
+                    </tr>
+                </c:forEach>
+                </tbody>
+            </table>
         </div>
     </body>
+    <br/><br/><br/>
     <footer class="page-footer">
         <c:if test="${not empty message}">
         	<div class="popup-green position-page-center border-round">

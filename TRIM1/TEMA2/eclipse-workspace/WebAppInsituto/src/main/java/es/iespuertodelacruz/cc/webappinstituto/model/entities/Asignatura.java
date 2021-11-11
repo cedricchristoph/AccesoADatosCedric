@@ -17,10 +17,21 @@ public class Asignatura {
 	}
 	
 	/**
+	 * Constructor de la clase asignatura
+	 * @param nombre Nombre de la asignatura
+	 * @param curso Curso al que pertenece
+	 */
+	public Asignatura(String nombre, String curso) {
+		this.id = null;
+		this.nombre = nombre;
+		this.curso = curso;
+	}
+	
+	/**
 	 * Constructor completo
 	 * @param id de la asignatura
-	 * @param nombre de la asignatura
-	 * @param curso al que se imparte esta asignatura
+	 * @param nombre Nombre de la asignatura
+	 * @param  curso Curso al que pertenece
 	 */
 	public Asignatura(Integer id, String nombre, String curso) {
 		super();

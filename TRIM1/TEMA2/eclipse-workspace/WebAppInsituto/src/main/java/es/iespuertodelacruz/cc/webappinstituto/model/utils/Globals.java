@@ -4,10 +4,10 @@ public class Globals {
 
 	/* CREDENCIALES DE APLICACION PARA DDBB */
 	public static final String CONST_APP_DBLOCATION = "instituto";
-	public static final String CONST_APP_USER = "webapp";
-	public static final String CONST_APP_PWD = "9pWrL9Ld2SipVjx";
-	//public static final String CONST_APP_USER = "root";
-	//public static final String CONST_APP_PWD = "1q2w3e4r";
+	//public static final String CONST_APP_USER = "webapp";
+	//public static final String CONST_APP_PWD = "9pWrL9Ld2SipVjx";
+	public static final String CONST_APP_USER = "root";
+	public static final String CONST_APP_PWD = "N0Acc3$$4U";
 	
 	/* SERVLETS */
 	public static final String SERVLET_ALUMNOS = "alumnos";
@@ -80,6 +80,22 @@ public class Globals {
 	public static final String PARAM_ASIGNATURA_MOSTRAR_ID = "asignaturamostrarid";
 	public static final String PARAM_ASIGNATURA_MOSTRAR_NOMBRE = "asignaturamostrarnombre";
 	public static final String PARAM_ASIGNATURA_MOSTRAR_CURSO = "asignaturamostrarcurso";
+	
+		// PARAMETROS MATRICULAS
+	public static final String PARAM_MATRICULA_AGREGAR_DNI = "matriculaagregardni";
+	public static final String PARAM_MATRICULA_AGREGAR_YEAR = "matriculaagregaryear";
+	public static final String PARAM_MATRICULA_AGREGAR_ASIGNATURAS = "matriculaagregarasignaturas";
+	
+	public static final String PARAM_MATRICULA_BORRAR_ID = "matriculaborrarid";
+	
+	public static final String PARAM_MATRICULA_EDITAR_ID = "matriculaeditarid";
+	public static final String PARAM_MATRICULA_EDITAR_DNI = "matriculaeditardni";
+	public static final String PARAM_MATRICULA_EDITAR_YEAR = "matriculaeditaryear";
+	public static final String PARAM_MATRICULA_EDITAR_ASIGNATURAS = "matriculaeditarasignaturas";
+	
+	public static final String PARAM_MATRICULA_MOSTRAR_YEAR = "matriculamostraryear";
+	public static final String PARAM_MATRICULA_MOSTRAR_DNI = "matriculamostrardni";
+	
 	/* BCRYPT */
 	public static final int BCRYPT_SALTS = 10;
 }

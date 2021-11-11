@@ -54,7 +54,7 @@
         <div class="col description border-round">
             <h4><b>Agregar asignatura</b></h4>
             <small>Rellene este formulario para agregar una nueva asignatura al sistema</small>
-            <form class="container" id="asignatura-agregar-form">
+            <form class="container" id="asignatura-agregar-form" action="agregarasignatura" method="POST">
                 <label>Nombre asignatura</label>
                 <input type="text" name="asignaturaagregarnombre" placeholder="Nombre asignatura*"><br />
                 <label>Curso</label>
@@ -70,9 +70,9 @@
             <h4><b>Borrar asignatura</b></h4>
             <small>Rellene este formulario para eliminar una asignatura del sistema</small>
 
-            <form class="container" id="asignatura-borrar-form">
+            <form class="container" id="asignatura-borrar-form" action="borrarasignatura" method="POST">
                 <label>Identificador&nbsp;</label>
-                <input type="text" name="asignaturaborrarid" placeholder="Identificador*"><br />
+                <input type="text" name="asignaturaborrarid" placeholder="Identificador*" /><br/>
                 <div class="text-center text-md-left container">
                     <a class="btn btn-primary position-bottom-right"
                         onclick="document.getElementById('asignatura-borrar-form').submit();">Borrar</a>
@@ -84,9 +84,9 @@
             <h4><b>Editar asignatura</b></h4>
             <small>Rellene este formulario para editar una asignatura del sistema</small>
 
-            <form class="container" id="asignatura-editar-form">
+            <form class="container" id="asignatura-editar-form" action="editarasignatura" method="POST">
                 <label for="editarasignaturaid">Identificador&nbsp;</label>
-                <input type="text" name="editarasignaturaid" placeholer="Identificador*"/><br />
+                <input type="text" name="editarasignaturaid" placeholer="Identificador*" /><br />
                 <label for="editarasignaturanombre">Nombre asignatura&nbsp;</label>
                 <input type="text" name="editarasignaturanombre" placeholder="Nombre asignatura*"><br />
                 <label for="editarasignaturacurso">Curso&nbsp;</label>
@@ -102,7 +102,7 @@
             <h4><b>Mostrar asignatura</b></h4>
             <small>Rellene este formulario para ver una asignatura del sistema</small>
 
-            <form class="container" id="asignatura-mostrar-form">
+            <form class="container" id="asignatura-mostrar-form" action="mostrarasignatura" method="POST">
                 <label for="asignaturamostrarid">Identificador&nbsp;</label>
                 <input type="text" name="asignaturamostrarid" placeholer="Identificador"/><br />
                 <label for="asignaturamostrarnombre">Nombre&nbsp;</label>

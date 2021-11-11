@@ -78,6 +78,41 @@
     	<servlet-name>MostrarAlumno</servlet-name>
     	<servlet-class>es.iespuertodelacruz.cc.webappinstituto.servlets.alumnos.MostrarAlumno</servlet-class>
     </servlet>
+    <servlet>
+    	<description>
+    	</description>
+    	<display-name>AgregarAsignatura</display-name>
+    	<servlet-name>AgregarAsignatura</servlet-name>
+    	<servlet-class>es.iespuertodelacruz.cc.webappinstituto.servlets.asignaturas.AgregarAsignatura</servlet-class>
+    </servlet>
+    <servlet>
+    	<description>
+    	</description>
+    	<display-name>BorrarAsignatura</display-name>
+    	<servlet-name>BorrarAsignatura</servlet-name>
+    	<servlet-class>es.iespuertodelacruz.cc.webappinstituto.servlets.asignaturas.BorrarAsignatura</servlet-class>
+    </servlet>
+    <servlet>
+    	<description>
+    	</description>
+    	<display-name>EditarAsignatura</display-name>
+    	<servlet-name>EditarAsignatura</servlet-name>
+    	<servlet-class>es.iespuertodelacruz.cc.webappinstituto.servlets.asignaturas.EditarAsignatura</servlet-class>
+    </servlet>
+    <servlet>
+    	<description>
+    	</description>
+    	<display-name>MostrarAsignatura</display-name>
+    	<servlet-name>MostrarAsignatura</servlet-name>
+    	<servlet-class>es.iespuertodelacruz.cc.webappinstituto.servlets.asignaturas.MostrarAsignatura</servlet-class>
+    </servlet>
+    <servlet>
+    	<description>
+    	</description>
+    	<display-name>AgregarMatricula</display-name>
+    	<servlet-name>AgregarMatricula</servlet-name>
+    	<servlet-class>es.iespuertodelacruz.cc.webappinstituto.servlets.matriculas.AgregarMatricula</servlet-class>
+    </servlet>
     <servlet-mapping>
     	<servlet-name>Alumnos</servlet-name>
     	<url-pattern>/Alumnos</url-pattern>
@@ -147,6 +182,46 @@
     <servlet-mapping>
     	<servlet-name>MostrarAlumno</servlet-name>
     	<url-pattern>/mostraralumno</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+    	<servlet-name>AgregarAsignatura</servlet-name>
+    	<url-pattern>/AgregarAsignatura</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+    	<servlet-name>AgregarAsignatura</servlet-name>
+    	<url-pattern>/agregarasignatura</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+    	<servlet-name>BorrarAsignatura</servlet-name>
+    	<url-pattern>/BorrarAsignatura</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+    	<servlet-name>BorrarAsignatura</servlet-name>
+    	<url-pattern>/borrarasignatura</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+    	<servlet-name>EditarAsignatura</servlet-name>
+    	<url-pattern>/EditarAsignatura</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+    	<servlet-name>EditarAsignatura</servlet-name>
+    	<url-pattern>/editarasignatura</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+    	<servlet-name>MostrarAsignatura</servlet-name>
+    	<url-pattern>/MostrarAsignatura</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+    	<servlet-name>MostrarAsignatura</servlet-name>
+    	<url-pattern>/mostrarasignatura</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+    	<servlet-name>AgregarMatricula</servlet-name>
+    	<url-pattern>/AgregarMatricula</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+    	<servlet-name>AgregarMatricula</servlet-name>
+    	<url-pattern>/agregarmatricula</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

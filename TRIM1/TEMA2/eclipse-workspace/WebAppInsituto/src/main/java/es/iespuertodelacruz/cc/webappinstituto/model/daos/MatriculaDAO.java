@@ -52,16 +52,16 @@ public class MatriculaDAO extends MatriculaEntry implements ICRUD<Matricula, Int
 			return null;
 		}
 	}
-
-	@Override
-	public List<Matricula> selectAll() {
+	
+	public List<Matricula> selectByYear(int year) {
 		AlumnoDAO alumnoDao = new AlumnoDAO(db);
 		AsignaturaDAO asignaturaDao = new AsignaturaDAO(db);
 		List<Matricula> matriculas = new ArrayList<Matricula>();
 		try (Connection conn = db.getConnection()) {
-			String sqlMatricula = "SELECT * FROM " + TABLE_NAME;
-			Statement stmt = conn.createStatement();
-			ResultSet rs = stmt.executeQuery(sqlMatricula);
+			String sqlMatricula = "SELECT * FROM " + TABLE_NAME + " WHERE " + YEAR + " = ?";
+			PreparedStatement ps = conn.prepareStatement(sqlMatricula);
+			ps.setInt(1, year);
+			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
 				Alumno alumno = alumnoDao.select(rs.getString(DNI));
 				Matricula matricula = new Matricula(rs.getInt(ID), alumno, rs.getInt(YEAR));
@@ -75,6 +75,100 @@ public class MatriculaDAO extends MatriculaEntry implements ICRUD<Matricula, Int
 					asignaturas.add(a);
 				}
 				matricula.setAsignaturas(asignaturas);
+				matriculas.add(matricula);
+			}
+			return matriculas;
+		} catch (SQLException e) {
+			return null;
+		}
+	}
+	
+	public List<Matricula> selectByDni(String dni) {
+		AlumnoDAO alumnoDao = new AlumnoDAO(db);
+		AsignaturaDAO asignaturaDao = new AsignaturaDAO(db);
+		List<Matricula> matriculas = new ArrayList<Matricula>();
+		try (Connection conn = db.getConnection()) {
+			String sqlMatricula = "SELECT * FROM " + TABLE_NAME + " WHERE " + DNI + " = ?";
+			PreparedStatement ps = conn.prepareStatement(sqlMatricula);
+			ps.setString(1, dni);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				Alumno alumno = alumnoDao.select(rs.getString(DNI));
+				Matricula matricula = new Matricula(rs.getInt(ID), alumno, rs.getInt(YEAR));
+				ArrayList<Asignatura> asignaturas = new ArrayList<Asignatura>();
+				String sqlAsignaturaMatricula = "SELECT * FROM " + AsignaturaMatriculaEntry.TABLE_NAME + " WHERE " + AsignaturaMatriculaEntry.IDMATRICULA + " = ?";
+				PreparedStatement ps2 = conn.prepareStatement(sqlAsignaturaMatricula);
+				ps2.setInt(1, matricula.getId());
+				ResultSet rs2 = ps2.executeQuery();
+				while (rs2.next()) {
+					Asignatura a = asignaturaDao.select(rs2.getInt(AsignaturaMatriculaEntry.IDASIGNATURA));
+					asignaturas.add(a);
+				}
+				matricula.setAsignaturas(asignaturas);
+				matriculas.add(matricula);
+			}
+			return matriculas;
+		} catch (SQLException e) {
+			return null;
+		}
+	}
+	
+	public List<Matricula> selectByYearAndDni(int year, String dni) {
+		AlumnoDAO alumnoDao = new AlumnoDAO(db);
+		AsignaturaDAO asignaturaDao = new AsignaturaDAO(db);
+		List<Matricula> matriculas = new ArrayList<Matricula>();
+		try (Connection conn = db.getConnection()) {
+			String sqlMatricula = "SELECT * FROM " + TABLE_NAME + " WHERE " + YEAR + " = ? AND " + DNI + " = ?";
+			PreparedStatement ps = conn.prepareStatement(sqlMatricula);
+			ps.setInt(1, year);
+			ps.setString(2, dni);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				Alumno alumno = alumnoDao.select(rs.getString(DNI));
+				Matricula matricula = new Matricula(rs.getInt(ID), alumno, rs.getInt(YEAR));
+				ArrayList<Asignatura> asignaturas = new ArrayList<Asignatura>();
+				String sqlAsignaturaMatricula = "SELECT * FROM " + AsignaturaMatriculaEntry.TABLE_NAME + " WHERE " + AsignaturaMatriculaEntry.IDMATRICULA + " = ?";
+				PreparedStatement ps2 = conn.prepareStatement(sqlAsignaturaMatricula);
+				ps2.setInt(1, matricula.getId());
+				ResultSet rs2 = ps2.executeQuery();
+				while (rs2.next()) {
+					Asignatura a = asignaturaDao.select(rs2.getInt(AsignaturaMatriculaEntry.IDASIGNATURA));
+					asignaturas.add(a);
+				}
+				matricula.setAsignaturas(asignaturas);
+				matriculas.add(matricula);
+			}
+			return matriculas;
+		} catch (SQLException e) {
+			return null;
+		}
+	}
+
+	@Override
+	public List<Matricula> selectAll() {
+		AlumnoDAO alumnoDao = new AlumnoDAO(db);
+		AsignaturaDAO asignaturaDao = new AsignaturaDAO(db);
+		List<Matricula> matriculas = new ArrayList<Matricula>();
+		try (Connection conn = db.getConnection()) {
+			String sqlMatricula = "SELECT * FROM " + TABLE_NAME;
+			Statement stmt = conn.createStatement();
+			ResultSet matriculasResultSet = stmt.executeQuery(sqlMatricula);
+			while (matriculasResultSet.next()) {
+				Alumno alumno = alumnoDao.select(matriculasResultSet.getString(DNI));
+				Matricula matricula = new Matricula(matriculasResultSet.getInt(ID), alumno, matriculasResultSet.getInt(YEAR));
+				System.out.println("Econtrado matricula " + matricula.getId());
+				ArrayList<Asignatura> asignaturas = new ArrayList<Asignatura>();
+				String sqlAsignaturaMatricula = "SELECT * FROM " + AsignaturaMatriculaEntry.TABLE_NAME + " WHERE " + AsignaturaMatriculaEntry.IDMATRICULA + " = ?";
+				PreparedStatement ps2 = conn.prepareStatement(sqlAsignaturaMatricula);
+				ps2.setInt(1, matricula.getId());
+				ResultSet matriculasAsignaturasResultSet = ps2.executeQuery();
+				while (matriculasAsignaturasResultSet.next()) {
+					Asignatura a = asignaturaDao.select(matriculasAsignaturasResultSet.getInt(AsignaturaMatriculaEntry.IDASIGNATURA));
+					System.out.println("Asignatura " + a.getNombre() + " se añade a " + matricula.getId());
+					asignaturas.add(a);
+				}
+				matricula.setAsignaturas(asignaturas);
+				matriculas.add(matricula);
 			}
 			return matriculas;
 		} catch (SQLException e) {

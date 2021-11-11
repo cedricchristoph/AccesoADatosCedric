@@ -35,6 +35,7 @@ public class ServletAlumnos extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
 		ServletContext context = request.getServletContext();
 		HttpSession session = request.getSession();
 		
@@ -57,9 +58,10 @@ public class ServletAlumnos extends HttpServlet {
 			}
 			if (paramSearchNombre == null && paramSearchDni == null) {
 				alumnos = (ArrayList<Alumno>) alumnoDao.selectAll();
-				if (alumnos == null) {
-					session.setAttribute(Globals.ATTRIBUTE_SESSION_INFO_MSG, "No se encontró ningún registro");
-				}
+				
+			}
+			if (alumnos != null && alumnos.isEmpty()) {
+				session.setAttribute(Globals.ATTRIBUTE_SESSION_INFO_MSG, "La búsqueda no obtuvo resultados");
 			}
 			session.setAttribute(Globals.ATTRIBUTE_SESSION_LIST_ALUMNOS, alumnos);
 			request.getRequestDispatcher(Globals.JSP_ALUMNOS).forward(request, response);
