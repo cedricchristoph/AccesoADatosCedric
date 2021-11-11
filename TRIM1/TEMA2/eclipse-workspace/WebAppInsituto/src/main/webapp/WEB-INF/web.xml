@@ -113,6 +113,13 @@
     	<servlet-name>AgregarMatricula</servlet-name>
     	<servlet-class>es.iespuertodelacruz.cc.webappinstituto.servlets.matriculas.AgregarMatricula</servlet-class>
     </servlet>
+    <servlet>
+    	<description>
+    	</description>
+    	<display-name>BorrarMatricula</display-name>
+    	<servlet-name>BorrarMatricula</servlet-name>
+    	<servlet-class>es.iespuertodelacruz.cc.webappinstituto.servlets.matriculas.BorrarMatricula</servlet-class>
+    </servlet>
     <servlet-mapping>
     	<servlet-name>Alumnos</servlet-name>
     	<url-pattern>/Alumnos</url-pattern>
@@ -222,6 +229,14 @@
     <servlet-mapping>
     	<servlet-name>AgregarMatricula</servlet-name>
     	<url-pattern>/agregarmatricula</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+    	<servlet-name>BorrarMatricula</servlet-name>
+    	<url-pattern>/BorrarMatricula</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+    	<servlet-name>BorrarMatricula</servlet-name>
+    	<url-pattern>/borrarmatricula</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

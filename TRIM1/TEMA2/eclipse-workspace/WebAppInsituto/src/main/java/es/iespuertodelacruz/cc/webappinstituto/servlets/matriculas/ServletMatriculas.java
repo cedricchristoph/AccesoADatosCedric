@@ -76,7 +76,6 @@ public class ServletMatriculas extends HttpServlet {
 				// No filtrar
 				if (paramSearchDni == null && paramSearchYear == null) {
 					matriculas = matriculaDao.selectAll();
-					System.out.println("Matriculas cargadas sin filtro. " + matriculas.size() + " registros encontrados");
 				}
 			} catch (Exception e) {
 				session.setAttribute(Globals.ATTRIBUTE_SESSION_ERROR_MSG, e.getMessage());

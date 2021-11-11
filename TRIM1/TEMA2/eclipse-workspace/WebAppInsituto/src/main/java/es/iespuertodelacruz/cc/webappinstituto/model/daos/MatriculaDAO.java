@@ -156,7 +156,6 @@ public class MatriculaDAO extends MatriculaEntry implements ICRUD<Matricula, Int
 			while (matriculasResultSet.next()) {
 				Alumno alumno = alumnoDao.select(matriculasResultSet.getString(DNI));
 				Matricula matricula = new Matricula(matriculasResultSet.getInt(ID), alumno, matriculasResultSet.getInt(YEAR));
-				System.out.println("Econtrado matricula " + matricula.getId());
 				ArrayList<Asignatura> asignaturas = new ArrayList<Asignatura>();
 				String sqlAsignaturaMatricula = "SELECT * FROM " + AsignaturaMatriculaEntry.TABLE_NAME + " WHERE " + AsignaturaMatriculaEntry.IDMATRICULA + " = ?";
 				PreparedStatement ps2 = conn.prepareStatement(sqlAsignaturaMatricula);
@@ -164,7 +163,6 @@ public class MatriculaDAO extends MatriculaEntry implements ICRUD<Matricula, Int
 				ResultSet matriculasAsignaturasResultSet = ps2.executeQuery();
 				while (matriculasAsignaturasResultSet.next()) {
 					Asignatura a = asignaturaDao.select(matriculasAsignaturasResultSet.getInt(AsignaturaMatriculaEntry.IDASIGNATURA));
-					System.out.println("Asignatura " + a.getNombre() + " se añade a " + matricula.getId());
 					asignaturas.add(a);
 				}
 				matricula.setAsignaturas(asignaturas);
@@ -179,20 +177,42 @@ public class MatriculaDAO extends MatriculaEntry implements ICRUD<Matricula, Int
 	@Override
 	public Matricula insert(Matricula entity) throws SQLException {
 		try (Connection conn = db.getConnection()) {
+			conn.setAutoCommit(false);
 			String sqlMatricula = "INSERT INTO " + TABLE_NAME + " (" + DNI + ", " + YEAR + ") VALUES (?,?)";
 			PreparedStatement ps = conn.prepareStatement(sqlMatricula, PreparedStatement.RETURN_GENERATED_KEYS);
 			ps.setString(1, entity.getAlumno().getDni());
 			ps.setInt(2, entity.getYear());
-			int ok = ps.executeUpdate();
-			if (ok > 0) {
-				ResultSet rsKeys = ps.getGeneratedKeys();
-				while (rsKeys.next())
-					entity.setId(rsKeys.getInt(ID));
-				return entity;
+			int affectedRows = ps.executeUpdate();
+			if (affectedRows <= 0) {
+				conn.rollback();
+				conn.setAutoCommit(true);
+				throw new SQLException("Error. No se pudo crear la matrícula. Ninguna fila afectada.");
+			} else {
+				ResultSet rs = ps.getGeneratedKeys();
+				while (rs.next()) {
+					entity.setId(rs.getInt(1));
+					System.out.println("El id generado es " + entity.getId());
+				}
 			}
-			return null;
+			for (Asignatura asignatura : entity.getAsignaturas()) {
+				String sql = "INSERT INTO " + AsignaturaMatriculaEntry.TABLE_NAME + " ("
+						+ AsignaturaMatriculaEntry.IDMATRICULA + ", " + AsignaturaMatriculaEntry.IDASIGNATURA + ") VALUES (?,?)";
+				PreparedStatement ps2 = conn.prepareStatement(sql);
+				ps2.setInt(1, entity.getId());
+				ps2.setInt(2, asignatura.getId());
+				int ok = ps2.executeUpdate();
+				if (ok <= 0) {
+					conn.rollback();
+					conn.setAutoCommit(true);
+					throw new SQLException("Error al vincular relaciones con asignaturas en la matrícula");
+				}
+			}	
+			conn.commit();
+			conn.setAutoCommit(true);
+			return entity;
 		} catch (SQLException e) {
-			return null;
+			e.printStackTrace();
+			throw new SQLException(e.getMessage());
 		}
 	}
 
@@ -205,15 +225,26 @@ public class MatriculaDAO extends MatriculaEntry implements ICRUD<Matricula, Int
 	@Override
 	public boolean delete(Integer id) throws SQLException {
 		try (Connection conn = db.getConnection()) {
+			conn.setAutoCommit(false);
+			String sqlRelaciones = "DELETE FROM " + AsignaturaMatriculaEntry.TABLE_NAME + " WHERE " +
+					AsignaturaMatriculaEntry.IDMATRICULA + " = ?";
+			PreparedStatement psRelations = conn.prepareStatement(sqlRelaciones);
+			psRelations.setInt(1, id);
+			psRelations.executeUpdate();
 			String sql = "DELETE FROM " + TABLE_NAME + " WHERE " + ID + " = ?";
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setInt(1, id);
 			int ok = ps.executeUpdate();
-			if (ok > 0)
-				return true;
-			return false;
+			if (ok == 0) {
+				conn.rollback();
+				conn.setAutoCommit(true);
+				throw new SQLException("No se pudo eliminar el registro");
+			}
+			conn.commit();
+			conn.setAutoCommit(true);
+			return true;
 		} catch (SQLException e) {
-			return false;
+			throw new SQLException(e.getMessage());
 		}
 	}
 	

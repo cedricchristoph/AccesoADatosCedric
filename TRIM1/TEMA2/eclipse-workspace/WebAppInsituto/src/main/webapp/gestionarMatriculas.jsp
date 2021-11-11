@@ -52,9 +52,9 @@
                     <label for="matriculaagregardni">DNI alumno</label>
                     <input type="text" name="matriculaagregardni" placeholder="12345678A"><br/>
                     <label for="matriculaagregaryear">Año</label>
-                    <input type="text" name="matriculaagregaryear" placeholder="1995"><br/>
+                    <input type="text" name="matriculaagregaryear" placeholder="2003"><br/>
                     <label for="matriculaagregaryear">Asignaturas</label>
-                    <input type="text" name="matriculaagregarasignaturas" placeholder="1,23,12,..."><br/>
+                    <input type="text" name="matriculaagregarasignaturas" placeholder="1,2,3,..."><br/>
                     <div class="text-center text-md-left container">
                         <a class="btn btn-primary position-bottom-right" onclick="document.getElementById('matricula-agregar-form').submit();">Matricular</a>
                     </div>
@@ -76,13 +76,13 @@
                 <small>Rellene este formulario para editar una matrícula del sistema</small>
                 <form id="matricula-editar-form" class="container" action="editarmatricula" method="POST">
                     <label for="matriculaeditarid">ID matrícula</label>
-                    <input type="text" name="matriculaeditarid" placeholder="ID matrícula*"><br/>
+                    <input type="text" name="matriculaeditarid" placeholder="12"><br/>
                     <label for="matriculaeditardni">DNI alumno</label>
-                    <input type="text" name="matriculaeditardni" placeholder="DNI alumno*"><br/>
+                    <input type="text" name="matriculaeditardni" placeholder="12345678A"><br/>
                     <label for="matriculaeditaryear">Año</label>
-                    <input type="text" name="matriculaeditaryear" placeholder="Año*"><br/>
-                    <label for="matriculaeditarasignaturas">Asignaturas</label>
-                    <input type="text" name="matriculaeditarasignaturas" placeholder="Asignaturas*"><br/>
+                    <input type="text" name="matriculaeditaryear" placeholder="2003"><br/>
+                    <label for="matriculaeditarasignaturas">Asignaturas (IDs)</label>
+                    <input type="text" name="matriculaeditarasignaturas" placeholder="1,2,3,..."><br/>
                     <div class="text-center text-md-left container">
                         <a class="btn btn-primary position-bottom-right" onclick="document.getElementById('matricula-editar-form').submit();">Actualizar</a>
                     </div>
@@ -93,9 +93,9 @@
                 <small>Introduzca los datos para mostrar matrículas de un alumno</small>
                 <form id="matricula-mostrar-form" class="container" action="mostrarmatricula" method="POST">
                     <label for="matriculamostraryear">Año</label>
-                    <input type="text" name="matriculamostraryear" placeholder="Año*"><br/>
+                    <input type="text" name="matriculamostraryear" placeholder="2003"><br/>
                     <label for="matriculamostrardni">DNI alumno</label>
-                    <input type="text" name="matriculamostrardni" placeholder="DNI alumno*"><br/>
+                    <input type="text" name="matriculamostrardni" placeholder="12345678A"><br/>
                     <div class="text-center text-md-left container">
                         <a class="btn btn-primary position-bottom-right" onclick="document.getElementById('matricula-mostrar-form').submit();">Mostrar</a>
                     </div>
