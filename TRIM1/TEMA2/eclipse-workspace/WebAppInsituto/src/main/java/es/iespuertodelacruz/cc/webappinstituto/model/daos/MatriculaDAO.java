@@ -37,6 +37,8 @@ public class MatriculaDAO extends MatriculaEntry implements ICRUD<Matricula, Int
 				matricula = new Matricula(rs.getInt(ID), alumno, rs.getInt(YEAR));
 				break;
 			}
+			if (matricula == null)
+				throw new SQLException("Matricula no encontrada");
 			ArrayList<Asignatura> asignaturas = new ArrayList<Asignatura>();
 			String sqlAsignaturaMatricula = "SELECT * FROM " + AsignaturaMatriculaEntry.TABLE_NAME + " WHERE " + AsignaturaMatriculaEntry.IDMATRICULA + " = ?";
 			PreparedStatement ps2 = conn.prepareStatement(sqlAsignaturaMatricula);
@@ -218,8 +220,54 @@ public class MatriculaDAO extends MatriculaEntry implements ICRUD<Matricula, Int
 
 	@Override
 	public boolean update(Matricula entity) throws SQLException {
-		// TODO Auto-generated method stub
-		return false;
+		try (Connection conn = db.getConnection()) {
+			conn.setAutoCommit(false);
+			int affectedRows = 0;
+			// Eliminar relaciones en tabla de relaciones.
+			String sqlRelaciones = "DELETE FROM " + AsignaturaMatriculaEntry.TABLE_NAME + " WHERE " +
+					AsignaturaMatriculaEntry.IDMATRICULA + " = ?";
+			PreparedStatement psRelaciones = conn.prepareStatement(sqlRelaciones);
+			psRelaciones.setInt(1, entity.getId());
+			affectedRows = psRelaciones.executeUpdate();
+			if (affectedRows == 0) {
+				conn.rollback();
+				conn.setAutoCommit(true);
+				throw new SQLException("No se pudo eliminar las relaciones antiguas");
+			}
+			affectedRows = 0;
+			// Actualizar tabla matricula
+			String sqlMatricula = "UPDATE " + TABLE_NAME + " SET " + DNI + " = ?, " + YEAR + " = ? WHERE " + ID + " = ?";
+			PreparedStatement psMatricula = conn.prepareStatement(sqlMatricula);
+			psMatricula.setString(1, entity.getAlumno().getDni());
+			psMatricula.setInt(2, entity.getYear());
+			psMatricula.setInt(3, entity.getId());
+			affectedRows = psMatricula.executeUpdate();
+			if (affectedRows == 0) {
+				conn.rollback();
+				conn.setAutoCommit(true);
+				throw new SQLException("No se pudieron actualizar los valores de matrícula");
+			}
+			affectedRows = 0;
+			// Reestablecer relaciones en tabla de relaciones
+			for (Asignatura asignatura : entity.getAsignaturas()) {
+				String sql = "INSERT INTO " + AsignaturaMatriculaEntry.TABLE_NAME + " ("
+						+ AsignaturaMatriculaEntry.IDMATRICULA + ", " + AsignaturaMatriculaEntry.IDASIGNATURA + ") VALUES (?,?)";
+				PreparedStatement ps2 = conn.prepareStatement(sql);
+				ps2.setInt(1, entity.getId());
+				ps2.setInt(2, asignatura.getId());
+				int ok = ps2.executeUpdate();
+				if (ok <= 0) {
+					conn.rollback();
+					conn.setAutoCommit(true);
+					throw new SQLException("Error al vincular relaciones con asignaturas en la matrícula");
+				}
+			}	
+			conn.commit();
+			conn.setAutoCommit(true);
+			return true;
+		} catch (SQLException e) {
+			throw new SQLException(e.getMessage());
+		}
 	}
 
 	@Override

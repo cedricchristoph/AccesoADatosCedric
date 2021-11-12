@@ -131,6 +131,9 @@
                 </c:forEach>
                 </tbody>
             </table>
+            <div class="text-center text-md-left container">
+                <a class="btn btn-primary position-bottom-right" onclick="document.getElementById('').submit();">Formato JSON</a>
+            </div>
         </div>
         <br/><br><br/>
     </body>

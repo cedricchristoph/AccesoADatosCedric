@@ -4,10 +4,10 @@ public class Globals {
 
 	/* CREDENCIALES DE APLICACION PARA DDBB */
 	public static final String CONST_APP_DBLOCATION = "instituto";
-	public static final String CONST_APP_USER = "webapp";
-	public static final String CONST_APP_PWD = "9pWrL9Ld2SipVjx";
-	//public static final String CONST_APP_USER = "root";
-	//public static final String CONST_APP_PWD = "1q2w3e4r";
+	//public static final String CONST_APP_USER = "webapp";
+	//public static final String CONST_APP_PWD = "9pWrL9Ld2SipVjx";
+	public static final String CONST_APP_USER = "root";
+	public static final String CONST_APP_PWD = "N0Acc3$$4U";
 	
 	/* SERVLETS */
 	public static final String SERVLET_ALUMNOS = "alumnos";

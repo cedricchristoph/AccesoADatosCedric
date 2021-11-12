@@ -120,6 +120,20 @@
     	<servlet-name>BorrarMatricula</servlet-name>
     	<servlet-class>es.iespuertodelacruz.cc.webappinstituto.servlets.matriculas.BorrarMatricula</servlet-class>
     </servlet>
+    <servlet>
+    	<description>
+    	</description>
+    	<display-name>MostrarMatricula</display-name>
+    	<servlet-name>MostrarMatricula</servlet-name>
+    	<servlet-class>es.iespuertodelacruz.cc.webappinstituto.servlets.matriculas.MostrarMatricula</servlet-class>
+    </servlet>
+    <servlet>
+    	<description>
+    	</description>
+    	<display-name>EditarMatricula</display-name>
+    	<servlet-name>EditarMatricula</servlet-name>
+    	<servlet-class>es.iespuertodelacruz.cc.webappinstituto.servlets.matriculas.EditarMatricula</servlet-class>
+    </servlet>
     <servlet-mapping>
     	<servlet-name>Alumnos</servlet-name>
     	<url-pattern>/Alumnos</url-pattern>
@@ -237,6 +251,22 @@
     <servlet-mapping>
     	<servlet-name>BorrarMatricula</servlet-name>
     	<url-pattern>/borrarmatricula</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+    	<servlet-name>MostrarMatricula</servlet-name>
+    	<url-pattern>/MostrarMatricula</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+    	<servlet-name>MostrarMatricula</servlet-name>
+    	<url-pattern>/mostrarmatricula</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+    	<servlet-name>EditarMatricula</servlet-name>
+    	<url-pattern>/EditarMatricula</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+    	<servlet-name>EditarMatricula</servlet-name>
+    	<url-pattern>/editarmatricula</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
