@@ -134,6 +134,27 @@
     	<servlet-name>EditarMatricula</servlet-name>
     	<servlet-class>es.iespuertodelacruz.cc.webappinstituto.servlets.matriculas.EditarMatricula</servlet-class>
     </servlet>
+    <servlet>
+    	<description>
+    	</description>
+    	<display-name>AccountServlet</display-name>
+    	<servlet-name>AccountServlet</servlet-name>
+    	<servlet-class>es.iespuertodelacruz.cc.webappinstituto.servlets.account.AccountServlet</servlet-class>
+    </servlet>
+    <servlet>
+    	<description>
+    	</description>
+    	<display-name>CambiarDatos</display-name>
+    	<servlet-name>CambiarDatos</servlet-name>
+    	<servlet-class>es.iespuertodelacruz.cc.webappinstituto.servlets.account.CambiarDatos</servlet-class>
+    </servlet>
+    <servlet>
+    	<description>
+    	</description>
+    	<display-name>ActivationServlet</display-name>
+    	<servlet-name>ActivationServlet</servlet-name>
+    	<servlet-class>es.iespuertodelacruz.cc.webappinstituto.servlets.account.ActivationServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
     	<servlet-name>Alumnos</servlet-name>
     	<url-pattern>/Alumnos</url-pattern>
@@ -267,6 +288,26 @@
     <servlet-mapping>
     	<servlet-name>EditarMatricula</servlet-name>
     	<url-pattern>/editarmatricula</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+    	<servlet-name>AccountServlet</servlet-name>
+    	<url-pattern>/AccountServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+    	<servlet-name>AccountServlet</servlet-name>
+    	<url-pattern>/myaccount</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+    	<servlet-name>CambiarDatos</servlet-name>
+    	<url-pattern>/CambiarDatos</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+    	<servlet-name>CambiarDatos</servlet-name>
+    	<url-pattern>/cambiardatos</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+    	<servlet-name>ActivationServlet</servlet-name>
+    	<url-pattern>/activate</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -14,6 +14,7 @@ import es.iespuertodelacruz.cc.webappinstituto.model.daos.MatriculaDAO;
 import es.iespuertodelacruz.cc.webappinstituto.model.entities.Matricula;
 import es.iespuertodelacruz.cc.webappinstituto.model.entities.User;
 import es.iespuertodelacruz.cc.webappinstituto.model.utils.Globals;
+import es.iespuertodelacruz.cc.webappinstituto.model.utils.JsonConverter;
 import es.iespuertodelacruz.cc.webappinstituto.model.utils.MyDatabase;
 
 /**
@@ -80,6 +81,8 @@ public class ServletMatriculas extends HttpServlet {
 			} catch (Exception e) {
 				session.setAttribute(Globals.ATTRIBUTE_SESSION_ERROR_MSG, e.getMessage());
 			}
+			session.setAttribute(Globals.ATTRIBUTE_SESSION_JSON_MATRICULAS, 
+					new JsonConverter<Matricula>().convertToJson(matriculas));
 			session.setAttribute(Globals.ATTRIBUTE_SESSION_LIST_MATRICULAS, matriculas);
 			request.getRequestDispatcher(Globals.JSP_MATRICULAS).forward(request, response);
 			session.setAttribute(Globals.ATTRIBUTE_SESSION_MSG, "");

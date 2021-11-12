@@ -11,6 +11,10 @@ import es.iespuertodelacruz.cc.webappinstituto.model.utils.Globals;
  */
 public class User {
 	
+	/* CONSTANTES GLOBALES ESTATICAS */
+	public static final int ACCESSLEVEL_ADMINISTRATOR = 1;
+	public static final int ACCESSLEVEL_STANDARD = 0;
+	
 	/**
 	 * Variables de clase User
 	 */
@@ -18,6 +22,7 @@ public class User {
 	private String email;
 	private String hashPwd;
 	private boolean active;
+	private int accessLevel;
 	
 	/**
 	 * Constructor por defecto
@@ -34,11 +39,12 @@ public class User {
 	 * @param active Valor que indica si la cuenta esta activa o no
 	 * @param hashPwd Determina si plainPwd será encriptado o no
 	 */
-	public User(String user, String email, String plainPwd, boolean active, boolean hashPwd) {
+	public User(String user, String email, String plainPwd, boolean active, boolean hashPwd, int type) {
 		super();
 		this.user = user;
 		this.email = email;
 		this.active = active;
+		this.accessLevel = type;
 		if (hashPwd)
 			this.hashPwd = BCrypt.hashpw(plainPwd, BCrypt.gensalt(Globals.BCRYPT_SALTS));
 		else
@@ -86,6 +92,25 @@ public class User {
 
 	public void setActive(boolean active) {
 		this.active = active;
+	}
+
+	public String getAccessLevelStr() {
+		switch (accessLevel) {
+		case ACCESSLEVEL_ADMINISTRATOR:
+			return "Administrator";
+		case ACCESSLEVEL_STANDARD:
+			return "Standard";
+		default:
+			return "Unknown";
+		}
+	}
+	
+	public int getAccessLevel() {
+		return accessLevel;
+	}
+
+	public void setAccessLevel(int accessLevel) {
+		this.accessLevel = accessLevel;
 	}
 	
 	

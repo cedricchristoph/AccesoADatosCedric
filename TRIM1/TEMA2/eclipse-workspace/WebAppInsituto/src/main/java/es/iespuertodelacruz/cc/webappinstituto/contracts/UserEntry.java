@@ -8,5 +8,6 @@ public abstract class UserEntry {
 	public static final String EMAIL = "email";
 	public static final String HASH = "hash";
 	public static final String ACTIVE = "active";
+	public static final String TYPE = "type";
 	
 }

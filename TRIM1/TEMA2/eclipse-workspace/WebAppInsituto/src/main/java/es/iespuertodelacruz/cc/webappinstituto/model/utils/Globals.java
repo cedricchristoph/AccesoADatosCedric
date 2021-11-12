@@ -16,7 +16,8 @@ public class Globals {
 	public static final String SERVLET_LOGIN = "login";
 	public static final String SERVLET_REGISTRAR = "registrar";
 	public static final String SERVLET_INICIO = "inicio";
-	
+	public static final String SERVLET_ACCOUNT = "myaccount";
+	public static final String SERVLET_ACCOUNT_EDIT = "cambiardatos";
 	public static final String SERVLET_ALUMNOS_MOSTRAR = "mostraralumno";
 	
 	/* JSPs */
@@ -26,6 +27,8 @@ public class Globals {
 	public static final String JSP_INICIO = "index.jsp";
 	public static final String JSP_LOGIN = "login.jsp";
 	public static final String JSP_REGISTRAR = "register.jsp";
+	public static final String JSP_ACCOUNT = "account.jsp";
+	public static final String JSP_ACCOUNT_EDIT = "changeaccountdata.jsp";
 	
 	/* ATRIBUTOS APLICACION */
 	public static final String ATTRIBUTE_APP_DATABASE = "appdatabase";
@@ -39,6 +42,10 @@ public class Globals {
 	public static final String ATTRIBUTE_SESSION_INFO_MSG = "infoMessage";
 	public static final String ATTRIBUTE_SESSION_MSG = "message";
 	public static final String ATTRIBUTE_SESSION_RELOAD = "reload";
+	public static final String ATTRIBUTE_SESSION_JSON_ALUMNOS = "alumnosjson";
+	public static final String ATTRIBUTE_SESSION_JSON_ASIGNATURAS = "asignaturasjson";
+	public static final String ATTRIBUTE_SESSION_JSON_MATRICULAS = "matriculasjson";
+	public static final String ATTRIBUTE_SESSION_ACCOUNTS_INACTIVE = "accountsinactive";
 	/* ATRIBUTOS APLICACION */
 	
 	/* PARAMETROS */
@@ -95,6 +102,13 @@ public class Globals {
 	
 	public static final String PARAM_MATRICULA_MOSTRAR_YEAR = "matriculamostraryear";
 	public static final String PARAM_MATRICULA_MOSTRAR_DNI = "matriculamostrardni";
+	
+		// PARAMETROS ACCOUNT
+	public static final String PARAM_ACCOUNT_EDITAR_EMAIL = "email";
+	public static final String PARAM_ACCOUNT_EDITAR_PWD_OLD = "oldpassword";
+	public static final String PARAM_ACCOUNT_EDITAR_PWD_NEW = "newpassword";
+	public static final String PARAM_ACCOUNT_EDITAR_PWD_REPEAT = "repeatpassword";
+	public static final String PARAM_ACCOUNT_USER_TOACTIVATE = "user";
 	
 	/* BCRYPT */
 	public static final int BCRYPT_SALTS = 10;

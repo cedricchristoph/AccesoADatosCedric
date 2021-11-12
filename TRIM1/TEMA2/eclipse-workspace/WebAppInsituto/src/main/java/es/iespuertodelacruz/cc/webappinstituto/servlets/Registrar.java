@@ -58,7 +58,7 @@ public class Registrar extends HttpServlet {
 				if (existing != null) {
 					throw new Exception("El usuario ya existe");
 				} else {
-					User toRegister = new User(paramUser, paramEmail, paramPwd, false, true);
+					User toRegister = new User(paramUser, paramEmail, paramPwd, false, true, User.ACCESSLEVEL_STANDARD);
 					System.out.println(toRegister.getHashPwd());
 					User output;
 					if ((output = userDao.insert(toRegister)) != null) {

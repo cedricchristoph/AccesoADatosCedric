@@ -15,6 +15,7 @@ import es.iespuertodelacruz.cc.webappinstituto.model.daos.AlumnoDAO;
 import es.iespuertodelacruz.cc.webappinstituto.model.entities.Alumno;
 import es.iespuertodelacruz.cc.webappinstituto.model.entities.User;
 import es.iespuertodelacruz.cc.webappinstituto.model.utils.Globals;
+import es.iespuertodelacruz.cc.webappinstituto.model.utils.JsonConverter;
 import es.iespuertodelacruz.cc.webappinstituto.model.utils.MyDatabase;
 
 /**
@@ -63,6 +64,9 @@ public class ServletAlumnos extends HttpServlet {
 			if (alumnos != null && alumnos.isEmpty()) {
 				session.setAttribute(Globals.ATTRIBUTE_SESSION_INFO_MSG, "La búsqueda no obtuvo resultados");
 			}
+			
+			session.setAttribute(Globals.ATTRIBUTE_SESSION_JSON_ALUMNOS, 
+					new JsonConverter<Alumno>().convertToJson(alumnos));
 			session.setAttribute(Globals.ATTRIBUTE_SESSION_LIST_ALUMNOS, alumnos);
 			request.getRequestDispatcher(Globals.JSP_ALUMNOS).forward(request, response);
 			session.setAttribute(Globals.ATTRIBUTE_SESSION_MSG, "");

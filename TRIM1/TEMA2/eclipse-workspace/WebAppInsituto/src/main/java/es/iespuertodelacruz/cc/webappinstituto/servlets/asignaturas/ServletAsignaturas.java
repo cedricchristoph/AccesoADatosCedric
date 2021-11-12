@@ -15,6 +15,7 @@ import es.iespuertodelacruz.cc.webappinstituto.model.daos.AsignaturaDAO;
 import es.iespuertodelacruz.cc.webappinstituto.model.entities.Asignatura;
 import es.iespuertodelacruz.cc.webappinstituto.model.entities.User;
 import es.iespuertodelacruz.cc.webappinstituto.model.utils.Globals;
+import es.iespuertodelacruz.cc.webappinstituto.model.utils.JsonConverter;
 import es.iespuertodelacruz.cc.webappinstituto.model.utils.MyDatabase;
 
 /**
@@ -81,6 +82,8 @@ public class ServletAsignaturas extends HttpServlet {
 				if (asignaturas != null && asignaturas.isEmpty())
 					session.setAttribute(Globals.ATTRIBUTE_SESSION_INFO_MSG, "La búsqueda no obtuvo resultados");
 				
+				session.setAttribute(Globals.ATTRIBUTE_SESSION_JSON_ASIGNATURAS, 
+						new JsonConverter<Asignatura>().convertToJson(asignaturas));
 				session.setAttribute(Globals.ATTRIBUTE_SESSION_LIST_ASIGNATURAS, asignaturas);
 				request.getRequestDispatcher(Globals.JSP_ASIGNATURAS).forward(request, response);
 				session.setAttribute(Globals.ATTRIBUTE_SESSION_MSG, "");
