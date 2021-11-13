@@ -4,15 +4,16 @@
    "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="es">
     <head>
-        <title>Mi perfil</title>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
-        <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
-        <link rel="stylesheet" type="text/css" href="main.css">
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <title>Mi Perfil</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+        integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="main.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    </head>
+</head>
     
 
 	<body>
@@ -54,34 +55,12 @@
                     <small>E-Mail vinculado : <b><c:out value="${sessionuser.email}"></c:out></b></small><br/>
                     <small>Contraseña       : <b>●●●●●●</b></small><br/>
                 </div>
-                <a href="cambiardatos" class="btn btn-secondary" style="margin-top: 10px;">Cambiar datos de cuenta</a>                            <!-- Button trigger modal -->
+                <a href="cambiardatos" class="btn btn-secondary" style="margin-top: 10px;">Cambiar datos de cuenta</a>                            
+                <!-- Button trigger modal -->
             <button type="button" class="btn btn-danger" style="margin-top: 10px;" data-toggle="modal" data-target="#exampleModal">
               Eliminar cuenta
             </button>
-
-            <!-- Modal -->
-            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-              <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Eliminar cuenta permanentemente</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                    </button>
-                  </div>
-                  <div class="modal-body">
-                    Esta a punto de eliminar su cuenta y todos sus datos del sistema. Esta acción no es reversible.
-                    ¿Seguro que quiere proceder?
-                  </div>
-                    <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" href="deleteaccount">Eliminar mi cuenta</button>
-                  </div>
-                </div>
-              </div>
-            </div>
+                
             </div><br/>
             <c:if test="${not empty accountsinactive}">
                 <div class="description border-round usersinactive" style="width: 100%;">
@@ -109,6 +88,26 @@
                 </div>
             </c:if>
         </div>
+        <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Eliminar cuenta permanentemente</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                      <small>Está a punto de eliminar su cuenta permanentemente. Esta acción <b>no es reversible</b>.<br/>¿Seguro que quiere proceder?</small>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                      <a href="deleteaccount" type="button" class="btn btn-danger" >Eliminar cuenta permanentemente</a>
+                  </div>
+                </div>
+              </div>
+            </div>
     </body>
     <footer class="page-footer">
     	<c:if test="${not empty message}">

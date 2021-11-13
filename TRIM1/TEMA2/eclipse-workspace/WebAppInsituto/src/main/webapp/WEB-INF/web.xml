@@ -155,6 +155,13 @@
     	<servlet-name>ActivationServlet</servlet-name>
     	<servlet-class>es.iespuertodelacruz.cc.webappinstituto.servlets.account.ActivationServlet</servlet-class>
     </servlet>
+    <servlet>
+    	<description>
+    	</description>
+    	<display-name>DeleteAccount</display-name>
+    	<servlet-name>DeleteAccount</servlet-name>
+    	<servlet-class>es.iespuertodelacruz.cc.webappinstituto.servlets.account.DeleteAccount</servlet-class>
+    </servlet>
     <servlet-mapping>
     	<servlet-name>Alumnos</servlet-name>
     	<url-pattern>/Alumnos</url-pattern>
@@ -308,6 +315,14 @@
     <servlet-mapping>
     	<servlet-name>ActivationServlet</servlet-name>
     	<url-pattern>/activate</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+    	<servlet-name>DeleteAccount</servlet-name>
+    	<url-pattern>/DeleteAccount</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+    	<servlet-name>DeleteAccount</servlet-name>
+    	<url-pattern>/deleteaccount</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

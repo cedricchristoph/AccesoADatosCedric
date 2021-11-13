@@ -3,7 +3,6 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
    "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="es">
-
 <head>
     <title>Matriculas</title>
     <meta charset="utf-8">
@@ -110,7 +109,7 @@
                 <label for="asignaturamostrarnombre">Nombre&nbsp;</label>
                 <input type="text" name="asignaturamostrarnombre" placeholder="Nombre"/><br/>
                 <label for="asignaturamostrarcurso">Curso</label>
-                <input type="text" name="asignaturamostrarcurso" placeholder="Curso"/>
+                <input type="text" name="asignaturamostrarcurso" placeholder="Curso"/><br/><br/>
                 <div class="text-center text-md-left container position-bottom-right">
                     <a class="btn btn-primary"
                         onclick="document.getElementById('asignatura-mostrar-form').submit();">Mostrar</a>
