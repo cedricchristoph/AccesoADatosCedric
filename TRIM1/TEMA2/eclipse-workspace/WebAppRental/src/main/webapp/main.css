@@ -1,0 +1,181 @@
+body {
+    padding: 0;
+    margin: 0;
+    background: #121212;
+}
+.navbar {
+    background: #0a0a0a;
+}
+.nav-link,
+.navbar-brand {
+    color: white;
+    cursor: pointer;
+}
+.nav-link {
+    margin-right: 1em !important;
+    background-color: #2765a3;
+    color: white;
+}
+.nav-link:hover {
+    background-color: #2d73ba;
+    color: white;
+}
+.navbar-collapse {
+    justify-content: flex-end;
+}
+
+.description {
+    color: white;
+	text-align: center;
+    background-color: #0a0a0a;
+    padding: 20px;
+}
+
+.border-round {
+    border-radius: 25px;
+    padding: 20px; 
+    margin: 5px;
+}
+
+.description {
+	color: white;
+}
+
+.description p {
+	color: white;
+	font-size: 1.3rem;
+	line-height: 1.5;
+}
+
+.text-left {
+	text-align: left;
+}
+
+.position-page-center {
+    left: 50%;
+	position: absolute;
+	top: 55%;
+	transform: translate(-50%, -55%);
+}
+
+div a {
+    color: white;
+    text-decoration: none;
+}
+
+.selection {
+	text-align: center;
+    background-color: #ebebeb;
+    border-radius: 25px;
+    padding: 25px;
+    margin: 15px; 
+    text-decoration: none;
+}
+
+.selection h4 p{
+    color: white;
+}
+
+.selection:hover {
+    background-color: #2682bf;
+    color: #FFFF;
+    text-decoration: none;
+}
+
+.svg-white {
+    fill: white;
+}
+
+.row {
+    padding: 10px;
+    margin: 10px;;
+}
+
+.container {
+    margin: 15px;
+    padding: 1px;
+    clear: both;
+}
+
+div form {
+    text-align: left;
+}
+
+input {
+    float: right; 
+    width: 250px;
+    margin-left: 1px;
+}
+
+.page-footer {
+    background-color: #0a0a0a;
+    color: white;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+}
+.footer-copyright {
+    color: white;
+    padding: 10px 0;
+}
+
+.popup-blue {
+  top: auto;
+  bottom: 10px;
+  outline: none;
+  border: 1px solid #2682bf;
+  background-color: #c7e9ff;
+  color: black;
+}
+
+.popup-green {
+  top: auto;
+  bottom: 10px;
+  outline: none;
+  border: 1px solid green;
+  background-color: #ccf0d5;
+  color: black;
+}
+
+.popup-red {
+  top: auto;
+  bottom: 10px;
+  outline: none;
+  border: 1px solid red;
+  background-color: #f2c4c4;
+  color: black;
+}
+
+.position-bottom-right {
+    position: absolute;
+    right:    0;
+    bottom:   0;
+    margin-right: 15px;
+    margin-bottom: 15px;
+    padding: 5px;
+}
+
+.popup-json {
+    background-color: white;
+    border-radius: 25px;
+    padding: 20px; 
+    margin: 5px;
+    width: 40%;
+    opacity: 0;
+    visibility: hidden;
+}
+
+.popup-json:target {
+    opacity: 1;
+    visibility: visible;
+}
+
+.usersinactive {
+    display: block;
+}
+
+@media (max-width: 767px) {
+    .userinactive {
+        display: none !important;
+    }
+}
