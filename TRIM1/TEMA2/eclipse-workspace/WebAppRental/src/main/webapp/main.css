@@ -3,6 +3,16 @@ body {
     margin: 0;
     background: #121212;
 }
+
+input {
+	color: white;
+	background: #121212;
+	border: 1px solid grey;
+	font-size: 18px;
+	text-align: center;
+	padding: 5px;
+}
+
 .navbar {
     background: #0a0a0a;
 }
@@ -32,8 +42,8 @@ body {
 }
 
 .border-round {
-    border-radius: 25px;
-    padding: 20px; 
+    border-radius: 15px;
+    padding: 25px; 
     margin: 5px;
 }
 
@@ -72,7 +82,16 @@ div a {
     text-decoration: none;
 }
 
-.selection h4 p{
+h3 {
+	font-weight: 600;
+}
+
+form label {
+	font-weight: 50;
+	
+}
+
+.selection h4 {
     color: white;
 }
 

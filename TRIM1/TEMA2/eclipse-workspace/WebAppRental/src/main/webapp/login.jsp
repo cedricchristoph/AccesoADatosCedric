@@ -19,18 +19,21 @@
             <h3>Film Rental</h3>
         </div>
         <div class="description border-round position-page-center">
-        	<h3><b>Login</b></h3>
+        	<h3>Login</h3>
             <form action="login" method="POST" id="form-login">
-            	<label for="user">Usuario </label>
+            	<label for="user">Usuario</label>
+            	<br/>
             	<input type="text" name="loginuser" id="loginuser"/>
             	<br/>
-            	<label for="pwd" method="POST">Contraseña </label>
-            	<input type="password" name="loginpwd" id="loginpwd"/>
             	<br/>
-            	<input type="submit" name="login" value="Acceder" class="btn btn-primary"/>
+            	<label for="pwd" method="POST">Contraseña</label>
+            	<br/>
+            	<input type="password" name="loginpwd" id="loginpwd"/>
+            	<br/><br/><br/>
+            	<input type="submit" name="login" value="Acceder" class="btn btn-warning"/>
             </form>
             <br/><br/>
-            <a href="registrar">Crear cuenta</a>
+            <a href="registrar" class="btn btn-dark" style="width: 99%">Crear cuenta</a>
         </div>
         <c:if test="${not empty message}">
         	<div class="popup-green position-page-center border-round">
