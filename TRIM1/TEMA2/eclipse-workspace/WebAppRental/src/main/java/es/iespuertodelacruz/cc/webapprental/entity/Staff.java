@@ -2,6 +2,9 @@ package es.iespuertodelacruz.cc.webapprental.entity;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import org.mindrot.jbcrypt.BCrypt;
+
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -63,6 +66,10 @@ public class Staff implements Serializable {
 	public Staff() {
 	}
 
+	public boolean checkPwd(String pwd) {
+		return BCrypt.checkpw(pwd, getPassword());
+	}
+	
 	public byte getStaffId() {
 		return this.staffId;
 	}

@@ -64,8 +64,22 @@ input {
 .position-page-center {
     left: 50%;
 	position: absolute;
-	top: 55%;
-	transform: translate(-50%, -55%);
+	top: 50%;
+	transform: translate(-50%, -50%);
+}
+
+#message {
+    position: relative;
+    top: 0;
+    left: 30%;
+    right: 10%;
+    width: 42%;
+    margin-top: 15px;
+    margin-bottom: 10px;
+}
+
+#inner-message {
+    margin: 0 auto;
 }
 
 div a {
