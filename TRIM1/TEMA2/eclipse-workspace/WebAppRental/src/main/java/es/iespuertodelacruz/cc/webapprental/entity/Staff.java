@@ -7,15 +7,18 @@ import org.mindrot.jbcrypt.BCrypt;
 
 import java.sql.Timestamp;
 import java.util.List;
-
+import es.iespuertodelacruz.cc.contracts.StaffEntry;
 
 /**
  * The persistent class for the staff database table.
  * 
  */
 @Entity
-@Table(name="staff")
-@NamedQuery(name="Staff.findAll", query="SELECT s FROM Staff s")
+@Table(name=StaffEntry.TABLE)
+@NamedQueries({
+	@NamedQuery(name = StaffEntry.FINDALL, query = StaffEntry.FINDALL_QUERY),
+	@NamedQuery(name = StaffEntry.FINDUSER, query = StaffEntry.FINDUSER_QUERY)
+})
 public class Staff implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -122,8 +125,8 @@ public class Staff implements Serializable {
 		return this.password;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
+	public void setPassword(String plain) {
+		this.password = BCrypt.hashpw(plain, BCrypt.gensalt(10));
 	}
 
 	public String getUsername() {

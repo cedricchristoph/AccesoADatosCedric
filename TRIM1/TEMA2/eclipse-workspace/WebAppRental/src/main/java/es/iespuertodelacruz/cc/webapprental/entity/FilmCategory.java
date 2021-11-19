@@ -23,12 +23,12 @@ public class FilmCategory implements Serializable {
 
 	//bi-directional many-to-one association to Category
 	@ManyToOne
-	@JoinColumn(name="category_id")
+	@JoinColumn(name="category")
 	private Category category;
 
 	//bi-directional many-to-one association to Film
 	@ManyToOne
-	@JoinColumn(name="film_id")
+	@JoinColumn(name="film")
 	private Film film;
 
 	public FilmCategory() {
