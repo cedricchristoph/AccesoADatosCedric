@@ -41,7 +41,7 @@
               <span class="nav-profile-name">${user.firstName}&nbsp;${user.lastName}</span>
             </a>
             <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
-              <a class="dropdown-item">
+              <a class="dropdown-item" href="login">
                 <i class="mdi mdi-logout text-primary"></i>
                 Logout
               </a>
@@ -59,7 +59,7 @@
       <nav class="sidebar sidebar-offcanvas" id="sidebar">
         <ul class="nav">
           <li class="nav-item">
-            <a class="nav-link" href="index.html">
+            <a class="nav-link" href="clientes">
               <i class="mdi mdi-account menu-icon"></i>
               <span class="menu-title">Clientes</span>
             </a>
@@ -87,24 +87,18 @@
       <!-- partial -->
       <div class="main-panel">
         <div class="content-wrapper">
-          
           <div class="row">
             <div class="col-md-12 grid-margin">
               <div class="d-flex justify-content-between flex-wrap">
                 <div class="d-flex align-items-end flex-wrap">
                   <div class="mr-md-3 mr-xl-5">
-                    <h2>Clientes</h2>
-                    <p class="mb-md-0">Lista de clientes</p>
+                    <h2><i class="mdi mdi-account"></i>&nbsp;Alquiler #${selectedRental.rentalId}</h2>
+                    <p class="mb-md-0">${selectedclient.firstName}&nbsp;${selectedclient.lastName}</p>
                   </div>
                   <div class="d-flex">
                     <i class="mdi mdi-home text-muted hover-cursor"></i>
-                    <p class="text-muted mb-0 hover-cursor">&nbsp;/&nbsp;Clientes&nbsp;</p>
+                    <p class="text-muted mb-0 hover-cursor">&nbsp;/&nbsp;Clientes/#${selectedclient.customerId}/Rentals/#${selectedRental.rentalId}</p>
                   </div>
-                </div>
-                <div class="d-flex justify-content-between align-items-end flex-wrap">
-                  <button type="button" class="btn btn-light bg-white btn-icon mr-3 mt-2 mt-xl-0">
-                    <i class="mdi mdi-plus text-muted"></i>
-                  </button>
                 </div>
               </div>
             </div>
@@ -114,37 +108,48 @@
             <div class="col-md-12 stretch-card">
               <div class="card">
                 <div class="card-body">
-                  <p class="card-title">Clientes</p>
-                    <form class="card-title" action="clientes" method="post">
-                        <div class="row">
-                            <input class="col form-control" type="text" name="searchname" placeholder="Buscar nombre">
-                            <input class="col form-control" type="text" name="searchlastname" placeholder="Buscar apellidos">
-                            <input class="col btn btn-outline-warning" type="submit" value="Buscar"/>
-                        </div>
-                    </form>
-                  <div class="table-responsive">
-                    <table id="recent-purchases-listing" class="table">
-                      <thead>
-                        <tr>
-                            <th>Nombre</th>
-                            <th>Apellidos</th>
-                            <th>Domicilio</th>
-                            <th>Acciones</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                            <c:forEach var="cliente" items="${clientlist}">
-                                <tr>
-                                    <td>${cliente.firstName}</td>
-                                    <td>${cliente.lastName}</td>
-                                    <td>${cliente.address.getFullAddress()}</td>
-                                    <td>
-                                        <a class="btn btn-warning" type="button" href="cliente?id=${cliente.customerId}">Abrir</a>
-                                    </td>
-                                </tr>
-                            </c:forEach>
-                      </tbody>
-                    </table>
+                  <h4 class="card-title">Accesos directos</h4>
+                  <div>
+                      <a href="#datos" class="col-lg-12 btn btn-secondary btn-fw" type="submit" style="width: 150px; margin: 3px; color: white;">Ver Datos</a>
+                      <a href="#alquileres" class="col-lg-12 btn btn-secondary btn-fw" type="submit" style="width: 150px; margin: 3px; color: white;">Ver Alquileres</a>
+                      <a href="#pagos" class="col-lg-12 btn btn-secondary btn-fw" type="submit" style="width: 150px; margin: 3px; color: white;">Ver Pagos</a>
+                      <a class="col-lg-12 btn btn-inverse-success btn-fw" type="submit" style="width: 150px; margin: 3px;">Nuevo Alquiler</a>
+                      <a class="col-lg-12 btn btn-inverse-success btn-fw" type="submit" style="width: 150px; margin: 3px;">Nuevo Pago</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div id="datos" class="col-md-12 stretch-card" style="margin-top: 30px;">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title">Datos</h4>
+                  <div>
+                    En construccion
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div id="alquileres" class="col-md-12 stretch-card" style="margin-top: 30px;">
+              <div class="card">
+                <div class="card-body">
+                  <p class="card-title">Peliculas</p>
+                    <div class="d-flex justify-content-between align-items-end flex-wrap" style="margin-bottom: 10px;">
+                        <a type="button" class="btn btn-inverse-success">
+                            +&nbsp;Añadir
+                        </a>
+                    </div>
+                    En construccion
+                  </div>
+                </div>
+              </div>
+            </div><br/>
+            <div id="pagos" class="col-md-12 stretch-card" style="margin-top: 30px;">
+              <div class="card">
+                <div class="card-body">
+                  <p class="card-title">Pagos</p>
+                  <div class="card-content">
+                    
+                    En construccion
                   </div>
                 </div>
               </div>
@@ -167,25 +172,25 @@
   <!-- container-scroller -->
 
   <!-- plugins:js -->
-  <script src="vendors/base/vendor.bundle.base.js"></script>
+  <script src="template/vendors/base/vendor.bundle.base.js"></script>
   <!-- endinject -->
   <!-- Plugin js for this page-->
-  <script src="vendors/chart.js/Chart.min.js"></script>
-  <script src="vendors/datatables.net/jquery.dataTables.js"></script>
-  <script src="vendors/datatables.net-bs4/dataTables.bootstrap4.js"></script>
+  <script src="template/vendors/chart.js/Chart.min.js"></script>
+  <script src="template/vendors/datatables.net/jquery.dataTables.js"></script>
+  <script src="template/vendors/datatables.net-bs4/dataTables.bootstrap4.js"></script>
   <!-- End plugin js for this page-->
   <!-- inject:js -->
-  <script src="js/off-canvas.js"></script>
-  <script src="js/hoverable-collapse.js"></script>
-  <script src="js/template.js"></script>
+  <script src="template/js/off-canvas.js"></script>
+  <script src="template/js/hoverable-collapse.js"></script>
+  <script src="template/js/template.js"></script>
   <!-- endinject -->
   <!-- Custom js for this page-->
-  <script src="js/dashboard.js"></script>
-  <script src="js/data-table.js"></script>
-  <script src="js/jquery.dataTables.js"></script>
-  <script src="js/dataTables.bootstrap4.js"></script>
+  <script src="template/js/dashboard.js"></script>
+  <script src="template/js/data-table.js"></script>
+  <script src="template/js/jquery.dataTables.js"></script>
+  <script src="template/js/dataTables.bootstrap4.js"></script>
   <!-- End custom js for this page-->
-  <script src="js/jquery.cookie.js" type="text/javascript"></script>
+  <script src="template/js/jquery.cookie.js" type="text/javascript"></script>
 </body>
 
 </html>

@@ -19,18 +19,16 @@
 		<class>es.iespuertodelacruz.cc.webapprental.entity.Rental</class>
 		<class>es.iespuertodelacruz.cc.webapprental.entity.Staff</class>
 		<class>es.iespuertodelacruz.cc.webapprental.entity.Store</class>
-		
 		<properties>
       		<property name="javax.persistence.jdbc.url" 
 				value="jdbc:mysql://localhost:3306/sakila?serverTimezone=UTC"/>
 	      	<property name="javax.persistence.jdbc.user" value="root"/>
 	      	<property name="javax.persistence.jdbc.driver" 
 				value="com.mysql.cj.jdbc.Driver"/>
-	      	<property name="javax.persistence.jdbc.password" value="N0Acc3$$4U"/>
+	      	<property name="javax.persistence.jdbc.password" value="1q2w3e4r"/>
 	      	<property name="hibernate.dialect" 
 				value="org.hibernate.dialect.MySQLDialect" />
 	      	<property name="hibernate.show_sql" value="true" />
     	</properties>
-		
 	</persistence-unit>
 </persistence>

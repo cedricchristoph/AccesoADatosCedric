@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import es.iespuertodelacruz.cc.contracts.StaffEntry;
+import es.iespuertodelacruz.cc.repositories.StaffRepository;
 import es.iespuertodelacruz.cc.webapprental.entity.Staff;
 import es.iespuertodelacruz.cc.webapprental.utils.Globals;
 
@@ -42,9 +43,6 @@ public class Login extends HttpServlet {
 		HttpSession session = request.getSession();
 		session.invalidate();
 		request.getRequestDispatcher(Globals.JSP_LOGIN).forward(request, response);
-		session.setAttribute(Globals.ATT_SESSION_MSG, "");
-		session.setAttribute(Globals.ATT_SESSION_ERRMSG, "");
-		session.setAttribute(Globals.ATT_SESSION_INFOMSG, "");
 	}
 
 	/**
@@ -65,10 +63,8 @@ public class Login extends HttpServlet {
 				try {
 					EntityManagerFactory factory = (EntityManagerFactory) context
 							.getAttribute(Globals.ATT_APP_ENTITY_MANAGER_FACTORY);
-					EntityManager manager = factory.createEntityManager();
-					Query q = manager.createNamedQuery(StaffEntry.FINDUSER);
-					q.setParameter(1, paramUser);
-					user = (Staff) q.getSingleResult();
+					StaffRepository db = new StaffRepository(factory);
+					user = db.selectByUser(paramUser);
 				} catch (Exception e) {
 
 				}

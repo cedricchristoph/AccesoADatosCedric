@@ -10,14 +10,14 @@ import java.util.Date;
 public class Globals {
 
 	/* SERVLETS */
-	public static final String SERVLET_LOGIN = "login";
+	public static final String SERVLET_LOGIN = "/WebAppRental/login";
 	public static final String SERVLET_CLIENTES = "clientes";
 	public static final String SERVLET_CLIENTE = "cliente";
 	
 	/* JSPs */
 	public static final String JSP_LOGIN = "login.jsp";
-	public static final String JSP_CLIENTES = "clientes.jsp";
-	public static final String JSP_CLIENTE = "cliente.jsp";
+	public static final String JSP_CLIENTES = "home/clientes.jsp";
+	public static final String JSP_CLIENTE = "home/cliente.jsp";
 	
 	/* ATRIBUTOS DE APLICACION */
 	public static final String ATT_APP_ENTITY_MANAGER_FACTORY = "appemf";
@@ -32,6 +32,7 @@ public class Globals {
 	
 	public static final String ATT_SESSION_CLIENTS_LIST = "clientlist";
 	public static final String ATT_SESSION_SELECTED_CLIENT = "selectedclient";
+	public static final String ATT_SESSION_SELECTED_RENTAL = "selectedrental";
 	
 	/* PARAMETROS */
 		/* PARAMETROS DE LOGIN */

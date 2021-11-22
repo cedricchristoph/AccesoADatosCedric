@@ -1,0 +1,74 @@
+package es.iespuertodelacruz.cc.repositories;
+
+import java.sql.SQLException;
+import java.util.List;
+
+import es.iespuertodelacruz.cc.contracts.StaffEntry;
+import es.iespuertodelacruz.cc.webapprental.entity.Staff;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Query;
+
+public class StaffRepository implements CRUD<Staff, Integer> {
+
+	private EntityManagerFactory factory;
+	
+	public StaffRepository(EntityManagerFactory emf) {
+		this.factory = emf;
+	}
+
+	@Override
+	public Staff select(Integer id) {
+		return null;
+	}
+	
+	/**
+	 * Devuelve un Staff con un usuario especifico
+	 * @param user
+	 * @return
+	 */
+	public Staff selectByUser(String user) {
+		EntityManager manager = factory.createEntityManager();
+		manager.getTransaction().begin();
+		Query q = manager.createNamedQuery(StaffEntry.FINDUSER);
+		q.setParameter(1, user);
+		Staff result = (Staff) q.getSingleResult();
+		manager.getTransaction().commit();
+		return result;
+	}
+
+	/**
+	 * Devuelve todos los objetos Staff de la base de datos
+	 */
+	@Override
+	public List<Staff> selectAll() {
+		EntityManager manager = factory.createEntityManager();
+		manager.getTransaction().begin();
+		Query q = manager.createNamedQuery(StaffEntry.FINDALL);
+		List<Staff> result = (List<Staff>) q.getResultList();
+		manager.getTransaction().commit();
+		return result;
+	}
+
+	@Override
+	public Staff insert(Staff entity) throws SQLException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean update(Staff entity) throws SQLException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean delete(Integer id) throws SQLException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	
+	
+	
+}
