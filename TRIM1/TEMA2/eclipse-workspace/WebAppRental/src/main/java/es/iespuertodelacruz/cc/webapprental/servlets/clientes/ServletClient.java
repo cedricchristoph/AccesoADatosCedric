@@ -15,22 +15,21 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import es.iespuertodelacruz.cc.contracts.CustomerEntry;
-import es.iespuertodelacruz.cc.contracts.StaffEntry;
 import es.iespuertodelacruz.cc.webapprental.entity.Customer;
 import es.iespuertodelacruz.cc.webapprental.entity.Staff;
 import es.iespuertodelacruz.cc.webapprental.utils.Globals;
 
 /**
- * Servlet implementation class ServletClientes
+ * Servlet implementation class ServletClient
  */
-@WebServlet("/clientes")
-public class ServletClientes extends HttpServlet {
+@WebServlet("/cliente")
+public class ServletClient extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ServletClientes() {
+    public ServletClient() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -39,6 +38,7 @@ public class ServletClientes extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
 		request.setCharacterEncoding("UTF-8");
 		ServletContext context = request.getServletContext();
 		HttpSession session = request.getSession();
@@ -46,27 +46,21 @@ public class ServletClientes extends HttpServlet {
 		if (user == null) {
 			response.sendRedirect(Globals.SERVLET_LOGIN);
 		} else {
+			String paramId = request.getParameter("id");
 			try {
+				Integer id = Integer.parseInt(paramId);
 				EntityManagerFactory factory = (EntityManagerFactory) context
 						.getAttribute(Globals.ATT_APP_ENTITY_MANAGER_FACTORY);
 				EntityManager manager = factory.createEntityManager();
-				Query q = manager.createNamedQuery(CustomerEntry.FINDALL);
-				List<Customer> results = (List<Customer>) q.getResultList();
-				session.setAttribute(Globals.ATT_SESSION_CLIENTS_LIST, results);
+				Query q = manager.createNamedQuery(CustomerEntry.FINDBYID);
+				q.setParameter(1, id);
+				Customer customer = (Customer) q.getSingleResult();
+				session.setAttribute(Globals.ATT_SESSION_SELECTED_CLIENT, customer);
 			} catch (Exception e) {
 				session.setAttribute(Globals.ATT_SESSION_ERRMSG, e.getMessage());
 			}
-			request.getRequestDispatcher(Globals.JSP_CLIENTES).forward(request, response);
+			request.getRequestDispatcher(Globals.JSP_CLIENTE).forward(request, response);
 		}
-		
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
 	}
 
 }

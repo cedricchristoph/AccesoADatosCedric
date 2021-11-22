@@ -184,5 +184,9 @@ public class Address implements Serializable {
 
 		return store;
 	}
+	
+	public String getFullAddress() {
+		return address + " " + getCity().getCity() + " " + getPostalCode();
+	}
 
 }

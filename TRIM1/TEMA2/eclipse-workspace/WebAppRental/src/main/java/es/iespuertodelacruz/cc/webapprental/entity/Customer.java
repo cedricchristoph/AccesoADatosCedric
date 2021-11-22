@@ -2,6 +2,9 @@ package es.iespuertodelacruz.cc.webapprental.entity;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import es.iespuertodelacruz.cc.contracts.CustomerEntry;
+
 import java.util.Date;
 import java.sql.Timestamp;
 import java.util.List;
@@ -12,8 +15,12 @@ import java.util.List;
  * 
  */
 @Entity
-@Table(name="customer")
-@NamedQuery(name="Customer.findAll", query="SELECT c FROM Customer c")
+@Table(name=CustomerEntry.TABLE)
+@NamedQueries({
+	@NamedQuery(name=CustomerEntry.FINDALL, query=CustomerEntry.FINDALL_QUERY),
+	@NamedQuery(name=CustomerEntry.FINDBYID, query=CustomerEntry.FINDBYID_QUERY)
+})
+
 public class Customer implements Serializable {
 	private static final long serialVersionUID = 1L;
 

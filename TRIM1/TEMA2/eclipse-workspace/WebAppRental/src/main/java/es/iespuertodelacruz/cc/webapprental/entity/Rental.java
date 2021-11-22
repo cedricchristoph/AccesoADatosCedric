@@ -32,7 +32,7 @@ public class Rental implements Serializable {
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="return_date")
 	private Date returnDate;
-
+	
 	//bi-directional many-to-one association to Payment
 	@OneToMany(mappedBy="rental")
 	private List<Payment> payments;

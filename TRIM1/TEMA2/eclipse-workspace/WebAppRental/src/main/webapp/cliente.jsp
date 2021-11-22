@@ -59,7 +59,7 @@
       <nav class="sidebar sidebar-offcanvas" id="sidebar">
         <ul class="nav">
           <li class="nav-item">
-            <a class="nav-link" href="index.html">
+            <a class="nav-link" href="clientes">
               <i class="mdi mdi-account menu-icon"></i>
               <span class="menu-title">Clientes</span>
             </a>
@@ -87,24 +87,18 @@
       <!-- partial -->
       <div class="main-panel">
         <div class="content-wrapper">
-          
           <div class="row">
             <div class="col-md-12 grid-margin">
               <div class="d-flex justify-content-between flex-wrap">
                 <div class="d-flex align-items-end flex-wrap">
                   <div class="mr-md-3 mr-xl-5">
-                    <h2>Clientes</h2>
-                    <p class="mb-md-0">Lista de clientes</p>
+                    <h2>${selectedclient.firstName}&nbsp;${selectedclient.lastName}</h2>
+                    <p class="mb-md-0">#${selectedclient.customerId}</p>
                   </div>
                   <div class="d-flex">
                     <i class="mdi mdi-home text-muted hover-cursor"></i>
-                    <p class="text-muted mb-0 hover-cursor">&nbsp;/&nbsp;Clientes&nbsp;</p>
+                    <p class="text-muted mb-0 hover-cursor">&nbsp;/&nbsp;Clientes/#${selectedclient.customerId}</p>
                   </div>
-                </div>
-                <div class="d-flex justify-content-between align-items-end flex-wrap">
-                  <button type="button" class="btn btn-light bg-white btn-icon mr-3 mt-2 mt-xl-0">
-                    <i class="mdi mdi-plus text-muted"></i>
-                  </button>
                 </div>
               </div>
             </div>
@@ -114,32 +108,54 @@
             <div class="col-md-12 stretch-card">
               <div class="card">
                 <div class="card-body">
-                  <p class="card-title">Clientes</p>
-                    <form class="card-title" action="clientes" method="post">
-                        <div class="row">
-                            <input class="col form-control" type="text" name="searchname" placeholder="Buscar nombre">
-                            <input class="col form-control" type="text" name="searchlastname" placeholder="Buscar apellidos">
-                            <input class="col btn btn-outline-warning" type="submit" value="Buscar"/>
-                        </div>
-                    </form>
-                  <div class="table-responsive">
+                  <p class="card-title">Registro</p>
+                  <div>
+                    <p><b>Creado:&nbsp;</b>${selectedclient.createDate}</p>
+                    <p><b>Última mod.:&nbsp;</b>${selectedclient.lastUpdate}</p>
+                    <p><b>Tienda:&nbsp;</b>${selectedclient.store.address.getFullAddress()}</p><br/>
+                      <p><b>Datos de contacto del cliente:</b></p>
+                    <p><b>E-Mail:&nbsp;</b><a href="mailto:${selectedclient.email}">${selectedclient.email}</a></p><br/>
+                      <div>
+                        <a class="col-lg-12 btn btn-light btn-fw" type="submit" style="width: 150px;">Editar</a>
+                        <a class="col-lg-12 btn btn-danger btn-fw" type="submit" style="width: 150px; color: white;">Eliminar</a>
+                      </div>
+                  </div>
+                </div>
+              </div>
+            </div><br/>
+            <div class="col-md-12 stretch-card" style="margin-top: 30px;">
+              <div class="card">
+                <div class="card-body">
+                  <p class="card-title">Alquileres</p>
+                    <div class="d-flex justify-content-between align-items-end flex-wrap" style="margin-bottom: 10px;">
+                        <a type="button" class="btn btn-light">
+                            +&nbsp;Nuevo
+                        </a>
+                    </div>
+                    <div class="table-responsive">
                     <table id="recent-purchases-listing" class="table">
                       <thead>
                         <tr>
-                            <th>Nombre</th>
-                            <th>Apellidos</th>
-                            <th>Domicilio</th>
+                            <th>Fecha</th>
+                            <th>Fecha Devolución</th>
+                            <th>Realizado por</th>
                             <th>Acciones</th>
                         </tr>
                       </thead>
                       <tbody>
-                            <c:forEach var="cliente" items="${clientlist}">
+                            <c:forEach var="rental" items="${selectedclient.rentals}">
                                 <tr>
-                                    <td>${cliente.firstName}</td>
-                                    <td>${cliente.lastName}</td>
-                                    <td>${cliente.address.getFullAddress()}</td>
                                     <td>
-                                        <a class="btn btn-warning" type="button" href="cliente?id=${cliente.customerId}">Abrir</a>
+                                        ${rental.rentalDate}
+                                    </td>
+                                    <td>${rental.returnDate}</td>
+                                    <td>
+                                        <a href="staff?id=${rental.staff.staffId}">
+                                            ${rental.staff.firstName}&nbsp;${rental.staff.lastName}
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a class="btn btn-warning" type="button" href="alquiler?id=${rental.rentalId}">Ver detalles</a>
                                     </td>
                                 </tr>
                             </c:forEach>
@@ -148,8 +164,56 @@
                   </div>
                 </div>
               </div>
+            </div><br/>
+            <div class="col-md-12 stretch-card" style="margin-top: 30px;">
+              <div class="card">
+                <div class="card-body">
+                  <p class="card-title">Pagos</p>
+                  <div class="card-content">
+                    <div class="table-responsive">
+                    <table id="recent-purchases-listing" class="table">
+                      <thead>
+                        <tr>
+                            <th>Fecha de pago</th>
+                            <th>Tramitado por</th>
+                            <th>Alquiler</th>
+                            <th>Cantidad</th>
+                            <th>Acciones</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                            <c:forEach var="pago" items="${selectedclient.payments}">
+                                <tr>
+                                    <td>
+                                        ${pago.paymentDate}
+                                    </td>
+                                    <td>
+                                        <a href="staff?id=${pago.staff.staffId}">
+                                            ${pago.staff.firstName}&nbsp;${pago.staff.lastName}
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a href="alquiler?id=${pago.rental.rentalId}">
+                                            Alquiler Nr. #${pago.rental.rentalId}
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <b>${pago.amount}</b>
+                                    </td>
+                                    <td>
+                                        <a class="btn btn-warning" type="button" href="pago?id=${pago.paymentId}">Abrir</a>
+                                    </td>
+                                </tr>
+                            </c:forEach>
+                      </tbody>
+                    </table>
+                  </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
+            
         </div>
         <!-- content-wrapper ends -->
         <!-- partial:partials/_footer.html -->
