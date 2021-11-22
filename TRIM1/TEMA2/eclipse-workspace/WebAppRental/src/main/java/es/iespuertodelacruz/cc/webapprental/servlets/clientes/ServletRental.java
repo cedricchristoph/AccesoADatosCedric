@@ -15,7 +15,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import es.iespuertodelacruz.cc.contracts.CustomerEntry;
+import es.iespuertodelacruz.cc.repositories.RentalRepository;
 import es.iespuertodelacruz.cc.webapprental.entity.Customer;
+import es.iespuertodelacruz.cc.webapprental.entity.Rental;
 import es.iespuertodelacruz.cc.webapprental.entity.Staff;
 import es.iespuertodelacruz.cc.webapprental.utils.Globals;
 
@@ -45,10 +47,14 @@ public class ServletRental extends HttpServlet {
 		Staff user = (Staff) session.getAttribute(Globals.ATT_SESSION_LOGGED_USER);
 		
 		String paramId = request.getParameter("id");
+		
 		try {
-			// TODO
-			// - Crear RentalEntry
-			// - Crear RentalRepository
+			Integer id = Integer.parseInt(paramId);
+			EntityManagerFactory factory = (EntityManagerFactory) context
+					.getAttribute(Globals.ATT_APP_ENTITY_MANAGER_FACTORY);
+			RentalRepository db = new RentalRepository(factory);
+			Rental rental = db.select(id);
+			session.setAttribute(Globals.ATT_SESSION_SELECTED_RENTAL, rental);
 		} catch (Exception e) {
 			
 		}

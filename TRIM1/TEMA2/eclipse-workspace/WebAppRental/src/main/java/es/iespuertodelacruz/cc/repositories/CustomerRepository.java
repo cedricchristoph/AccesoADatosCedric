@@ -3,62 +3,57 @@ package es.iespuertodelacruz.cc.repositories;
 import java.sql.SQLException;
 import java.util.List;
 
-import es.iespuertodelacruz.cc.contracts.StaffEntry;
-import es.iespuertodelacruz.cc.webapprental.entity.Staff;
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 
-public class StaffRepository extends StaffEntry implements CRUD<Staff, Integer> {
+import es.iespuertodelacruz.cc.contracts.CustomerEntry;
+import es.iespuertodelacruz.cc.webapprental.entity.Customer;
+import es.iespuertodelacruz.cc.webapprental.entity.Staff;
 
+public class CustomerRepository extends CustomerEntry implements CRUD<Customer, Integer>{
+
+	
 	private EntityManagerFactory factory;
 	
-	public StaffRepository(EntityManagerFactory emf) {
+	public CustomerRepository(EntityManagerFactory emf) {
 		this.factory = emf;
-	}
-
-	@Override
-	public Staff select(Integer id) {
-		return null;
 	}
 	
 	/**
-	 * Devuelve un Staff con un usuario especifico
-	 * @param user
-	 * @return
+	 * Devuelve un Customer con un ID especifico
 	 */
-	public Staff selectByUser(String user) {
+	@Override
+	public Customer select(Integer id) {
 		EntityManager manager = factory.createEntityManager();
 		manager.getTransaction().begin();
-		Query q = manager.createNamedQuery(FINDUSER);
-		q.setParameter(1, user);
-		Staff result = (Staff) q.getSingleResult();
+		Query q = manager.createNamedQuery(FINDBYID);
+		q.setParameter(1, id);
+		Customer result = (Customer) q.getSingleResult();
 		manager.getTransaction().commit();
 		return result;
 	}
 
 	/**
-	 * Devuelve todos los objetos Staff de la base de datos
+	 * Devuelve todos los Customer en la base de datos
 	 */
 	@Override
-	public List<Staff> selectAll() {
+	public List<Customer> selectAll() {
 		EntityManager manager = factory.createEntityManager();
 		manager.getTransaction().begin();
 		Query q = manager.createNamedQuery(FINDALL);
-		List<Staff> result = (List<Staff>) q.getResultList();
+		List<Customer> result = (List<Customer>) q.getResultList();
 		manager.getTransaction().commit();
 		return result;
 	}
 
 	@Override
-	public Staff insert(Staff entity) throws SQLException {
-		// TODO Auto-generated method stub
+	public Customer insert(Customer entity) throws SQLException {
 		return null;
 	}
 
 	@Override
-	public boolean update(Staff entity) throws SQLException {
+	public boolean update(Customer entity) throws SQLException {
 		// TODO Auto-generated method stub
 		return false;
 	}
@@ -68,7 +63,5 @@ public class StaffRepository extends StaffEntry implements CRUD<Staff, Integer> 
 		// TODO Auto-generated method stub
 		return false;
 	}
-	
-	
-	
+
 }

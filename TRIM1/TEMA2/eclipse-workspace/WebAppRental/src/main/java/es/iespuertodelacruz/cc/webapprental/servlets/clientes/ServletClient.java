@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import es.iespuertodelacruz.cc.contracts.CustomerEntry;
+import es.iespuertodelacruz.cc.repositories.CustomerRepository;
 import es.iespuertodelacruz.cc.webapprental.entity.Customer;
 import es.iespuertodelacruz.cc.webapprental.entity.Staff;
 import es.iespuertodelacruz.cc.webapprental.utils.Globals;
@@ -51,10 +52,8 @@ public class ServletClient extends HttpServlet {
 				Integer id = Integer.parseInt(paramId);
 				EntityManagerFactory factory = (EntityManagerFactory) context
 						.getAttribute(Globals.ATT_APP_ENTITY_MANAGER_FACTORY);
-				EntityManager manager = factory.createEntityManager();
-				Query q = manager.createNamedQuery(CustomerEntry.FINDBYID);
-				q.setParameter(1, id);
-				Customer customer = (Customer) q.getSingleResult();
+				CustomerRepository db = new CustomerRepository(factory);
+				Customer customer = db.select(id);
 				session.setAttribute(Globals.ATT_SESSION_SELECTED_CLIENT, customer);
 			} catch (Exception e) {
 				session.setAttribute(Globals.ATT_SESSION_ERRMSG, e.getMessage());
