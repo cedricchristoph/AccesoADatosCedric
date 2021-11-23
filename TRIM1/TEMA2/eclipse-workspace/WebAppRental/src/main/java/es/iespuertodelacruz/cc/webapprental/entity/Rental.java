@@ -52,7 +52,7 @@ public class Rental implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="inventory_id")
 	private Inventory inventory;
-
+	
 	//bi-directional many-to-one association to Staff
 	@ManyToOne
 	@JoinColumn(name="staff_id")

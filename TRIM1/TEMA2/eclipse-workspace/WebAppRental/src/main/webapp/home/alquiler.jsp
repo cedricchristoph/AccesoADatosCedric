@@ -92,12 +92,12 @@
               <div class="d-flex justify-content-between flex-wrap">
                 <div class="d-flex align-items-end flex-wrap">
                   <div class="mr-md-3 mr-xl-5">
-                    <h2><i class="mdi mdi-account"></i>&nbsp;Alquiler #${selectedRental.rentalId}</h2>
+                    <h2><i class="mdi mdi-account"></i>&nbsp;Alquiler #${selectedrental.rentalId}</h2>
                     <p class="mb-md-0">${selectedclient.firstName}&nbsp;${selectedclient.lastName}</p>
                   </div>
                   <div class="d-flex">
                     <i class="mdi mdi-home text-muted hover-cursor"></i>
-                    <p class="text-muted mb-0 hover-cursor">&nbsp;/&nbsp;Clientes/#${selectedclient.customerId}/Rentals/#${selectedRental.rentalId}</p>
+                    <p class="text-muted mb-0 hover-cursor">&nbsp;/&nbsp;Clientes/#${selectedclient.customerId}/Rentals/#${selectedrental.rentalId}</p>
                   </div>
                 </div>
               </div>
@@ -105,51 +105,82 @@
           </div>
         
           <div class="row">
-            <div class="col-md-12 stretch-card">
+            <div class="row" style="margin-left: 1px; width: 100%;">
+            <div class="col-md-4 stretch-card">
               <div class="card">
                 <div class="card-body">
-                  <h4 class="card-title">Accesos directos</h4>
+                  <h4 class="card-title">Pago pendiente</h4>
                   <div>
-                      <a href="#datos" class="col-lg-12 btn btn-secondary btn-fw" type="submit" style="width: 150px; margin: 3px; color: white;">Ver Datos</a>
-                      <a href="#alquileres" class="col-lg-12 btn btn-secondary btn-fw" type="submit" style="width: 150px; margin: 3px; color: white;">Ver Alquileres</a>
-                      <a href="#pagos" class="col-lg-12 btn btn-secondary btn-fw" type="submit" style="width: 150px; margin: 3px; color: white;">Ver Pagos</a>
-                      <a class="col-lg-12 btn btn-inverse-success btn-fw" type="submit" style="width: 150px; margin: 3px;">Nuevo Alquiler</a>
-                      <a class="col-lg-12 btn btn-inverse-success btn-fw" type="submit" style="width: 150px; margin: 3px;">Nuevo Pago</a>
+                      <h2 style="padding: 5px;">8.99€</h2><br/>
+                      <a href="#" class="col-lg-12 btn btn-secondary btn-fw" type="submit" style="width: 150px; margin: 3px; color: white;">Realizar pago</a>
                   </div>
                 </div>
               </div>
             </div>
-            <div id="datos" class="col-md-12 stretch-card" style="margin-top: 30px;">
+              <div id="datos" class="col-md-6 stretch-card">
               <div class="card">
                 <div class="card-body">
-                  <h4 class="card-title">Datos</h4>
+                  <h4 class="card-title">Películas alquiladas</h4>
                   <div>
-                    En construccion
+                      <ul>
+                        <li>
+                            <h4 style="padding: 2px;">Película</h4>
+                        </li>
+                          <li>
+                            <h4 style="padding: 2px;">Película</h4>
+                        </li>
+                          <li>
+                            <h4 style="padding: 2px;">Película</h4>
+                        </li>
+                          <li>
+                            <h4 style="padding: 2px;">Película</h4>
+                        </li>
+                      </ul>
                   </div>
                 </div>
               </div>
+            </div>
             </div>
             <div id="alquileres" class="col-md-12 stretch-card" style="margin-top: 30px;">
               <div class="card">
                 <div class="card-body">
-                  <p class="card-title">Peliculas</p>
+                  <p class="card-title">Pagos</p>
                     <div class="d-flex justify-content-between align-items-end flex-wrap" style="margin-bottom: 10px;">
                         <a type="button" class="btn btn-inverse-success">
                             +&nbsp;Añadir
                         </a>
                     </div>
-                    En construccion
-                  </div>
-                </div>
-              </div>
-            </div><br/>
-            <div id="pagos" class="col-md-12 stretch-card" style="margin-top: 30px;">
-              <div class="card">
-                <div class="card-body">
-                  <p class="card-title">Pagos</p>
-                  <div class="card-content">
-                    
-                    En construccion
+                    <div class="table-responsive">
+                    <table id="recent-purchases-listing" class="table">
+                      <thead>
+                        <tr>
+                            <th>Fecha de pago</th>
+                            <th>Tramitado por</th>
+                            <th>Cantidad (<b>€</b>)</th>
+                            <th>Acciones</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                            <c:forEach var="pago" items="${selectedrental.payments}">
+                                <tr>
+                                    <td>
+                                        ${pago.paymentDate}
+                                    </td>
+                                    <td>
+                                        <a href="staff?id=${pago.staff.staffId}">
+                                            ${pago.staff.firstName}&nbsp;${pago.staff.lastName}
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <b>${pago.amount}&nbsp;€</b>
+                                    </td>
+                                    <td>
+                                        <a class="btn btn-warning" type="button" href="pago?id=${pago.paymentId}">Ver detalles</a>
+                                    </td>
+                                </tr>
+                            </c:forEach>
+                      </tbody>
+                    </table>
                   </div>
                 </div>
               </div>

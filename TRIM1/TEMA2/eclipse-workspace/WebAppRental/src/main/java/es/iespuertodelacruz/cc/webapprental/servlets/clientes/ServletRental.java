@@ -24,7 +24,7 @@ import es.iespuertodelacruz.cc.webapprental.utils.Globals;
 /**
  * Servlet implementation class ServletRental
  */
-@WebServlet({ "/rental", "/home/rental" })
+@WebServlet({ "/alquiler", "/home/alquiler" })
 public class ServletRental extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -58,7 +58,7 @@ public class ServletRental extends HttpServlet {
 		} catch (Exception e) {
 			
 		}
-		
+		request.getRequestDispatcher(Globals.JSP_RENTAL).forward(request, response);
 	}
 
 }

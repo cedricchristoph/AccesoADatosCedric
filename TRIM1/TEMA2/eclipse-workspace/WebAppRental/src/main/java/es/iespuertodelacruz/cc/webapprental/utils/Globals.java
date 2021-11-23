@@ -13,11 +13,13 @@ public class Globals {
 	public static final String SERVLET_LOGIN = "/WebAppRental/login";
 	public static final String SERVLET_CLIENTES = "clientes";
 	public static final String SERVLET_CLIENTE = "cliente";
+	public static final String SERVLET_RENTAL = "alquiler";
 	
 	/* JSPs */
 	public static final String JSP_LOGIN = "login.jsp";
 	public static final String JSP_CLIENTES = "home/clientes.jsp";
 	public static final String JSP_CLIENTE = "home/cliente.jsp";
+	public static final String JSP_RENTAL = "home/alquiler.jsp";
 	
 	/* ATRIBUTOS DE APLICACION */
 	public static final String ATT_APP_ENTITY_MANAGER_FACTORY = "appemf";
