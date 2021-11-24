@@ -108,21 +108,22 @@
             <div class="col-md-12 stretch-card">
               <div class="card">
                 <div class="card-body">
-                  <h4 class="card-title">Accesos directos</h4>
+                  <h4 class="card-title"><i class="mdi mdi-arrow-down"></i>&nbsp;Accesos directos</h4>
                   <div>
                       <a href="#datos" class="col-lg-12 btn btn-secondary btn-fw" type="submit" style="width: 150px; margin: 3px; color: white;">Ver Datos</a>
                       <a href="#alquileres" class="col-lg-12 btn btn-secondary btn-fw" type="submit" style="width: 150px; margin: 3px; color: white;">Ver Alquileres</a>
-                      <a href="#pagos" class="col-lg-12 btn btn-secondary btn-fw" type="submit" style="width: 150px; margin: 3px; color: white;">Ver Pagos</a>
+                      <a href="#pagos_realizados" class="col-lg-12 btn btn-secondary btn-fw" type="submit" style="width: 150px; margin: 3px; color: white;">Ver Pagos</a>
                       <a class="col-lg-12 btn btn-inverse-success btn-fw" type="submit" style="width: 150px; margin: 3px;">Nuevo Alquiler</a>
                       <a class="col-lg-12 btn btn-inverse-success btn-fw" type="submit" style="width: 150px; margin: 3px;">Nuevo Pago</a>
                   </div>
                 </div>
               </div>
             </div>
-            <div id="datos" class="col-md-12 stretch-card" style="margin-top: 30px;">
+            <div class="row" style="margin-left: 1px;">
+            <div id="datos" class="col-md-8 stretch-card" style="margin-top: 30px;">
               <div class="card">
                 <div class="card-body">
-                  <h4 class="card-title">Datos</h4>
+                  <h4 class="card-title"><i class="mdi mdi-database"></i>&nbsp;Datos</h4>
                   <div>
                     <p><b>Creado:&nbsp;</b>${selectedclient.createDate}</p>
                     <p><b>Última mod.:&nbsp;</b>${selectedclient.lastUpdate}</p>
@@ -137,10 +138,23 @@
                 </div>
               </div>
             </div>
+            <div id="pagospendientes" class="col-md stretch-card" style="margin-top: 30px;">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title"><i class="mdi mdi-cash-multiple"></i>&nbsp;Pago total pendiente</h4>
+                  <div>
+                    <h2 style="padding: 5px;">0.00€</h2><br/>
+                    <a href="#" class="col-lg-12 btn btn-secondary btn-fw" type="submit" style="width: 150px; margin: 3px; color: white;">Ver pagos pendientes</a>
+                      <a href="#" class="col-lg-12 btn btn-secondary btn-fw" type="submit" style="width: 150px; margin: 3px; color: white;">Realizar pago</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            </div>
             <div id="alquileres" class="col-md-12 stretch-card" style="margin-top: 30px;">
               <div class="card">
                 <div class="card-body">
-                  <p class="card-title">Alquileres</p>
+                  <p class="card-title"><i class="mdi mdi-filmstrip"></i>&nbsp;Alquileres</p>
                     <div class="d-flex justify-content-between align-items-end flex-wrap" style="margin-bottom: 10px;">
                         <a type="button" class="btn btn-inverse-success">
                             +&nbsp;Nuevo
@@ -160,9 +174,9 @@
                             <c:forEach var="rental" items="${selectedclient.rentals}">
                                 <tr>
                                     <td>
-                                        ${rental.rentalDate}
+                                        ${rental.getRentalDateString()}
                                     </td>
-                                    <td>${rental.returnDate}</td>
+                                    <td>${rental.getReturnDateString()}</td>
                                     <td>
                                         <a href="staff?id=${rental.staff.staffId}">
                                             ${rental.staff.firstName}&nbsp;${rental.staff.lastName}
@@ -179,10 +193,10 @@
                 </div>
               </div>
             </div><br/>
-            <div id="pagos" class="col-md-12 stretch-card" style="margin-top: 30px;">
+            <div id="pagos_realizados" class="col-md-12 stretch-card" style="margin-top: 30px;">
               <div class="card">
                 <div class="card-body">
-                  <p class="card-title">Pagos</p>
+                  <p class="card-title"><i class="mdi mdi-cash-multiple"></i>&nbsp;Pagos realizados</p>
                   <div class="card-content">
                     <div class="table-responsive">
                     <table id="recent-purchases-listing" class="table">

@@ -4,6 +4,7 @@ import java.io.Serializable;
 import javax.persistence.*;
 
 import es.iespuertodelacruz.cc.contracts.RentalEntry;
+import es.iespuertodelacruz.cc.webapprental.utils.Globals;
 
 import java.util.Date;
 import java.sql.Timestamp;
@@ -80,6 +81,10 @@ public class Rental implements Serializable {
 	public Date getRentalDate() {
 		return this.rentalDate;
 	}
+	
+	public String getRentalDateString() {
+		return Globals.getOnlyDate(rentalDate);
+	}
 
 	public void setRentalDate(Date rentalDate) {
 		this.rentalDate = rentalDate;
@@ -89,6 +94,10 @@ public class Rental implements Serializable {
 		return this.returnDate;
 	}
 
+	public String getReturnDateString() {
+		return Globals.getOnlyDate(returnDate);
+	}
+	
 	public void setReturnDate(Date returnDate) {
 		this.returnDate = returnDate;
 	}
@@ -138,5 +147,7 @@ public class Rental implements Serializable {
 	public void setStaff(Staff staff) {
 		this.staff = staff;
 	}
+	
+
 
 }

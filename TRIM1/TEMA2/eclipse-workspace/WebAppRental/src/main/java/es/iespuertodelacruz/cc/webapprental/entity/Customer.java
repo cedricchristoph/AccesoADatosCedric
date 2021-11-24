@@ -18,7 +18,10 @@ import java.util.List;
 @Table(name=CustomerEntry.TABLE)
 @NamedQueries({
 	@NamedQuery(name=CustomerEntry.FINDALL, query=CustomerEntry.FINDALL_QUERY),
-	@NamedQuery(name=CustomerEntry.FINDBYID, query=CustomerEntry.FINDBYID_QUERY)
+	@NamedQuery(name=CustomerEntry.FINDBYID, query=CustomerEntry.FINDBYID_QUERY),
+	@NamedQuery(name=CustomerEntry.FINDBYFULLNAME, query=CustomerEntry.FINDBYFULLNAME_QUERY),
+	@NamedQuery(name=CustomerEntry.FINDBYNAME, query=CustomerEntry.FINDBYNAME_QUERY),
+	@NamedQuery(name=CustomerEntry.FINDBYLASTNAME, query=CustomerEntry.FINDBYLASTNAME_QUERY)
 })
 
 public class Customer implements Serializable {

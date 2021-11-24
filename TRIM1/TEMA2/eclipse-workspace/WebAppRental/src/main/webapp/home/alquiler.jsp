@@ -93,7 +93,7 @@
                 <div class="d-flex align-items-end flex-wrap">
                   <div class="mr-md-3 mr-xl-5">
                     <h2><i class="mdi mdi-account"></i>&nbsp;Alquiler #${selectedrental.rentalId}</h2>
-                    <p class="mb-md-0">${selectedclient.firstName}&nbsp;${selectedclient.lastName}</p>
+                      <p class="mb-md-0"><a href="cliente?id=${selectedclient.customerId}">${selectedclient.firstName}&nbsp;${selectedclient.lastName}</a></p>
                   </div>
                   <div class="d-flex">
                     <i class="mdi mdi-home text-muted hover-cursor"></i>
@@ -109,18 +109,18 @@
             <div class="col-md-4 stretch-card">
               <div class="card">
                 <div class="card-body">
-                  <h4 class="card-title">Pago pendiente</h4>
+                  <h4 class="card-title"><i class="mdi mdi-cash-multiple"></i>&nbsp;Pago pendiente</h4>
                   <div>
-                      <h2 style="padding: 5px;">8.99€</h2><br/>
+                      <h2 style="padding: 5px;">0.00€</h2><br/>
                       <a href="#" class="col-lg-12 btn btn-secondary btn-fw" type="submit" style="width: 150px; margin: 3px; color: white;">Realizar pago</a>
                   </div>
                 </div>
               </div>
             </div>
-              <div id="datos" class="col-md-6 stretch-card">
+            <div id="datos" class="col-md stretch-card">
               <div class="card">
                 <div class="card-body">
-                  <h4 class="card-title">Películas alquiladas</h4>
+                  <h4 class="card-title"><i class="mdi mdi-filmstrip"></i>&nbsp;Películas alquiladas</h4>
                   <div>
                       <ul>
                         <li>
@@ -140,11 +140,25 @@
                 </div>
               </div>
             </div>
+            <div id="datos" class="col-md stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title"><i class="mdi mdi-database"></i>&nbsp;Datos</h4>
+                  <div>
+                        <p><b>Creado:&nbsp;</b>${selectedrental.getRentalDateString()}</p>
+                        <p><b>Última mod.:&nbsp;</b>${selectedrental.lastUpdate}</p>
+                        <p><b>Tienda:&nbsp;</b>${selectedrental.inventory.store.address.getFullAddress()}</p><br/><br/>
+                        <h4 class="text-muted">Fecha Devolución</h4>
+                        <h3>${selectedrental.getReturnDateString()}</h3>
+                  </div>
+                </div>
+              </div>
+            </div>
             </div>
             <div id="alquileres" class="col-md-12 stretch-card" style="margin-top: 30px;">
               <div class="card">
                 <div class="card-body">
-                  <p class="card-title">Pagos</p>
+                  <p class="card-title"><i class="mdi mdi-cash-multiple"></i>&nbsp;Pagos</p>
                     <div class="d-flex justify-content-between align-items-end flex-wrap" style="margin-bottom: 10px;">
                         <a type="button" class="btn btn-inverse-success">
                             +&nbsp;Añadir
@@ -164,7 +178,7 @@
                             <c:forEach var="pago" items="${selectedrental.payments}">
                                 <tr>
                                     <td>
-                                        ${pago.paymentDate}
+                                        ${pago.getPaymentDateString()}
                                     </td>
                                     <td>
                                         <a href="staff?id=${pago.staff.staffId}">

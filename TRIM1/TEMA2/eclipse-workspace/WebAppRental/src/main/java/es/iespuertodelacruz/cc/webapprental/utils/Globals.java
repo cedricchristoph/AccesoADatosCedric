@@ -41,7 +41,14 @@ public class Globals {
 	public static final String PARAM_LOGIN_USER = "loginuser";
 	public static final String PARAM_LOGIN_PWD = "loginpwd";
 	
+		/* PARAMETROS DE CLIENTES BUSQUEDA */
+	public static final String PARAM_CLIENTES_SEARCH_NAME = "searchname";
+	public static final String PARAM_CLIENTES_SEARCH_LASTNAME = "searchlastname";
+	
 	/* FUNCTIONS */
-
+	public static String getOnlyDate(Date date) {
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");  
+	    return formatter.format(date);  
+	}
 	
 }

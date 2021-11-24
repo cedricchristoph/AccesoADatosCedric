@@ -20,6 +20,7 @@ import es.iespuertodelacruz.cc.repositories.CustomerRepository;
 import es.iespuertodelacruz.cc.webapprental.entity.Customer;
 import es.iespuertodelacruz.cc.webapprental.entity.Staff;
 import es.iespuertodelacruz.cc.webapprental.utils.Globals;
+import es.iespuertodelacruz.cc.webapprental.utils.ParameterUrl;
 
 /**
  * Servlet implementation class ServletClientes
@@ -45,20 +46,26 @@ public class ServletClientes extends HttpServlet {
 		ServletContext context = request.getServletContext();
 		HttpSession session = request.getSession();
 		Staff user = (Staff) session.getAttribute(Globals.ATT_SESSION_LOGGED_USER);
-		if (user == null) {
-			response.sendRedirect(Globals.SERVLET_LOGIN);
-		} else {
-			try {
-				EntityManagerFactory factory = (EntityManagerFactory) context
-						.getAttribute(Globals.ATT_APP_ENTITY_MANAGER_FACTORY);
-				CustomerRepository db = new CustomerRepository(factory);
-				List<Customer> results = db.selectAll();
-				session.setAttribute(Globals.ATT_SESSION_CLIENTS_LIST, results);
-			} catch (Exception e) {
-				session.setAttribute(Globals.ATT_SESSION_ERRMSG, e.getMessage());
+		String paramName = request.getParameter("name");
+		String paramLastName = request.getParameter("last");
+		try {
+			EntityManagerFactory factory = (EntityManagerFactory) context.getAttribute(Globals.ATT_APP_ENTITY_MANAGER_FACTORY);
+			CustomerRepository db = new CustomerRepository(factory);
+			List<Customer> results = null;
+			if (paramName != null && !paramName.isEmpty() && paramLastName != null && !paramLastName.isEmpty()) {
+				results = db.selectByFullname(paramName, paramLastName);
+			} else if (paramName != null && !paramName.isEmpty() && paramLastName == null) {
+				results = db.selectByName(paramName);
+			} else if (paramLastName != null && !paramLastName.isEmpty() && paramName == null) {
+				results = db.selectByLastName(paramLastName);
+			} else {
+				results = db.selectAll();
 			}
-			request.getRequestDispatcher(Globals.JSP_CLIENTES).forward(request, response);
+			session.setAttribute(Globals.ATT_SESSION_CLIENTS_LIST, results);
+		} catch (Exception e) {
+			session.setAttribute(Globals.ATT_SESSION_ERRMSG, e.getMessage());
 		}
+		request.getRequestDispatcher(Globals.JSP_CLIENTES).forward(request, response);
 		
 	}
 
@@ -66,8 +73,14 @@ public class ServletClientes extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		String paramName = request.getParameter(Globals.PARAM_CLIENTES_SEARCH_NAME);
+		String paramLast = request.getParameter(Globals.PARAM_CLIENTES_SEARCH_LASTNAME);
+		ParameterUrl url = new ParameterUrl(Globals.SERVLET_CLIENTES);
+		if (paramName != null && !paramName.isEmpty())
+			url.addParameter("name", paramName);
+		if (paramLast != null && !paramLast.isEmpty())
+			url.addParameter("last", paramLast);
+		response.sendRedirect(url.toUrl());
 	}
 
 }

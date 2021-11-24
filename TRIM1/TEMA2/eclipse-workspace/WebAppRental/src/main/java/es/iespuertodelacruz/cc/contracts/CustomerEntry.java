@@ -22,5 +22,14 @@ public class CustomerEntry {
 	public static final String FINDBYID = "Customer.findById";
 	public static final String FINDBYID_QUERY = "SELECT c FROM " + ENTITY + " c WHERE " +
 												ID + " = ?1";
+	public static final String FINDBYNAME = "Customer.findByName";
+	public static final String FINDBYNAME_QUERY = "SELECT c FROM " + ENTITY + " c WHERE " +
+												FIRSTNAME + " LIKE ?1";
+	public static final String FINDBYLASTNAME = "Customer.findByLastName";
+	public static final String FINDBYLASTNAME_QUERY = "SELECT c FROM " + ENTITY + " c WHERE " +
+												LASTNAME + " LIKE ?1";
+	public static final String FINDBYFULLNAME = "Customer.findByFullname";
+	public static final String FINDBYFULLNAME_QUERY = "SELECT c FROM " + ENTITY + " c WHERE " +
+												FIRSTNAME + " LIKE ?1 AND " + LASTNAME + " LIKE ?2";
 	
 }

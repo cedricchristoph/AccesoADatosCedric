@@ -45,7 +45,7 @@ public class ServletRental extends HttpServlet {
 		ServletContext context = request.getServletContext();
 		HttpSession session = request.getSession();
 		Staff user = (Staff) session.getAttribute(Globals.ATT_SESSION_LOGGED_USER);
-		
+		session.setAttribute(Globals.ATT_SESSION_SELECTED_RENTAL, null);
 		String paramId = request.getParameter("id");
 		
 		try {

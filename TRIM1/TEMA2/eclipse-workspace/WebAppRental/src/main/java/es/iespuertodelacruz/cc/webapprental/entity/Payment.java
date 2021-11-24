@@ -2,6 +2,9 @@ package es.iespuertodelacruz.cc.webapprental.entity;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import es.iespuertodelacruz.cc.webapprental.utils.Globals;
+
 import java.math.BigDecimal;
 import java.util.Date;
 import java.sql.Timestamp;
@@ -75,6 +78,10 @@ public class Payment implements Serializable {
 
 	public Date getPaymentDate() {
 		return this.paymentDate;
+	}
+	
+	public String getPaymentDateString() {
+		return Globals.getOnlyDate(paymentDate);
 	}
 
 	public void setPaymentDate(Date paymentDate) {
