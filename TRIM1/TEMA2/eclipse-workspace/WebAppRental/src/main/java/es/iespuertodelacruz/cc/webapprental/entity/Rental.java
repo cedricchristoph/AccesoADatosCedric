@@ -62,6 +62,20 @@ public class Rental implements Serializable {
 	public Rental() {
 	}
 
+	/**
+	 * Calcula el pago pendiente del alquiler
+	 * @return
+	 */
+	public double getPagoPendiente() {
+		double pagosRealizadosTotal = 0;
+		for (Payment p : getPayments())
+			pagosRealizadosTotal += Double.parseDouble(p.getAmount().toString());
+		double pendiente = 
+					Double.parseDouble(getInventory().getFilm().getRentalRate().toString()) 
+					- pagosRealizadosTotal;
+		return pendiente;
+	}
+	
 	public int getRentalId() {
 		return this.rentalId;
 	}

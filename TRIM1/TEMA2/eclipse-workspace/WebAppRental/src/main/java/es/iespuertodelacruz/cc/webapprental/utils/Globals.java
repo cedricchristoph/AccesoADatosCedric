@@ -16,7 +16,7 @@ public class Globals {
 	public static final String SERVLET_RENTAL = "alquiler";
 	
 	/* JSPs */
-	public static final String JSP_LOGIN = "login.jsp";
+	public static final String JSP_LOGIN = "newlogin.jsp";
 	public static final String JSP_CLIENTES = "home/clientes.jsp";
 	public static final String JSP_CLIENTE = "home/cliente.jsp";
 	public static final String JSP_RENTAL = "home/alquiler.jsp";
@@ -35,6 +35,10 @@ public class Globals {
 	public static final String ATT_SESSION_CLIENTS_LIST = "clientlist";
 	public static final String ATT_SESSION_SELECTED_CLIENT = "selectedclient";
 	public static final String ATT_SESSION_SELECTED_RENTAL = "selectedrental";
+	
+	public static final String ATT_SESSION_CLIENT_PAYMENTS = "clientpayments";
+	public static final String ATT_SESSION_RENTAL_LEFTTOPAY = "pendiente";
+	public static final String ATT_SESSION_RENTALS_PENDIENTE = "rentalspendientes";
 	
 	/* PARAMETROS */
 		/* PARAMETROS DE LOGIN */

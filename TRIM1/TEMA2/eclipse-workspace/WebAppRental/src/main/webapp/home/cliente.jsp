@@ -13,7 +13,10 @@
   <link rel="stylesheet" href="template/vendors/base/vendor.bundle.base.css">
   <!-- endinject -->
   <!-- plugin css for this page -->
-  <link rel="stylesheet" href="template/vendors/datatables.net-bs4/dataTables.bootstrap4.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+        <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
   <!-- End plugin css for this page -->
   <!-- inject:css -->
   <link rel="stylesheet" href="template/css/style.css">
@@ -143,8 +146,10 @@
                 <div class="card-body">
                   <h4 class="card-title"><i class="mdi mdi-cash-multiple"></i>&nbsp;Pago total pendiente</h4>
                   <div>
-                    <h2 style="padding: 5px;">0.00€</h2><br/>
-                    <a href="#" class="col-lg-12 btn btn-secondary btn-fw" type="submit" style="width: 150px; margin: 3px; color: white;">Ver pagos pendientes</a>
+                    <h2 style="padding: 5px;">${pendiente}&nbsp;€</h2><br/>
+                    <button type="button" class="col-lg-12 btn btn-secondary btn-fw" data-toggle="modal" data-target="#alquilerespendientes">
+                        Ver pagos pendientes
+                    </button>
                       <a href="#" class="col-lg-12 btn btn-secondary btn-fw" type="submit" style="width: 150px; margin: 3px; color: white;">Realizar pago</a>
                   </div>
                 </div>
@@ -210,7 +215,7 @@
                         </tr>
                       </thead>
                       <tbody>
-                            <c:forEach var="pago" items="${selectedclient.payments}">
+                            <c:forEach var="pago" items="${pagos}">
                                 <tr>
                                     <td>
                                         ${pago.paymentDate}
@@ -242,6 +247,57 @@
             </div>
           </div>
         </div>
+          
+          
+          <!-- Modal -->
+            <div class="modal fade" id="alquilerespendientes" tabindex="-1" role="dialog" aria-labelledby="labelAlquileresPendientes" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="labelAlquileresPendientes">Alquileres pendientes de pago</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <div class="table-responsive">
+                    <table id="recent-purchases-listing" class="table">
+                      <thead>
+                        <tr>
+                            <th>Realizado por</th>
+                            <th>Pendiente</th>
+                            <th>Acciones</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                            <c:forEach var="rental" items="${rentalspendientes}">
+                                <tr>
+                                    <td>
+                                        <a href="staff?id=${rental.staff.staffId}">
+                                            ${rental.staff.firstName}&nbsp;${rental.staff.lastName}
+                                        </a>
+                                    </td>
+                                    <td>
+                                        ${rental.getPagoPendiente()}&nbsp;€
+                                    </td>
+                                    <td>
+                                        <a class="btn btn-warning" type="button" href="alquiler?id=${rental.rentalId}">Ver detalles</a>
+                                    </td>
+                                </tr>
+                            </c:forEach>
+                      </tbody>
+                    </table>
+                  </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          
+          
+          
         <!-- content-wrapper ends -->
         <!-- partial:partials/_footer.html -->
         <footer class="footer">

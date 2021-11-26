@@ -1,6 +1,7 @@
 package es.iespuertodelacruz.cc.webapprental.servlets.clientes;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -16,10 +17,12 @@ import javax.servlet.http.HttpSession;
 
 import es.iespuertodelacruz.cc.contracts.CustomerEntry;
 import es.iespuertodelacruz.cc.repositories.CustomerRepository;
+import es.iespuertodelacruz.cc.repositories.PaymentRepository;
 import es.iespuertodelacruz.cc.webapprental.entity.Customer;
 import es.iespuertodelacruz.cc.webapprental.entity.Staff;
 import es.iespuertodelacruz.cc.webapprental.utils.Globals;
-
+import es.iespuertodelacruz.cc.webapprental.entity.Payment;
+import es.iespuertodelacruz.cc.webapprental.entity.Rental;
 /**
  * Servlet implementation class ServletClient
  */
@@ -53,7 +56,21 @@ public class ServletClient extends HttpServlet {
 				EntityManagerFactory factory = (EntityManagerFactory) context
 						.getAttribute(Globals.ATT_APP_ENTITY_MANAGER_FACTORY);
 				CustomerRepository db = new CustomerRepository(factory);
+				PaymentRepository payments = new PaymentRepository(factory);
 				Customer customer = db.select(id);
+				//List<Payment> pagos = payments.selectByCustomer(id);
+				//session.setAttribute(Globals.ATT_SESSION_CLIENT_PAYMENTS, pagos);
+				double pagopendiente = 0;
+				List<Rental> alquileresPendientes = new ArrayList<Rental>();
+				for (Rental a : customer.getRentals()) {
+					double pendiente = a.getPagoPendiente();
+					if (pendiente > 0) {
+						alquileresPendientes.add(a);
+						pagopendiente += pendiente;
+					}
+				}
+				session.setAttribute(Globals.ATT_SESSION_RENTAL_LEFTTOPAY, pagopendiente);
+				session.setAttribute(Globals.ATT_SESSION_RENTALS_PENDIENTE, alquileresPendientes);
 				session.setAttribute(Globals.ATT_SESSION_SELECTED_CLIENT, customer);
 			} catch (Exception e) {
 				session.setAttribute(Globals.ATT_SESSION_ERRMSG, e.getMessage());

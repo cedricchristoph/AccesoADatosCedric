@@ -111,7 +111,9 @@
                 <div class="card-body">
                   <h4 class="card-title"><i class="mdi mdi-cash-multiple"></i>&nbsp;Pago pendiente</h4>
                   <div>
-                      <h2 style="padding: 5px;">0.00€</h2><br/>
+                      <h2 style="padding: 5px;">
+                        ${pendiente}&nbsp;€
+                      </h2><br/>
                       <a href="#" class="col-lg-12 btn btn-secondary btn-fw" type="submit" style="width: 150px; margin: 3px; color: white;">Realizar pago</a>
                   </div>
                 </div>
@@ -120,20 +122,11 @@
             <div id="datos" class="col-md stretch-card">
               <div class="card">
                 <div class="card-body">
-                  <h4 class="card-title"><i class="mdi mdi-filmstrip"></i>&nbsp;Películas alquiladas</h4>
+                  <h4 class="card-title"><i class="mdi mdi-filmstrip"></i>&nbsp;Película alquilada</h4>
                   <div>
                       <ul>
                         <li>
-                            <h4 style="padding: 2px;">Película</h4>
-                        </li>
-                          <li>
-                            <h4 style="padding: 2px;">Película</h4>
-                        </li>
-                          <li>
-                            <h4 style="padding: 2px;">Película</h4>
-                        </li>
-                          <li>
-                            <h4 style="padding: 2px;">Película</h4>
+                            <h4 style="padding: 2px;">${selectedrental.inventory.film.title}</h4>
                         </li>
                       </ul>
                   </div>
@@ -147,7 +140,10 @@
                   <div>
                         <p><b>Creado:&nbsp;</b>${selectedrental.getRentalDateString()}</p>
                         <p><b>Última mod.:&nbsp;</b>${selectedrental.lastUpdate}</p>
-                        <p><b>Tienda:&nbsp;</b>${selectedrental.inventory.store.address.getFullAddress()}</p><br/><br/>
+                        <p><b>Tienda:&nbsp;</b>${selectedrental.inventory.store.address.getFullAddress()}
+                        </p>
+                        <p><b>Realizado por:&nbsp;</b>${selectedrental.staff.firstName}&nbsp;${selectedrental.staff.lastName}</p>
+                      <br/><br/>
                         <h4 class="text-muted">Fecha Devolución</h4>
                         <h3>${selectedrental.getReturnDateString()}</h3>
                   </div>

@@ -41,7 +41,8 @@ public class Login extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		HttpSession session = request.getSession();
-		session.invalidate();
+		if ((Staff) session.getAttribute(Globals.ATT_SESSION_LOGGED_USER) != null)
+			session.invalidate();
 		request.getRequestDispatcher(Globals.JSP_LOGIN).forward(request, response);
 	}
 

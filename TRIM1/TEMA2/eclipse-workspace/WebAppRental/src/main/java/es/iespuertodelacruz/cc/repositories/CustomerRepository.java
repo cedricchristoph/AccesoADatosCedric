@@ -7,9 +7,10 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 
+import org.hibernate.Hibernate;
+
 import es.iespuertodelacruz.cc.contracts.CustomerEntry;
 import es.iespuertodelacruz.cc.webapprental.entity.Customer;
-import es.iespuertodelacruz.cc.webapprental.entity.Staff;
 
 public class CustomerRepository extends CustomerEntry implements CRUD<Customer, Integer>{
 
@@ -30,6 +31,7 @@ public class CustomerRepository extends CustomerEntry implements CRUD<Customer, 
 		Query q = manager.createNamedQuery(FINDBYID);
 		q.setParameter(1, id);
 		Customer result = (Customer) q.getSingleResult();
+		//Hibernate.initialize(result.getPayments());
 		manager.getTransaction().commit();
 		return result;
 	}
@@ -46,7 +48,7 @@ public class CustomerRepository extends CustomerEntry implements CRUD<Customer, 
 		Query q = manager.createNamedQuery(FINDBYFULLNAME);
 		q.setParameter(1, "%" + name + "%");
 		q.setParameter(2, "%" + lastname + "%");
-		List<Customer> result = (List<Customer>) q.getResultList();
+		List<Customer> result = q.getResultList();
 		manager.getTransaction().commit();
 		return result;
 	}
@@ -62,6 +64,7 @@ public class CustomerRepository extends CustomerEntry implements CRUD<Customer, 
 		Query q = manager.createNamedQuery(FINDBYNAME);
 		q.setParameter(1, "%" + name + "%");
 		List<Customer> result = (List<Customer>) q.getResultList();
+		//result.stream().forEach(c -> c.getRentals().size());
 		manager.getTransaction().commit();
 		return result;
 	}
@@ -77,6 +80,7 @@ public class CustomerRepository extends CustomerEntry implements CRUD<Customer, 
 		Query q = manager.createNamedQuery(FINDBYLASTNAME);
 		q.setParameter(1, "%" + lastname + "%");
 		List<Customer> result = (List<Customer>) q.getResultList();
+		//result.stream().forEach(c -> c.getRentals().size());
 		manager.getTransaction().commit();
 		return result;
 	}
@@ -90,6 +94,7 @@ public class CustomerRepository extends CustomerEntry implements CRUD<Customer, 
 		manager.getTransaction().begin();
 		Query q = manager.createNamedQuery(FINDALL);
 		List<Customer> result = (List<Customer>) q.getResultList();
+		//result.stream().forEach(c -> c.getRentals().size());
 		manager.getTransaction().commit();
 		return result;
 	}

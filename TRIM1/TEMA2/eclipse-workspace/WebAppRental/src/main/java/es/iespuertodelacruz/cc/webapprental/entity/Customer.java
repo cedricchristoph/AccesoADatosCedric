@@ -60,6 +60,7 @@ public class Customer implements Serializable {
 	private Store store;
 
 	//bi-directional many-to-one association to Payment
+	@Transient
 	@OneToMany(mappedBy="customer")
 	private List<Payment> payments;
 
@@ -153,7 +154,6 @@ public class Customer implements Serializable {
 	public Payment addPayment(Payment payment) {
 		getPayments().add(payment);
 		payment.setCustomer(this);
-
 		return payment;
 	}
 

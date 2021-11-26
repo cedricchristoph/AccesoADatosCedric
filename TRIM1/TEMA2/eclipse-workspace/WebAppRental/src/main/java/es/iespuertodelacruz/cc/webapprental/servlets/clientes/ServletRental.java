@@ -1,6 +1,7 @@
 package es.iespuertodelacruz.cc.webapprental.servlets.clientes;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -17,6 +18,7 @@ import javax.servlet.http.HttpSession;
 import es.iespuertodelacruz.cc.contracts.CustomerEntry;
 import es.iespuertodelacruz.cc.repositories.RentalRepository;
 import es.iespuertodelacruz.cc.webapprental.entity.Customer;
+import es.iespuertodelacruz.cc.webapprental.entity.Payment;
 import es.iespuertodelacruz.cc.webapprental.entity.Rental;
 import es.iespuertodelacruz.cc.webapprental.entity.Staff;
 import es.iespuertodelacruz.cc.webapprental.utils.Globals;
@@ -54,6 +56,7 @@ public class ServletRental extends HttpServlet {
 					.getAttribute(Globals.ATT_APP_ENTITY_MANAGER_FACTORY);
 			RentalRepository db = new RentalRepository(factory);
 			Rental rental = db.select(id);
+			session.setAttribute(Globals.ATT_SESSION_RENTAL_LEFTTOPAY, rental.getPagoPendiente());
 			session.setAttribute(Globals.ATT_SESSION_SELECTED_RENTAL, rental);
 		} catch (Exception e) {
 			
