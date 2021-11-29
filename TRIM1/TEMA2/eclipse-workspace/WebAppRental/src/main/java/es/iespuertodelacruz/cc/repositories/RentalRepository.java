@@ -44,8 +44,15 @@ public class RentalRepository extends RentalEntry implements CRUD<Rental, Intege
 
 	@Override
 	public boolean update(Rental entity) throws SQLException {
-		// TODO Auto-generated method stub
-		return false;
+		try {
+			EntityManager manager = factory.createEntityManager();
+			manager.getTransaction().begin();
+			manager.persist(entity);
+			manager.getTransaction().commit();
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
 	}
 
 	@Override

@@ -6,6 +6,7 @@ import javax.persistence.*;
 import es.iespuertodelacruz.cc.webapprental.utils.Globals;
 
 import java.math.BigDecimal;
+import java.math.MathContext;
 import java.util.Date;
 import java.sql.Timestamp;
 
@@ -50,6 +51,13 @@ public class Payment implements Serializable {
 	private Staff staff;
 
 	public Payment() {
+	}
+	
+	public Payment(Staff staff, double amount) {
+		this.customer = customer;
+		this.rental = rental;
+		this.staff = staff;
+		this.amount = new BigDecimal(amount, MathContext.DECIMAL64);
 	}
 
 	public int getPaymentId() {

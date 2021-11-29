@@ -147,10 +147,10 @@
                   <h4 class="card-title"><i class="mdi mdi-cash-multiple"></i>&nbsp;Pago total pendiente</h4>
                   <div>
                     <h2 style="padding: 5px;">${pendiente}&nbsp;€</h2><br/>
-                    <button type="button" class="col-lg-12 btn btn-secondary btn-fw" data-toggle="modal" data-target="#alquilerespendientes">
+                    <button type="button" class="col-lg-12 btn btn-secondary btn-fw" style="margin: 3px; color: white;" data-toggle="modal" data-target="#alquilerespendientes">
                         Ver pagos pendientes
                     </button>
-                      <a href="#" class="col-lg-12 btn btn-secondary btn-fw" type="submit" style="width: 150px; margin: 3px; color: white;">Realizar pago</a>
+                      <a href="pay" class="col-lg-12 btn btn-secondary btn-fw" type="submit" style="margin: 3px; color: white;">Realizar pago</a>
                   </div>
                 </div>
               </div>
@@ -235,6 +235,7 @@
                                     </td>
                                     <td>
                                         <a class="btn btn-warning" type="button" href="pago?id=${pago.paymentId}">Ver detalles</a>
+                                        
                                     </td>
                                 </tr>
                             </c:forEach>
@@ -282,7 +283,8 @@
                                     </td>
                                     <td>
                                         <a class="btn btn-warning" type="button" href="alquiler?id=${rental.rentalId}">Ver detalles</a>
-                                    </td>
+                                        <a class="btn btn-success" type="button" href="pay?rental=${rental.rentalId}">Pagar</a>
+                                     </td>
                                 </tr>
                             </c:forEach>
                       </tbody>

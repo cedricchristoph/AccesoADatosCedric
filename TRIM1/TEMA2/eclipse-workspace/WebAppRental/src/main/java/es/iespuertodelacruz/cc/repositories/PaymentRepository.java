@@ -46,8 +46,11 @@ public class PaymentRepository extends PaymentEntry implements CRUD<Payment, Int
 	}
 	@Override
 	public Payment insert(Payment entity) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+		EntityManager manager = factory.createEntityManager();
+		manager.getTransaction().begin();
+		manager.persist(entity);
+		manager.getTransaction().commit();
+		return entity;
 	}
 	@Override
 	public boolean update(Payment entity) throws SQLException {

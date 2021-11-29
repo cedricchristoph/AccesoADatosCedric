@@ -41,7 +41,7 @@ public class Rental implements Serializable {
 	private Date returnDate;
 	
 	//bi-directional many-to-one association to Payment
-	@OneToMany(mappedBy="rental")
+	@OneToMany(mappedBy="rental", cascade = CascadeType.PERSIST)
 	private List<Payment> payments;
 
 	//bi-directional many-to-one association to Customer
@@ -125,16 +125,15 @@ public class Rental implements Serializable {
 	}
 
 	public Payment addPayment(Payment payment) {
-		getPayments().add(payment);
+		payment.setCustomer(getCustomer());
 		payment.setRental(this);
+		getPayments().add(payment);
 
 		return payment;
 	}
 
 	public Payment removePayment(Payment payment) {
 		getPayments().remove(payment);
-		payment.setRental(null);
-
 		return payment;
 	}
 

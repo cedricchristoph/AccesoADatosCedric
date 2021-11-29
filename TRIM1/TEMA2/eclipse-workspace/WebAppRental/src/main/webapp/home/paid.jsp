@@ -25,25 +25,17 @@
 <body>
   <div class="container-scroller">
     <div class="container-fluid page-body-wrapper full-page-wrapper">
-      <div class="content-wrapper d-flex align-items-center auth px-0">
+      <div class="content-wrapper d-flex align-items-center auth px-0" style="background-color: #edf7f0;">
         <div class="row w-100 mx-0">
           <div class="col-lg-4 mx-auto">
-            <div class="auth-form-light text-left py-5 px-4 px-sm-5">
-              <h3>Login</h3>
-              <form  action="login" method="POST" class="pt-3">
-                <div class="form-group">
-                  <input type="text" name="loginuser" class="form-control form-control-lg" id="loginuser" placeholder="Username">
-                </div>
-                <div class="form-group">
-                  <input type="password" name="loginpwd" class="form-control form-control-lg" id="loginpwd" placeholder="Password">
-                </div>
-                <div class="mt-3">
-                  <input type="submit" name="login" class="btn btn-block btn-warning btn-lg font-weight-medium auth-form-btn" value="Acceder"/>
-                </div>
-                <div class="text-center mt-4 font-weight-light">
-                  ¿No tienes cuenta aún?&nbsp;<a href="register.html" class="text-primary">Crear Cuenta</a>
-                </div>
-              </form>
+            <div class="auth-form-light text-left py-5 px-4 px-sm-5" style="border: 1px solid green;">
+             <h3 style="color: green;">✔ Pago completado correctamente</h3>
+             <h5 style="margin-top: 30px;"><b>Detalles de pago</b></h5>
+             <ul>
+               <li>Cantidad: <b>${cantidadpagada}&nbsp;€</b></li>
+               <li>Tramitado por: <b>${user.firstName}&nbsp;${user.lastName}</b></li>
+             </ul>
+             <a href="/home/cliente?id=${selectedclient.customerId}" class="btn btn-secondary">← Volver</a>
             </div>
           </div>
         </div>
