@@ -1,5 +1,6 @@
 package es.iespuertodelacruz.cc.webapprental.utils;
 
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -22,6 +23,7 @@ public class Globals {
 	public static final String JSP_CLIENTE = "home/cliente.jsp";
 	public static final String JSP_RENTAL = "home/alquiler.jsp";
 	public static final String JSP_PAID = "home/paid.jsp";
+	public static final String JSP_PAYERROR = "home/payerror.jsp";
 	
 	/* ATRIBUTOS DE APLICACION */
 	public static final String ATT_APP_ENTITY_MANAGER_FACTORY = "appemf";
@@ -54,9 +56,14 @@ public class Globals {
 	public static final String PARAM_CLIENTES_SEARCH_LASTNAME = "searchlastname";
 	
 	/* FUNCTIONS */
-	public static String getOnlyDate(Date date) {
+	public synchronized static String getOnlyDate(Date date) {
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");  
 	    return formatter.format(date);  
+	}
+	
+	public synchronized static String getTwoDecimals(double number) {
+		DecimalFormat df = new DecimalFormat("0.00");
+		return df.format(number);
 	}
 	
 }

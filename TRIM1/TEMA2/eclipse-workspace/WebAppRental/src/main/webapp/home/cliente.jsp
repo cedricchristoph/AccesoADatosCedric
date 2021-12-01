@@ -265,6 +265,7 @@
                     <table id="recent-purchases-listing" class="table">
                       <thead>
                         <tr>
+                            <th>Alquiler ID</th>
                             <th>Realizado por</th>
                             <th>Pendiente</th>
                             <th>Acciones</th>
@@ -273,6 +274,9 @@
                       <tbody>
                             <c:forEach var="rental" items="${rentalspendientes}">
                                 <tr>
+                                    <td>
+                                      ${rental.rentalId}
+                                    </td>
                                     <td>
                                         <a href="staff?id=${rental.staff.staffId}">
                                             ${rental.staff.firstName}&nbsp;${rental.staff.lastName}

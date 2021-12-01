@@ -25,18 +25,15 @@
 <body>
   <div class="container-scroller">
     <div class="container-fluid page-body-wrapper full-page-wrapper">
-      <div class="content-wrapper d-flex align-items-center auth px-0" style="background-color: #edf7f0;">
+      <div class="content-wrapper d-flex align-items-center auth px-0" style="background-color: #ffe0e0;">
         <div class="row w-100 mx-0">
           <div class="col-lg-4 mx-auto">
-            <div class="auth-form-light text-left py-5 px-4 px-sm-5" style="border: 1px solid green;">
-             <h3 style="color: green;">✔ Pago completado correctamente</h3>
-             <h5 style="margin-top: 30px;"><b>Detalles de pago</b></h5>
-             <ul>
-               <li>Cantidad: <b>${cantidadpagada}&nbsp;€</b></li>
-               <li>Tramitado por: <b>${user.firstName}&nbsp;${user.lastName}</b></li>
-             </ul>
+            <div class="auth-form-light text-left py-5 px-4 px-sm-5" style="border: 1px solid red;">
+             <h3 style="color: red;">✗ Error de pago</h3>
+             <h5 style="margin-top: 30px;"><b>${errorMessage}</b></h5>
+             <p>Contacte con el administrador si sigue ocurriendo</p>
              <a href="cliente?id=${selectedclient.customerId}" class="btn btn-secondary" style="margin-top: 20px;">← Volver</a>
-             <img src="icons/cash.gif" width="120px" height="100px" style="margin-left: 250px;"/>
+             <img src="icons/dinosaurio.gif" width="100px" height="70px" style="margin-left: 300px;"/>
             </div>
           </div>
         </div>

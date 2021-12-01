@@ -1,6 +1,7 @@
 package es.iespuertodelacruz.cc.repositories;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -8,6 +9,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 
 import es.iespuertodelacruz.cc.contracts.RentalEntry;
+import es.iespuertodelacruz.cc.webapprental.entity.Payment;
 import es.iespuertodelacruz.cc.webapprental.entity.Rental;
 
 public class RentalRepository extends RentalEntry implements CRUD<Rental, Integer> {
@@ -44,14 +46,28 @@ public class RentalRepository extends RentalEntry implements CRUD<Rental, Intege
 
 	@Override
 	public boolean update(Rental entity) throws SQLException {
+		EntityManager manager = null;
 		try {
-			EntityManager manager = factory.createEntityManager();
+			manager = factory.createEntityManager();
 			manager.getTransaction().begin();
-			manager.persist(entity);
+			Rental find = manager.find(Rental.class,entity.getRentalId());
+			ArrayList<Payment> newPayments = (ArrayList<Payment>) entity.getNewPayments();
+			for (Payment p : newPayments) {
+				manager.persist(p);
+				find.addPayment(p);
+			}
+			entity.setNewPayments(null);
 			manager.getTransaction().commit();
 			return true;
 		} catch (Exception e) {
+			e.printStackTrace();
 			return false;
+		} finally {
+			try {
+				manager.close();
+			} catch (Exception e) {
+				
+			}
 		}
 	}
 

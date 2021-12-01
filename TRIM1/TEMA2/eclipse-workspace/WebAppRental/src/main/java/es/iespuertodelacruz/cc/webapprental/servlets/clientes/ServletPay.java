@@ -54,9 +54,14 @@ public class ServletPay extends HttpServlet {
 				Rental rental = rentalRepo.select(rentalId);
 				if (rental != null) {
 					Staff staff = (Staff) session.getAttribute(Globals.ATT_SESSION_LOGGED_USER);
-					rental.addPayment(new Payment(staff, rental.getPagoPendiente()));
-					if (rentalRepo.update(rental))
+					double pago = rental.getPagoPendiente();
+					if (pago <= 0)
+						throw new Exception("No se pueden realizar pagos con cantidades nulas");
+					rental.addNewPayment(new Payment(staff, pago));
+					if (rentalRepo.update(rental)) {
+						session.setAttribute(Globals.ATT_SESSION_CANTIDAD_PAGADA, pago);
 						request.getRequestDispatcher(Globals.JSP_PAID).forward(request, response);
+					}
 					else
 						throw new Exception("No se pudo realizar el pago");
 
@@ -69,21 +74,32 @@ public class ServletPay extends HttpServlet {
 				if (pendientes != null) {
 					Staff staff = (Staff) session.getAttribute(Globals.ATT_SESSION_LOGGED_USER);
 					double pagado = 0;
+					boolean error = false;
 					for (Rental rental : pendientes) {
 						double pendiente = rental.getPagoPendiente();
-						rental.addPayment(new Payment(staff, pendiente));
-						rentalRepo.update(rental);
-						pagado += pendiente;
+						if (pendiente <= 0)
+							throw new Exception("No se pueden realizar pagos con cantidades nulas");
+						rental.addNewPayment(new Payment(staff, pendiente));
+						if (rentalRepo.update(rental)) {
+							pagado += pendiente;
+							continue; 
+						}
+						error = true;
+						break;
 					}
-					session.setAttribute(Globals.ATT_SESSION_CANTIDAD_PAGADA, pagado);
-					request.getRequestDispatcher(Globals.JSP_PAID).forward(request, response);
+					if (!error) {
+						session.setAttribute(Globals.ATT_SESSION_CANTIDAD_PAGADA, pagado);
+						request.getRequestDispatcher(Globals.JSP_PAID).forward(request, response);
+					} else {
+						throw new Exception("No se pudo realizar el pago");	
+					}
 				} else {
 					throw new Exception("No se encontraron alquileres pendientes");
 				}
 			}
 		} catch(Exception e) {
 			session.setAttribute(Globals.ATT_SESSION_ERRMSG, e.getMessage());
-			response.sendRedirect(Globals.SERVLET_CLIENTE);
+			request.getRequestDispatcher(Globals.JSP_PAYERROR).forward(request, response);		
 		}
 	}
 	/**

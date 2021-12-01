@@ -69,7 +69,8 @@ public class ServletClient extends HttpServlet {
 						pagopendiente += pendiente;
 					}
 				}
-				session.setAttribute(Globals.ATT_SESSION_RENTAL_LEFTTOPAY, pagopendiente);
+				
+				session.setAttribute(Globals.ATT_SESSION_RENTAL_LEFTTOPAY, Globals.getTwoDecimals(pagopendiente));
 				session.setAttribute(Globals.ATT_SESSION_RENTALS_PENDIENTE, alquileresPendientes);
 				session.setAttribute(Globals.ATT_SESSION_SELECTED_CLIENT, customer);
 			} catch (Exception e) {

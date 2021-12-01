@@ -114,7 +114,7 @@
                       <h2 style="padding: 5px;">
                         ${pendiente}&nbsp;€
                       </h2><br/>
-                      <a href="#" class="col-lg-12 btn btn-secondary btn-fw" type="submit" style="width: 150px; margin: 3px; color: white;">Realizar pago</a>
+                      <a href="pay?rental=${selectedrental.rentalId}" class="col-lg-12 btn btn-secondary btn-fw" type="submit" style="width: 150px; margin: 3px; color: white;">Realizar pago</a>
                   </div>
                 </div>
               </div>

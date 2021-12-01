@@ -6,8 +6,10 @@ import javax.persistence.*;
 import es.iespuertodelacruz.cc.contracts.RentalEntry;
 import es.iespuertodelacruz.cc.webapprental.utils.Globals;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.sql.Timestamp;
+import java.text.DecimalFormat;
 import java.util.List;
 
 
@@ -43,6 +45,9 @@ public class Rental implements Serializable {
 	//bi-directional many-to-one association to Payment
 	@OneToMany(mappedBy="rental", cascade = CascadeType.PERSIST)
 	private List<Payment> payments;
+	
+	@Transient
+	private List<Payment> newPayments;
 
 	//bi-directional many-to-one association to Customer
 	@ManyToOne
@@ -74,6 +79,11 @@ public class Rental implements Serializable {
 					Double.parseDouble(getInventory().getFilm().getRentalRate().toString()) 
 					- pagosRealizadosTotal;
 		return pendiente;
+	}
+	
+	public String getPagoPendienteToString() {
+		DecimalFormat df = new DecimalFormat("0.00");
+		return df.format(getPagoPendiente());
 	}
 	
 	public int getRentalId() {
@@ -128,7 +138,15 @@ public class Rental implements Serializable {
 		payment.setCustomer(getCustomer());
 		payment.setRental(this);
 		getPayments().add(payment);
-
+		return payment;
+	}
+	
+	public Payment addNewPayment(Payment payment) throws Exception {
+		if (newPayments == null)
+			newPayments = new ArrayList<Payment>();
+		payment.setCustomer(getCustomer());
+		payment.setRental(this);
+		newPayments.add(payment);
 		return payment;
 	}
 
@@ -160,6 +178,15 @@ public class Rental implements Serializable {
 	public void setStaff(Staff staff) {
 		this.staff = staff;
 	}
+
+	public List<Payment> getNewPayments() {
+		return newPayments;
+	}
+
+	public void setNewPayments(List<Payment> newPayments) {
+		this.newPayments = newPayments;
+	}
+	
 	
 
 
