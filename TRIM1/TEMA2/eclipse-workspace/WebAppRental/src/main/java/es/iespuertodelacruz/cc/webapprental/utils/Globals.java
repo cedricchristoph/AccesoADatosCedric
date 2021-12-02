@@ -16,6 +16,7 @@ public class Globals {
 	public static final String SERVLET_CLIENTE = "cliente";
 	public static final String SERVLET_RENTAL = "alquiler";
 	public static final String SERVLET_PAY = "pay";
+	public static final String SERVLET_CREAR_ALQUILER = "newrental";
 	
 	/* JSPs */
 	public static final String JSP_LOGIN = "newlogin.jsp";
@@ -23,7 +24,9 @@ public class Globals {
 	public static final String JSP_CLIENTE = "home/cliente.jsp";
 	public static final String JSP_RENTAL = "home/alquiler.jsp";
 	public static final String JSP_PAID = "home/paid.jsp";
-	public static final String JSP_PAYERROR = "home/payerror.jsp";
+	public static final String JSP_ERROR = "home/error.jsp";
+	public static final String JSP_CREAR_ALQUILER = "home/crearalquiler.jsp";
+	public static final String JSP_ALQUILER_CREADO = "home/alquilercreado.jsp";
 	
 	/* ATRIBUTOS DE APLICACION */
 	public static final String ATT_APP_ENTITY_MANAGER_FACTORY = "appemf";
@@ -46,6 +49,9 @@ public class Globals {
 	
 	
 	public static final String ATT_SESSION_CANTIDAD_PAGADA = "cantidadpagada";
+	
+	public static final String ATT_SESSION_SELECTED_FILM = "selectedfilm";
+	
 	/* PARAMETROS */
 		/* PARAMETROS DE LOGIN */
 	public static final String PARAM_LOGIN_USER = "loginuser";

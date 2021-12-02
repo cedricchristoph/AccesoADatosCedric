@@ -99,7 +99,7 @@ public class ServletPay extends HttpServlet {
 			}
 		} catch(Exception e) {
 			session.setAttribute(Globals.ATT_SESSION_ERRMSG, e.getMessage());
-			request.getRequestDispatcher(Globals.JSP_PAYERROR).forward(request, response);		
+			request.getRequestDispatcher(Globals.JSP_ERROR).forward(request, response);		
 		}
 	}
 	/**

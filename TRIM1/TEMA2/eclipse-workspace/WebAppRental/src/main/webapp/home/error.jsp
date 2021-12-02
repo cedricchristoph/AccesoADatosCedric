@@ -32,7 +32,7 @@
              <h3 style="color: red;">✗ ERROR</h3>
              <h5 style="margin-top: 30px;"><b>${errorMessage}</b></h5>
              <p>Contacte con el administrador si sigue ocurriendo</p>
-             <a href="/WebAppRental/clientes" class="btn btn-secondary" style="margin-top: 20px;">← Página principal</a>
+             <a href="cliente?id=${selectedclient.customerId}" class="btn btn-secondary" style="margin-top: 20px;">← Volver</a>
              <img src="icons/dinosaurio.gif" width="100px" height="70px" style="margin-left: 300px;"/>
             </div>
           </div>

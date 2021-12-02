@@ -161,7 +161,7 @@
                 <div class="card-body">
                   <p class="card-title"><i class="mdi mdi-filmstrip"></i>&nbsp;Alquileres</p>
                     <div class="d-flex justify-content-between align-items-end flex-wrap" style="margin-bottom: 10px;">
-                        <a type="button" class="btn btn-inverse-success">
+                        <a href="newrental" type="button" class="btn btn-inverse-success">
                             +&nbsp;Nuevo
                         </a>
                     </div>
@@ -198,54 +198,6 @@
                 </div>
               </div>
             </div><br/>
-            <div id="pagos_realizados" class="col-md-12 stretch-card" style="margin-top: 30px;">
-              <div class="card">
-                <div class="card-body">
-                  <p class="card-title"><i class="mdi mdi-cash-multiple"></i>&nbsp;Pagos realizados</p>
-                  <div class="card-content">
-                    <div class="table-responsive">
-                    <table id="recent-purchases-listing" class="table">
-                      <thead>
-                        <tr>
-                            <th>Fecha de pago</th>
-                            <th>Tramitado por</th>
-                            <th>Alquiler</th>
-                            <th>Cantidad (<b>€</b>)</th>
-                            <th>Acciones</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                            <c:forEach var="pago" items="${pagos}">
-                                <tr>
-                                    <td>
-                                        ${pago.paymentDate}
-                                    </td>
-                                    <td>
-                                        <a href="staff?id=${pago.staff.staffId}">
-                                            ${pago.staff.firstName}&nbsp;${pago.staff.lastName}
-                                        </a>
-                                    </td>
-                                    <td>
-                                        <a href="alquiler?id=${pago.rental.rentalId}">
-                                            Alquiler Nr. #${pago.rental.rentalId}
-                                        </a>
-                                    </td>
-                                    <td>
-                                        <b>${pago.amount}&nbsp;€</b>
-                                    </td>
-                                    <td>
-                                        <a class="btn btn-warning" type="button" href="pago?id=${pago.paymentId}">Ver detalles</a>
-                                        
-                                    </td>
-                                </tr>
-                            </c:forEach>
-                      </tbody>
-                    </table>
-                  </div>
-                  </div>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
           
