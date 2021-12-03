@@ -34,7 +34,7 @@
              <ul>
                <li>Cliente: <b>${selectedclient.firstName}&nbsp;${selectedclient.lastName}</b></li>
                <li>Tramitado por: <b>${user.firstName}&nbsp;${user.lastName}</b></li>
-               <li>Película alquilada: <b>${selectedclient.title}</b></li>
+               <li>Película alquilada: <b>${selectedfilm.title}</b></li>
                <li>Precio a pagar: <b>${selectedfilm.rentalRate}&nbsp;€</b></li>
              </ul>
              <a href="cliente?id=${selectedclient.customerId}" class="btn btn-secondary" style="margin-top: 20px;">← Volver al cliente</a>

@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import es.iespuertodelacruz.cc.repositories.FilmRepository;
 import es.iespuertodelacruz.cc.repositories.RentalRepository;
 import es.iespuertodelacruz.cc.webapprental.entity.Customer;
 import es.iespuertodelacruz.cc.webapprental.entity.Film;
@@ -42,12 +43,13 @@ public class ServletAddRental extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		ServletContext context = request.getServletContext();
 		HttpSession session = request.getSession();	
-		
 		EntityManagerFactory factory = (EntityManagerFactory) context
 				.getAttribute(Globals.ATT_APP_ENTITY_MANAGER_FACTORY);
+		FilmRepository filmRepo = new FilmRepository(factory);
+		List<Film> films = filmRepo.selectAll();
+		session.setAttribute(Globals.ATT_SESSION_FILMS, films);
 		
 		/* Recibir posibles parametros */
 		String filmIdStr = request.getParameter("selectfilm");
@@ -113,10 +115,7 @@ public class ServletAddRental extends HttpServlet {
 			RentalRepository rentals = new RentalRepository(factory);
 			rentals.insert(rental);
 			
-			response.sendRedirect(Globals.JSP_ALQUILER_CREADO);
-			
-			// Vaciar los atributos en sesion
-			session.setAttribute(Globals.ATT_SESSION_SELECTED_FILM, null);
+			response.sendRedirect(Globals.SERVLET_ALQUILER_CREADO);
 			
 		} catch (Exception e) {
 			session.setAttribute(Globals.ATT_SESSION_ERRMSG, e.getMessage());

@@ -40,8 +40,21 @@ public class RentalRepository extends RentalEntry implements CRUD<Rental, Intege
 
 	@Override
 	public Rental insert(Rental entity) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+		EntityManager manager = null;
+		try {
+			manager = factory.createEntityManager();
+			manager.getTransaction().begin();
+			manager.persist(entity.getInventory());
+			manager.persist(entity);
+			manager.getTransaction().commit();
+			return entity;
+		} catch (Exception e) {
+			try {
+				manager.close();
+			} catch (Exception ex) {
+			}
+			return null;
+		}
 	}
 
 	@Override

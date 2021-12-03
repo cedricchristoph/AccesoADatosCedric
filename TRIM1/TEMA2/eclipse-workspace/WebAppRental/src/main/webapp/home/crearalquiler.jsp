@@ -116,6 +116,7 @@
                 <div class="card-body">
                   <p class="card-title">Detalles del alquiler</p>
                   <c:if test="${empty selectedfilm}">
+                    <p>Seleccionar película a alquilar</p>
                     <div class="table-responsive">
                       <table id="films" class="table">
                         <thead>
@@ -127,25 +128,22 @@
                         </thead>
                         <tbody>
                               <c:forEach var="film" items="${films}">
-                                  <tr>
-                                      ${film.title}
-                                  </tr>
-                                  <tr>
-                                    ${film.rentalRate}&nbsp;€
-                                  </tr>
-                                  <tr>
-                                    <a href="newrental?selectfilm=${film.filmId}" class="btn btn-warning">Seleccionar</a>
-                                  </tr>
+                                <tr>
+                                    <td>${film.title}</td>
+                                    <td>${film.rentalRate}&nbsp;€</td>
+                                    <td><a href="newrental?selectfilm=${film.filmId}" class="btn btn-warning">Seleccionar</a></td>
+                                </tr>
                               </c:forEach>
                         </tbody>
                       </table>
                     </div>
                   </c:if>   
                   <c:if test="${not empty selectedfilm}">
-                    <form action="newrental" method="POST">
+                    <p><b>Película seleccionada:</b>&nbsp;${selectedfilm.title}</p>  
+                  <form action="newrental" method="POST">
                       <label for="returndate">Fecha devolución</label>  
                       <input class="form-control" type="text" placeholder="dd/mm/yyyy" name="returndate" id="returndate"/>
-                      <input class="form-control" type="submit" value="Confirmar"/>
+                      <input class="btn btn-warning" type="submit" style="margin-top: 10px;" value="Confirmar"/>
                     </form>
                   </c:if>               
                 </div>

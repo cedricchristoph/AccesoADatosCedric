@@ -17,6 +17,7 @@ public class Globals {
 	public static final String SERVLET_RENTAL = "alquiler";
 	public static final String SERVLET_PAY = "pay";
 	public static final String SERVLET_CREAR_ALQUILER = "newrental";
+	public static final String SERVLET_ALQUILER_CREADO = "alquilercreado";
 	
 	/* JSPs */
 	public static final String JSP_LOGIN = "newlogin.jsp";
@@ -42,6 +43,8 @@ public class Globals {
 	public static final String ATT_SESSION_CLIENTS_LIST = "clientlist";
 	public static final String ATT_SESSION_SELECTED_CLIENT = "selectedclient";
 	public static final String ATT_SESSION_SELECTED_RENTAL = "selectedrental";
+	
+	public static final String ATT_SESSION_FILMS = "films";
 	
 	public static final String ATT_SESSION_CLIENT_PAYMENTS = "clientpayments";
 	public static final String ATT_SESSION_RENTAL_LEFTTOPAY = "pendiente";
