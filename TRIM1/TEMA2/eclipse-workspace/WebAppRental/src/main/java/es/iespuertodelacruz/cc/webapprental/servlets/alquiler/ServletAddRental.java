@@ -63,9 +63,9 @@ public class ServletAddRental extends HttpServlet {
 					if (film != null)
 						session.setAttribute(Globals.ATT_SESSION_SELECTED_FILM, film);
 					else
-						throw new Exception("No se encontr√≥ ninguna pel√≠cula con el identificador indicado");
+						throw new Exception("No se encontrÛ ninguna pel√≠cula con el identificador indicado");
 				} catch (Exception e) {
-					throw new Exception("El formato del identificador de la pel√≠cula es err√≥neo");
+					throw new Exception("El formato del identificador de la pelÌcula es errÛneo");
 				}
 			}
 			
@@ -100,7 +100,7 @@ public class ServletAddRental extends HttpServlet {
 			if (returnDateStr != null && !returnDateStr.isEmpty()) {
 				returnDate = new SimpleDateFormat("dd/MM/yyyy").parse(returnDateStr);
 			} else {
-				throw new NullPointerException("No se ha especificado una fecha de devoluci√≥n");
+				throw new NullPointerException("No se ha especificado una fecha de devoluciÛn");
 			}
 			Rental rental = new Rental();
 			Inventory inventory = new Inventory();

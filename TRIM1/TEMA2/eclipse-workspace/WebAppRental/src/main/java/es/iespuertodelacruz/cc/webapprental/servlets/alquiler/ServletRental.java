@@ -1,4 +1,4 @@
-package es.iespuertodelacruz.cc.webapprental.servlets.clientes;
+package es.iespuertodelacruz.cc.webapprental.servlets.alquiler;
 
 import java.io.IOException;
 import java.math.BigDecimal;

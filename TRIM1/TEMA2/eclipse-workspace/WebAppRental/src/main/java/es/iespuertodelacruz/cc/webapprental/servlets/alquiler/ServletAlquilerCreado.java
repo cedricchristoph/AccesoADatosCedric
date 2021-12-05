@@ -29,8 +29,8 @@ public class ServletAlquilerCreado extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// Vaciar los atributos en sesion
-		request.getSession().setAttribute(Globals.ATT_SESSION_SELECTED_FILM, null);
 		request.getRequestDispatcher(Globals.JSP_ALQUILER_CREADO).forward(request, response);
+		request.getSession().setAttribute(Globals.ATT_SESSION_SELECTED_FILM, null);
 	}
 
 

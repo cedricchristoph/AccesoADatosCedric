@@ -28,6 +28,7 @@ public class Globals {
 	public static final String JSP_ERROR = "home/error.jsp";
 	public static final String JSP_CREAR_ALQUILER = "home/crearalquiler.jsp";
 	public static final String JSP_ALQUILER_CREADO = "home/alquilercreado.jsp";
+	public static final String JSP_CREAR_PAGO = "home/crearpago.jsp";
 	
 	/* ATRIBUTOS DE APLICACION */
 	public static final String ATT_APP_ENTITY_MANAGER_FACTORY = "appemf";

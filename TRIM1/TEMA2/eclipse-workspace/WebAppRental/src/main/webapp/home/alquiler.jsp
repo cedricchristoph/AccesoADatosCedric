@@ -147,6 +147,7 @@
                         <h4 class="text-muted">Fecha Devolución</h4>
                         <h3>${selectedrental.getReturnDateString()}</h3>
                   </div>
+                  <a href="deleterental?id=${selectedrental.rentalId}" class="col-lg-12 btn btn-danger btn-fw" type="submit" style="width: 150px; color: white;">Eliminar</a>
                 </div>
               </div>
             </div>
@@ -155,11 +156,6 @@
               <div class="card">
                 <div class="card-body">
                   <p class="card-title"><i class="mdi mdi-cash-multiple"></i>&nbsp;Pagos</p>
-                    <div class="d-flex justify-content-between align-items-end flex-wrap" style="margin-bottom: 10px;">
-                        <a type="button" class="btn btn-inverse-success">
-                            +&nbsp;Añadir
-                        </a>
-                    </div>
                     <div class="table-responsive">
                     <table id="recent-purchases-listing" class="table">
                       <thead>
@@ -167,7 +163,6 @@
                             <th>Fecha de pago</th>
                             <th>Tramitado por</th>
                             <th>Cantidad (<b>€</b>)</th>
-                            <th>Acciones</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -183,9 +178,6 @@
                                     </td>
                                     <td>
                                         <b>${pago.amount}&nbsp;€</b>
-                                    </td>
-                                    <td>
-                                        <a class="btn btn-warning" type="button" href="pago?id=${pago.paymentId}">Ver detalles</a>
                                     </td>
                                 </tr>
                             </c:forEach>

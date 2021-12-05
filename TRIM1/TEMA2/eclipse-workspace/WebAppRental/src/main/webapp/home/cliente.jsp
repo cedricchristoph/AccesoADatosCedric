@@ -115,9 +115,7 @@
                   <div>
                       <a href="#datos" class="col-lg-12 btn btn-secondary btn-fw" type="submit" style="width: 150px; margin: 3px; color: white;">Ver Datos</a>
                       <a href="#alquileres" class="col-lg-12 btn btn-secondary btn-fw" type="submit" style="width: 150px; margin: 3px; color: white;">Ver Alquileres</a>
-                      <a href="#pagos_realizados" class="col-lg-12 btn btn-secondary btn-fw" type="submit" style="width: 150px; margin: 3px; color: white;">Ver Pagos</a>
-                      <a class="col-lg-12 btn btn-inverse-success btn-fw" type="submit" style="width: 150px; margin: 3px;">Nuevo Alquiler</a>
-                      <a class="col-lg-12 btn btn-inverse-success btn-fw" type="submit" style="width: 150px; margin: 3px;">Nuevo Pago</a>
+                      <a href="newrental" class="col-lg-12 btn btn-inverse-success btn-fw" type="submit" style="width: 150px; margin: 3px;">Nuevo Alquiler</a>
                   </div>
                 </div>
               </div>
@@ -213,39 +211,44 @@
                     </button>
                   </div>
                   <div class="modal-body">
-                    <div class="table-responsive">
-                    <table id="recent-purchases-listing" class="table">
-                      <thead>
-                        <tr>
-                            <th>Alquiler ID</th>
-                            <th>Realizado por</th>
-                            <th>Pendiente</th>
-                            <th>Acciones</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                            <c:forEach var="rental" items="${rentalspendientes}">
-                                <tr>
-                                    <td>
-                                      ${rental.rentalId}
-                                    </td>
-                                    <td>
-                                        <a href="staff?id=${rental.staff.staffId}">
-                                            ${rental.staff.firstName}&nbsp;${rental.staff.lastName}
-                                        </a>
-                                    </td>
-                                    <td>
-                                        ${rental.getPagoPendiente()}&nbsp;€
-                                    </td>
-                                    <td>
-                                        <a class="btn btn-warning" type="button" href="alquiler?id=${rental.rentalId}">Ver detalles</a>
-                                        <a class="btn btn-success" type="button" href="pay?rental=${rental.rentalId}">Pagar</a>
-                                     </td>
-                                </tr>
-                            </c:forEach>
-                      </tbody>
-                    </table>
-                  </div>
+                    <c:if test="${not empty rentalspendientes}">
+                      <div class="table-responsive">
+                        <table id="recent-purchases-listing" class="table">
+                          <thead>
+                            <tr>
+                                <th>Alquiler ID</th>
+                                <th>Realizado por</th>
+                                <th>Pendiente</th>
+                                <th>Acciones</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                                <c:forEach var="rental" items="${rentalspendientes}">
+                                    <tr>
+                                        <td>
+                                          ${rental.rentalId}
+                                        </td>
+                                        <td>
+                                            <a href="staff?id=${rental.staff.staffId}">
+                                                ${rental.staff.firstName}&nbsp;${rental.staff.lastName}
+                                            </a>
+                                        </td>
+                                        <td>
+                                            ${rental.getPagoPendiente()}&nbsp;€
+                                        </td>
+                                        <td>
+                                            <a class="btn btn-warning" type="button" href="alquiler?id=${rental.rentalId}">Ver detalles</a>
+                                            <a class="btn btn-success" type="button" href="pay?rental=${rental.rentalId}">Pagar</a>
+                                         </td>
+                                    </tr>
+                                </c:forEach>
+                          </tbody>
+                        </table>
+                      </div>
+                    </c:if>
+                    <c:if test="${empty rentalspendientes}">
+                      <p>No hay alquileres pendientes de pago</p>
+                    </c:if>
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>

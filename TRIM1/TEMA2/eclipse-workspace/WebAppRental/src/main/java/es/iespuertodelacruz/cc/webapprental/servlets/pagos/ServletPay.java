@@ -1,4 +1,4 @@
-package es.iespuertodelacruz.cc.webapprental.servlets.clientes;
+package es.iespuertodelacruz.cc.webapprental.servlets.pagos;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -37,8 +37,8 @@ public class ServletPay extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		/* Obligatoriamente se deben pasar los parametros:
-		 * rental (identificador de rental)
+		/* Se debe enviar el parametro "rental" para realizar unicamente el pago de dicho alquiler.
+		 * En caso de no enviar ningun rental, se pagaran todos los alquileres pendientes del cliente seleccionado
 		 */ 
 		ServletContext context = request.getServletContext();
 		HttpSession session = request.getSession();
@@ -71,13 +71,13 @@ public class ServletPay extends HttpServlet {
 			} else {
 				// En este caso se realiza el pago de todos los alquileres pendientes de pago
 				ArrayList<Rental> pendientes = (ArrayList<Rental>) session.getAttribute(Globals.ATT_SESSION_RENTALS_PENDIENTE);
-				if (pendientes != null) {
+				if (pendientes != null && !pendientes.isEmpty()) {
 					Staff staff = (Staff) session.getAttribute(Globals.ATT_SESSION_LOGGED_USER);
 					double pagado = 0;
 					boolean error = false;
 					for (Rental rental : pendientes) {
 						double pendiente = rental.getPagoPendiente();
-						if (pendiente <= 0)
+						if (pendiente <= 0.0)
 							throw new Exception("No se pueden realizar pagos con cantidades nulas");
 						rental.addNewPayment(new Payment(staff, pendiente));
 						if (rentalRepo.update(rental)) {
@@ -101,14 +101,6 @@ public class ServletPay extends HttpServlet {
 			session.setAttribute(Globals.ATT_SESSION_ERRMSG, e.getMessage());
 			request.getRequestDispatcher(Globals.JSP_ERROR).forward(request, response);		
 		}
-	}
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		/* Obligatoriamente se deben pasar los parametros:
-		 * amount (cantidad a pagar)
-		 */ 
 	}
 
 }

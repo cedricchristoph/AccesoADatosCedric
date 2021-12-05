@@ -17,7 +17,7 @@ import es.iespuertodelacruz.cc.webapprental.utils.Globals;
 /**
  * Servlet implementation class ServletEliminarAlquiler
  */
-@WebServlet("/ServletEliminarAlquiler")
+@WebServlet("/deleterental")
 public class ServletEliminarAlquiler extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -36,7 +36,7 @@ public class ServletEliminarAlquiler extends HttpServlet {
 		
 		ServletContext context = request.getServletContext();
 		HttpSession session = request.getSession();
-		EntityManagerFactory factory = (EntityManagerFactory) session.getAttribute(Globals.ATT_APP_ENTITY_MANAGER_FACTORY);
+		EntityManagerFactory factory = (EntityManagerFactory) context.getAttribute(Globals.ATT_APP_ENTITY_MANAGER_FACTORY);
 		
 		try {
 			Integer rentalId = null;
@@ -47,8 +47,12 @@ public class ServletEliminarAlquiler extends HttpServlet {
 			}
 			if (rentalId != null) {
 				RentalRepository rentals = new RentalRepository(factory);
-				rentals.delete(rentalId);
+				if (!rentals.delete(rentalId))
+					throw new Exception("No se pudo eliminar el alquiler");
+				session.setAttribute(Globals.ATT_SESSION_SELECTED_RENTAL, null);
 				response.sendRedirect(Globals.SERVLET_CLIENTES);
+			} else {
+				throw new Exception("No se pudo encontrar el alquiler");
 			}
 		} catch (Exception e) {
 			session.setAttribute(Globals.ATT_SESSION_ERRMSG, e.getMessage());

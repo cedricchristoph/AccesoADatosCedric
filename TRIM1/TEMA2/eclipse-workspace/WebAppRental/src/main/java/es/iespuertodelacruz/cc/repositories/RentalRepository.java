@@ -86,8 +86,28 @@ public class RentalRepository extends RentalEntry implements CRUD<Rental, Intege
 
 	@Override
 	public boolean delete(Integer id) throws SQLException {
-		// TODO Auto-generated method stub
-		return false;
+		EntityManager manager = null;
+		try {
+			manager = factory.createEntityManager();
+			manager.getTransaction().begin();
+			Rental rental = manager.find(Rental.class, id);
+			if (rental != null) {
+				manager.remove(rental);
+				manager.getTransaction().commit();
+				return true;
+			}
+			manager.getTransaction().rollback();
+			throw new Exception("No se encontro el alquiler");
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		} finally {
+			try {
+				manager.close();
+			} catch (Exception e) {
+				
+			}
+		}
 	}
 
 }
