@@ -12,6 +12,7 @@ public class Globals {
 
 	/* SERVLETS */
 	public static final String SERVLET_LOGIN = "/WebAppRental/login";
+	public static final String SERVLET_REGISTRAR = "/WebAppRental/registrar";
 	public static final String SERVLET_CLIENTES = "clientes";
 	public static final String SERVLET_CLIENTE = "cliente";
 	public static final String SERVLET_RENTAL = "alquiler";
@@ -21,6 +22,7 @@ public class Globals {
 	
 	/* JSPs */
 	public static final String JSP_LOGIN = "newlogin.jsp";
+	public static final String JSP_REGISTRAR = "registrar.jsp";
 	public static final String JSP_CLIENTES = "home/clientes.jsp";
 	public static final String JSP_CLIENTE = "home/cliente.jsp";
 	public static final String JSP_RENTAL = "home/alquiler.jsp";
@@ -60,6 +62,7 @@ public class Globals {
 		/* PARAMETROS DE LOGIN */
 	public static final String PARAM_LOGIN_USER = "loginuser";
 	public static final String PARAM_LOGIN_PWD = "loginpwd";
+	public static final String PARAM_LOGIN_REPEATPWD = "repeatpwd";
 	
 		/* PARAMETROS DE CLIENTES BUSQUEDA */
 	public static final String PARAM_CLIENTES_SEARCH_NAME = "searchname";

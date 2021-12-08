@@ -53,8 +53,11 @@ public class StaffRepository extends StaffEntry implements CRUD<Staff, Integer> 
 
 	@Override
 	public Staff insert(Staff entity) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+		EntityManager manager = factory.createEntityManager();
+		manager.getTransaction().begin();
+		manager.persist(entity);
+		manager.getTransaction().commit();
+		return entity;
 	}
 
 	@Override
