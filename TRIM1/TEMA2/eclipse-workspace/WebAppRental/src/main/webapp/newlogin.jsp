@@ -41,7 +41,7 @@
                   <input type="submit" name="login" class="btn btn-block btn-warning btn-lg font-weight-medium auth-form-btn" value="Acceder"/>
                 </div>
                 <div class="text-center mt-4 font-weight-light">
-                  ¿No tienes cuenta aún?&nbsp;<a href="register.html" class="text-primary">Crear Cuenta</a>
+                  ¿No tienes cuenta aún?&nbsp;<a href="registrar" class="text-primary">Crear Cuenta</a>
                 </div>
               </form>
             </div>

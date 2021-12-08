@@ -29,13 +29,17 @@ public class StaffRepository extends StaffEntry implements CRUD<Staff, Integer> 
 	 * @return
 	 */
 	public Staff selectByUser(String user) {
-		EntityManager manager = factory.createEntityManager();
-		manager.getTransaction().begin();
-		Query q = manager.createNamedQuery(FINDUSER);
-		q.setParameter(1, user);
-		Staff result = (Staff) q.getSingleResult();
-		manager.getTransaction().commit();
-		return result;
+		try {
+			EntityManager manager = factory.createEntityManager();
+			manager.getTransaction().begin();
+			Query q = manager.createNamedQuery(FINDUSER);
+			q.setParameter(1, user);
+			Staff result = (Staff) q.getSingleResult();
+			manager.getTransaction().commit();
+			return result; 
+		} catch (Exception e) {
+			return null;
+		}
 	}
 
 	/**
@@ -53,11 +57,23 @@ public class StaffRepository extends StaffEntry implements CRUD<Staff, Integer> 
 
 	@Override
 	public Staff insert(Staff entity) throws SQLException {
-		EntityManager manager = factory.createEntityManager();
-		manager.getTransaction().begin();
-		manager.persist(entity);
-		manager.getTransaction().commit();
-		return entity;
+		EntityManager manager = null;
+		try {
+			manager = factory.createEntityManager();
+			manager.getTransaction().begin();
+			manager.persist(entity.getAddress());
+			manager.persist(entity.getPayments());
+			manager.persist(entity.getRentals());
+			manager.persist(entity);
+			manager.getTransaction().commit();
+			return entity;
+		} catch (Exception e) {
+			try {
+				manager.close();
+			} catch (Exception ex) {
+			}
+			return null;
+		}
 	}
 
 	@Override

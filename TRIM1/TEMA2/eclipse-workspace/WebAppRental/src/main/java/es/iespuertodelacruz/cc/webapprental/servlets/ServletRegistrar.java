@@ -1,6 +1,7 @@
 package es.iespuertodelacruz.cc.webapprental.servlets;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.persistence.EntityManagerFactory;
 import javax.servlet.ServletContext;
@@ -12,6 +13,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import es.iespuertodelacruz.cc.repositories.StaffRepository;
+import es.iespuertodelacruz.cc.webapprental.entity.Address;
+import es.iespuertodelacruz.cc.webapprental.entity.Payment;
+import es.iespuertodelacruz.cc.webapprental.entity.Rental;
 import es.iespuertodelacruz.cc.webapprental.entity.Staff;
 import es.iespuertodelacruz.cc.webapprental.utils.Globals;
 
@@ -52,12 +56,18 @@ public class ServletRegistrar extends HttpServlet {
 			StaffRepository rep = new StaffRepository((EntityManagerFactory) context.getAttribute(Globals.ATT_APP_ENTITY_MANAGER_FACTORY));
 			if (paramUser != null && !paramUser.isEmpty() && paramPwd != null && !paramPwd.isEmpty() && paramRepeatPwd != null && !paramRepeatPwd.isEmpty()) {
 				
-				if ((rep.selectByUser(paramUser)) == null)
+				if ((rep.selectByUser(paramUser)) != null)
 					throw new Exception("Ya existe una cuenta con ese usuario");
 				if (!paramPwd.equals(paramRepeatPwd))
-					throw new Exception("Las contraseñas no coinciden");
+					throw new Exception("Las contraseÃ±as no coinciden");
 				
 				Staff staff = new Staff();
+				staff.setEmail("");
+				staff.setAddress(new Address());
+				staff.setFirstName("");
+				staff.setLastName("");
+				staff.setPayments(new ArrayList<Payment>());
+				staff.setRentals(new ArrayList<Rental>());
 				staff.setUsername(paramUser);
 				staff.setPassword(paramPwd);
 				rep.insert(staff);
