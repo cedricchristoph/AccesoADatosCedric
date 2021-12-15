@@ -11,6 +11,10 @@ public class MatriculaDTO {
 	private Alumno alumno;
 	private List<Asignatura> asignaturas;
 
+	public MatriculaDTO() {
+		
+	}
+	
 	public MatriculaDTO(Matricula matricula) {
 		this.idmatricula = matricula.getIdmatricula();
 		this.year = matricula.getYear();
@@ -48,5 +52,9 @@ public class MatriculaDTO {
 
 	public void setAsignaturas(List<Asignatura> asignaturas) {
 		this.asignaturas = asignaturas;
+	}
+	
+	public Matricula toMatricula() {
+		return new Matricula(this);
 	}
 }

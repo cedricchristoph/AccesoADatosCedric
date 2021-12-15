@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import es.iespuertodelacruz.cc.institutorest.dto.AsignaturaDTO;
 import es.iespuertodelacruz.cc.institutorest.entity.Asignatura;
 import es.iespuertodelacruz.cc.institutorest.service.AsignaturaService;
 
@@ -26,16 +27,16 @@ public class AsignaturaREST {
 	private AsignaturaService service;
 	
 	@GetMapping
-	public List<Asignatura> getAllAsignaturas() {
-		ArrayList<Asignatura> lista = new ArrayList<Asignatura>();
-		service.findAll().forEach(a -> lista.add(a));
-		return lista;
+	public ResponseEntity<?> getAllAsignaturas() {
+		ArrayList<AsignaturaDTO> lista = new ArrayList<AsignaturaDTO>();
+		service.findAll().forEach(a -> lista.add(a.toDTO()));
+		return ResponseEntity.ok(lista);
 	}
 	
 	@GetMapping("/{id}")
 	public ResponseEntity<?> getAsignaturaById (@PathVariable("id") Integer id) {
 		Optional<Asignatura> asignatura = service.findById(id);
 		if (!asignatura.isPresent()) return ResponseEntity.notFound().build();
-		return ResponseEntity.ok(asignatura);
+		return ResponseEntity.ok(asignatura.get().toDTO());
 	}
 }

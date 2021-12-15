@@ -14,6 +14,10 @@ public class AlumnoDTO {
 	private String nombre;
 	private List<Matricula> matriculas;
 
+	public AlumnoDTO(){
+		
+	}
+	
 	public AlumnoDTO(Alumno alumno) {
 		this.dni = alumno.getDni();
 		this.apellidos = alumno.getApellidos();
@@ -60,6 +64,10 @@ public class AlumnoDTO {
 
 	public void setMatriculas(List<Matricula> matriculas) {
 		this.matriculas = matriculas;
+	}
+	
+	public Alumno toAlumno() {
+		return new Alumno(this);
 	}
 	
 }

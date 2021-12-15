@@ -38,6 +38,13 @@ public class Matricula implements Serializable {
 	public Matricula() {
 	}
 
+	public Matricula(MatriculaDTO dto) {
+		idmatricula = dto.getIdmatricula();
+		year = dto.getYear();
+		alumno = dto.getAlumno();
+		asignaturas = dto.getAsignaturas();
+	}
+	
 	public int getIdmatricula() {
 		return this.idmatricula;
 	}

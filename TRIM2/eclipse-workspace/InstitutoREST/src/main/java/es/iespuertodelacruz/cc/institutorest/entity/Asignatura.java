@@ -39,6 +39,13 @@ public class Asignatura implements Serializable {
 
 	public Asignatura() {
 	}
+	
+	public Asignatura(AsignaturaDTO dto) {
+		idasignatura = dto.getIdasignatura();
+		curso = dto.getCurso();
+		nombre = dto.getNombre();
+		matriculas = dto.getMatriculas();
+	}
 
 	public int getIdasignatura() {
 		return this.idasignatura;

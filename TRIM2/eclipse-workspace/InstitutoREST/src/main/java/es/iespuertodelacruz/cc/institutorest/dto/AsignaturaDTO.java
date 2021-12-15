@@ -12,6 +12,10 @@ public class AsignaturaDTO {
 	private String nombre;
 	private List<Matricula> matriculas;
 
+	public AsignaturaDTO() {
+		
+	}
+	
 	public AsignaturaDTO(Asignatura asignatura) {
 		this.idasignatura = asignatura.getIdasignatura();
 		this.curso = asignatura.getCurso();
@@ -49,5 +53,9 @@ public class AsignaturaDTO {
 
 	public void setMatriculas(List<Matricula> matriculas) {
 		this.matriculas = matriculas;
+	}
+	
+	public Asignatura toAsignatura() {
+		return new Asignatura(this);
 	}
 }

@@ -38,6 +38,14 @@ public class Alumno implements Serializable {
 	public Alumno() {
 	}
 
+	public Alumno(AlumnoDTO dto) {
+		dni = dto.getDni();
+		apellidos = dto.getApellidos();
+		fechanacimiento = dto.getFechanacimiento();
+		nombre = dto.getNombre();
+		matriculas = dto.getMatriculas();
+	}
+	
 	public String getDni() {
 		return this.dni;
 	}
