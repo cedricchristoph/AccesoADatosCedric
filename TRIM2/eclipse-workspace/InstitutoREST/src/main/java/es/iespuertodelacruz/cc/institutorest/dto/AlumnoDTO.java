@@ -3,6 +3,8 @@ package es.iespuertodelacruz.cc.institutorest.dto;
 import java.math.BigInteger;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import es.iespuertodelacruz.cc.institutorest.entity.Alumno;
 import es.iespuertodelacruz.cc.institutorest.entity.Matricula;
 
@@ -12,6 +14,7 @@ public class AlumnoDTO {
 	private String apellidos;
 	private BigInteger fechanacimiento;
 	private String nombre;
+	@JsonIgnore
 	private List<Matricula> matriculas;
 
 	public AlumnoDTO(){

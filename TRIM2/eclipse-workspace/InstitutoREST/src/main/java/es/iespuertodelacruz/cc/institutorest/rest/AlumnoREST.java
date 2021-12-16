@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -30,39 +31,86 @@ public class AlumnoREST {
 	private Logger log = LoggerFactory.getLogger(AlumnoREST.class);
 	
 	@Autowired
-	private AlumnoService alumnoServices;
+	private AlumnoService alumnoService;
 	
 	@Autowired
 	private MatriculaService matriculaService;
 	
+	/**
+	 * Funcion que devuelve una lista de todos los alumnos
+	 * @return
+	 * Devuelve ok si todo ha ido bien
+	 */
 	@GetMapping
 	public ResponseEntity<?> getAllAlumnos() {
 		ArrayList<AlumnoDTO> lista = new ArrayList<AlumnoDTO>();
-		alumnoServices.findAll().forEach(a -> lista.add(a.toDTO()));
+		alumnoService.findAll().forEach(a -> lista.add(a.toDTO()));
 		return ResponseEntity.ok(lista);
 	}
 	
+	/**
+	 * Funcion que devuelve la informacion de un alumno dado su dni
+	 * @param id Dni del alumno
+	 * @return
+	 * Devuelve notFound si no se encontro el alumno
+	 * Devuelve ok si todo ha ido bien
+	 */
 	@GetMapping("/{dni}")
 	public ResponseEntity<?> getAlumnoById (@PathVariable("dni") String id) {
-		Optional<Alumno> alumno = alumnoServices.findById(id);
+		Optional<Alumno> alumno = alumnoService.findById(id);
 		if (!alumno.isPresent()) return ResponseEntity.notFound().build();
 		return ResponseEntity.ok(alumno.get().toDTO());
 	}
 	
+	/**
+	 * Funcion para devolver una lista de matriculas dado el dni de un alumno
+	 * @param dni del alumno
+	 * @return
+	 * Devuelve 
+	 */
 	@GetMapping("/{dni}/matriculas")
 	public ResponseEntity<?> getMatriculas(@PathVariable("dni") String dni) {
 		ArrayList<MatriculaDTO> matriculas = new ArrayList<MatriculaDTO>();
+		Optional<Alumno> alumno = alumnoService.findById(dni);
+		if (!alumno.isPresent()) return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No existe el alumno con el dni indicado");
 		matriculaService.findByAlumno(dni).forEach(m -> matriculas.add(m.toDTO()));
 		return ResponseEntity.ok(matriculas);
 	}
 	
+	/**
+	 * Funcion para crear una matricula para un alumno indicado
+	 * @param dni Dni del alumno
+	 * @param dto Objeto MatriculaDTO a crear
+	 * @return 
+	 * Devuelve BadRequest si la matricula ya existe
+	 * Devuelve Created si la matricula ha sido creado
+	 */
 	@PostMapping("/{dni}/matriculas")
 	public ResponseEntity<?> insertMatricula(@PathVariable("dni") String dni, @RequestBody MatriculaDTO dto) {
 		Optional<Matricula> matricula = matriculaService.findById(dto.getIdmatricula());
 		if (matricula.isPresent()) return ResponseEntity.badRequest().body("La matricula ya existe");
-		Matricula m = matricula.get();
-		m = dto.toMatricula();
-		matriculaService.save(m);
+		Optional<Alumno> alumno = alumnoService.findById(dni);
+		if (!alumno.isPresent()) return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No existe el alumno con el dni indicado");
+		Matricula newMatricula = dto.toMatricula();
+		newMatricula.setAlumno(alumno.get());
+		matriculaService.save(newMatricula);
 		return ResponseEntity.status(HttpStatus.CREATED).body("Matricula creada correctamente");
+	}
+	
+	/**
+	 * Funcion para eliminar una matricula de un alumno
+	 * @param dni Del alumno
+	 * @param id De la matricula a eliminar
+	 * @return 
+	 * Devuelve ResponseEntity (not Found si no se encuentra la matricula o dicho id no pertenece al alumno indicado)
+	 * Devuelve Ok si se ha eliminado correctamente la matricula
+	 */
+	@DeleteMapping("/{dni}/matriculas/{id}")
+	public ResponseEntity<?> deleteMatricula(@PathVariable("dni") String dni, @PathVariable("id") Integer id) {
+		Optional<Matricula> matricula = matriculaService.findById(id);
+		if (!matricula.isPresent()) return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No existe ninguna matricula con el identificador indicado");
+		if (!matricula.get().getAlumno().getDni().equals(dni)) return ResponseEntity.status(HttpStatus.NOT_FOUND).body("La matricula no pertenece al alumno indicado");
+		matriculaService.deleteById(matricula.get());
+		return ResponseEntity.ok("Eliminado correctamente la matricula");
 	}
 }

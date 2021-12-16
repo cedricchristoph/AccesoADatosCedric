@@ -1,6 +1,9 @@
 package es.iespuertodelacruz.cc.institutorest.dto;
 
 import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import es.iespuertodelacruz.cc.institutorest.entity.Alumno;
 import es.iespuertodelacruz.cc.institutorest.entity.Asignatura;
 import es.iespuertodelacruz.cc.institutorest.entity.Matricula;
@@ -8,6 +11,7 @@ import es.iespuertodelacruz.cc.institutorest.entity.Matricula;
 public class MatriculaDTO {
 	private int idmatricula;
 	private int year;
+	@JsonIgnore
 	private Alumno alumno;
 	private List<Asignatura> asignaturas;
 
