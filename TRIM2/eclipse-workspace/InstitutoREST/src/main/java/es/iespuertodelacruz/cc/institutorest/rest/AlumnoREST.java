@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import es.iespuertodelacruz.cc.institutorest.dto.AlumnoDTO;
 import es.iespuertodelacruz.cc.institutorest.dto.MatriculaDTO;
+import es.iespuertodelacruz.cc.institutorest.dto.ShortMatriculaDTO;
 import es.iespuertodelacruz.cc.institutorest.entity.Alumno;
 import es.iespuertodelacruz.cc.institutorest.entity.Matricula;
 import es.iespuertodelacruz.cc.institutorest.service.AlumnoService;
@@ -55,6 +57,15 @@ public class AlumnoREST {
 		}
 	}
 	
+	@PostMapping
+	public ResponseEntity<?> insertAlumno(@RequestBody AlumnoDTO alumno) {
+		if (alumno == null) return ResponseEntity.badRequest().build();
+		if (alumno.getDni() == null) return ResponseEntity.badRequest().build();
+		alumnoService.save(alumno.toAlumno());
+		return ResponseEntity.ok("Alumno creado correctamente");
+	}
+
+	
 	/**
 	 * Funcion que devuelve la informacion de un alumno dado su dni
 	 * @param id Dni del alumno
@@ -70,6 +81,34 @@ public class AlumnoREST {
 	}
 	
 	/**
+	 * Funcion que actualiza la informacion de un alumno
+	 * @param dni Dni del alumno a actualizar
+	 * @param alumnoDto Datos nuevos 
+	 * @return
+	 */
+	@PutMapping("/{dni}")
+	public ResponseEntity<?> updateAlumnoById(@PathVariable("dni") String dni, @RequestBody AlumnoDTO alumnoDto) {
+		if (alumnoDto == null) return ResponseEntity.badRequest().build();
+		Optional<Alumno> alumno = alumnoService.findById(dni);
+		if (!alumno.isPresent()) return ResponseEntity.notFound().build();
+		alumnoService.save(alumnoDto.toAlumno());
+		return ResponseEntity.ok("Alumno actualizado");
+	}
+	
+	/**
+	 * Funcion que elimina un alumno con un dni especifico dado
+	 * @param dni Del alumno a eliminar
+	 * @return
+	 */
+	@DeleteMapping("/{dni}")
+	public ResponseEntity<?> deleteAlumnoById(@PathVariable("dni") String dni) {
+		Optional<Alumno> alumno = alumnoService.findById(dni);
+		if (!alumno.isPresent()) return ResponseEntity.notFound().build();
+		alumnoService.deleteById(alumno.get());
+		return ResponseEntity.ok("Alumno eliminado correctamente");
+	}
+	
+	/**
 	 * Funcion para devolver una lista de matriculas dado el dni de un alumno
 	 * @param dni del alumno
 	 * @return
@@ -77,10 +116,10 @@ public class AlumnoREST {
 	 */
 	@GetMapping("/{dni}/matriculas")
 	public ResponseEntity<?> getMatriculas(@PathVariable("dni") String dni) {
-		ArrayList<MatriculaDTO> matriculas = new ArrayList<MatriculaDTO>();
+		ArrayList<ShortMatriculaDTO> matriculas = new ArrayList<ShortMatriculaDTO>();
 		Optional<Alumno> alumno = alumnoService.findById(dni);
 		if (!alumno.isPresent()) return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No existe el alumno con el dni indicado");
-		matriculaService.findByAlumno(dni).forEach(m -> matriculas.add(m.toDTO()));
+		matriculaService.findByAlumno(dni).forEach(m -> matriculas.add(new ShortMatriculaDTO(m)));
 		return ResponseEntity.ok(matriculas);
 	}
 	
@@ -102,6 +141,18 @@ public class AlumnoREST {
 		newMatricula.setAlumno(alumno.get());
 		matriculaService.save(newMatricula);
 		return ResponseEntity.status(HttpStatus.CREATED).body("Matricula creada correctamente");
+	}
+
+	
+	@GetMapping("/{dni}/matriculas/{id}")
+	public ResponseEntity<?> getMatriculaById(@PathVariable("dni") String dni, @PathVariable("id") Integer id) {
+		Optional<Alumno> alumno = alumnoService.findById(dni);
+		if (!alumno.isPresent()) return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Alumno no encontrado");
+		Optional<Matricula> matricula = matriculaService.findById(id);
+		if (!matricula.isPresent()) return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Matricula no encontrada");
+		log.debug("\nALUMNO: " + matricula.get().toString() + "\n");
+		if (!(matricula.get().getAlumno().getDni().equals(dni))) return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("La matricula no pertenece al alumno indicado");
+		return ResponseEntity.ok(matricula.get().toDTO());
 	}
 	
 	/**

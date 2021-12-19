@@ -3,8 +3,11 @@ package es.iespuertodelacruz.cc.institutorest.entity;
 import java.io.Serializable;
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import es.iespuertodelacruz.cc.institutorest.dto.AsignaturaDTO;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -19,7 +22,7 @@ public class Asignatura implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idasignatura;
 
 	private String curso;
@@ -27,10 +30,11 @@ public class Asignatura implements Serializable {
 	private String nombre;
 
 	//bi-directional many-to-many association to Matricula
-	@ManyToMany
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinTable(name="asignatura_matricula",
 		joinColumns = {@JoinColumn(name="idasignatura")},
 		inverseJoinColumns = {@JoinColumn(name="idmatricula")})
+	@JsonIgnore
 	private List<Matricula> matriculas;
 
 	public Asignatura() {
@@ -42,7 +46,10 @@ public class Asignatura implements Serializable {
 		} catch (NullPointerException e) {}
 		curso = dto.getCurso();
 		nombre = dto.getNombre();
-		matriculas = dto.getMatriculas();
+		matriculas = new ArrayList<Matricula>();
+		try {
+			dto.getMatriculas().forEach(m -> matriculas.add(m.toMatricula()));
+		} catch (NullPointerException e) {}
 	}
 	
 	public int getIdasignatura() {

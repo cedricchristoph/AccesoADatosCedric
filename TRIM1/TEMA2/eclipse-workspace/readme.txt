@@ -1,0 +1,3 @@
+- Importar la base de datos dada.
+- Cambiar contraseñas de acceso a mysql en persistence.xml
+- Usar dentro de la aplicación para logearse a 'Jon' con contraseña '1234'
