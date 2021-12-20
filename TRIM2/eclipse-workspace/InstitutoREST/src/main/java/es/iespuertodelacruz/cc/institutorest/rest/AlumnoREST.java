@@ -23,8 +23,10 @@ import es.iespuertodelacruz.cc.institutorest.dto.AlumnoDTO;
 import es.iespuertodelacruz.cc.institutorest.dto.MatriculaDTO;
 import es.iespuertodelacruz.cc.institutorest.dto.ShortMatriculaDTO;
 import es.iespuertodelacruz.cc.institutorest.entity.Alumno;
+import es.iespuertodelacruz.cc.institutorest.entity.Asignatura;
 import es.iespuertodelacruz.cc.institutorest.entity.Matricula;
 import es.iespuertodelacruz.cc.institutorest.service.AlumnoService;
+import es.iespuertodelacruz.cc.institutorest.service.AsignaturaService;
 import es.iespuertodelacruz.cc.institutorest.service.MatriculaService;
 
 @RestController
@@ -38,6 +40,9 @@ public class AlumnoREST {
 	
 	@Autowired
 	private MatriculaService matriculaService;
+	
+	@Autowired
+	private AsignaturaService asignaturaService;
 	
 	/**
 	 * Funcion que devuelve una lista de todos los alumnos
@@ -133,11 +138,18 @@ public class AlumnoREST {
 	 */
 	@PostMapping("/{dni}/matriculas")
 	public ResponseEntity<?> insertMatricula(@PathVariable("dni") String dni, @RequestBody MatriculaDTO dto) {
-		Optional<Matricula> matricula = matriculaService.findById(dto.getIdmatricula());
-		if (matricula.isPresent()) return ResponseEntity.badRequest().body("La matricula ya existe");
+		if (dto.getIdmatricula() != null) return ResponseEntity.badRequest().build();	
 		Optional<Alumno> alumno = alumnoService.findById(dni);
 		if (!alumno.isPresent()) return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No existe el alumno con el dni indicado");
-		Matricula newMatricula = dto.toMatricula();
+		ArrayList<Asignatura> asignaturas = new ArrayList<Asignatura>();
+		for (Asignatura a : dto.getAsignaturas()) {
+			Optional<Asignatura> asignatura = asignaturaService.findById(a.getIdasignatura());
+			if (!asignatura.isPresent()) continue;
+			asignaturas.add(asignatura.get());
+		}
+		Matricula newMatricula = new Matricula();
+		newMatricula.setAsignaturas(asignaturas);
+		newMatricula.setYear(dto.getYear());
 		newMatricula.setAlumno(alumno.get());
 		matriculaService.save(newMatricula);
 		return ResponseEntity.status(HttpStatus.CREATED).body("Matricula creada correctamente");

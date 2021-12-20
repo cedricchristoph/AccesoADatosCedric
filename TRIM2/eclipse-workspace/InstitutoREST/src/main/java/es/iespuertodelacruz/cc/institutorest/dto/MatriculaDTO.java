@@ -11,7 +11,7 @@ import es.iespuertodelacruz.cc.institutorest.entity.Asignatura;
 import es.iespuertodelacruz.cc.institutorest.entity.Matricula;
 
 public class MatriculaDTO {
-	private int idmatricula;
+	private Integer idmatricula;
 	private int year;
 	
 	@JsonIgnore
@@ -29,11 +29,11 @@ public class MatriculaDTO {
 		this.asignaturas = matricula.getAsignaturas();
 	}
 
-	public int getIdmatricula() {
+	public Integer getIdmatricula() {
 		return this.idmatricula;
 	}
 
-	public void setIdmatricula(int idmatricula) {
+	public void setIdmatricula(Integer idmatricula) {
 		this.idmatricula = idmatricula;
 	}
 

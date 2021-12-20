@@ -11,7 +11,7 @@ import es.iespuertodelacruz.cc.institutorest.entity.Matricula;
 public interface MatriculaRepository extends JpaRepository<Matricula, Integer> {
 
 	
-	//@Query("SELECT m FROM matriculas m WHERE m.dni = :dni")
-	//List<Matricula> findByAlumno(@Param("dni")String paramDni);
+	@Query("SELECT m FROM Matricula m INNER JOIN Alumno a ON m.alumno = a WHERE a.dni = :dni")
+	List<Matricula> findByAlumno(@Param("dni")String paramDni);
 	
 }

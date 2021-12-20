@@ -30,10 +30,7 @@ public class Asignatura implements Serializable {
 	private String nombre;
 
 	//bi-directional many-to-many association to Matricula
-	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@JoinTable(name="asignatura_matricula",
-		joinColumns = {@JoinColumn(name="idasignatura")},
-		inverseJoinColumns = {@JoinColumn(name="idmatricula")})
+	@ManyToMany(mappedBy = "asignaturas",cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JsonIgnore
 	private List<Matricula> matriculas;
 
