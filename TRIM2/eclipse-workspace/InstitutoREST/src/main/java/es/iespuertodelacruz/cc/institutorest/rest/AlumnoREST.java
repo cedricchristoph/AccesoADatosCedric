@@ -28,7 +28,10 @@ import es.iespuertodelacruz.cc.institutorest.entity.Matricula;
 import es.iespuertodelacruz.cc.institutorest.service.AlumnoService;
 import es.iespuertodelacruz.cc.institutorest.service.AsignaturaService;
 import es.iespuertodelacruz.cc.institutorest.service.MatriculaService;
-
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.*;
+@Api
 @RestController
 @RequestMapping("/api/alumnos")
 public class AlumnoREST {
@@ -49,6 +52,13 @@ public class AlumnoREST {
 	 * @return
 	 * Devuelve ok si todo ha ido bien
 	 */
+	@ApiOperation(value="Devuelve la lista de todos los alumnos en la base de datos",
+				  response=Iterable.class, tags = "alumnos")
+	@ApiResponses(value = { 
+            @ApiResponse(code = 200, message = "OK"),
+            @ApiResponse(code = 401, message = "No esta autorizado"), 
+            @ApiResponse(code = 403, message = "Prohibido"),
+            @ApiResponse(code = 404, message = "No encontrado") })
 	@GetMapping
 	public ResponseEntity<?> getAllAlumnos(@RequestParam(required=false, name="nombre")String nombre) {
 		if (nombre == null) {
@@ -62,6 +72,13 @@ public class AlumnoREST {
 		}
 	}
 	
+	@ApiOperation(value = "Inserta un nuevo alumno en la base de datos", response = Iterable.class, tags = "alumnos")
+	@ApiResponses(value = { 
+			@ApiResponse(code = 200, message = "OK. El alumno se añadió a la base de datos"),
+			@ApiResponse(code = 400, message = "Bad request. No se indicó el alumno a añadir o dicho alumno no contiene un dni"),
+			@ApiResponse(code = 401, message = "No esta autorizado"), 
+			@ApiResponse(code = 403, message = "Prohibido"),
+			@ApiResponse(code = 404, message = "No encontrado") })
 	@PostMapping
 	public ResponseEntity<?> insertAlumno(@RequestBody AlumnoDTO alumno) {
 		if (alumno == null) return ResponseEntity.badRequest().build();

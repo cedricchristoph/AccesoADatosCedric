@@ -6,6 +6,7 @@ import javax.persistence.*;
 import org.hibernate.annotations.Cascade;
 
 import es.iespuertodelacruz.cc.institutorest.dto.AlumnoDTO;
+import io.swagger.annotations.ApiModelProperty;
 
 import java.math.BigInteger;
 import java.util.List;
@@ -23,12 +24,24 @@ public class Alumno implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@ApiModelProperty(
+			notes="Dni del alumno", name="dni", 
+			required=true, value="12345678Z")
 	private String dni;
-
+	
+	@ApiModelProperty(
+			notes="Apellidos del alumno", name="apellidos", 
+			required=false, value="Hernandez Gonzalez")
 	private String apellidos;
-
+	
+	@ApiModelProperty(
+			notes="Fecha de nacimiento del alumno", name="fechanacimiento", 
+			required=false, value="785747595")
 	private BigInteger fechanacimiento;
 
+	@ApiModelProperty(
+			notes="Nombre del alumno", name="nombre", 
+			required=false, value="Jorge")
 	private String nombre;
 
 	//bi-directional many-to-one association to Matricula
