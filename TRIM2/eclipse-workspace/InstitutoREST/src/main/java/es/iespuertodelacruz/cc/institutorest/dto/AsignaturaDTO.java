@@ -3,10 +3,11 @@ package es.iespuertodelacruz.cc.institutorest.dto;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Entity;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import es.iespuertodelacruz.cc.institutorest.entity.Asignatura;
-
 
 public class AsignaturaDTO {
 

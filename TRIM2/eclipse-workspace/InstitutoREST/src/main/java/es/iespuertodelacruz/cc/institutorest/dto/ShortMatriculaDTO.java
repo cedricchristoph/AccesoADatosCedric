@@ -1,9 +1,12 @@
 package es.iespuertodelacruz.cc.institutorest.dto;
 
+import javax.persistence.Entity;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import es.iespuertodelacruz.cc.institutorest.entity.Alumno;
 import es.iespuertodelacruz.cc.institutorest.entity.Matricula;
+
 
 public class ShortMatriculaDTO {
 	private int idmatricula;

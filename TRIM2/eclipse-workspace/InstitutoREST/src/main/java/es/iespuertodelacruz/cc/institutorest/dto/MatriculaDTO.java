@@ -2,6 +2,8 @@ package es.iespuertodelacruz.cc.institutorest.dto;
 
 import java.util.List;
 
+import javax.persistence.Entity;
+
 import org.springframework.data.annotation.Transient;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
