@@ -19,9 +19,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import es.iespuertodelacruz.cc.institutorest.dto.AsignaturaDTO;
-import es.iespuertodelacruz.cc.institutorest.dto.MatriculaDTO;
 import es.iespuertodelacruz.cc.institutorest.entity.Asignatura;
 import es.iespuertodelacruz.cc.institutorest.service.AsignaturaService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.annotations.*;
 
 @RestController
 @RequestMapping("/api/asignaturas")
@@ -32,6 +33,10 @@ public class AsignaturaREST {
 	@Autowired
 	private AsignaturaService service;
 	
+	@Operation(summary = "Devuelve todas las asignaturas")
+	@ApiResponses(value = {
+			@ApiResponse(code = 200, message = "OK. Se devuelve la lista")
+	})
 	@GetMapping
 	public ResponseEntity<?> getAllAsignaturas() {
 		ArrayList<AsignaturaDTO> lista = new ArrayList<AsignaturaDTO>();
@@ -39,6 +44,11 @@ public class AsignaturaREST {
 		return ResponseEntity.ok(lista);
 	}
 	
+	@Operation(summary = "Inserta una nueva asignatura")
+	@ApiResponses(value = {
+			@ApiResponse(code = 201, message = "OK. Asignatura creada"),
+			@ApiResponse(code = 400, message = "Bad Request. No se envió un objeto o este contiene un id")
+	})
 	@PostMapping
 	public ResponseEntity<?> insertAsignatura(@RequestBody AsignaturaDTO dto) {
 		if (dto == null) return ResponseEntity.badRequest().body("No se especificó la asignatura a añadir");
@@ -47,6 +57,11 @@ public class AsignaturaREST {
 		return ResponseEntity.status(HttpStatus.CREATED).body("Se ha añadido la asignatura correctamente");
 	}
 	
+	@Operation(summary = "Devuelve un objeto asignatura con un id especifico")
+	@ApiResponses(value = {
+			@ApiResponse(code = 200, message = "OK. Se devuelve el objeto"),
+			@ApiResponse(code = 404, message = "No se encontro la asignatura")
+	})
 	@GetMapping("/{id}")
 	public ResponseEntity<?> getAsignaturaById (@PathVariable("id") Integer id) {
 		Optional<Asignatura> asignatura = service.findById(id);
@@ -54,6 +69,12 @@ public class AsignaturaREST {
 		return ResponseEntity.ok(asignatura.get().toDTO());
 	}
 	
+	@Operation(summary = "Actualiza una asignatura")
+	@ApiResponses(value = {
+			@ApiResponse(code = 200, message = "OK. Se actualizó la asignatura"),
+			@ApiResponse(code = 400, message = "Los identificadores no coinciden"),
+			@ApiResponse(code = 404, message = "No se encontró la asignatura")
+	})
 	@PutMapping("/{id}")
 	public ResponseEntity<?> updateAsignaturaById(@PathVariable("id") Integer id, @RequestBody AsignaturaDTO dto) {
 		Optional<Asignatura> optionalAsignatura = service.findById(id);
@@ -66,6 +87,11 @@ public class AsignaturaREST {
 		return ResponseEntity.ok("Asignatura actualizada");
 	}
 	
+	@Operation(summary = "Elimina una asignatura")
+	@ApiResponses(value = {
+			@ApiResponse(code = 200, message = "OK. Asignatura eliminada"),
+			@ApiResponse(code = 404, message = "No se encontro la asignatura")
+	})
 	@DeleteMapping("/{id}")
 	public ResponseEntity<?> deleteAsignaturaById(@PathVariable("id") Integer id) {
 		Optional<Asignatura> asignatura = service.findById(id);

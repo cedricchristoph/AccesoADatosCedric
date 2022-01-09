@@ -30,6 +30,7 @@ import es.iespuertodelacruz.cc.institutorest.service.AsignaturaService;
 import es.iespuertodelacruz.cc.institutorest.service.MatriculaService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.annotations.*;
 @Api
 @RestController
@@ -52,8 +53,7 @@ public class AlumnoREST {
 	 * @return
 	 * Devuelve ok si todo ha ido bien
 	 */
-	@ApiOperation(value="Devuelve la lista de todos los alumnos en la base de datos",
-				  response=Iterable.class, tags = "alumnos")
+	@Operation(summary="Devuelve la lista de todos los alumnos en la base de datos")
 	@ApiResponses(value = { 
             @ApiResponse(code = 200, message = "OK"),
             @ApiResponse(code = 401, message = "No esta autorizado"), 
@@ -72,7 +72,7 @@ public class AlumnoREST {
 		}
 	}
 	
-	@ApiOperation(value = "Inserta un nuevo alumno en la base de datos", response = Iterable.class, tags = "alumnos")
+	@Operation(summary = "Inserta un nuevo alumno en la base de datos")
 	@ApiResponses(value = { 
 			@ApiResponse(code = 200, message = "OK. El alumno se añadió a la base de datos"),
 			@ApiResponse(code = 400, message = "Bad request. No se indicó el alumno a añadir o dicho alumno no contiene un dni"),
@@ -88,13 +88,12 @@ public class AlumnoREST {
 	}
 
 	
-	/**
-	 * Funcion que devuelve la informacion de un alumno dado su dni
-	 * @param id Dni del alumno
-	 * @return
-	 * Devuelve notFound si no se encontro el alumno
-	 * Devuelve ok si todo ha ido bien
-	 */
+	@Operation(summary = "Devuelve un alumno dado su dni")
+	@ApiResponses(value = {
+		@ApiResponse(code = 200, message = "OK. El alumno se devolvió"),
+		@ApiResponse(code = 400, message = "Bad Request."),
+		@ApiResponse(code = 404, message = "No se encontro el alumno con el dni proporcionado")
+	})
 	@GetMapping("/{dni}")
 	public ResponseEntity<?> getAlumnoById (@PathVariable("dni") String id) {
 		Optional<Alumno> alumno = alumnoService.findById(id);
@@ -102,12 +101,12 @@ public class AlumnoREST {
 		return ResponseEntity.ok(alumno.get().toDTO());
 	}
 	
-	/**
-	 * Funcion que actualiza la informacion de un alumno
-	 * @param dni Dni del alumno a actualizar
-	 * @param alumnoDto Datos nuevos 
-	 * @return
-	 */
+	@Operation(summary = "Actualiza un alumno dado su dni")
+	@ApiResponses(value = {
+			@ApiResponse(code = 200, message = "OK. Alumno actualizado"),
+			@ApiResponse(code = 400, message = "Bad Request. No se ha enviado un objeto a actualizar"),
+			@ApiResponse(code = 404, message = "No se encontro el alumno con el dni proporcionado")
+	})
 	@PutMapping("/{dni}")
 	public ResponseEntity<?> updateAlumnoById(@PathVariable("dni") String dni, @RequestBody AlumnoDTO alumnoDto) {
 		if (alumnoDto == null) return ResponseEntity.badRequest().build();
@@ -117,11 +116,11 @@ public class AlumnoREST {
 		return ResponseEntity.ok("Alumno actualizado");
 	}
 	
-	/**
-	 * Funcion que elimina un alumno con un dni especifico dado
-	 * @param dni Del alumno a eliminar
-	 * @return
-	 */
+	@Operation(summary = "Elimina un alumno dado su dni")
+	@ApiResponses(value = {
+			@ApiResponse(code = 200, message = "OK. Alumno eliminado"),
+			@ApiResponse(code = 404, message = "No se encontro el alumno con el dni proporcionado")
+	})
 	@DeleteMapping("/{dni}")
 	public ResponseEntity<?> deleteAlumnoById(@PathVariable("dni") String dni) {
 		Optional<Alumno> alumno = alumnoService.findById(dni);
@@ -130,12 +129,11 @@ public class AlumnoREST {
 		return ResponseEntity.ok("Alumno eliminado correctamente");
 	}
 	
-	/**
-	 * Funcion para devolver una lista de matriculas dado el dni de un alumno
-	 * @param dni del alumno
-	 * @return
-	 * Devuelve 
-	 */
+	@Operation(summary = "Devuelve una lista de matriculas de un alumno especifico")
+	@ApiResponses(value = {
+			@ApiResponse(code = 200, message = "OK. Devuelve la lista"),
+			@ApiResponse(code = 404, message = "No se encontro el alumno con el dni proporcionado")
+	})
 	@GetMapping("/{dni}/matriculas")
 	public ResponseEntity<?> getMatriculas(@PathVariable("dni") String dni) {
 		ArrayList<ShortMatriculaDTO> matriculas = new ArrayList<ShortMatriculaDTO>();
@@ -145,14 +143,12 @@ public class AlumnoREST {
 		return ResponseEntity.ok(matriculas);
 	}
 	
-	/**
-	 * Funcion para crear una matricula para un alumno indicado
-	 * @param dni Dni del alumno
-	 * @param dto Objeto MatriculaDTO a crear
-	 * @return 
-	 * Devuelve BadRequest si la matricula ya existe
-	 * Devuelve Created si la matricula ha sido creado
-	 */
+	@Operation(summary = "Inserta una matricula a un alumno")
+	@ApiResponses(value = {
+			@ApiResponse(code = 201, message = "OK. Matricula creada"),
+			@ApiResponse(code = 400, message = "Bad Request. No se proporciono un objeto matricula a añadir"),
+			@ApiResponse(code = 404, message = "No se encontro el alumno con el dni proporcionado")
+	})
 	@PostMapping("/{dni}/matriculas")
 	public ResponseEntity<?> insertMatricula(@PathVariable("dni") String dni, @RequestBody MatriculaDTO dto) {
 		if (dto.getIdmatricula() != null) return ResponseEntity.badRequest().build();	
@@ -172,7 +168,12 @@ public class AlumnoREST {
 		return ResponseEntity.status(HttpStatus.CREATED).body("Matricula creada correctamente");
 	}
 
-	
+	@Operation(summary = "Devuelve una matricula especifica de un alumno especifico")
+	@ApiResponses(value = {
+			@ApiResponse(code = 200, message = "OK. Matricula devuelta"),
+			@ApiResponse(code = 404, message = "No se encontro el alumno o la matricula"),
+			@ApiResponse(code = 400, message = "Bad Request. La matricula no pertenece al alumno")
+	})
 	@GetMapping("/{dni}/matriculas/{id}")
 	public ResponseEntity<?> getMatriculaById(@PathVariable("dni") String dni, @PathVariable("id") Integer id) {
 		Optional<Alumno> alumno = alumnoService.findById(dni);
@@ -184,19 +185,17 @@ public class AlumnoREST {
 		return ResponseEntity.ok(matricula.get().toDTO());
 	}
 	
-	/**
-	 * Funcion para eliminar una matricula de un alumno
-	 * @param dni Del alumno
-	 * @param id De la matricula a eliminar
-	 * @return 
-	 * Devuelve ResponseEntity (not Found si no se encuentra la matricula o dicho id no pertenece al alumno indicado)
-	 * Devuelve Ok si se ha eliminado correctamente la matricula
-	 */
+	@Operation(summary = "Elimina una matricula especifica de un alumno especifico")
+	@ApiResponses(value = {
+			@ApiResponse(code = 200, message = "OK. Matricula eliminada"),
+			@ApiResponse(code = 400, message = "La matricula no pertenece al alumno"),
+			@ApiResponse(code = 404, message = "No se encontro la matricula")
+	})
 	@DeleteMapping("/{dni}/matriculas/{id}")
 	public ResponseEntity<?> deleteMatricula(@PathVariable("dni") String dni, @PathVariable("id") Integer id) {
 		Optional<Matricula> matricula = matriculaService.findById(id);
 		if (!matricula.isPresent()) return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No existe ninguna matricula con el identificador indicado");
-		if (!matricula.get().getAlumno().getDni().equals(dni)) return ResponseEntity.status(HttpStatus.NOT_FOUND).body("La matricula no pertenece al alumno indicado");
+		if (!matricula.get().getAlumno().getDni().equals(dni)) return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("La matricula no pertenece al alumno indicado");
 		matriculaService.deleteById(matricula.get());
 		return ResponseEntity.ok("Eliminado correctamente la matricula");
 	}
