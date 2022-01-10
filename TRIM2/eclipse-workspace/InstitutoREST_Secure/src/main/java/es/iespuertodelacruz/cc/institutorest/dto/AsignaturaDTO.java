@@ -1,11 +1,13 @@
 package es.iespuertodelacruz.cc.institutorest.dto;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import javax.persistence.Entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import es.iespuertodelacruz.cc.institutorest.entity.Asignatura;
-import es.iespuertodelacruz.cc.institutorest.entity.Matricula;
 
 public class AsignaturaDTO {
 
@@ -13,7 +15,7 @@ public class AsignaturaDTO {
 	private String curso;
 	private String nombre;
 	@JsonIgnore
-	private List<Matricula> matriculas;
+	private List<MatriculaDTO> matriculas;
 
 	public AsignaturaDTO() {
 		
@@ -23,7 +25,8 @@ public class AsignaturaDTO {
 		this.idasignatura = asignatura.getIdasignatura();
 		this.curso = asignatura.getCurso();
 		this.nombre = asignatura.getNombre();
-		this.matriculas = asignatura.getMatriculas();
+		this.matriculas = new ArrayList<MatriculaDTO>();
+		asignatura.getMatriculas().forEach(m -> matriculas.add(new MatriculaDTO(m)));
 	}
 
 	public Integer getIdasignatura() {
@@ -50,11 +53,11 @@ public class AsignaturaDTO {
 		this.nombre = nombre;
 	}
 
-	public List<Matricula> getMatriculas() {
+	public List<MatriculaDTO> getMatriculas() {
 		return this.matriculas;
 	}
 
-	public void setMatriculas(List<Matricula> matriculas) {
+	public void setMatriculas(List<MatriculaDTO> matriculas) {
 		this.matriculas = matriculas;
 	}
 	

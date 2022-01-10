@@ -1,41 +1,36 @@
 package es.iespuertodelacruz.cc.institutorest.dto;
 
-import java.util.List;
-
 import javax.persistence.Entity;
-
-import org.springframework.data.annotation.Transient;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import es.iespuertodelacruz.cc.institutorest.entity.Alumno;
-import es.iespuertodelacruz.cc.institutorest.entity.Asignatura;
 import es.iespuertodelacruz.cc.institutorest.entity.Matricula;
 
-public class MatriculaDTO {
-	private Integer idmatricula;
+
+public class ShortMatriculaDTO {
+	private int idmatricula;
 	private int year;
-	
 	@JsonIgnore
 	private Alumno alumno;
-	private List<Asignatura> asignaturas;
+	private Integer asignaturas;
 
-	public MatriculaDTO() {
+	public ShortMatriculaDTO() {
 		
 	}
 	
-	public MatriculaDTO(Matricula matricula) {
+	public ShortMatriculaDTO(Matricula matricula) {
 		this.idmatricula = matricula.getIdmatricula();
 		this.year = matricula.getYear();
 		this.alumno = matricula.getAlumno();
-		this.asignaturas = matricula.getAsignaturas();
+		this.asignaturas = matricula.getAsignaturas().size();
 	}
 
-	public Integer getIdmatricula() {
+	public int getIdmatricula() {
 		return this.idmatricula;
 	}
 
-	public void setIdmatricula(Integer idmatricula) {
+	public void setIdmatricula(int idmatricula) {
 		this.idmatricula = idmatricula;
 	}
 
@@ -55,15 +50,12 @@ public class MatriculaDTO {
 		this.alumno = alumno;
 	}
 
-	public List<Asignatura> getAsignaturas() {
+	public Integer getAsignaturas() {
 		return this.asignaturas;
 	}
 
-	public void setAsignaturas(List<Asignatura> asignaturas) {
+	public void setAsignaturas(Integer asignaturas) {
 		this.asignaturas = asignaturas;
 	}
-	
-	public Matricula toMatricula() {
-		return new Matricula(this);
-	}
+
 }

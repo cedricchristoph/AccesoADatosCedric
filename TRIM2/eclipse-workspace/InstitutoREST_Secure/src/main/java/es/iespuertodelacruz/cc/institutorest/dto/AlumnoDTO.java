@@ -3,6 +3,8 @@ package es.iespuertodelacruz.cc.institutorest.dto;
 import java.math.BigInteger;
 import java.util.List;
 
+import javax.persistence.Entity;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import es.iespuertodelacruz.cc.institutorest.entity.Alumno;

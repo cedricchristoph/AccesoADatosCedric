@@ -1,11 +1,14 @@
 package es.iespuertodelacruz.cc.institutorest.repository;
 
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import es.iespuertodelacruz.cc.institutorest.entity.Asignatura;
+import es.iespuertodelacruz.cc.institutorest.entity.User;
 
 @Repository
-public interface AsignaturaRepository extends JpaRepository<Asignatura, Integer>{
+public interface UserRepository extends JpaRepository<User, String> {
 
+	
+	
 }

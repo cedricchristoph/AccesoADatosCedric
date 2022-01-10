@@ -37,7 +37,8 @@ public class MatriculaService implements GenericService<Matricula, Integer>{
 	}
 
 	public Iterable<Matricula> findByAlumno(String dni) {
-		return repository.findAll().stream().filter(m -> m.getAlumno().getDni().equals(dni)).collect(Collectors.toList());
+		return repository.findByAlumno(dni);
+		//return repository.findAll().stream().filter(m -> m.getAlumno().getDni().equals(dni)).collect(Collectors.toList());
 	}
 	
 	@Override
