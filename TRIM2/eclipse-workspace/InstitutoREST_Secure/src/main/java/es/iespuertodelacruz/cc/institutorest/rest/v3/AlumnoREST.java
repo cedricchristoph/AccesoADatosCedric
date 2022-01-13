@@ -1,4 +1,4 @@
-package es.iespuertodelacruz.cc.institutorest.rest;
+package es.iespuertodelacruz.cc.institutorest.rest.v3;
 
 import java.util.ArrayList;
 import java.util.List;

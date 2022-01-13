@@ -1,4 +1,4 @@
-package es.iespuertodelacruz.cc.institutorest.rest;
+package es.iespuertodelacruz.cc.institutorest.rest.v3;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +25,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.annotations.*;
 
 @RestController
-@RequestMapping("/api/asignaturas")
+@RequestMapping("/api/v3/asignaturas")
 public class AsignaturaREST {
 
 	private Logger log = LoggerFactory.getLogger(AsignaturaREST.class);

@@ -34,6 +34,18 @@ public class User {
 	}
 	
 	/**
+	 * Constructor que importa un objeto del mismo tipo
+	 * @param u Objeto usuario que se duplica
+	 */
+	public User(User u) {
+		this.user = u.getUser();
+		this.email = u.getEmail();
+		this.active = u.isActive();
+		this.accessLevel = u.getAccessLevel();
+		this.hashPwd = u.getHashPwd();
+	}
+	
+	/**
 	 * Constructor completo
 	 * @param user Nombre de usuario
 	 * @param email Email del usuario

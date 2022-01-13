@@ -25,8 +25,8 @@ public class LoginController {
 	private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
 
 	/* acepta request del tipo: form urlencode */
-	@PostMapping("/login")
-	public ResponseEntity<?> login(@RequestParam("name") String username, @RequestParam("password") String pwd) {
+	@PostMapping("/api/login")
+	public ResponseEntity<?> login(@RequestParam("username") String username, @RequestParam("password") String pwd) {
 		String token = getJWTToken(username, pwd);
 		//si token nulo es que usuario/pass no es válido
 		if (token != null) {
