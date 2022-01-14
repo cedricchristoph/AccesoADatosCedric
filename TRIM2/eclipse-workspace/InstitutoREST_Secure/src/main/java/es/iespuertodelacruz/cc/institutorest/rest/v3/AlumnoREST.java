@@ -34,7 +34,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.annotations.*;
 @Api
 @RestController
-@RequestMapping("/api/alumnos")
+@RequestMapping("/api/v3/alumnos")
 public class AlumnoREST {
 
 	private Logger log = LoggerFactory.getLogger(AlumnoREST.class);

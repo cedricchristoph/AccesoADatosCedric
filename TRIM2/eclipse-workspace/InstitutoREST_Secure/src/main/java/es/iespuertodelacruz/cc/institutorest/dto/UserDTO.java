@@ -1,8 +1,8 @@
-package es.iespuertodelacruz.cc.institutorest.entity;
+package es.iespuertodelacruz.cc.institutorest.dto;
 
 import org.springframework.security.crypto.bcrypt.BCrypt;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import es.iespuertodelacruz.cc.institutorest.entity.User;
 
 import javax.persistence.*;
 /**
@@ -11,9 +11,7 @@ import javax.persistence.*;
  *
  */
 @Entity
-@Table(name="users")
-@NamedQuery(name="User.findAll", query="SELECT u FROM User u")
-public class User {
+public class UserDTO {
 	
 	/* CONSTANTES GLOBALES ESTATICAS */
 	public static final int ACCESSLEVEL_ADMINISTRATOR = 1;
@@ -25,8 +23,6 @@ public class User {
 	@Id
 	private String user;
 	private String email;
-	@JsonIgnore
-	private String hash;
 	private boolean active;
 	@Column
 	private int type;
@@ -34,20 +30,8 @@ public class User {
 	/**
 	 * Constructor por defecto
 	 */
-	public User() {
+	public UserDTO() {
 		
-	}
-	
-	/**
-	 * Constructor que importa un objeto del mismo tipo
-	 * @param u Objeto usuario que se duplica
-	 */
-	public User(User u) {
-		this.user = u.getUser();
-		this.email = u.getEmail();
-		this.active = u.isActive();
-		this.type = u.getAccessLevel();
-		this.hash = u.getHashPwd();
 	}
 	
 	/**
@@ -58,25 +42,18 @@ public class User {
 	 * @param active Valor que indica si la cuenta esta activa o no
 	 * @param hashPwd Determina si plainPwd será encriptado o no
 	 */
-	public User(String user, String email, String plainPwd, boolean active, boolean hashPwd, int type) {
-		super();
+	public UserDTO(String user, String email, boolean active, int type) {
 		this.user = user;
 		this.email = email;
 		this.active = active;
 		this.type = type;
-		if (hashPwd)
-			this.hash = BCrypt.hashpw(plainPwd, BCrypt.gensalt(10));
-		else
-			this.hash = plainPwd;
-	}
-
-	/**
-	 * Funcion que determina si la contraseña es correcta
-	 * @param plainPwd Contraseña en forma de texto plano
-	 * @return Devuelve true y solo true si la contraseña es correcta.
-	 */
-	public boolean checkPwd(String plainPwd) {
-		return BCrypt.checkpw(plainPwd, hash);
+	}	
+	
+	public UserDTO(User user) {
+		this.user = user.getUser();
+		this.email = user.getEmail();
+		this.active = user.isActive();
+		this.type = user.getAccessLevel();
 	}
 	
 	// Getters and Setters
@@ -97,12 +74,12 @@ public class User {
 		this.email = email;
 	}
 
-	public String getHashPwd() {
-		return hash;
+	public int getType() {
+		return type;
 	}
 
-	public void setHashPwd(String hashPwd) {
-		this.hash = hashPwd;
+	public void setType(int type) {
+		this.type = type;
 	}
 
 	public boolean isActive() {
@@ -123,15 +100,6 @@ public class User {
 			return "Unknown";
 		}
 	}
-	
-	public int getAccessLevel() {
-		return type;
-	}
-
-	public void setAccessLevel(int accessLevel) {
-		this.type = accessLevel;
-	}
-	
 	
 	
 }

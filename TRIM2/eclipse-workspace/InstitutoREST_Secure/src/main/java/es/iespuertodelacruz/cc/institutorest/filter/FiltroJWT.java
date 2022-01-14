@@ -46,6 +46,7 @@ public class FiltroJWT extends OncePerRequestFilter {
 		String token = null;
 		try {
 			token = request.getHeader(gestorDeJWT.AUTHORIZATIONHEADER).replace(gestorDeJWT.BEARERPREFIX, "");
+			logger.info(token);
 			Claims claims = gestorDeJWT.getClaims(token);
 			if (claims.get(gestorDeJWT.ROLSCLAIMS) != null) {
 				setUpSpringAuthentication(claims);
@@ -53,11 +54,13 @@ public class FiltroJWT extends OncePerRequestFilter {
 				SecurityContextHolder.clearContext();
 			}
 		} catch (Exception ex) {
+			logger.error(ex.getMessage());
 			// únicamente para debug.Luego comentar o quitar el
 			ex.printStackTrace();
 			// ex.printStackTrace();
 			SecurityContextHolder.clearContext();
 		}
+		logger.info("llegado");
 		filterChain.doFilter(request, response);
 	}
 }
