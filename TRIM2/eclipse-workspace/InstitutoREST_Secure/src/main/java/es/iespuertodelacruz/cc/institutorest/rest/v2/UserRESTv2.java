@@ -1,4 +1,4 @@
-package es.iespuertodelacruz.cc.institutorest.rest.v3;
+package es.iespuertodelacruz.cc.institutorest.rest.v2;
 
 import java.util.ArrayList;
 import java.util.Optional;
@@ -26,10 +26,10 @@ import io.swagger.annotations.ApiResponses;
 import io.swagger.v3.oas.annotations.Operation;
 
 @RestController
-@RequestMapping("/api/v3/users")
-public class UserREST {
+@RequestMapping("/api/v2/users")
+public class UserRESTv2 {
 
-	private Logger log = LoggerFactory.getLogger(UserREST.class);
+	private Logger log = LoggerFactory.getLogger(UserRESTv2.class);
 	
 	
 	@Autowired
@@ -46,18 +46,6 @@ public class UserREST {
 		return ResponseEntity.ok(users);
 	}
 	
-	@Operation(summary = "Inserta un nuevo usuario")
-	@ApiResponses(value = {
-			@ApiResponse(code = 201, message = "OK. Matricula creada"),
-			@ApiResponse(code = 400, message = "Bad Request. No se especifico un usuario a añadir")
-	})
-	@PostMapping
-	public ResponseEntity<?> insertUser(@RequestBody PlainPasswordUserDTO dto) {
-		if (dto == null) return ResponseEntity.badRequest().body("No se especificó un usuario a añadir");
-		service.save(dto.toUser());
-		return ResponseEntity.status(HttpStatus.CREATED).body("Se ha añadido el usuario correctamente");
-	}
-	
 	@GetMapping("/{username}")
 	public ResponseEntity<?> getUser(@PathVariable("username") String username) {
 		Optional<User> optional = service.findById(username);
@@ -65,28 +53,5 @@ public class UserREST {
 			return ResponseEntity.notFound().build();
 		return ResponseEntity.ok(new UserDTO(optional.get()));
 	}
-	
-	@PutMapping("/{username}")
-	public ResponseEntity<?> updateUser(@PathVariable("username") String username, @RequestBody PlainPasswordUserDTO dto) {
-		if (dto == null) return ResponseEntity.badRequest().body("No se especificó un usuario a actualizar");
-		if (!dto.getUser().equals(username)) return ResponseEntity.badRequest().body("Los nombres de usuarios no coinciden");
-		service.save(dto.toUser());
-		return ResponseEntity.ok("Usuario actualizado con exito.");
-	}
-	
-	@DeleteMapping("/{username}")
-	public ResponseEntity<?> deleteUser(@PathVariable("username") String username) {
-		Optional<User> optional = service.findById(username);
-		if (!optional.isPresent()) return ResponseEntity.notFound().build();
-		service.deleteById(optional.get());
-		return ResponseEntity.ok("Se ha borrado el usuario");
-	}
-	
-	
-	
-	
-	
-	
-	
 	
 }

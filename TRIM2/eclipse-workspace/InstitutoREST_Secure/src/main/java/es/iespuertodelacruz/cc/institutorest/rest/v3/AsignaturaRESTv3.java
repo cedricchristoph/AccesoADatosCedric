@@ -26,9 +26,9 @@ import io.swagger.annotations.*;
 
 @RestController
 @RequestMapping("/api/v3/asignaturas")
-public class AsignaturaREST {
+public class AsignaturaRESTv3 {
 
-	private Logger log = LoggerFactory.getLogger(AsignaturaREST.class);
+	private Logger log = LoggerFactory.getLogger(AsignaturaRESTv3.class);
 	
 	@Autowired
 	private AsignaturaService service;

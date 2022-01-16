@@ -1,4 +1,4 @@
-package es.iespuertodelacruz.cc.institutorest.rest.v3;
+package es.iespuertodelacruz.cc.institutorest.rest.v2;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,10 +34,10 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.annotations.*;
 @Api
 @RestController
-@RequestMapping("/api/v3/alumnos")
-public class AlumnoREST {
+@RequestMapping("/api/v2/alumnos")
+public class AlumnoRESTv2 {
 
-	private Logger log = LoggerFactory.getLogger(AlumnoREST.class);
+	private Logger log = LoggerFactory.getLogger(AlumnoRESTv2.class);
 	
 	@Autowired
 	private AlumnoService alumnoService;

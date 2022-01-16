@@ -4,5 +4,6 @@
 		<class>es.iespuertodelacruz.cc.institutorest.entity.Alumno</class>
 		<class>es.iespuertodelacruz.cc.institutorest.entity.Asignatura</class>
 		<class>es.iespuertodelacruz.cc.institutorest.entity.Matricula</class>
+		<class>es.iespuertodelacruz.cc.institutorest.entity.User</class>
 	</persistence-unit>
 </persistence>
