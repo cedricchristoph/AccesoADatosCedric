@@ -13,6 +13,15 @@ nos muestre en pantalla nuestro nombre completo.
 console.log("Cedric Christoph");
 ```
 
+## Practica 02
+Hacer uso de nodemon con la app anterior
+```ruby
+nodemon app.js
+```
+y comprobar que mientras editamos el fichero ( agregamos delante de nuestro nombre: “nombre del alumno: ” ) y guardamos, automáticamente nos muestra la ejecución de los cambios.
+
+
+
 ## Practica 03
 Crear la aplicación descrita
 ```ruby
