@@ -1,5 +1,8 @@
 # Dossier Node
 Esta página contiene todas las prácticas propuestas.
+<br/>
+<a href="https://github.com/cedricchristoph/AccesoADatosCedric/blob/main/TRIM2/Dossier_Node/Dossier%20Node.pdf">
+    Abrir Dossier en formato PDF</a>
 
 ## Practica 01
 Crear una aplicación que al ejecutar:
@@ -20,7 +23,7 @@ nodemon app.js
 ```
 y comprobar que mientras editamos el fichero ( agregamos delante de nuestro nombre: “nombre del alumno: ” ) y guardamos, automáticamente nos muestra la ejecución de los cambios.
 
-
+![alt text](https://github.com/cedricchristoph/AccesoADatosCedric/blob/main/TRIM2/Dossier_Node/Practica_02/result.png)
 
 ## Practica 03
 Crear la aplicación descrita
