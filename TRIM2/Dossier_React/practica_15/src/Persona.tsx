@@ -22,6 +22,7 @@ export class Persona {
         this.altura = altura;
         this.edad = edad;
         this.peso = peso;
+        return this;
     }
 
     calcularImc() {
