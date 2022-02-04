@@ -1,0 +1,28 @@
+* {
+  text-align: center;
+  justify-items: center;
+  justify-content: center;
+}
+
+.wrapper {
+  display: grid;
+  grid-template-columns: 300px, auto; 
+  grid-template-rows: auto;
+  gap: 1rem;
+}
+
+.card {
+  width: 300px;
+  padding: 1rem;
+  background-color: blanchedalmond;
+}
+
+.card input {
+  padding: 3px;
+  display: inline-block;
+}
+
+.input-box {
+  margin-top: 20px;
+  padding: 5px, 2px;
+}
