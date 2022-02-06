@@ -4,6 +4,7 @@ import React from 'react';
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import MonedaService from "../../service/MonedaService";
 
 interface IState { moneda?: IMoneda }
 
@@ -22,6 +23,14 @@ export function Moneda() {
                 setStmoneda({ moneda });
             }
             getMoneda(idmoneda);
+            /*MonedaService.selectById(idmoneda)
+            .then((response: any) => {
+                let moneda: IMoneda = response;
+                setStmoneda({moneda});
+            })
+            .catch((e: Error) => {
+                console.log(e.message);
+            });*/
         },
         [idmoneda]
     );
@@ -31,9 +40,9 @@ export function Moneda() {
             <div className="container">
                 <h1>Moneda #{stmoneda.moneda?.idmoneda}</h1>
                 <p>
-                    Nombre: {stmoneda.moneda?.nombre.toUpperCase()}
+                    <b>Nombre: </b>{stmoneda.moneda?.nombre.toUpperCase()}
                 <br/>
-                    País: {stmoneda.moneda?.pais}
+                    <b>País: </b>{stmoneda.moneda?.pais}
                 </p>
             </div>
         </>

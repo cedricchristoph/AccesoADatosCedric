@@ -25,9 +25,85 @@ code {
 }
 
 .menu a:hover {
-  background-color: #131313;
+  background-color: #222222;
 }
 
 .container {
-  padding: 2rem;
+  padding: 2rem 2rem 2rem 2rem;
+}
+
+.moneda-wrapper{
+  display: grid;
+  grid-template-columns: 160px 160px 160px 160px; 
+  grid-template-rows: 180px;
+  gap: 5rem;
+}
+
+.moneda-card {
+  display: inline-block;
+  width: 150px;
+  height: 180px;
+
+  border: 1px rgb(195, 195, 195) solid;
+  padding-left: 15px;
+  padding-right: 15px;
+
+  transition: transform .15s ease;
+}
+
+.moneda-card:hover {
+  border: 1px rgb(31, 139, 207) solid;
+  color: rgb(31, 139, 207);
+  transform: scale(1.1);
+}
+
+.moneda-card:active {
+  transform: scale(1);
+}
+
+.submit-button {
+  margin-top: 20px;
+  background-color: #239c3e;
+  color: white;
+  padding: 20px 40px;
+  font-size: 19px;
+  border: none;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.submit-button:hover {
+  background-color: #1b8d34;
+}
+
+form input[type="text"] {
+  padding: 16px;
+  font-size: 20px;
+  border: 1px #cccccc solid;
+  margin: 5px 0px;
+}
+
+.bottom-tool-bar {
+  background-color: #000000;
+  position: fixed;
+  width: 100%;
+  height: 50px;
+  bottom: 0;
+}
+
+.tool-bar-button {
+  background-color: #000000;
+  color: white;
+  border: none;
+  height: 100%;
+  width: 100px;
+  font-size: 17px;
+}
+
+.tool-bar-button:hover {
+  background-color: #222222;
+}
+
+.tool-bar-button:active {
+  background-color: #646464;
 }
