@@ -1,26 +1,41 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Link, Route, Routes } from 'react-router-dom';
+import AlumnoDetails from './views/AlumnoDetails';
+import Alumnos from './views/Alumnos';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+
+/*
+                <Route path="/alumnos/add" element={<AddAlumno/>}/>
+                <Route path="/alumnos/edit" element={<AlumnoDetails/>}/>
+                <Route path="/alumnos/:dni/matriculas/:id" element={<MatriculaDetails/>}/>
+                <Route path="/asignaturas" element={<Asignaturas/>}/>
+                <Route path="/asignaturas/:id" element={<AsignaturaDetails/>}/>
+                <Route path="/asignaturas/add" element={<AsignaturaDetails/>}/>
+*/
+
+  return(
+    <>
+        <BrowserRouter>
+            <Navbar />
+            <Routes>
+                <Route path="/" element={<Alumnos/>}/>
+                <Route path="/alumnos" element={<Alumnos/>}/>
+                <Route path="/alumnos/:id" element={<AlumnoDetails />}/>
+            </Routes>
+        </BrowserRouter>
+    </>
   );
+
+  function Navbar() {
+    return (
+      <nav className='menu'>
+          <Link to="/"> Alumnos </Link>&nbsp;
+          <Link to="/asignaturas"> Asignaturas </Link>&nbsp;
+      </nav>
+  );
+  }
+
 }
 
 export default App;
