@@ -27,7 +27,7 @@ export default function Monedas() {
     );
 
     async function selectAllMonedas() {
-        let rutaDeMoneda = "http://localhost:8080/api/v1/monedas/";
+        let rutaDeMoneda = "http://localhost:8080/api/v1/monedas";
         let { data } = await axios.get(rutaDeMoneda);
         let arrMonedas: Array<IMoneda> = data;
         console.log(arrMonedas);

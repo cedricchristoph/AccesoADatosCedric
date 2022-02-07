@@ -20,7 +20,7 @@ export function Moneda() {
                 let { data } = await axios.get(rutaDeMoneda + monedaid);
                 let moneda: IMoneda = data;
                 console.log(moneda);
-                setStmoneda({ moneda });
+                setStmoneda({moneda: moneda});
             }
             getMoneda(idmoneda);
             /*MonedaService.selectById(idmoneda)

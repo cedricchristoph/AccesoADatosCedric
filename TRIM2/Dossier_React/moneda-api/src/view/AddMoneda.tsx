@@ -8,12 +8,31 @@ interface IState {moneda: IMoneda}
 
 export default function AddMoneda() {
     
-    const [stmoneda, setStmoneda] = useState<IState>({moneda: {idmoneda: -1, nombre: "", pais: "", historicos: []}});
+    const [stmoneda, setStmoneda] = useState<IState>({moneda: {idmoneda: null, nombre: "", pais: "", historicos: []}});
     let navigate = useNavigate();
     
-    const save = async () => {
-        let rutaDeMoneda = "http://localhost:8080/api/v1/monedas/";
-        axios.post(rutaDeMoneda, stmoneda).then(() => navigate("/")).catch((e: Error) => {console.log(e.stack)});
+    function save (event:React.FormEvent<HTMLFormElement>) {
+        event.preventDefault();
+        let formulario: HTMLFormElement = event.currentTarget;
+        let inputnombre: HTMLInputElement = formulario.nombre;
+        let inputpais: HTMLInputElement = formulario.country;
+        let moneda: IMoneda = {
+            idmoneda: null, 
+            nombre: inputnombre.value.toString(), 
+            pais: inputpais.value.toString(), 
+            historicos: []
+        };
+        const asyncsave = async () => {
+            let rutaDeMoneda = "http://localhost:8080/api/v1/monedas";
+            
+            try {
+                let { data } = await axios.post(rutaDeMoneda, moneda);
+            } catch {
+                console.log()
+            } 
+        }
+        asyncsave();
+        navigate("/");
     }
 
     return (
@@ -21,21 +40,10 @@ export default function AddMoneda() {
         <div className='container'>
             <h1>Añadir una moneda</h1>
             <form onSubmit={save}>
-                <label>ID:</label><br/>
-                <input type="text" id="id" onChange={(e) => {
-                    stmoneda.moneda.idmoneda = Number.parseInt(e.target.value);
-                    setStmoneda(stmoneda);
-                }}/><br/>
                 <label>Nombre</label><br/>
-                <input type="text" id="nombre" onChange={(e) => {
-                    stmoneda.moneda.nombre = e.target.value;
-                    setStmoneda(stmoneda);
-                }}/><br/>
+                <input type="text" id="nombre"/><br/>
                 <label>País</label><br/>
-                <input type="text" id="country" onChange={(e) => {
-                    stmoneda.moneda.pais = e.target.value;
-                    setStmoneda(stmoneda);
-                }}/><br/>
+                <input type="text" id="country"/><br/>
                 <input className="submit-button" type="submit" value="Guardar"/>
             </form>
         </div>
