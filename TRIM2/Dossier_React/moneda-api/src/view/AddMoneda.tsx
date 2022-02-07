@@ -13,7 +13,7 @@ export default function AddMoneda() {
     
     const save = async () => {
         let rutaDeMoneda = "http://localhost:8080/api/v1/monedas/";
-        axios.post(rutaDeMoneda, stmoneda).then(() => navigate("/")).catch(() => {});
+        axios.post(rutaDeMoneda, stmoneda).then(() => navigate("/")).catch((e: Error) => {console.log(e.stack)});
     }
 
     return (
