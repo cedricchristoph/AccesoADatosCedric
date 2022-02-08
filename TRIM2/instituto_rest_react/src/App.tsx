@@ -3,7 +3,8 @@ import { BrowserRouter, Link, Route, Routes } from 'react-router-dom';
 import AddAlumno from './views/alumno/AddAlumno';
 import AlumnoDetails from './views/alumno/AlumnoDetails';
 import EliminarAlumno from './views/alumno/EliminarAlumno';
-import Alumnos from './views/Alumnos';
+import Alumnos from './views/alumno/Alumnos';
+import Asignaturas from './views/asignaturas/Asignaturas';
 
 
 function App() {
@@ -28,6 +29,8 @@ function App() {
                 <Route path="/alumnos/add" element={<AddAlumno />}/>
                 <Route path="/alumnos/:dni/edit" element={<AddAlumno />} />
                 <Route path="/alumnos/:dni/delete" element={<EliminarAlumno />}/>
+
+                <Route path="/asignaturas" element={<Asignaturas />}/>
             </Routes>
         </BrowserRouter>
     </>

@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import AlumnoDetailToolBar from "../../components/AlumnoDetailToolBar";
+import AlumnoDetailToolBar from "../../components/alumno/AlumnoDetailToolBar";
 import IAlumno from "../../model/entity/IAlumno";
 import ApiUrl from "../../model/util/ApiUtil";
 import StringUtils from "../../model/util/StringUtils";

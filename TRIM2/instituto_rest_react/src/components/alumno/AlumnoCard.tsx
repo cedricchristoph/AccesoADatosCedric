@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import IAlumno from "../model/entity/IAlumno";
-import StringUtils from "../model/util/StringUtils";
+import IAlumno from "../../model/entity/IAlumno";
+import StringUtils from "../../model/util/StringUtils";
 
 interface IProps {alumno: IAlumno}
 interface IState {alumno: IAlumno}

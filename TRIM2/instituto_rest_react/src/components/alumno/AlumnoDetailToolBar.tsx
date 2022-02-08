@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import IAlumno from '../model/entity/IAlumno';
+import IAlumno from '../../model/entity/IAlumno';
 
 interface IProps {alumno: IAlumno | undefined}
 
