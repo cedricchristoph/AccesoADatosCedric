@@ -14,29 +14,51 @@ code {
 
 .menu {
   background-color: #000000;
-  padding: 1rem;
+  /*margin-top: 1rem;*/
+  padding: 1.2rem;
+  color: white;
 }
 
 .menu a {
   background-color: #000000;
   text-decoration: none;
+  font-weight: 400;
   color: white;
-  padding: 10px;
+  padding: 1.2rem 1.5rem;
+  
+}
+
+.menu a[type="no-link"] {
+  font-weight: 100;
+  margin-right: 2rem;
 }
 
 .menu a:hover {
   background-color: #222222;
 }
 
+.menu a[type="no-link"]:hover {
+  background-color: #000000;
+}
+
+.inline {
+  display: inline;
+}
+
 .container {
   padding: 2rem 2rem 2rem 2rem;
 }
 
+.container h1 {
+  font-weight: 100;
+}
+
 .alumno-wrapper{
   display: grid;
-  grid-template-columns: 220px 220px;
-  /*grid-template-rows: 180px;*/
+  grid-template-columns: repeat(5, 13rem);/*220px 220px*/
+  grid-template-rows: repeat(auto-fill, 8rem);;
   gap: 4rem;
+
 }
 
 .alumno-card {
@@ -59,6 +81,10 @@ code {
 
 .alumno-card:active {
   transform: scale(1);
+}
+
+.alumno-card p {
+  font-weight: 300;
 }
 
 .submit-button {
@@ -84,26 +110,71 @@ form input[type="text"] {
 }
 
 .bottom-tool-bar {
-  background-color: #000000;
   position: fixed;
-  width: 100%;
-  height: 50px;
+  bottom: 1rem;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  background-color: transparent;
+  position: fixed;
+  width: auto;
+  height: 4.5rem;
   bottom: 0;
 }
 
 .tool-bar-button {
-  background-color: #000000;
-  color: white;
+  background-color: transparent;
+  color: rgb(15, 15, 15);
   border: none;
   height: 100%;
-  width: 100px;
+  width: 5rem;
+  margin-right: 1rem;
   font-size: 17px;
+  border-radius: 80px;
 }
 
 .tool-bar-button:hover {
-  background-color: #222222;
+  background-color: #909090;
 }
 
 .tool-bar-button:active {
-  background-color: #646464;
+  background-color: #747474;
+}
+
+#green-btn {
+  background-color: #239c3e;
+  color: white;
+}
+
+#green-btn:hover {
+  background-color: #1b8d34;
+}
+
+#green-btn:active {
+  background-color: #17802d;
+}
+
+#blue-btn {
+  background-color: rgb(31, 139, 207);
+  color: white;
+}
+
+#blue-btn:hover {
+  background-color: rgb(23, 126, 190);
+}
+
+#blue-btn:active {
+  background-color: rgb(17, 115, 175);
+}
+
+#red-btn {
+  background-color: #db1b1b;
+  color: white;
+}
+
+#red-btn:hover {
+  background-color: #a11515;
+}
+
+#red-btn:active {
+  background-color: #860d0d;
 }

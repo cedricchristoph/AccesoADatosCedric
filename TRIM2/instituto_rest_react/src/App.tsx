@@ -1,7 +1,10 @@
 import React from 'react';
 import { BrowserRouter, Link, Route, Routes } from 'react-router-dom';
-import AlumnoDetails from './views/AlumnoDetails';
+import AddAlumno from './views/alumno/AddAlumno';
+import AlumnoDetails from './views/alumno/AlumnoDetails';
+import EliminarAlumno from './views/alumno/EliminarAlumno';
 import Alumnos from './views/Alumnos';
+
 
 function App() {
 
@@ -22,6 +25,9 @@ function App() {
                 <Route path="/" element={<Alumnos/>}/>
                 <Route path="/alumnos" element={<Alumnos/>}/>
                 <Route path="/alumnos/:id" element={<AlumnoDetails />}/>
+                <Route path="/alumnos/add" element={<AddAlumno />}/>
+                <Route path="/alumnos/:dni/edit" element={<AddAlumno />} />
+                <Route path="/alumnos/:dni/delete" element={<EliminarAlumno />}/>
             </Routes>
         </BrowserRouter>
     </>
@@ -30,8 +36,11 @@ function App() {
   function Navbar() {
     return (
       <nav className='menu'>
+        <div className='inline'>
+          <Link to="/" type='no-link'>&nbsp;Aplicación Instituto Rest</Link>&nbsp;
           <Link to="/"> Alumnos </Link>&nbsp;
           <Link to="/asignaturas"> Asignaturas </Link>&nbsp;
+        </div>
       </nav>
   );
   }

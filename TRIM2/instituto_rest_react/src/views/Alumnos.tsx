@@ -4,8 +4,8 @@ import { useEffect, useState } from "react";
 import { isClassStaticBlockDeclaration } from "typescript";
 import AlumnoCard from "../components/AlumnoCard";
 import IAlumno from "../model/entity/IAlumno";
-import ApiUrl from "../model/networking/ApiUtil";
-import ApiUtil from "../model/networking/ApiUtil";
+import ApiUrl from "../model/util/ApiUtil";
+import AlumnosToolBar from "../components/AlumnosToolBar";
 
 export default function Alumnos() {
 
@@ -21,6 +21,7 @@ export default function Alumnos() {
     async function selectAllAlumnos() {
         let {data} = await axios.get(ApiUrl() + "/alumnos");
         let arrAlumno: Array<IAlumno> = data;
+        console.log(data);
         setStAlumnos(arrAlumno);
     }
 
@@ -31,6 +32,7 @@ export default function Alumnos() {
             <div className="alumno-wrapper">
                 {stalumnos.map((alumno) => <AlumnoCard alumno={alumno}/>)}
             </div>
+            <AlumnosToolBar />
         </div>
         </>
     );

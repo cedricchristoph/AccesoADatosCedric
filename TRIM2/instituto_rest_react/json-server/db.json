@@ -22,5 +22,70 @@
     "apellidos": "A",
     "fechanacimiento": 976579200000,
     "nombre": "A"
-  }]
+  },
+  {
+    "id": "X8741949V",
+    "apellidos": "Christoph",
+    "fechanacimiento": 976579200000,
+    "nombre": "Cedric"
+  },
+  {
+    "id": "554466333X",
+    "apellidos": "Sosa",
+    "fechanacimiento": 976579200000,
+    "nombre": "Jesus"
+  },
+  {
+    "id": "568573353G",
+    "apellidos": "Perez",
+    "fechanacimiento": 976579200000,
+    "nombre": "Jorge"
+  }],
+  "asignaturas":[
+    {
+      "idasignatura": 4,
+      "curso": "2º DAM",
+      "nombre": "AED"
+    },
+    {
+      "idasignatura": 1,
+      "curso": "1º DAM",
+      "nombre": "BAE"
+    },
+    {
+      "idasignatura": 6,
+      "curso": "2º DAW",
+      "nombre": "DPL"
+    },
+    {
+      "idasignatura": 5,
+      "curso": "2º DAW",
+      "nombre": "DSW"
+    },
+    {
+      "idasignatura": 9,
+      "curso": "3º ESO",
+      "nombre": "FYQ"
+    },
+    {
+      "idasignatura": 3,
+      "curso": "1º DAM",
+      "nombre": "LND"
+    },
+    {
+      "idasignatura": 8,
+      "curso": "2º DAM",
+      "nombre": "PGL"
+    },
+    {
+      "idasignatura": 2,
+      "curso": "2º DAM",
+      "nombre": "PGV"
+    },
+    {
+      "idasignatura": 7,
+      "curso": "1º DAM",
+      "nombre": "PRO"
+    }
+  ]
 }
