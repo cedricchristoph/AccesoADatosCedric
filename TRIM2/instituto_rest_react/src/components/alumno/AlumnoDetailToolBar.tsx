@@ -18,8 +18,8 @@ export default function AlumnoDetailToolBar(props: IProps) {
     return (
         <>
         <div className="bottom-tool-bar">
-            <button id="blue-btn" className="tool-bar-button" onClick={onEditClicked}>Editar</button>
-            <button id="red-btn" className="tool-bar-button" onClick={onDeleteClicked}>Eliminar</button>
+            <button id="blue-btn" className="tool-bar-button" onClick={onEditClicked}>*</button>
+            <button id="red-btn" className="tool-bar-button" onClick={onDeleteClicked}>-</button>
         </div>
         </>
     );

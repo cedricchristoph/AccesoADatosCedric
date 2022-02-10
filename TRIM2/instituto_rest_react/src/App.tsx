@@ -10,6 +10,7 @@ import AddMatricula from './views/matriculas/AddMatricula';
 import EliminarMatricula from './views/matriculas/EliminarMatricula';
 import AddAsignatura from './views/asignaturas/AddAsignatura';
 import EliminarAsignatura from './views/asignaturas/EliminarAsignatura';
+import ApiConnectionError from './views/ApiConnectionError';
 
 
 function App() {
@@ -28,6 +29,8 @@ function App() {
         <BrowserRouter>
             <Navbar />
             <Routes>
+                <Route path="/connection_error" element={<ApiConnectionError/>}/>
+
                 <Route path="/" element={<Alumnos/>}/>
 
                 <Route path="/alumnos" element={<Alumnos/>}/>

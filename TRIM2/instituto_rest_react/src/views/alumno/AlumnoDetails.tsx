@@ -18,9 +18,14 @@ export default function AlumnoDetails() {
     useEffect(() => {
         const selectAlumno = async (id: string | undefined) => {
             let ruta = ApiUrl() + "/alumnos/" + id;
-            let {data} = await axios.get(ruta);
-            let alumno: IAlumno = data;
-            setStAlumno({alumno: alumno});
+            try {
+                let {data} = await axios.get(ruta);
+                let alumno: IAlumno = data;
+                setStAlumno({alumno: alumno});
+            } catch {
+                navigate("/connection_error");
+            }
+            
         }
         selectAlumno(id);
     }, [id]);

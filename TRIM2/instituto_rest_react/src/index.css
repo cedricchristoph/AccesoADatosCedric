@@ -183,16 +183,19 @@ form input[type="text"] {
   height: 100%;
   width: 5rem;
   margin-right: 1rem;
-  font-size: 17px;
-  border-radius: 80px;
+  font-size: 38px;
+  border-radius: 100%;
+  transition: transform .15s ease;
 }
 
 .tool-bar-button:hover {
   background-color: #909090;
+  transform: scale(1.1);
 }
 
 .tool-bar-button:active {
   background-color: #747474;
+  transform: scale(1);
 }
 
 table {
@@ -233,6 +236,16 @@ select {
 button {
   padding: .5rem 1rem;
   border: none;
+}
+
+.no_internet {
+  margin-top: 1rem;
+  content: url("./icons/caveman.gif");
+}
+
+.error-page {
+  background-color: #F0F4F7;
+
 }
 
 #green-btn {

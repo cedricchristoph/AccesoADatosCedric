@@ -12,9 +12,9 @@ export default function EliminarAlumno() {
     useEffect(() => {
         const eliminar = async () => {
             await axios.delete(ApiUrl() + "/alumnos/" + dni);
+            navigate("/");
         }
         eliminar();
-        navigate("/");
     }, []);
 
     return (<></>);

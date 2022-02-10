@@ -15,10 +15,15 @@ export default function Matriculas(props: IProps) {
     useEffect(() => {
         const selectMatriculas = async (id: string | undefined) => {
             let ruta = ApiUrl() + "/alumnos/" + id + "/matriculas";
-            let {data} = await axios.get(ruta);
-            let arrMatricula: Array<IMatricula> = data;
-            console.log(arrMatricula);
-            setStMatriculas(arrMatricula);
+            try {
+                let {data} = await axios.get(ruta);
+                let arrMatricula: Array<IMatricula> = data;
+                console.log(arrMatricula);
+                setStMatriculas(arrMatricula);
+            } catch {
+                navigate("/connection_error");
+            }
+            
         }
         selectMatriculas(props.dni);
     }, []);

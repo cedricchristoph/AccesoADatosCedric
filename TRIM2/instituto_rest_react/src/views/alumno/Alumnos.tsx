@@ -6,18 +6,25 @@ import AlumnoCard from "../../components/alumno/AlumnoCard";
 import IAlumno from "../../model/entity/IAlumno";
 import ApiUrl from "../../model/util/ApiUtil";
 import AlumnosToolBar from "../../components/alumno/AlumnosToolBar";
+import { useNavigate } from 'react-router-dom';
 
 export default function Alumnos() {
 
     const [stalumnos, setStAlumnos] = useState<Array<IAlumno>>([]);
     
+    let navigate = useNavigate();
+
     useEffect(
         () => {
             async function selectAllAlumnos() {
-                let {data} = await axios.get(ApiUrl() + "/alumnos");
-                let arrAlumno: Array<IAlumno> = data;
-                console.log(data);
-                setStAlumnos(arrAlumno);
+                try {
+                    let {data} = await axios.get(ApiUrl() + "/alumnos");
+                    let arrAlumno: Array<IAlumno> = data;
+                    console.log(data);
+                    setStAlumnos(arrAlumno);
+                } catch {
+                    navigate("/connection_error");
+                }
             }            
             selectAllAlumnos();    
         }, 

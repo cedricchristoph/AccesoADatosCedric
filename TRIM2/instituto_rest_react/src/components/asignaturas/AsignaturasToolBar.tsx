@@ -10,7 +10,7 @@ export default function AsignaturaToolBar() {
     return (
         <>
         <div className="bottom-tool-bar">
-            <button id="green-btn" className="tool-bar-button" onClick={onAddClicked}>Añadir</button>
+            <button id="green-btn" className="tool-bar-button" onClick={onAddClicked}>+</button>
         </div>
         </>
     );
