@@ -13,17 +13,18 @@ export default function Alumnos() {
     
     useEffect(
         () => {
+            async function selectAllAlumnos() {
+                let {data} = await axios.get(ApiUrl() + "/alumnos");
+                let arrAlumno: Array<IAlumno> = data;
+                console.log(data);
+                setStAlumnos(arrAlumno);
+            }            
             selectAllAlumnos();    
         }, 
         []
     );
 
-    async function selectAllAlumnos() {
-        let {data} = await axios.get(ApiUrl() + "/alumnos");
-        let arrAlumno: Array<IAlumno> = data;
-        console.log(data);
-        setStAlumnos(arrAlumno);
-    }
+
 
     return (
         <>

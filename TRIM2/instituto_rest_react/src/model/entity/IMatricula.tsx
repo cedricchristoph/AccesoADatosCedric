@@ -3,7 +3,7 @@ import IAsignatura from "./IAsignatura";
 
 export default interface IMatricula {
 
-    idmatricula: Number;
+    idmatricula: Number | undefined;
     year: Number;
     asignaturas: Array<IAsignatura>
 

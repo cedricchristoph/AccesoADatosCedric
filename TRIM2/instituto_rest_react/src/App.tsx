@@ -5,6 +5,9 @@ import AlumnoDetails from './views/alumno/AlumnoDetails';
 import EliminarAlumno from './views/alumno/EliminarAlumno';
 import Alumnos from './views/alumno/Alumnos';
 import Asignaturas from './views/asignaturas/Asignaturas';
+import EditAlumno from './views/alumno/EditAlumno';
+import AddMatricula from './views/matriculas/AddMatricula';
+import EliminarMatricula from './views/matriculas/EliminarMatricula';
 
 
 function App() {
@@ -24,13 +27,17 @@ function App() {
             <Navbar />
             <Routes>
                 <Route path="/" element={<Alumnos/>}/>
+                
                 <Route path="/alumnos" element={<Alumnos/>}/>
                 <Route path="/alumnos/:id" element={<AlumnoDetails />}/>
                 <Route path="/alumnos/add" element={<AddAlumno />}/>
-                <Route path="/alumnos/:dni/edit" element={<AddAlumno />} />
+                <Route path="/alumnos/:dni/edit" element={<EditAlumno />} />
                 <Route path="/alumnos/:dni/delete" element={<EliminarAlumno />}/>
-
+                <Route path="/alumnos/:dni/matriculas/add" element={<AddMatricula />} />
+                <Route path="/alumnos/:dni/matriculas/:id/delete" element={<EliminarMatricula/>}/>
+                
                 <Route path="/asignaturas" element={<Asignaturas />}/>
+                
             </Routes>
         </BrowserRouter>
     </>

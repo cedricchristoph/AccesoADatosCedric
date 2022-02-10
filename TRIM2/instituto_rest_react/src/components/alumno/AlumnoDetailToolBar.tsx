@@ -8,7 +8,7 @@ export default function AlumnoDetailToolBar(props: IProps) {
     let navigate = useNavigate();
 
     const onEditClicked = () => {
-        navigate("/alumnos/edit");
+        navigate("/alumnos/" + props.alumno?.dni + "/edit");
     }
 
     const onDeleteClicked = () => {

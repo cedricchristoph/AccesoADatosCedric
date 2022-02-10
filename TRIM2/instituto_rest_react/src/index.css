@@ -195,6 +195,46 @@ form input[type="text"] {
   background-color: #747474;
 }
 
+table {
+  border-collapse: collapse;
+  color: #212529;
+}
+
+th {
+  padding: 1rem;
+}
+
+tr {
+  padding: .75rem;
+  vertical-align: top;
+  border-top: 1px solid #dee2e6;
+}
+
+td {
+	border: none;
+	padding: 1rem;
+	border-bottom: 3px solid #f8f9fd;
+	font-size: 14px;
+}
+
+.clickable {
+  background-color: transparent;
+}
+
+.clickable:hover {
+  background-color: rgb(31, 139, 207);
+  color: white;
+}
+
+select {
+  width: 500px;
+}
+
+button {
+  padding: .5rem 1rem;
+  border: none;
+}
+
 #green-btn {
   background-color: #239c3e;
   color: white;
