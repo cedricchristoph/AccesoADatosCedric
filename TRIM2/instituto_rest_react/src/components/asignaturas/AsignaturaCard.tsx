@@ -15,11 +15,15 @@ export default function AsignaturaCard(props: IProps) {
         navigate(route);
     }
 
+    const eliminarClicked = () => {
+        navigate("/asignaturas/" + stasignatura.asignatura.idasignatura + "/delete");
+    }
+
     return (
         <>
         <div className="asignatura-card">
             <div className="top-tool-bar">
-                <button className="top-tool-button top-tool-delete">✕</button>
+                <button className="top-tool-button top-tool-delete" onClick={eliminarClicked}>✕</button>
             </div>
             <div onClick={asignaturaClicked}>
                 <h3>{stasignatura.asignatura.nombre}</h3>

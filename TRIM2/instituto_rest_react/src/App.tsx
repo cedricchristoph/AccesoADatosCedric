@@ -8,6 +8,8 @@ import Asignaturas from './views/asignaturas/Asignaturas';
 import EditAlumno from './views/alumno/EditAlumno';
 import AddMatricula from './views/matriculas/AddMatricula';
 import EliminarMatricula from './views/matriculas/EliminarMatricula';
+import AddAsignatura from './views/asignaturas/AddAsignatura';
+import EliminarAsignatura from './views/asignaturas/EliminarAsignatura';
 
 
 function App() {
@@ -27,7 +29,7 @@ function App() {
             <Navbar />
             <Routes>
                 <Route path="/" element={<Alumnos/>}/>
-                
+
                 <Route path="/alumnos" element={<Alumnos/>}/>
                 <Route path="/alumnos/:id" element={<AlumnoDetails />}/>
                 <Route path="/alumnos/add" element={<AddAlumno />}/>
@@ -37,7 +39,8 @@ function App() {
                 <Route path="/alumnos/:dni/matriculas/:id/delete" element={<EliminarMatricula/>}/>
                 
                 <Route path="/asignaturas" element={<Asignaturas />}/>
-                
+                <Route path="/asignaturas/add" element={<AddAsignatura/>}/>
+                <Route path="/asignaturas/:id/delete" element={<EliminarAsignatura/>}/>
             </Routes>
         </BrowserRouter>
     </>

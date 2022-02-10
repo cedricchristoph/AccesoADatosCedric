@@ -43,7 +43,7 @@ export default function Matriculas(props: IProps) {
                 <>
                     <table>
                         <th>Año de matriculación</th>
-                        <th>Matrículas matriculadas</th>
+                        <th>Asignaturas matriculadas</th>
                         <th>Herramientas</th>
                         {stmatriculas.map((matricula) => 
                         <tr className="clickable">

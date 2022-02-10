@@ -5,6 +5,7 @@ import { isClassStaticBlockDeclaration } from "typescript";
 import ApiUrl from "../../model/util/ApiUtil";
 import IAsignatura from "../../model/entity/IAsignatura";
 import AsignaturaCard from "../../components/asignaturas/AsignaturaCard";
+import AsignaturaToolBar from "../../components/asignaturas/AsignaturasToolBar";
 
 export default function Asignaturas() {
 
@@ -29,7 +30,12 @@ export default function Asignaturas() {
         <div className="container">
             <h1>Asignaturas</h1>
             <div className="asignatura-wrapper">
-                {stasignaturas.length === 0 ? <span className="loader"></span> : stasignaturas.map((asignatura) => <AsignaturaCard asignatura={asignatura}/>) }
+                {stasignaturas.length === 0 ? <span className="loader"></span> : 
+                <>
+                {stasignaturas.map((asignatura) => <AsignaturaCard asignatura={asignatura}/>)}
+                <AsignaturaToolBar/> 
+                </>
+                }
             </div>
         </div>
         </>

@@ -1,7 +1,7 @@
 
 export default interface IAsignatura {
 
-    idasignatura: Number;
+    idasignatura: Number | undefined;
     curso: String;
     nombre: String;
 
