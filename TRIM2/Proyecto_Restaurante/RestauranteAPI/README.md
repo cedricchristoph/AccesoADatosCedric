@@ -13,6 +13,7 @@ Las rutas de acceso público/anónimo son aquellas que no requieren de ningún t
 y podrán ser accedidos por cualquiera.
 
 * LOGIN Y MESAS
+	
 	[x] POST /api/login  (LoginController)
 		Este endpoint permitirá enviar por URLENCODE un 'username' y un 'password' donde la API
 		responderá con un mensaje de error o un TOKEN válido para su posterior uso en la API y
@@ -26,6 +27,7 @@ Las rutas autorizadas de tipo ROLE_USER deberán enviar la cabecera AUTHORIZATIO
 generado por la propia API bajo la URL /api/login y que sea un token con Authority ROLE_USER.
 
 * MESAS Y SERVICIOS  (MesasREST)
+	
 	[x] GET /api/v2/mesas
 		Devolverá la lista de mesas del restaurante
 	
@@ -60,6 +62,7 @@ generado por la propia API bajo la URL /api/login y que sea un token con Authori
 		Devolverá la cantidad total a pagar por el cliente según sus detallepedido realizados
 		
 * PLATOS  (PlatosREST)
+	
 	[ ] GET /api/v2/platos?availableonly=true
 		Devolverá la lista completa de platos disponibles
 		
@@ -80,6 +83,7 @@ Las rutas autorizadas de tipo ROLE_ADMIN deberán enviar la cabecera AUTHORIZATI
 generado por la propia API bajo la URL /api/login y que sea un token con Authority ROLE_ADMIN.
 
 * MESAS  (MesasREST)
+	
 	[ ] POST /api/v3/mesas
 		Enviaremos un JSON de tipo Mesa que se añadirá a la lista de mesas
 		
@@ -90,6 +94,7 @@ generado por la propia API bajo la URL /api/login y que sea un token con Authori
 			Eliminaremos la mesa con el identificador indicado
 	
 * PLATOS  (PlatosREST)
+	
 	[ ] POST /api/v3/platos
 		Enviaremos un JSON de tipo Plato que se añadirá a la lista de platos
 		
