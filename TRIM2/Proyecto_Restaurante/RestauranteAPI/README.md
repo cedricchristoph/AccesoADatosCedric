@@ -198,5 +198,14 @@ ALTER TABLE detallefactura ADD FOREIGN KEY (fkidplato) REFERENCES platos(idplato
 
 /* DONE */
 ```
-	
+
+Queries importantes para su uso en la API
+```ruby
+/* QUERIES */
+select count(distinct(nummesa))
+from mesas inner join servicio
+on mesas.nummesa = servicio.fknummesa
+where fecha >= now() and ( (fecha + 120minutos < fechacomienzo || fecha >= fechafin ) or (pagada=true) )
+and ocupantes < mesas.ocupantesmax
+```
 	
