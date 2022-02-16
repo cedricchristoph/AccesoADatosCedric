@@ -5,10 +5,12 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
 
 import es.iespuertodelacruz.cc.restauranteapi.entity.Detallefactura;
 import es.iespuertodelacruz.cc.restauranteapi.repository.DetallefacturaRepository;
 
+@Service
 public class DetallefacturaService implements GenericService<Detallefactura, Integer> {
 
 	@Autowired
