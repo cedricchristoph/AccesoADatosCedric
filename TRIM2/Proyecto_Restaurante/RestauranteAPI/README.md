@@ -12,19 +12,19 @@ Los endpoints son rutas a las que responde o reacciona la api.
 Las rutas de acceso público/anónimo son aquellas que no requieren de ningún tipo de autenticación
 y podrán ser accedidos por cualquiera.
 
-	* POST /api/login
+	* POST /api/login  (LoginController)
 		Este endpoint permitirá enviar por URLENCODE un 'username' y un 'password' donde la API
 		responderá con un mensaje de error o un TOKEN válido para su posterior uso en la API y
 		autenticación.
 	
-	* GET /api/mesas?time=123456789
+	* GET /api/mesas?time=123456789  (MesasRest)
 		Esta URL devolverá las mesas disponibles para la fecha y hora que se le indica.
 		
 ### Acceso autorizado: ROLE_USER
 Las rutas autorizadas de tipo ROLE_USER deberán enviar la cabecera AUTHORIZATION con un token válido
 generado por la propia API bajo la URL /api/login y que sea un token con Authority ROLE_USER.
 
-	* MESAS Y SERVICIOS
+	* MESAS Y SERVICIOS  (MesasREST)
 		* GET /api/v2/mesas
 			Devolverá la lista de mesas del restaurante
 	
@@ -58,7 +58,7 @@ generado por la propia API bajo la URL /api/login y que sea un token con Authori
 		* GET /api/v2/mesas/{id}/servicios/{id}/total
 			Devolverá la cantidad total a pagar por el cliente según sus detallepedido realizados
 		
-	* PLATOS
+	* PLATOS  (PlatosREST)
 		* GET /api/v2/platos?availableonly=true
 			Devolverá la lista completa de platos disponibles
 		
@@ -78,7 +78,7 @@ generado por la propia API bajo la URL /api/login y que sea un token con Authori
 Las rutas autorizadas de tipo ROLE_ADMIN deberán enviar la cabecera AUTHORIZATION con un token válido
 generado por la propia API bajo la URL /api/login y que sea un token con Authority ROLE_ADMIN.
 
-	* MESAS
+	* MESAS  (MesasREST)
 		* POST /api/v3/mesas
 			Enviaremos un JSON de tipo Mesa que se añadirá a la lista de mesas
 		
@@ -88,7 +88,7 @@ generado por la propia API bajo la URL /api/login y que sea un token con Authori
 		* DELETE /api/v3/mesas/{id}
 			Eliminaremos la mesa con el identificador indicado
 	
-	* PLATOS
+	* PLATOS  (PlatosREST)
 		* POST /api/v3/platos
 			Enviaremos un JSON de tipo Plato que se añadirá a la lista de platos
 		
