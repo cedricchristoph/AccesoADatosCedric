@@ -34,13 +34,16 @@ generado por la propia API bajo la URL /api/login y que sea un token con Authori
 	[x] GET /api/v2/mesas/{id}
 		Devolverá el objeto mesa solicitado
 	
-	[ ] GET /api/v2/mesas/{id}/servicios
+	[x] GET /api/v2/mesas/{id}/servicios
 		Devolverá la lista de servicios que ha tenido esta mesa
+	
+	[x] GET /api/v2/mesas/{id}/servicios/{id}
+		Recibiremos el objeto Servicio solicitado por id. Se comrpbará que el identificador de mesa coincide.
 		
 	[ ] PUT /api/v2/mesas/{id}/servicios/{id}
 		Enviaremos un JSON de tipo Servicio que actualizará el servicio con el id indicado
 	
-	[ ] DELETE /api/v2/mesas/{id}/servicios/{id}
+	[x] DELETE /api/v2/mesas/{id}/servicios/{id}
 		Eliminará el servicio de la base de datos en cascada con todos sus detallefactura.
 	
 	[ ] GET /api/v2/mesas/{id}/servicio_actual

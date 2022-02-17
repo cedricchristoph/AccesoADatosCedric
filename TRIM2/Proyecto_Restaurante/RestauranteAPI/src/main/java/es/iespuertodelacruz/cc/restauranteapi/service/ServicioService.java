@@ -24,6 +24,10 @@ public class ServicioService implements GenericService<Servicio, Integer>{
 	public Page<Servicio> findAll(Pageable pageable) {
 		return repo.findAll(pageable);
 	}
+	
+	public Iterable<Servicio> findByMesa(Integer nummesa) {
+		return repo.findServiciosFromMesa(nummesa);
+	}
 
 	@Override
 	public Optional<Servicio> findById(Integer id) {
