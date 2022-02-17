@@ -3,6 +3,8 @@ package es.iespuertodelacruz.cc.restauranteapi.entity;
 import java.io.Serializable;
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 /**
  * The persistent class for the detallefactura database table.
@@ -29,6 +31,7 @@ public class Detallefactura implements Serializable {
 	//bi-directional many-to-one association to Servicio
 	@ManyToOne
 	@JoinColumn(name="fkidservicio")
+	@JsonIgnore
 	private Servicio servicio;
 
 	public Detallefactura() {

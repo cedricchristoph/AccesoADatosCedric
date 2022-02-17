@@ -14,8 +14,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import es.iespuertodelacruz.cc.restauranteapi.dto.MesaSinServiciosDTO;
+import es.iespuertodelacruz.cc.restauranteapi.dto.servicio.ServicioConDetallesDTO;
+import es.iespuertodelacruz.cc.restauranteapi.dto.servicio.ServicioSinDetallesDTO;
+import es.iespuertodelacruz.cc.restauranteapi.entity.Detallefactura;
 import es.iespuertodelacruz.cc.restauranteapi.entity.Mesa;
 import es.iespuertodelacruz.cc.restauranteapi.entity.Servicio;
+import es.iespuertodelacruz.cc.restauranteapi.service.DetallefacturaService;
 import es.iespuertodelacruz.cc.restauranteapi.service.MesaService;
 import es.iespuertodelacruz.cc.restauranteapi.service.ServicioService;
 
@@ -29,6 +33,11 @@ public class MesasREST {
 	@Autowired
 	ServicioService servicioService;
 	
+	@Autowired
+	DetallefacturaService detalleService;
+	
+	
+	/* MESAS */
 	
 	@GetMapping
 	public ResponseEntity<?> getAllMesas() {
@@ -44,9 +53,13 @@ public class MesasREST {
 		return ResponseEntity.ok(mesa.get());
 	}
 	
+	
+	/* SERVICIOS */
+	
 	@GetMapping("/{mesaid}/servicios")
 	public ResponseEntity<?> getServiciosFromMesa(@PathVariable("mesaid") Integer mesaId) {
-		List<Servicio> servicios = (List<Servicio>) servicioService.findByMesa(mesaId);
+		List<ServicioSinDetallesDTO> servicios = new ArrayList<>();
+		servicioService.findByMesa(mesaId).forEach(s -> servicios.add(new ServicioSinDetallesDTO(s)));
 		return ResponseEntity.ok(servicios);
 	}
 	
@@ -60,7 +73,8 @@ public class MesasREST {
 			if (servicio.get().getMesa().getNummesa() != mesaId) {
 				return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("El servicio solicidato no pertenece a la mesa indicada");
 			}
-			return ResponseEntity.ok(servicio.get());
+			System.out.println("DETALLES EN ESTE SERVICIO: " + servicio.get().getDetallefacturas().size());
+			return ResponseEntity.ok(servicio.get()); //new ServicioConDetallesDTO(servicio.get())
 		} else {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No se encontró el servicio");
 		}
@@ -86,5 +100,23 @@ public class MesasREST {
 		}
 		
 	}
+	
+	
+	/* DETALLES FACTURA */
+	
+	@GetMapping("/api/v2/mesas/{mesaid}/servicios/{servicioid}/detallesfactura")
+	public ResponseEntity<?> getDetallesFacturaDeServicio(
+			@PathVariable("mesaid") Integer mesaId, 
+			@PathVariable("servicioid") Integer servicioId) {
+		
+		List<Detallefactura> detalles = detalleService.findByIdServicio(servicioId);
+		return ResponseEntity.ok(detalles);
+		
+	}
+	
+	
+	
+	/* PLATOS */
+	
 	
 }

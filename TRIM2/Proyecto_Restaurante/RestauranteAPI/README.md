@@ -19,6 +19,9 @@ y podrán ser accedidos por cualquiera.
 		responderá con un mensaje de error o un TOKEN válido para su posterior uso en la API y
 		autenticación.
 	
+	[ ] GET /api/v1/platos
+		Devolverá la lista de platos del restaurante
+	
 	[ ] GET /api/mesas?time=123456789  (MesasRest)
 		Esta URL devolverá las mesas disponibles para la fecha y hora que se le indica.
 		

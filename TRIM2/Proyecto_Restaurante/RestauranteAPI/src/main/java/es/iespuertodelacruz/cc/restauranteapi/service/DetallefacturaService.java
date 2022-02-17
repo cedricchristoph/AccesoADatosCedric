@@ -1,5 +1,6 @@
 package es.iespuertodelacruz.cc.restauranteapi.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +32,10 @@ public class DetallefacturaService implements GenericService<Detallefactura, Int
 		return repo.findById(id);
 	}
 
+	public List<Detallefactura> findByIdServicio(Integer servicioid) {
+		return repo.findByIdServicio(servicioid);
+	}
+	
 	@Override
 	public Detallefactura save(Detallefactura producto) {
 		return repo.save(producto);

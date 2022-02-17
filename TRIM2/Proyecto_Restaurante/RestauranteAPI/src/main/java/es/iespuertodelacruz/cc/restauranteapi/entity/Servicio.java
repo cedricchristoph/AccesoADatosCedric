@@ -2,6 +2,9 @@ package es.iespuertodelacruz.cc.restauranteapi.entity;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.math.BigInteger;
 import java.util.List;
 
@@ -29,11 +32,13 @@ public class Servicio implements Serializable {
 
 	//bi-directional many-to-one association to Detallefactura
 	@OneToMany(mappedBy="servicio")
+	@JsonIgnore
 	private List<Detallefactura> detallefacturas;
 
 	//bi-directional many-to-one association to Mesa
 	@ManyToOne
 	@JoinColumn(name="fknummesa")
+	@JsonIgnore
 	private Mesa mesa;
 
 	public Servicio() {
