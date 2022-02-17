@@ -142,7 +142,7 @@ CREATE TABLE mesas (
 CREATE TABLE servicio (
     idservicio INTEGER PRIMARY KEY AUTO_INCREMENT,
     fknummesa INTEGER, /* CREAR FOREIGN KEY: mesas*/
-    fechacomienzo BIGINT,
+    fechacomienzo BIGINT NOT NULL,
     fechafin BIGINT,
     reservada VARCHAR(50),
     pagada boolean default false
@@ -201,6 +201,26 @@ INSERT INTO operario (nombre, password, rol) VALUES ("admin", "$2a$12$P7wpgXFkDZ
 INSERT INTO operario (nombre, password, rol) VALUES ("operario1", "$2a$12$TqZjNaGF8JMSxirsRWvP2u6Wk6sylzvhmIwVZ6U/cWrCxxlS5Jo1q", "ROLE_USER");
 INSERT INTO operario (nombre, password, rol) VALUES ("operario2", "$2a$12$vLlS8Vmcq9Jv61wivAuNmOC616jhH3gJWid/fTQxytkZNpBcTxADa", "ROLE_USER");
 
+INSERT INTO servicio(fknummesa, fechacomienzo, fechafin, reservada, pagada) VALUES (1, 1643725815000, 1643731215000, NULL, true);
+INSERT INTO servicio(fknummesa, fechacomienzo, fechafin, reservada, pagada) VALUES (1, 1643731215000, 1643736615000, NULL, true);
+INSERT INTO servicio(fknummesa, fechacomienzo, fechafin, reservada, pagada) VALUES (2, 1643725815000, 1643731215000, "Pedro Alfonso", true);
+INSERT INTO servicio(fknummesa, fechacomienzo, fechafin, reservada, pagada) VALUES (3, 1643725815000, 1643731215000, NULL, true);
+INSERT INTO servicio(fknummesa, fechacomienzo, fechafin, reservada, pagada) VALUES (4, 1643725815000, 1643731215000, "Alejandra Gonzalez", true);
+INSERT INTO servicio(fknummesa, fechacomienzo, fechafin, reservada, pagada) VALUES (5, 1643725815000, 1643731215000, NULL, true);
+INSERT INTO servicio(fknummesa, fechacomienzo, fechafin, reservada, pagada) VALUES (1, 1645111140000, 1645118400000, NULL, false);
+INSERT INTO servicio(fknummesa, fechacomienzo, fechafin, reservada, pagada) VALUES (2, 1645111140000, 1645118400000, NULL, false);
+INSERT INTO servicio(fknummesa, fechacomienzo, fechafin, reservada, pagada) VALUES (3, 1645111140000, 1645118400000, NULL, false);
+INSERT INTO servicio(fknummesa, fechacomienzo, fechafin, reservada, pagada) VALUES (4, 1645111140000, 1645118400000, NULL, false);
+
+INSERT INTO detallefactura (fkidservicio, fkidplato, cantidad, preciounidad) VALUES (1, 4, 2, 2.00);
+INSERT INTO detallefactura (fkidservicio, fkidplato, cantidad, preciounidad) VALUES (1, 5, 1, 2.40);
+INSERT INTO detallefactura (fkidservicio, fkidplato, cantidad, preciounidad) VALUES (1, 6, 1, 1.90);
+INSERT INTO detallefactura (fkidservicio, fkidplato, cantidad, preciounidad) VALUES (1, 7, 1, 2.50);
+
+INSERT INTO detallefactura (fkidservicio, fkidplato, cantidad, preciounidad) VALUES (2, 4, 1, 2.00);
+INSERT INTO detallefactura (fkidservicio, fkidplato, cantidad, preciounidad) VALUES (2, 5, 3, 2.40);
+INSERT INTO detallefactura (fkidservicio, fkidplato, cantidad, preciounidad) VALUES (2, 6, 2, 1.90);
+INSERT INTO detallefactura (fkidservicio, fkidplato, cantidad, preciounidad) VALUES (3, 7, 1, 2.50);
 
 /* ESTABLECER FOREIGN KEYS */
 ALTER TABLE servicio ADD FOREIGN KEY (fknummesa) REFERENCES mesas(nummesa);
