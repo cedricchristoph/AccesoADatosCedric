@@ -9,8 +9,10 @@ public class DateUtil {
 	public enum DateFormat {
 		
 		DD_MM_YYYY("dd/MM/YYYY"),
+		DD_MM_YYYY_HH_MM("dd/MM/YYYY HH:mm"),
 		MM_DD_YYYY("MM/dd/YYYY"),
 		YYYY_MM_DD("YYYY/MM/DD");
+		
 		
 		
 		private String format;

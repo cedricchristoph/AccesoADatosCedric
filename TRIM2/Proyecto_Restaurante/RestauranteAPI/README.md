@@ -46,26 +46,30 @@ generado por la propia API bajo la URL /api/login y que sea un token con Authori
 	
 **[x] GET /api/v2/mesas/{id}/servicios/{id}**
 		Recibiremos el objeto Servicio solicitado por id. Se comrpbará que el identificador de mesa coincide.
-		
-[ ] PUT /api/v2/mesas/{id}/servicios/{id}
+
+**[x] POST /api/v2/mesas/{id}/servicios**
+		Enviamos una peticion POST sin ningun cuerpo ya que se generará un nuevo servicio automaticamente segun id de mesa indicado,
+		y la fecha y hora actual de la peticion
+	
+**[x] PUT /api/v2/mesas/{id}/servicios/{id}**
 		Enviaremos un JSON de tipo Servicio que actualizará el servicio con el id indicado
 	
-[x] DELETE /api/v2/mesas/{id}/servicios/{id}
+**[x] DELETE /api/v2/mesas/{id}/servicios/{id}**
 		Eliminará el servicio de la base de datos en cascada con todos sus detallefactura.
 	
 [ ] GET /api/v2/mesas/{id}/servicio_actual
 		Devolverá el id del servicio actual de la mesa indicada
 	
-~~[ ] GET /api/v2/mesas/{id}/servicios/{id}/detallesfactura~~
-		~~Devolverá el servicio con sus pedidos realizados hasta el momento~~
+**[x] GET /api/v2/mesas/{id}/servicios/{id}/detallesfactura**
+		Devolverá el servicio con sus pedidos realizados hasta el momento
 		
-[ ] POST /api/v2/mesas/{id}/servicios/{id}
+**[x] POST /api/v2/mesas/{id}/servicios/{id}/detallesfactura**
 		Enviaremos un JSON de tipo Detallefactura que será añadido al servicio indicado
 	
-[ ] PUT /api/v2/mesas/{id}/servicios/{id}/detallesfactura/{id}
+[x] PUT /api/v2/mesas/{id}/servicios/{id}/detallesfactura/{id}
 		Enviaremos un JSON de tipo Detallefactura que será actualizado en el servicio indicado
 		
-[ ] DELETE /api/v2/mesas/{id}/servicios/{id}/detallesfactura/{id}
+[x] DELETE /api/v2/mesas/{id}/servicios/{id}/detallesfactura/{id}
 		Eliminará el detallefactura indicado de un servicio indicado
 		
 [ ] GET /api/v2/mesas/{id}/servicios/{id}/total
@@ -236,6 +240,7 @@ ALTER TABLE detallefactura ADD FOREIGN KEY (fkidplato) REFERENCES platos(idplato
 ```
 
 Queries importantes para su uso en la API
+
 ```ruby
 /* QUERIES */
 select count(distinct(nummesa))

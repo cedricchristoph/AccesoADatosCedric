@@ -1,6 +1,9 @@
 package es.iespuertodelacruz.cc.restauranteapi.rest.v2;
 
+import java.math.BigInteger;
+import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -10,18 +13,26 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import es.iespuertodelacruz.cc.restauranteapi.dto.MesaSinServiciosDTO;
+import es.iespuertodelacruz.cc.restauranteapi.dto.detallefactura.DetalleFacturaDTO;
 import es.iespuertodelacruz.cc.restauranteapi.dto.servicio.ServicioConDetallesDTO;
 import es.iespuertodelacruz.cc.restauranteapi.dto.servicio.ServicioSinDetallesDTO;
 import es.iespuertodelacruz.cc.restauranteapi.entity.Detallefactura;
 import es.iespuertodelacruz.cc.restauranteapi.entity.Mesa;
+import es.iespuertodelacruz.cc.restauranteapi.entity.Plato;
 import es.iespuertodelacruz.cc.restauranteapi.entity.Servicio;
 import es.iespuertodelacruz.cc.restauranteapi.service.DetallefacturaService;
 import es.iespuertodelacruz.cc.restauranteapi.service.MesaService;
+import es.iespuertodelacruz.cc.restauranteapi.service.PlatoService;
 import es.iespuertodelacruz.cc.restauranteapi.service.ServicioService;
+import es.iespuertodelacruz.cc.restauranteapi.util.DateUtil;
+import es.iespuertodelacruz.cc.restauranteapi.util.DateUtil.DateFormat;
 
 @RestController
 @RequestMapping("/api/v2/mesas")
@@ -36,6 +47,8 @@ public class MesasRESTv2 {
 	@Autowired
 	DetallefacturaService detalleService;
 	
+	@Autowired
+	PlatoService platoService;
 	
 	/* MESAS */
 	
@@ -81,6 +94,79 @@ public class MesasRESTv2 {
 		
 	}
 	
+	@PostMapping("/{mesaid}/servicios")
+	public ResponseEntity<?> insertNewServicio(
+			@PathVariable("mesaid") Integer mesaid) {
+		
+		// Creamos un nuevo servicio vacío
+		Servicio servicio = new Servicio();
+		
+		// Insertamos el objeto mesa segun id proporcionado
+		Optional<Mesa> mesa = mesaService.findById(mesaid);
+		if (!mesa.isPresent())
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No se encontró la mesa deseada");
+		servicio.setMesa(mesa.get());
+		
+		// Cargamos fecha y hora actual y se lo guardamos al objeto
+		servicio.setFechacomienzo(new BigInteger(String.valueOf(new Date().getTime())));
+		
+		// Guardamos en BBDD
+		Servicio ok = servicioService.save(servicio);
+		if (ok != null)
+			return ResponseEntity.ok("Se ha creado correctamente un nuevo servicio");
+		
+		return ResponseEntity.status(HttpStatus.NOT_MODIFIED).body("No se pudo crear el servicio");
+	}
+	
+	@PutMapping("/{mesaid}/servicios/{servicioid}")
+	public ResponseEntity<?> updateServicio(
+			@PathVariable("mesaid") Integer mesaid,
+			@PathVariable("servicioid") Integer servicioid,
+			@RequestBody ServicioSinDetallesDTO dto) {
+		
+		if (dto == null)
+			return ResponseEntity.badRequest().body("No se ha proporcionado un objeto servicio a actualizar");
+		
+		if (dto.getIdservicio() == null)
+			return ResponseEntity.badRequest().body("El cuerpo del servicio no especifica un identificador");
+		
+		if (dto.getIdservicio() != servicioid)
+			return ResponseEntity.badRequest().body("Los identificadores de servicio en la url no coinciden con el cuerpo");
+		
+		Optional<Mesa> mesa = mesaService.findById(mesaid);
+		if (!mesa.isPresent())
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No se encontró la mesa");
+		
+		Optional<Servicio> servicio = servicioService.findById(servicioid);
+		if (!servicio.isPresent())
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No se encontró el servicio que se quiere modificar");
+		
+		// Actualizamos contenidos de servicio con contenidos del dto proporcionado del usuario
+		try {
+			servicio.get().setFechacomienzo(new BigInteger(String.valueOf(DateUtil.stringDateToMillis(DateFormat.DD_MM_YYYY_HH_MM, dto.getFechacomienzo()))));
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		try {
+			servicio.get().setFechafin(new BigInteger(String.valueOf(DateUtil.stringDateToMillis(DateFormat.DD_MM_YYYY_HH_MM, dto.getFechafin()))));
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		servicio.get().setPagada(dto.getPagada());
+		servicio.get().setReservada(dto.getReservada());
+		
+		Servicio ok = servicioService.save(servicio.get());
+		if (ok != null)
+			return ResponseEntity.ok("Se ha actualizado el servicio correctamente");
+		return ResponseEntity.status(HttpStatus.NOT_MODIFIED).body("No se modificó el servicio. Ocurrió un problema");
+		
+		
+	}
+	
 	@DeleteMapping("/{mesaid}/servicios/{servicioid}")
 	public ResponseEntity<?> deleteServicioById(
 			@PathVariable("mesaid") Integer mesaId, 
@@ -104,15 +190,98 @@ public class MesasRESTv2 {
 	
 	/* DETALLES FACTURA */
 	
-	@GetMapping("/api/v2/mesas/{mesaid}/servicios/{servicioid}/detallesfactura")
+	@GetMapping("/{mesaid}/servicios/{servicioid}/detallesfactura")
 	public ResponseEntity<?> getDetallesFacturaDeServicio(
 			@PathVariable("mesaid") Integer mesaId, 
 			@PathVariable("servicioid") Integer servicioId) {
 		
-		List<Detallefactura> detalles = detalleService.findByIdServicio(servicioId);
+		List<DetalleFacturaDTO> detalles = new ArrayList<>();
+		detalleService.findByIdServicio(servicioId).forEach(s -> detalles.add(new DetalleFacturaDTO(s)));
 		return ResponseEntity.ok(detalles);
 		
 	}
 	
+	@PostMapping("/{mesaid}/servicios/{servicioid}/detallesfactura")
+	public ResponseEntity<?> insertNewDetalleFactura(
+			@PathVariable("mesaid") Integer mesaid,
+			@PathVariable("servicioid") Integer servicioid,
+			@RequestBody DetalleFacturaDTO dto) {
+		
+		if (dto == null)
+			return ResponseEntity.badRequest().body("No se ha proporcionado un objeto detallefactura a añadir");
+		
+		Optional<Servicio> servicio = servicioService.findById(servicioid);
+		if (!servicio.isPresent())
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No se encontró el servicio indicado");
+		
+		Optional<Plato> plato = platoService.findById(dto.getPlato().getIdplato());
+		if (!plato.isPresent())
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No se encontró el plato indicado");
+			
+		
+		Detallefactura df = new Detallefactura();
+		df.setCantidad(dto.getCantidad());
+		df.setPlato(plato.get());
+		df.setPreciounidad(plato.get().getPreciounidad());
+		df.setServicio(servicio.get());
+		
+		Detallefactura ok = detalleService.save(df);
+		if (ok != null)
+			return ResponseEntity.ok("Detalle factura añadido correctamente");
+		return ResponseEntity.status(HttpStatus.NOT_MODIFIED).body("No se pudo añadir el detalle factura");
+	}
+	
+	
+	@PutMapping("/{mesaid}/servicios/{servicioid}/detallesfactura/{detalleid}")
+	public ResponseEntity<?> updateDetalleFactura(
+			@PathVariable("mesaid") Integer mesaid,
+			@PathVariable("servicioid") Integer servicioid,
+			@PathVariable("detalleid") Integer detalleid,
+			@RequestBody DetalleFacturaDTO dto) {
+		
+		if (dto == null)
+			return ResponseEntity.badRequest().body("No se ha proporcionado un objeto detallefactura a añadir");
+		
+		Optional<Detallefactura> detalle = detalleService.findById(detalleid);
+		if (!detalle.isPresent())
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No se encontró el detalle factura indicado");
+		
+		Optional<Servicio> servicio = servicioService.findById(servicioid);
+		if (!servicio.isPresent())
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No se encontró el servicio indicado");
+		
+		Optional<Plato> plato = platoService.findById(dto.getPlato().getIdplato());
+		if (!plato.isPresent())
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No se encontró el plato indicado");
+				
+		Detallefactura df = detalle.get();
+		
+		// Solo se permite cambiar la cantidad del producto seleccionado
+		df.setCantidad(dto.getCantidad());
+		
+		if (detalleService.save(df) != null)
+			return ResponseEntity.ok("Se ha actualizado el detalle pedido");
+		return ResponseEntity.status(HttpStatus.NOT_MODIFIED).body("No se pudo actualizar el detalle pedido");
+	}
+	
+	
+	@DeleteMapping("/{mesaid}/servicios/{servicioid}/detallesfactura/{detalleid}")
+	public ResponseEntity<?> updateDetalleFactura(
+			@PathVariable("mesaid") Integer mesaid,
+			@PathVariable("servicioid") Integer servicioid,
+			@PathVariable("detalleid") Integer detalleid) {
+		
+		Optional<Detallefactura> detalle = detalleService.findById(detalleid);
+		if (!detalle.isPresent())
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No se encontró el detalle factura indicado");
+		
+		Optional<Servicio> servicio = servicioService.findById(servicioid);
+		if (!servicio.isPresent())
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No se encontró el servicio indicado");
+		
+		detalleService.deleteById(detalle.get());
+		return ResponseEntity.ok("Detalle factura eliminado");
+		
+	}
 	
 }

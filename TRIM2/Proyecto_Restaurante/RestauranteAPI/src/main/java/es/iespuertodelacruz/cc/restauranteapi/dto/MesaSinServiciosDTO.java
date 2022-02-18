@@ -1,22 +1,35 @@
 package es.iespuertodelacruz.cc.restauranteapi.dto;
 
+import java.util.Collections;
+import java.util.stream.Collectors;
+
+import es.iespuertodelacruz.cc.restauranteapi.dto.servicio.ConvertableDTO;
 import es.iespuertodelacruz.cc.restauranteapi.entity.Mesa;
 
-public class MesaSinServiciosDTO {
+public class MesaSinServiciosDTO implements ConvertableDTO<Mesa> {
 
-	private int nummesa;
+	private Integer nummesa;
 	private int ocupantesmax;
 	
 	public MesaSinServiciosDTO(Mesa mesa) {
 		nummesa = mesa.getNummesa();
 		ocupantesmax = mesa.getOcupantesmax();
 	}
-
-	public int getNummesa() {
+	
+	@Override
+	public Mesa convertToEntity() {
+		Mesa mesa = new Mesa();
+		mesa.setNummesa(ocupantesmax);
+		mesa.setOcupantesmax(ocupantesmax);
+		mesa.setServicios(Collections.EMPTY_LIST);
+		return mesa;
+	}
+	
+	public Integer getNummesa() {
 		return nummesa;
 	}
 
-	public void setNummesa(int nummesa) {
+	public void setNummesa(Integer nummesa) {
 		this.nummesa = nummesa;
 	}
 
@@ -27,6 +40,8 @@ public class MesaSinServiciosDTO {
 	public void setOcupantesmax(int ocupantesmax) {
 		this.ocupantesmax = ocupantesmax;
 	}
+
+	
 	
 	
 	

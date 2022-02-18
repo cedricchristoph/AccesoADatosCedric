@@ -30,10 +30,16 @@ public class ServicioConDetallesDTO implements ConvertableDTO<Servicio> {
 	@JsonIgnore
 	private Mesa mesa;
 	
+	public ServicioConDetallesDTO() {
+		
+	}
+	
 	public ServicioConDetallesDTO(Servicio servicio) {
 		idservicio = servicio.getIdservicio();
-		fechacomienzo = DateUtil.millisToStringDate(DateFormat.DD_MM_YYYY, servicio.getFechacomienzo().longValue());
-		fechafin = DateUtil.millisToStringDate(DateFormat.DD_MM_YYYY, servicio.getFechafin().longValue());
+		fechacomienzo = DateUtil.millisToStringDate(DateFormat.DD_MM_YYYY_HH_MM, servicio.getFechacomienzo().longValue());
+		try {
+			fechafin = DateUtil.millisToStringDate(DateFormat.DD_MM_YYYY_HH_MM, servicio.getFechafin().longValue());
+		} catch (NullPointerException ex) {}
 		pagada = servicio.getPagada();
 		reservada = servicio.getReservada();
 		mesa = servicio.getMesa();

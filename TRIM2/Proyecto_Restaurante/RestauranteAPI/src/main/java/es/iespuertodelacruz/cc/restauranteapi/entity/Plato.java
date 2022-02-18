@@ -20,7 +20,7 @@ public class Plato implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int idplato;
+	private Integer idplato;
 
 	private String descripcion;
 
@@ -38,11 +38,11 @@ public class Plato implements Serializable {
 	public Plato() {
 	}
 
-	public int getIdplato() {
+	public Integer getIdplato() {
 		return this.idplato;
 	}
 
-	public void setIdplato(int idplato) {
+	public void setIdplato(Integer idplato) {
 		this.idplato = idplato;
 	}
 

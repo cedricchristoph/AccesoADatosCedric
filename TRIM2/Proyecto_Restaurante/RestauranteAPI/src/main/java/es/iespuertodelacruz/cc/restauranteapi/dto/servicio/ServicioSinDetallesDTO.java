@@ -1,18 +1,20 @@
 package es.iespuertodelacruz.cc.restauranteapi.dto.servicio;
 
 import java.math.BigInteger;
+import java.text.ParseException;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import es.iespuertodelacruz.cc.restauranteapi.dto.MesaSinServiciosDTO;
 import es.iespuertodelacruz.cc.restauranteapi.entity.Mesa;
 import es.iespuertodelacruz.cc.restauranteapi.entity.Servicio;
 import es.iespuertodelacruz.cc.restauranteapi.util.DateUtil;
 import es.iespuertodelacruz.cc.restauranteapi.util.DateUtil.DateFormat;
 
-public class ServicioSinDetallesDTO {
+public class ServicioSinDetallesDTO implements ConvertableDTO<Servicio>{
 
 	
-	private int idservicio;
+	private Integer idservicio;
 
 	private String fechacomienzo;
 
@@ -23,22 +25,52 @@ public class ServicioSinDetallesDTO {
 	private String reservada;
 	
 	@JsonIgnore
-	private Mesa mesa;
+	private MesaSinServiciosDTO mesa;
+	
+	public ServicioSinDetallesDTO() {
+		
+	}
 	
 	public ServicioSinDetallesDTO(Servicio servicio) {
 		idservicio = servicio.getIdservicio();
-		fechacomienzo = DateUtil.millisToStringDate(DateFormat.DD_MM_YYYY, servicio.getFechacomienzo().longValue());
-		fechafin = DateUtil.millisToStringDate(DateFormat.DD_MM_YYYY, servicio.getFechafin().longValue());
+		fechacomienzo = DateUtil.millisToStringDate(DateFormat.DD_MM_YYYY_HH_MM, servicio.getFechacomienzo().longValue());
+		try {
+			fechafin = DateUtil.millisToStringDate(DateFormat.DD_MM_YYYY_HH_MM, servicio.getFechafin().longValue());
+		} catch (NullPointerException ex) {}
 		pagada = servicio.getPagada();
 		reservada = servicio.getReservada();
-		mesa = servicio.getMesa();
+		mesa = new MesaSinServiciosDTO(servicio.getMesa());
+	}
+	
+	@Override
+	public Servicio convertToEntity() {
+		Servicio servicio = new Servicio();
+		servicio.setIdservicio(idservicio);
+		try {
+			servicio.setFechacomienzo(new BigInteger(String.valueOf(DateUtil.stringDateToMillis(DateFormat.DD_MM_YYYY_HH_MM, fechacomienzo))));
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			servicio.setFechafin(new BigInteger(String.valueOf(DateUtil.stringDateToMillis(DateFormat.DD_MM_YYYY_HH_MM, fechafin))));
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		servicio.setPagada(pagada);
+		servicio.setReservada(reservada);
+		try {
+			servicio.setMesa(mesa.convertToEntity());
+		} catch (NullPointerException ex) {}
+		return servicio;
 	}
 
-	public int getIdservicio() {
+	public Integer getIdservicio() {
 		return idservicio;
 	}
 
-	public void setIdservicio(int idservicio) {
+	public void setIdservicio(Integer idservicio) {
 		this.idservicio = idservicio;
 	}
 
@@ -74,14 +106,14 @@ public class ServicioSinDetallesDTO {
 		this.reservada = reservada;
 	}
 
-	public Mesa getMesa() {
+	public MesaSinServiciosDTO getMesa() {
 		return mesa;
 	}
 
-	public void setMesa(Mesa mesa) {
+	public void setMesa(MesaSinServiciosDTO mesa) {
 		this.mesa = mesa;
 	}
-	
+
 	
 	
 }
