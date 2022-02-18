@@ -11,6 +11,10 @@ public class MesaSinServiciosDTO implements ConvertableDTO<Mesa> {
 	private Integer nummesa;
 	private int ocupantesmax;
 	
+	public MesaSinServiciosDTO() {
+		
+	}
+	
 	public MesaSinServiciosDTO(Mesa mesa) {
 		nummesa = mesa.getNummesa();
 		ocupantesmax = mesa.getOcupantesmax();

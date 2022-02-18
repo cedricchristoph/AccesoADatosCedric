@@ -201,6 +201,26 @@ public class MesasRESTv2 {
 		
 	}
 	
+	@GetMapping("/{mesaid}/servicios/{servicioid}/detallesfactura/{detalleid}")
+	public ResponseEntity<?> selectDetalleById(
+			@PathVariable("mesaid") Integer mesaid,
+			@PathVariable("servicioid") Integer servicioid,
+			@PathVariable("detalleid") Integer detalleid) {
+		
+		Optional<Detallefactura> df = detalleService.findById(detalleid);
+		if (!df.isPresent())
+			return ResponseEntity.notFound().build();
+		
+		if (df.get().getServicio().getIdservicio() != servicioid)
+			return ResponseEntity.badRequest().body("El detalle solicitado no pertenece al servicio indicado");
+		
+		if (df.get().getServicio().getMesa().getNummesa() != mesaid)
+			return ResponseEntity.badRequest().body("El detalle solicitado no pertenece a la mesa indicada");
+		
+		return ResponseEntity.ok(new DetalleFacturaDTO(df.get()));
+		
+	}
+	
 	@PostMapping("/{mesaid}/servicios/{servicioid}/detallesfactura")
 	public ResponseEntity<?> insertNewDetalleFactura(
 			@PathVariable("mesaid") Integer mesaid,
@@ -261,7 +281,7 @@ public class MesasRESTv2 {
 		
 		if (detalleService.save(df) != null)
 			return ResponseEntity.ok("Se ha actualizado el detalle pedido");
-		return ResponseEntity.status(HttpStatus.NOT_MODIFIED).body("No se pudo actualizar el detalle pedido");
+		return ResponseEntity.status(HttpStatus.NOT_MODIFIED).body("No se pudo actualizar el detalle factura");
 	}
 	
 	

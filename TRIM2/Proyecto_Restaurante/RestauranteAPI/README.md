@@ -66,10 +66,10 @@ generado por la propia API bajo la URL /api/login y que sea un token con Authori
 **[x] POST /api/v2/mesas/{id}/servicios/{id}/detallesfactura**
 		Enviaremos un JSON de tipo Detallefactura que será añadido al servicio indicado
 	
-[x] PUT /api/v2/mesas/{id}/servicios/{id}/detallesfactura/{id}
+**[x] PUT /api/v2/mesas/{id}/servicios/{id}/detallesfactura/{id}**
 		Enviaremos un JSON de tipo Detallefactura que será actualizado en el servicio indicado
 		
-[x] DELETE /api/v2/mesas/{id}/servicios/{id}/detallesfactura/{id}
+**[x] DELETE /api/v2/mesas/{id}/servicios/{id}/detallesfactura/{id}**
 		Eliminará el detallefactura indicado de un servicio indicado
 		
 [ ] GET /api/v2/mesas/{id}/servicios/{id}/total
@@ -98,10 +98,10 @@ generado por la propia API bajo la URL /api/login y que sea un token con Authori
 
 * MESAS  (MesasREST)
 	
-[ ] POST /api/v3/mesas
+**[x] POST /api/v3/mesas**
 		Enviaremos un JSON de tipo Mesa que se añadirá a la lista de mesas
 		
-[ ] PUT /api/v3/mesas/{id}
+**[x] PUT /api/v3/mesas/{id}**
 		Enviaremos un JSON de tipo Mesa para actualizar el objeto con el identificador indicado
 	
 [ ] DELETE /api/v3/mesas/{id}
