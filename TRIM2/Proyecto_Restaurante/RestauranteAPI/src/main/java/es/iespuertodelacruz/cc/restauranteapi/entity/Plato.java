@@ -2,6 +2,9 @@ package es.iespuertodelacruz.cc.restauranteapi.entity;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.List;
 
 
@@ -29,6 +32,7 @@ public class Plato implements Serializable {
 
 	//bi-directional many-to-one association to Detallefactura
 	@OneToMany(mappedBy="plato")
+	@JsonIgnore
 	private List<Detallefactura> detallefacturas;
 
 	public Plato() {

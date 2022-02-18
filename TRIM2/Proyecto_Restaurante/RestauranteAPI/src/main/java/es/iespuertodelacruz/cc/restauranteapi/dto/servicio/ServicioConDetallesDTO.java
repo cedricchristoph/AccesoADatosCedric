@@ -112,5 +112,15 @@ public class ServicioConDetallesDTO implements ConvertableDTO<Servicio> {
 	public void setMesa(Mesa mesa) {
 		this.mesa = mesa;
 	}
+
+	public List<Detallefactura> getDetallefacturas() {
+		return detallefacturas;
+	}
+
+	public void setDetallefacturas(List<Detallefactura> detallefacturas) {
+		this.detallefacturas = detallefacturas;
+	}
+	
+	
 	
 }

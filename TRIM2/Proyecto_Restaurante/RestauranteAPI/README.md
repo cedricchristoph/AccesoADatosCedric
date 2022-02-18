@@ -6,7 +6,11 @@ base de datos.
 
 ## Endpoints
 
-Los endpoints son rutas a las que responde o reacciona la api.
+Los endpoints son rutas a las que responde o reacciona la api. A continuación veremos una lista completa de endpoints que contiene
+o contendrá la API. 
+* Los endpoints marcados con [x] están programados
+* Los endpoints marcados con [x] y en **negrita** están programados y testeados
+* Los endpoints marcados con [ ] están aún por hacer 
 
 ### Acceso público/anónimo
 Las rutas de acceso público/anónimo son aquellas que no requieren de ningún tipo de autenticación
@@ -14,15 +18,15 @@ y podrán ser accedidos por cualquiera.
 
 * LOGIN Y MESAS
 	
-	[x] POST /api/login  (LoginController)
+**[x] POST /api/login  (LoginController)**
 		Este endpoint permitirá enviar por URLENCODE un 'username' y un 'password' donde la API
 		responderá con un mensaje de error o un TOKEN válido para su posterior uso en la API y
 		autenticación.
 	
-	[ ] GET /api/v1/platos
+[ ] GET /api/v1/platos
 		Devolverá la lista de platos del restaurante
 	
-	[ ] GET /api/mesas?time=123456789  (MesasRest)
+[ ] GET /api/mesas?time=123456789  (MesasRest)
 		Esta URL devolverá las mesas disponibles para la fecha y hora que se le indica.
 		
 ### Acceso autorizado: ROLE_USER
@@ -31,57 +35,57 @@ generado por la propia API bajo la URL /api/login y que sea un token con Authori
 
 * MESAS Y SERVICIOS  (MesasREST)
 	
-	[x] GET /api/v2/mesas
+**[x] GET /api/v2/mesas**
 		Devolverá la lista de mesas del restaurante
 	
-	[x] GET /api/v2/mesas/{id}
+**[x] GET /api/v2/mesas/{id}**
 		Devolverá el objeto mesa solicitado
 	
-	[x] GET /api/v2/mesas/{id}/servicios
+**[x] GET /api/v2/mesas/{id}/servicios**
 		Devolverá la lista de servicios que ha tenido esta mesa
 	
-	[x] GET /api/v2/mesas/{id}/servicios/{id}
+**[x] GET /api/v2/mesas/{id}/servicios/{id}**
 		Recibiremos el objeto Servicio solicitado por id. Se comrpbará que el identificador de mesa coincide.
 		
-	[ ] PUT /api/v2/mesas/{id}/servicios/{id}
+[ ] PUT /api/v2/mesas/{id}/servicios/{id}
 		Enviaremos un JSON de tipo Servicio que actualizará el servicio con el id indicado
 	
-	[x] DELETE /api/v2/mesas/{id}/servicios/{id}
+[x] DELETE /api/v2/mesas/{id}/servicios/{id}
 		Eliminará el servicio de la base de datos en cascada con todos sus detallefactura.
 	
-	[ ] GET /api/v2/mesas/{id}/servicio_actual
+[ ] GET /api/v2/mesas/{id}/servicio_actual
 		Devolverá el id del servicio actual de la mesa indicada
 	
-	[ ] GET /api/v2/mesas/{id}/servicios/{id}/detallesfactura
-		Devolverá el servicio con sus pedidos realizados hasta el momento
+~~[ ] GET /api/v2/mesas/{id}/servicios/{id}/detallesfactura~~
+		~~Devolverá el servicio con sus pedidos realizados hasta el momento~~
 		
-	[ ] POST /api/v2/mesas/{id}/servicios/{id}
+[ ] POST /api/v2/mesas/{id}/servicios/{id}
 		Enviaremos un JSON de tipo Detallefactura que será añadido al servicio indicado
 	
-	[ ] PUT /api/v2/mesas/{id}/servicios/{id}/detallesfactura/{id}
+[ ] PUT /api/v2/mesas/{id}/servicios/{id}/detallesfactura/{id}
 		Enviaremos un JSON de tipo Detallefactura que será actualizado en el servicio indicado
 		
-	[ ] DELETE /api/v2/mesas/{id}/servicios/{id}/detallesfactura/{id}
-			Eliminará el detallefactura indicado de un servicio indicado
+[ ] DELETE /api/v2/mesas/{id}/servicios/{id}/detallesfactura/{id}
+		Eliminará el detallefactura indicado de un servicio indicado
 		
-	[ ] GET /api/v2/mesas/{id}/servicios/{id}/total
+[ ] GET /api/v2/mesas/{id}/servicios/{id}/total
 		Devolverá la cantidad total a pagar por el cliente según sus detallepedido realizados
 		
 * PLATOS  (PlatosREST)
 	
-	[ ] GET /api/v2/platos?availableonly=true
-		Devolverá la lista completa de platos disponibles
-		
-	[ ] GET /api/v2/platos?availableonly=false
+**[x] GET /api/v2/platos**
 		Devolverá la lista completa de platos disponibles y no disponibles
+	
+**[x] GET /api/v2/platos?available=true/false**
+		Devolverá la lista completa de platos disponibles o no disponibles
 			
-	[ ] GET /api/v2/platos/{id}
+**[x] GET /api/v2/platos/{id}**
 		Devolverá el objeto indicado completo
 		
-	[ ] PUT /api/v2/platos/{id}
+**[x] PUT /api/v2/platos/{id}**
 		Los Usuarios están autorizados únicamente a cambiar la disponibilidad de un plato.
-		Se enviará un JSON de tipo Plato que se comprobará si únicamente ha cambiado la
-		disponibilidad. En tal caso se actualiza, en caso contario no.
+		Se enviará un JSON de tipo Plato del que solo se usará el ID y el campo DISPONIBLE.
+		Por esta razón el JSON enviado no tiene por que tener más campos que los indicados.
 		
 		
 ### Acceso autorizado: ROLE_ADMIN
@@ -90,24 +94,24 @@ generado por la propia API bajo la URL /api/login y que sea un token con Authori
 
 * MESAS  (MesasREST)
 	
-	[ ] POST /api/v3/mesas
+[ ] POST /api/v3/mesas
 		Enviaremos un JSON de tipo Mesa que se añadirá a la lista de mesas
 		
-	[ ] PUT /api/v3/mesas/{id}
-			Enviaremos un JSON de tipo Mesa para actualizar el objeto con el identificador indicado
+[ ] PUT /api/v3/mesas/{id}
+		Enviaremos un JSON de tipo Mesa para actualizar el objeto con el identificador indicado
 	
-	[ ] DELETE /api/v3/mesas/{id}
-			Eliminaremos la mesa con el identificador indicado
+[ ] DELETE /api/v3/mesas/{id}
+		Eliminaremos la mesa con el identificador indicado
 	
 * PLATOS  (PlatosREST)
 	
-	[ ] POST /api/v3/platos
+[ ] POST /api/v3/platos
 		Enviaremos un JSON de tipo Plato que se añadirá a la lista de platos
 		
-	[ ] PUT /api/v3/platos/{id}
+[ ] PUT /api/v3/platos/{id}
 		Enviaremos un JSON de tipo Plato para actualizar el plato con el identificador indicado
 		
-	[ ] DELETE /api/v3/platos/{id}
+[ ] DELETE /api/v3/platos/{id}
 		Eliminaremos el plato con el identificador indicado
 	
 	

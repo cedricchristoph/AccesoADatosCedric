@@ -25,7 +25,7 @@ import es.iespuertodelacruz.cc.restauranteapi.service.ServicioService;
 
 @RestController
 @RequestMapping("/api/v2/mesas")
-public class MesasREST {
+public class MesasRESTv2 {
 	
 	@Autowired
 	MesaService mesaService;
@@ -74,7 +74,7 @@ public class MesasREST {
 				return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("El servicio solicidato no pertenece a la mesa indicada");
 			}
 			System.out.println("DETALLES EN ESTE SERVICIO: " + servicio.get().getDetallefacturas().size());
-			return ResponseEntity.ok(servicio.get()); //new ServicioConDetallesDTO(servicio.get())
+			return ResponseEntity.ok(new ServicioConDetallesDTO(servicio.get()));
 		} else {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No se encontró el servicio");
 		}
@@ -113,10 +113,6 @@ public class MesasREST {
 		return ResponseEntity.ok(detalles);
 		
 	}
-	
-	
-	
-	/* PLATOS */
 	
 	
 }
