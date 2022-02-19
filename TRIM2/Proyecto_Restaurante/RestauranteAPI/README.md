@@ -23,10 +23,10 @@ y podrán ser accedidos por cualquiera.
 		responderá con un mensaje de error o un TOKEN válido para su posterior uso en la API y
 		autenticación.
 	
-[ ] GET /api/v1/platos
+**[x] GET /api/v1/platos**
 		Devolverá la lista de platos del restaurante
 	
-[ ] GET /api/mesas?time=123456789  (MesasRest)
+**[x] GET /api/v1/mesas?time=123456789&ocupantes=2  (MesasRest)**
 		Esta URL devolverá las mesas disponibles para la fecha y hora que se le indica.
 		
 ### Acceso autorizado: ROLE_USER
@@ -57,7 +57,7 @@ generado por la propia API bajo la URL /api/login y que sea un token con Authori
 **[x] DELETE /api/v2/mesas/{id}/servicios/{id}**
 		Eliminará el servicio de la base de datos en cascada con todos sus detallefactura.
 	
-[ ] GET /api/v2/mesas/{id}/servicio_actual
+**[x] GET /api/v2/mesas/{id}/servicio_actual**
 		Devolverá el id del servicio actual de la mesa indicada
 	
 **[x] GET /api/v2/mesas/{id}/servicios/{id}/detallesfactura**
@@ -72,8 +72,10 @@ generado por la propia API bajo la URL /api/login y que sea un token con Authori
 **[x] DELETE /api/v2/mesas/{id}/servicios/{id}/detallesfactura/{id}**
 		Eliminará el detallefactura indicado de un servicio indicado
 		
-[ ] GET /api/v2/mesas/{id}/servicios/{id}/total
-		Devolverá la cantidad total a pagar por el cliente según sus detallepedido realizados
+**[x] GET /api/v2/mesas/{id}/servicios/{id}/total**
+		El total se calcula recogiendo del servicio todos los detallefactura y sumando la cantidad*preciounidad
+		de cada detallefactura.
+		Devolverá la cantidad total a pagar por el cliente según sus detallefactura realizados
 		
 * PLATOS  (PlatosREST)
 	
@@ -104,18 +106,18 @@ generado por la propia API bajo la URL /api/login y que sea un token con Authori
 **[x] PUT /api/v3/mesas/{id}**
 		Enviaremos un JSON de tipo Mesa para actualizar el objeto con el identificador indicado
 	
-[ ] DELETE /api/v3/mesas/{id}
+**[x] DELETE /api/v3/mesas/{id}**
 		Eliminaremos la mesa con el identificador indicado
 	
 * PLATOS  (PlatosREST)
 	
-[ ] POST /api/v3/platos
+**[x] POST /api/v3/platos**
 		Enviaremos un JSON de tipo Plato que se añadirá a la lista de platos
 		
-[ ] PUT /api/v3/platos/{id}
+**[x] PUT /api/v3/platos/{id}**
 		Enviaremos un JSON de tipo Plato para actualizar el plato con el identificador indicado
 		
-[ ] DELETE /api/v3/platos/{id}
+**[x] DELETE /api/v3/platos/{id}**
 		Eliminaremos el plato con el identificador indicado
 	
 	
@@ -243,10 +245,10 @@ Queries importantes para su uso en la API
 
 ```ruby
 /* QUERIES */
-select count(distinct(nummesa))
-from mesas inner join servicio
-on mesas.nummesa = servicio.fknummesa
-where fecha >= now() and ( (fecha + 120minutos < fechacomienzo || fecha >= fechafin ) or (pagada=true) )
-and ocupantes < mesas.ocupantesmax
+
+/* AVERIGUAR MESAS LIBRES */
+SELECT * FROM mesas WHERE nummesa IN (SELECT DISTINCT m.nummesa
+FROM mesas m LEFT JOIN servicio s ON s.fknummesa=m.nummesa AND (s.fechacomienzo NOT BETWEEN FECHA and FECHA+120MINUTOS) AND s.pagada=1 WHERE m.ocupantesmax > OCUPANTESINDICADOS);
+
 ```
 	

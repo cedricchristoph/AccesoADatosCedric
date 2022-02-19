@@ -1,5 +1,6 @@
 package es.iespuertodelacruz.cc.restauranteapi.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,12 @@ public class MesaService implements GenericService<Mesa, Integer> {
 	@Transactional(readOnly=true)
 	public Optional<Mesa> findById(Integer id) {
 		return repo.findById(id);
+	}
+	
+	@Transactional(readOnly=true)
+	public List<Mesa> findMesasLibres(long fechacomienzo, int ocupantes) {
+		long fechafin = fechacomienzo + (120*60*1000);
+		return repo.findMesasLibres(fechacomienzo, fechafin, ocupantes);
 	}
 
 	@Override

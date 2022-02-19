@@ -10,7 +10,7 @@ import es.iespuertodelacruz.cc.restauranteapi.entity.Plato;
 
 public class PlatoDTO implements ConvertableDTO<Plato>{
 
-	private int idplato;
+	private Integer idplato;
 	private String descripcion;
 	private byte disponible;
 
@@ -46,11 +46,11 @@ public class PlatoDTO implements ConvertableDTO<Plato>{
 		return plato;
 	}
 
-	public int getIdplato() {
+	public Integer getIdplato() {
 		return idplato;
 	}
 
-	public void setIdplato(int idplato) {
+	public void setIdplato(Integer idplato) {
 		this.idplato = idplato;
 	}
 

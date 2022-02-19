@@ -18,4 +18,7 @@ public interface DetallefacturaRepository extends JpaRepository<Detallefactura, 
 	
 	@Query("SELECT d FROM Detallefactura d WHERE d.plato.idplato = :idplato")
 	public Optional<Detallefactura> findByPlatoId(@Param("idplato") Integer idplato);
+	
+	@Query("SELECT SUM(d.preciounidad*d.cantidad) FROM Detallefactura d WHERE d.servicio.idservicio = :idservicio")
+	public Double getTotalAPagar(@Param("idservicio") Integer idservicio);
 }

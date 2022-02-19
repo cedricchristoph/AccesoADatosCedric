@@ -23,7 +23,7 @@ public class MesaSinServiciosDTO implements ConvertableDTO<Mesa> {
 	@Override
 	public Mesa convertToEntity() {
 		Mesa mesa = new Mesa();
-		mesa.setNummesa(ocupantesmax);
+		mesa.setNummesa(nummesa);
 		mesa.setOcupantesmax(ocupantesmax);
 		mesa.setServicios(Collections.EMPTY_LIST);
 		return mesa;

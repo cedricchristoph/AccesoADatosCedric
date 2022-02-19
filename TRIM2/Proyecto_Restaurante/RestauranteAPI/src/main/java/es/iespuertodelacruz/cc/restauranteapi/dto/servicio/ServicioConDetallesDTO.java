@@ -55,13 +55,13 @@ public class ServicioConDetallesDTO implements ConvertableDTO<Servicio> {
 		servicio.setPagada(pagada);
 		servicio.setMesa(mesa);
 		try {
-			servicio.setFechacomienzo(new BigInteger(String.valueOf(DateUtil.stringDateToMillis(DateFormat.DD_MM_YYYY, fechacomienzo))));
+			servicio.setFechacomienzo(new BigInteger(String.valueOf(DateUtil.stringDateToMillis(DateFormat.DD_MM_YYYY_HH_MM, fechacomienzo))));
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		try {
-			servicio.setFechafin(new BigInteger(String.valueOf(DateUtil.stringDateToMillis(DateFormat.DD_MM_YYYY, fechafin))));
+			servicio.setFechafin(new BigInteger(String.valueOf(DateUtil.stringDateToMillis(DateFormat.DD_MM_YYYY_HH_MM, fechafin))));
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
