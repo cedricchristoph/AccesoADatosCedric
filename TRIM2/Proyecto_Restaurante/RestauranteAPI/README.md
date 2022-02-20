@@ -4,6 +4,9 @@ Este es el proyecto que contiene la API REST para el proyecto de Restaurante. En
 se explican los endpoints de la api y se proporciona las sentencias para la creación de la
 base de datos.
 
+## Swagger
+La API cuenta con una documentación simple en /swagger-ui.html
+
 ## Endpoints
 
 Los endpoints son rutas a las que responde o reacciona la api. A continuación veremos una lista completa de endpoints que contiene
