@@ -8,6 +8,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import es.iespuertodelacruz.cc.restauranteapi.repository.DetallefacturaRepository;
 import es.iespuertodelacruz.cc.restauranteapi.repository.ServicioRepository;
 import es.iespuertodelacruz.cc.restauranteapi.entity.Servicio;
 @Service
@@ -15,6 +16,9 @@ public class ServicioService implements GenericService<Servicio, Integer>{
 
 	@Autowired
 	private ServicioRepository repo;
+	
+	@Autowired
+	private DetallefacturaRepository repoDetalle;
 	
 	@Override
 	@Transactional(readOnly=true)
@@ -39,6 +43,16 @@ public class ServicioService implements GenericService<Servicio, Integer>{
 		return repo.findById(id);
 	}
 
+	@Transactional(readOnly=true)
+	public Optional<Servicio> findServicioActual(Integer mesaid) {
+		return repo.findServicioActual(mesaid);
+	}
+	
+	@Transactional(readOnly=true)
+	public Double getTotalAPagar(Integer idservicio) {
+		return repoDetalle.getTotalAPagar(idservicio);
+	}
+	
 	@Override
 	@Transactional
 	public Servicio save(Servicio producto) {

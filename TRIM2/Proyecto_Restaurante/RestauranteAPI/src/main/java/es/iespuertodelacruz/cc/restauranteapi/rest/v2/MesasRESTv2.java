@@ -188,14 +188,14 @@ public class MesasRESTv2 {
 		// Actualizamos contenidos de servicio con contenidos del dto proporcionado del usuario
 		try {
 			servicio.get().setFechacomienzo(new BigInteger(String.valueOf(DateUtil.stringDateToMillis(DateFormat.DD_MM_YYYY_HH_MM, dto.getFechacomienzo()))));
-		} catch (ParseException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
 		try {
 			servicio.get().setFechafin(new BigInteger(String.valueOf(DateUtil.stringDateToMillis(DateFormat.DD_MM_YYYY_HH_MM, dto.getFechafin()))));
-		} catch (ParseException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -236,6 +236,33 @@ public class MesasRESTv2 {
 		} else {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No se encontró el servicio");
 		}
+		
+	}
+	
+	@GetMapping("/{mesaid}/servicio_actual")
+	public ResponseEntity<?> getServicioActual(
+			@PathVariable("mesaid") Integer mesaId) {
+		
+		Optional<Servicio> servicio = servicioService.findServicioActual(mesaId);
+		if (!servicio.isPresent())
+			return ResponseEntity.notFound().build();
+		return ResponseEntity.ok(servicio.get());
+		
+	}
+	
+	@GetMapping("/{mesaid}/servicios/{servicioid}/total")
+	public ResponseEntity<?> getTotalAPagar(
+			@PathVariable("mesaid") Integer mesaid, 
+			@PathVariable("servicioid") Integer servicioid) {
+		
+		Optional<Servicio> servicio = servicioService.findById(servicioid);
+		if (!servicio.isPresent())
+			return ResponseEntity.notFound().build();
+		System.out.println("Servicio encontrado");
+		Double total = servicioService.getTotalAPagar(servicioid);
+		if (total == null)
+			return ResponseEntity.ok("0.00");
+		return ResponseEntity.ok(total);
 		
 	}
 	

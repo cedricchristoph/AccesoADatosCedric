@@ -42,8 +42,8 @@ public class DetallefacturaService implements GenericService<Detallefactura, Int
 	}
 	
 	@Transactional(readOnly=true)
-	public Optional<Detallefactura> findByPlatoId(Integer platoid) {
-		return repo.findByPlatoId(platoid);
+	public Optional<Detallefactura> findByPlatoId(Integer servicioid) {
+		return repo.findByPlatoId(servicioid);
 	}
 	
 	@Override

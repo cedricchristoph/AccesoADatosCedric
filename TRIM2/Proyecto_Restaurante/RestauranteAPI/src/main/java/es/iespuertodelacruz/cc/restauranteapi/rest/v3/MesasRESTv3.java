@@ -5,6 +5,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -78,6 +79,18 @@ public class MesasRESTv3 {
 		if (mesaService.save(mesa.get()) != null)
 			return ResponseEntity.ok("Mesa actualizada correctamente");
 		return ResponseEntity.status(HttpStatus.NOT_MODIFIED).body("No se pudo actualizar la mesa");
+		
+	}
+	
+	@DeleteMapping("/{mesaid}")
+	public ResponseEntity<?> deleteMesa(
+			@PathVariable("mesaid") Integer mesaid) {
+		
+		Optional<Mesa> mesa = mesaService.findById(mesaid);
+		if (!mesa.isPresent())
+			return ResponseEntity.notFound().build();
+		mesaService.deleteById(mesa.get());
+		return ResponseEntity.ok("Se ha eliminado la mesa correctamente");
 		
 	}
 	
