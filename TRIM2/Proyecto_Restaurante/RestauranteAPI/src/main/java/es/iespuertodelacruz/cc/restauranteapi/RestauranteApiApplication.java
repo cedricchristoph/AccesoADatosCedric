@@ -46,6 +46,13 @@ public class RestauranteApiApplication {
             .ignoring()
             .antMatchers(HttpMethod.POST, "/api/login")
             .antMatchers("/api/v1/**")
+            .antMatchers("/swagger-ui/**")
+            .antMatchers("/v3/api-docs/**",
+                                   "/configuration/ui",
+                                   "/swagger-resources/**",
+                                   "/configuration/security",
+                                   "/swagger-ui.html",
+                                   "/webjars/**")
             //.antMatchers("/api/**")
             ;
 	    }

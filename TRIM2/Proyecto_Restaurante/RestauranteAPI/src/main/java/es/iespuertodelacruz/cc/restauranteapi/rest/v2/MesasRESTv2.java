@@ -239,6 +239,12 @@ public class MesasRESTv2 {
 		
 	}
 	
+	@Operation(summary="Averigua y devuelve el servicio actual de una mesa")
+	@ApiResponses(value = { 
+            @ApiResponse(code = 200, message = "OK"),
+            @ApiResponse(code = 401, message = "No esta autorizado"), 
+            @ApiResponse(code = 403, message = "Prohibido"),
+            @ApiResponse(code = 404, message = "No encontrado")})
 	@GetMapping("/{mesaid}/servicio_actual")
 	public ResponseEntity<?> getServicioActual(
 			@PathVariable("mesaid") Integer mesaId) {
@@ -250,6 +256,12 @@ public class MesasRESTv2 {
 		
 	}
 	
+	@Operation(summary="Calcula el total a pagar en un servicio")
+	@ApiResponses(value = { 
+            @ApiResponse(code = 200, message = "OK"),
+            @ApiResponse(code = 401, message = "No esta autorizado"), 
+            @ApiResponse(code = 403, message = "Prohibido"),
+            @ApiResponse(code = 404, message = "No encontrado")})
 	@GetMapping("/{mesaid}/servicios/{servicioid}/total")
 	public ResponseEntity<?> getTotalAPagar(
 			@PathVariable("mesaid") Integer mesaid, 

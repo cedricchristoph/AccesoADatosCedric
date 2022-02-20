@@ -54,6 +54,12 @@ public class PlatosRESTv2 {
 		return ResponseEntity.ok(platos);
 	}
 	
+	@Operation(summary="Devuelve el plato con el id proporcionado")
+	@ApiResponses(value = { 
+            @ApiResponse(code = 200, message = "OK"),
+            @ApiResponse(code = 401, message = "No esta autorizado"), 
+            @ApiResponse(code = 403, message = "Prohibido"),
+            @ApiResponse(code = 404, message = "No encontrado")})
 	@GetMapping("/{platoid}")
 	public ResponseEntity<?> findPlatoById(@PathVariable("platoid") Integer platoid) {
 		Optional<Plato> plato = platoService.findById(platoid);
@@ -62,6 +68,14 @@ public class PlatosRESTv2 {
 		return ResponseEntity.notFound().build();
 	}
 	
+	@Operation(summary="Recibe un JSON de plato y actualiza estado de disponibilidad")
+	@ApiResponses(value = { 
+            @ApiResponse(code = 200, message = "OK"),
+            @ApiResponse(code = 400, message = "Solicitud mal formada o erronea"),
+            @ApiResponse(code = 401, message = "No esta autorizado"), 
+            @ApiResponse(code = 403, message = "Prohibido"),
+            @ApiResponse(code = 404, message = "No encontrado"),
+            @ApiResponse(code = 304, message = "No se ha modificado la base de datos")})
 	@PutMapping("/{platoid}")
 	public ResponseEntity<?> updatePlatoAvailability(
 			@PathVariable("platoid") Integer platoid,

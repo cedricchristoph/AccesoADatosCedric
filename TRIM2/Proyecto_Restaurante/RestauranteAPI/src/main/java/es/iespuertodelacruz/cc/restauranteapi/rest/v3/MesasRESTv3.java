@@ -82,6 +82,13 @@ public class MesasRESTv3 {
 		
 	}
 	
+	@Operation(summary="Elimina una mesa segun id proporcionado")
+	@ApiResponses(value = { 
+            @ApiResponse(code = 200, message = "OK"),
+            @ApiResponse(code = 400, message = "Solicitud mal formada o erronea"),
+            @ApiResponse(code = 401, message = "No esta autorizado"), 
+            @ApiResponse(code = 403, message = "Prohibido"),
+            @ApiResponse(code = 404, message = "No encontrado")})
 	@DeleteMapping("/{mesaid}")
 	public ResponseEntity<?> deleteMesa(
 			@PathVariable("mesaid") Integer mesaid) {

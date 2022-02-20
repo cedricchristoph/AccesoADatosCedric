@@ -16,6 +16,9 @@ import org.springframework.web.bind.annotation.RestController;
 import es.iespuertodelacruz.cc.restauranteapi.dto.plato.PlatoDTO;
 import es.iespuertodelacruz.cc.restauranteapi.entity.Plato;
 import es.iespuertodelacruz.cc.restauranteapi.service.PlatoService;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+import io.swagger.v3.oas.annotations.Operation;
 
 @RestController
 @RequestMapping("/api/v3/platos")
@@ -24,6 +27,14 @@ public class PlatosRESTv3 {
 	@Autowired
 	PlatoService platoService;
 	
+	@Operation(summary="Recibe un JSON de plato y lo inserta a la base de datos")
+	@ApiResponses(value = { 
+            @ApiResponse(code = 200, message = "OK"),
+            @ApiResponse(code = 400, message = "Solicitud mal formada o erronea"),
+            @ApiResponse(code = 401, message = "No esta autorizado"), 
+            @ApiResponse(code = 403, message = "Prohibido"),
+            @ApiResponse(code = 404, message = "No encontrado"),
+            @ApiResponse(code = 304, message = "No se ha modificado la base de datos")})
 	@PostMapping
 	public ResponseEntity<?> insertNewPlato(
 			@RequestBody PlatoDTO dto) {
@@ -38,6 +49,14 @@ public class PlatosRESTv3 {
 		
 	}
 	
+	@Operation(summary="Recibe un JSON de plato y lo inserta a la base de datos")
+	@ApiResponses(value = { 
+            @ApiResponse(code = 200, message = "OK"),
+            @ApiResponse(code = 400, message = "Solicitud mal formada o erronea"),
+            @ApiResponse(code = 401, message = "No esta autorizado"), 
+            @ApiResponse(code = 403, message = "Prohibido"),
+            @ApiResponse(code = 404, message = "No encontrado"),
+            @ApiResponse(code = 304, message = "No se ha modificado la base de datos")})
 	@PutMapping("/{platoid}")
 	public ResponseEntity<?> updatePlato(
 			@PathVariable("platoid") Integer platoid,
@@ -69,6 +88,14 @@ public class PlatosRESTv3 {
 		
 	}
 	
+	@Operation(summary="Elimina el plato con id proporcionado")
+	@ApiResponses(value = { 
+            @ApiResponse(code = 200, message = "OK"),
+            @ApiResponse(code = 400, message = "Solicitud mal formada o erronea"),
+            @ApiResponse(code = 401, message = "No esta autorizado"), 
+            @ApiResponse(code = 403, message = "Prohibido"),
+            @ApiResponse(code = 404, message = "No encontrado"),
+            @ApiResponse(code = 304, message = "No se ha modificado la base de datos")})
 	@DeleteMapping("/{platoid}")
 	public ResponseEntity<?> deletePlato(
 			@PathVariable("platoid") Integer platoid) {
