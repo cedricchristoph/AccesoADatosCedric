@@ -11,7 +11,7 @@
 	<groupId>es.iespuertodelacruz.cc</groupId>
 	<artifactId>RestauranteAPI</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
 	<name>RestauranteAPI</name>
 	<description>API para proyecto de Restaurante.</description>
 	<properties>
