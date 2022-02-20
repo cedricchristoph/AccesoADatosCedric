@@ -18,6 +18,9 @@ import org.springframework.web.bind.annotation.RestController;
 import es.iespuertodelacruz.cc.restauranteapi.dto.plato.PlatoDTO;
 import es.iespuertodelacruz.cc.restauranteapi.entity.Plato;
 import es.iespuertodelacruz.cc.restauranteapi.service.PlatoService;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+import io.swagger.v3.oas.annotations.Operation;
 
 @RestController
 @RequestMapping("/api/v2/platos")
@@ -26,6 +29,14 @@ public class PlatosRESTv2 {
 	@Autowired
 	PlatoService platoService;
 	
+	@Operation(summary="Recibe un JSON de mesa y lo inserta a la base de datos")
+	@ApiResponses(value = { 
+            @ApiResponse(code = 200, message = "OK"),
+            @ApiResponse(code = 400, message = "Solicitud mal formada o erronea"),
+            @ApiResponse(code = 401, message = "No esta autorizado"), 
+            @ApiResponse(code = 403, message = "Prohibido"),
+            @ApiResponse(code = 404, message = "No encontrado"),
+            @ApiResponse(code = 304, message = "No se ha modificado la base de datos")})
 	@GetMapping
 	public ResponseEntity<?> findAllPlatos(
 			@RequestParam(required=false, name="disponible") Boolean disponible) {

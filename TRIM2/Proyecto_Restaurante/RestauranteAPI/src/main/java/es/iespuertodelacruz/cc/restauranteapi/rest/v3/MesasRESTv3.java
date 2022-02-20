@@ -15,6 +15,9 @@ import org.springframework.web.bind.annotation.RestController;
 import es.iespuertodelacruz.cc.restauranteapi.dto.MesaSinServiciosDTO;
 import es.iespuertodelacruz.cc.restauranteapi.entity.Mesa;
 import es.iespuertodelacruz.cc.restauranteapi.service.MesaService;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+import io.swagger.v3.oas.annotations.Operation;
 
 @RestController
 @RequestMapping("/api/v3/mesas")
@@ -23,6 +26,14 @@ public class MesasRESTv3 {
 	@Autowired
 	MesaService mesaService;
 	
+	@Operation(summary="Recibe JSON de mesa y lo inserta a la base de datos")
+	@ApiResponses(value = { 
+            @ApiResponse(code = 200, message = "OK"),
+            @ApiResponse(code = 400, message = "Solicitud mal formada o erronea"),
+            @ApiResponse(code = 401, message = "No esta autorizado"), 
+            @ApiResponse(code = 403, message = "Prohibido"),
+            @ApiResponse(code = 404, message = "No encontrado"),
+            @ApiResponse(code = 304, message = "No se ha modificado la base de datos")})
 	@PostMapping
 	public ResponseEntity<?> insertNewMesa(
 			@RequestBody MesaSinServiciosDTO dto) {
@@ -40,6 +51,14 @@ public class MesasRESTv3 {
 		
 	}
 	
+	@Operation(summary="Recibe un JSON de mesa y lo actualiza en la base de datos")
+	@ApiResponses(value = { 
+            @ApiResponse(code = 200, message = "OK"),
+            @ApiResponse(code = 400, message = "Solicitud mal formada o erronea"),
+            @ApiResponse(code = 401, message = "No esta autorizado"), 
+            @ApiResponse(code = 403, message = "Prohibido"),
+            @ApiResponse(code = 404, message = "No encontrado"),
+            @ApiResponse(code = 304, message = "No se ha modificado la base de datos")})
 	@PutMapping("/{mesaid}")
 	public ResponseEntity<?> updateMesa(
 			@PathVariable("mesaid") Integer mesaid,

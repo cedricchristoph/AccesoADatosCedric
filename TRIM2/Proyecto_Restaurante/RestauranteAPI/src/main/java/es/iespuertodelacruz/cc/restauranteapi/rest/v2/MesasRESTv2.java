@@ -33,6 +33,9 @@ import es.iespuertodelacruz.cc.restauranteapi.service.PlatoService;
 import es.iespuertodelacruz.cc.restauranteapi.service.ServicioService;
 import es.iespuertodelacruz.cc.restauranteapi.util.DateUtil;
 import es.iespuertodelacruz.cc.restauranteapi.util.DateUtil.DateFormat;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+import io.swagger.v3.oas.annotations.Operation;
 
 @RestController
 @RequestMapping("/api/v2/mesas")
@@ -52,6 +55,11 @@ public class MesasRESTv2 {
 	
 	/* MESAS */
 	
+	@Operation(summary="Devuelve la lista de todas las mesas")
+	@ApiResponses(value = { 
+            @ApiResponse(code = 200, message = "OK"),
+            @ApiResponse(code = 401, message = "No esta autorizado"), 
+            @ApiResponse(code = 403, message = "Prohibido")})
 	@GetMapping
 	public ResponseEntity<?> getAllMesas() {
 		List<MesaSinServiciosDTO> mesas = new ArrayList<>();
@@ -59,6 +67,12 @@ public class MesasRESTv2 {
 		return ResponseEntity.ok(mesas);
 	}
 	
+	@Operation(summary="Devuelve la mesa con el identificador proporcionado")
+	@ApiResponses(value = { 
+            @ApiResponse(code = 200, message = "OK"),
+            @ApiResponse(code = 401, message = "No esta autorizado"), 
+            @ApiResponse(code = 403, message = "Prohibido"),
+            @ApiResponse(code = 404, message = "No encontrado") })
 	@GetMapping("/{mesaid}")
 	public ResponseEntity<?> getMesaById(@PathVariable("mesaid") Integer mesaId) {
 		Optional<Mesa> mesa = mesaService.findById(mesaId);
@@ -69,6 +83,12 @@ public class MesasRESTv2 {
 	
 	/* SERVICIOS */
 	
+	@Operation(summary="Devuelve la lista de servicios de una mesa específica")
+	@ApiResponses(value = { 
+            @ApiResponse(code = 200, message = "OK"),
+            @ApiResponse(code = 401, message = "No esta autorizado"), 
+            @ApiResponse(code = 403, message = "Prohibido"),
+            @ApiResponse(code = 404, message = "No encontrado") })
 	@GetMapping("/{mesaid}/servicios")
 	public ResponseEntity<?> getServiciosFromMesa(@PathVariable("mesaid") Integer mesaId) {
 		List<ServicioSinDetallesDTO> servicios = new ArrayList<>();
@@ -76,6 +96,13 @@ public class MesasRESTv2 {
 		return ResponseEntity.ok(servicios);
 	}
 	
+	@Operation(summary="Devuelve un servicio según identificador indicado")
+	@ApiResponses(value = { 
+            @ApiResponse(code = 200, message = "OK"),
+            @ApiResponse(code = 400, message = "Solicitud mal formada o erronea"),
+            @ApiResponse(code = 401, message = "No esta autorizado"), 
+            @ApiResponse(code = 403, message = "Prohibido"),
+            @ApiResponse(code = 404, message = "No encontrado") })
 	@GetMapping("/{mesaid}/servicios/{servicioid}")
 	public ResponseEntity<?> getServicioById(
 			@PathVariable("mesaid") Integer mesaId, 
@@ -94,6 +121,14 @@ public class MesasRESTv2 {
 		
 	}
 	
+	@Operation(summary="Recibe un JSON de servicio y lo inserta a la base de datos")
+	@ApiResponses(value = { 
+            @ApiResponse(code = 200, message = "OK"),
+            @ApiResponse(code = 400, message = "Solicitud mal formada o erronea"),
+            @ApiResponse(code = 401, message = "No esta autorizado"), 
+            @ApiResponse(code = 403, message = "Prohibido"),
+            @ApiResponse(code = 404, message = "No encontrado"),
+            @ApiResponse(code = 304, message = "No se ha modificado la base de datos")})
 	@PostMapping("/{mesaid}/servicios")
 	public ResponseEntity<?> insertNewServicio(
 			@PathVariable("mesaid") Integer mesaid) {
@@ -117,6 +152,15 @@ public class MesasRESTv2 {
 		
 		return ResponseEntity.status(HttpStatus.NOT_MODIFIED).body("No se pudo crear el servicio");
 	}
+	
+	@Operation(summary="Recibe un JSON de servicio y lo actualiza en la base de datos")
+	@ApiResponses(value = { 
+            @ApiResponse(code = 200, message = "OK"),
+            @ApiResponse(code = 400, message = "Solicitud mal formada o erronea"),
+            @ApiResponse(code = 401, message = "No esta autorizado"), 
+            @ApiResponse(code = 403, message = "Prohibido"),
+            @ApiResponse(code = 404, message = "No encontrado"),
+            @ApiResponse(code = 304, message = "No se ha modificado la base de datos")})
 	
 	@PutMapping("/{mesaid}/servicios/{servicioid}")
 	public ResponseEntity<?> updateServicio(
@@ -167,6 +211,14 @@ public class MesasRESTv2 {
 		
 	}
 	
+	@Operation(summary="Elimina el objeto servicio con identificador proporcionado")
+	@ApiResponses(value = { 
+            @ApiResponse(code = 200, message = "OK"),
+            @ApiResponse(code = 400, message = "Solicitud mal formada o erronea"),
+            @ApiResponse(code = 401, message = "No esta autorizado"), 
+            @ApiResponse(code = 403, message = "Prohibido"),
+            @ApiResponse(code = 404, message = "No encontrado"),
+            @ApiResponse(code = 304, message = "No se ha modificado la base de datos")})
 	@DeleteMapping("/{mesaid}/servicios/{servicioid}")
 	public ResponseEntity<?> deleteServicioById(
 			@PathVariable("mesaid") Integer mesaId, 
@@ -190,6 +242,11 @@ public class MesasRESTv2 {
 	
 	/* DETALLES FACTURA */
 	
+	@Operation(summary="Devuelve los detallefactura de un servicio")
+	@ApiResponses(value = { 
+            @ApiResponse(code = 200, message = "OK"),
+            @ApiResponse(code = 401, message = "No esta autorizado"), 
+            @ApiResponse(code = 403, message = "Prohibido")})
 	@GetMapping("/{mesaid}/servicios/{servicioid}/detallesfactura")
 	public ResponseEntity<?> getDetallesFacturaDeServicio(
 			@PathVariable("mesaid") Integer mesaId, 
@@ -201,6 +258,13 @@ public class MesasRESTv2 {
 		
 	}
 	
+	@Operation(summary="Devuelve el objeto detallefactura con id proporcionado")
+	@ApiResponses(value = { 
+            @ApiResponse(code = 200, message = "OK"),
+            @ApiResponse(code = 400, message = "Solicitud mal formada o erronea"),
+            @ApiResponse(code = 401, message = "No esta autorizado"), 
+            @ApiResponse(code = 403, message = "Prohibido"),
+            @ApiResponse(code = 404, message = "No encontrado")})
 	@GetMapping("/{mesaid}/servicios/{servicioid}/detallesfactura/{detalleid}")
 	public ResponseEntity<?> selectDetalleById(
 			@PathVariable("mesaid") Integer mesaid,
@@ -221,6 +285,14 @@ public class MesasRESTv2 {
 		
 	}
 	
+	@Operation(summary="Recibe un JSON de detallefactura y lo inserta a la base de datos")
+	@ApiResponses(value = { 
+            @ApiResponse(code = 200, message = "OK"),
+            @ApiResponse(code = 400, message = "Solicitud mal formada o erronea"),
+            @ApiResponse(code = 401, message = "No esta autorizado"), 
+            @ApiResponse(code = 403, message = "Prohibido"),
+            @ApiResponse(code = 404, message = "No encontrado"),
+            @ApiResponse(code = 304, message = "No se ha modificado la base de datos")})
 	@PostMapping("/{mesaid}/servicios/{servicioid}/detallesfactura")
 	public ResponseEntity<?> insertNewDetalleFactura(
 			@PathVariable("mesaid") Integer mesaid,
@@ -251,7 +323,14 @@ public class MesasRESTv2 {
 		return ResponseEntity.status(HttpStatus.NOT_MODIFIED).body("No se pudo añadir el detalle factura");
 	}
 	
-	
+	@Operation(summary="Recibe un JSON de detallefactura y lo actualiza a la base de datos")
+	@ApiResponses(value = { 
+            @ApiResponse(code = 200, message = "OK"),
+            @ApiResponse(code = 400, message = "Solicitud mal formada o erronea"),
+            @ApiResponse(code = 401, message = "No esta autorizado"), 
+            @ApiResponse(code = 403, message = "Prohibido"),
+            @ApiResponse(code = 404, message = "No encontrado"),
+            @ApiResponse(code = 304, message = "No se ha modificado la base de datos")})
 	@PutMapping("/{mesaid}/servicios/{servicioid}/detallesfactura/{detalleid}")
 	public ResponseEntity<?> updateDetalleFactura(
 			@PathVariable("mesaid") Integer mesaid,
@@ -284,9 +363,14 @@ public class MesasRESTv2 {
 		return ResponseEntity.status(HttpStatus.NOT_MODIFIED).body("No se pudo actualizar el detalle factura");
 	}
 	
-	
+	@Operation(summary="Elimina el detallefactura con id proporcionado")
+	@ApiResponses(value = { 
+            @ApiResponse(code = 200, message = "OK"),
+            @ApiResponse(code = 401, message = "No esta autorizado"), 
+            @ApiResponse(code = 403, message = "Prohibido"),
+            @ApiResponse(code = 404, message = "No encontrado")})
 	@DeleteMapping("/{mesaid}/servicios/{servicioid}/detallesfactura/{detalleid}")
-	public ResponseEntity<?> updateDetalleFactura(
+	public ResponseEntity<?> deleteDetalleFactura(
 			@PathVariable("mesaid") Integer mesaid,
 			@PathVariable("servicioid") Integer servicioid,
 			@PathVariable("detalleid") Integer detalleid) {
