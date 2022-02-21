@@ -1,14 +1,14 @@
 import axios from 'axios';
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import IMesa from '../../model/entity/IMesa';
 import ApiUtil from '../../model/util/ApiUtil';
 import { useNavigate } from 'react-router-dom';
 import MesaCard from '../../components/MesaCard';
-
+import MesaDetails from './MesaDetails';
 
 export default function Mesas () {
 
-    const [mesas, setMesas] = useState<Array<IMesa>>();
+    const [state, setState] = useState<Array<IMesa>>();;
     let navigate = useNavigate();
 
     useEffect(() => {
@@ -20,8 +20,9 @@ export default function Mesas () {
             try {
                 let respuesta = await axios.get(ApiUtil.getApiUrl() + "v2/mesas", headers);
                 let lista: Array<IMesa> = respuesta.data;
-                setMesas(lista);
-            } catch {
+                setState(prevState => lista);
+            } catch (error) {
+                console.log(error);
                 navigate("/connection_error");
             }
         }
@@ -32,7 +33,7 @@ export default function Mesas () {
         <>
         <div className='container'>
             <h1>Mesas</h1>
-            {mesas?.map((m) => <MesaCard mesa={m}/>)}
+            {state?.map((m) => <MesaCard mesa={m} />)}
         </div>
         </>
     );

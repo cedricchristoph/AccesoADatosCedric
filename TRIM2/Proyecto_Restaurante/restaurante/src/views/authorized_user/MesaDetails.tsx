@@ -35,28 +35,49 @@ export default function MesaDetails () {
         asyncLoadMesa();
     }, []);
 
+    function abrirServicioActual () {
+        navigate("/mesas/" + state?.mesa.nummesa + "/servicios/" + state?.servicioActual?.idservicio);
+    }
+
+    function crearServicio() {
+
+    }
+
     return (
         <>
         <div className='container'>
             <h1>Mesa {state?.mesa.nummesa}</h1>
             <p>Ocupación máxima: {state?.mesa.ocupantesmax} personas</p>
             {state?.servicioActual != null ?
-            <><p>Mesa está en uso actualmente</p><button> Abrir servicio actual </button></>  
-            : <button className='submit-button'>Iniciar nuevo servicio</button>}
+            <><p>Mesa está en uso actualmente</p><button onClick={abrirServicioActual}> Abrir servicio actual </button></>  
+            : <button className='submit-button' onClick={crearServicio}>Iniciar nuevo servicio</button>}
             <h3>Servicio anteriores</h3>
             <table>
-                <thead>
-                    <th>Fecha entrada</th>
-                    <th>Fecha salida</th>
-                    <th></th>
-                </thead>
+                <th>Fecha entrada</th>
+                <th>Fecha salida</th>
+                <th>Reservado a</th>
                 <tbody>
-                {state?.mesa.servicios?.map((s) => 
-                <tr>
-                    <td>{s.fechacomienzo}</td>
-                    <td>{s.fechafin}</td>
+                {state?.mesa.servicios?.map((s) => {
+                    return (
+                    <>
+                        {s.idservicio === state.servicioActual?.idservicio ?
+                        
+                        <tr className='clickable highlight'>
+                            <td>{s.fechacomienzo}</td>
+                            <td>{s.fechafin}</td>
+                            <td>{s.reservada}</td>
+                        </tr>
 
-                </tr>)}
+                        : 
+                        
+                        <tr className='clickable'>
+                            <td>{s.fechacomienzo}</td>
+                            <td>{s.fechafin}</td>
+                            <td>{s.reservada}</td>
+                        </tr>
+                }
+                    </>);
+                })}
                 </tbody>
             </table>
         </div>

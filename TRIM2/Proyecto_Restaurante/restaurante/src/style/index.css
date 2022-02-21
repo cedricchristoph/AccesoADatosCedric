@@ -276,6 +276,7 @@ button {
 
 .error-page {
   background-color: #F0F4F7;
+  height: 90vh;
 
 }
 
@@ -377,6 +378,19 @@ body {
 
 .error-msg {
   color: #db1b1b;
+}
+
+.success-msg {
+  color:#17802d;
+}
+
+.clickable:hover {
+  background-color: rgb(23, 126, 190);
+}
+
+.highlight {
+  background-color: #17802d;
+  color: white;
 }
 
 .form-signin {

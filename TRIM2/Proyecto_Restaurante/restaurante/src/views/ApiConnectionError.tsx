@@ -13,9 +13,9 @@ export default function ApiConnectionError() {
     return(
         <>
             <div className="container error-page">
-                <h1>Error de conexión</h1>
-                <p>Se interrumpió la conexión con el servidor. Compruebe su conexión a internet o reintente en unos minutos.</p>
-                <button onClick={volver}>Reintentar</button><br/>
+                <h1>Ups. Eso no debería haber pasado ;( &nbsp;&nbsp;</h1>
+                <p>Ocurrió un problema inesperado. Inténtelo de nuevo o contacte con un administrador si sigue ocurriendo.</p>
+                <button onClick={volver}>Volver al inicio</button><br/>
 
                 <img className="no_internet" width="300px"/>
 

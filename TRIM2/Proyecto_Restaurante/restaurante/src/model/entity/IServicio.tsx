@@ -2,9 +2,9 @@ import IDetalleFactura from "./IDetalleFactura";
 
 export default interface IServicio {
     idservicio: Number | undefined,
-    fechacomienzo: String,
+    fechacomienzo: String | undefined,
     fechafin: String | undefined,
-    pagada: Number,
-    reservada: String | null,
-    detallefacturas: Array<IDetalleFactura> | null
+    pagada: Number | undefined,
+    reservada: String | null | undefined,
+    detallefacturas: Array<IDetalleFactura> | null | undefined
 }
