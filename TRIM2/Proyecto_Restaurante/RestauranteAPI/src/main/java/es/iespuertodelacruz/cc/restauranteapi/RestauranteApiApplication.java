@@ -18,6 +18,7 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter;
 import org.springframework.web.cors.CorsUtils;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 
@@ -60,7 +61,7 @@ public class RestauranteApiApplication {
 	    @Override
 	    protected void configure(HttpSecurity http) throws Exception {
 	    	http 
-	    		//.addFilterBefore(new CustomCorsFilter(), WebAsyncManagerIntegrationFilter.class)
+	    	.addFilterBefore(new CustomCorsFilter(), WebAsyncManagerIntegrationFilter.class)
 			.csrf().disable()
 			.addFilterBefore(new FiltroJWT(), UsernamePasswordAuthenticationFilter.class)
 			.authorizeRequests()
