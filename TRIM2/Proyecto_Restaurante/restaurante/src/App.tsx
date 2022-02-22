@@ -11,6 +11,10 @@ import Mesas from './views/authorized_user/Mesas';
 import MesaDetails from './views/authorized_user/MesaDetails';
 import ServicioDetails from './views/authorized_user/ServicioDetails';
 import RealizarPedido from './views/authorized_user/RealizarPedido';
+import PlatosAdmin from './views/authorized_admin/PlatosAdmin';
+import NoAuthorization from './views/NoAuthorization';
+import { RequireAdminAuth } from './components/RequireAdminAuth';
+import EditarPlato from './views/authorized_admin/EditarPlato';
 function App() {  
 
     const[tokenState, setTokenState] = useState<String>("");
@@ -20,6 +24,7 @@ function App() {
           <BrowserRouter>
               <Navbar />
               <Routes>                
+                  <Route path="/no_authorization" element={<NoAuthorization/>}/>
                   <Route path="/connection_error" element={<ApiConnectionError/>}/>
                   <Route path="/login" element={<Login setTokenState={setTokenState}/>}/>
                   <Route path="/logout" element={<Logout setTokenState={setTokenState}/>}/>
@@ -29,8 +34,11 @@ function App() {
                   <Route path="/mesas" element={<RequireAuth><Mesas/></RequireAuth>}/>
                   <Route path="/mesas/:mesaid" element={<RequireAuth><MesaDetails/></RequireAuth>}/>
                   <Route path="/mesas/:mesaid/servicios/:servicioid" element={<RequireAuth><ServicioDetails/></RequireAuth>}/>
-                  <Route path="/platos" element={<RequireAuth><></></RequireAuth>}/>
+                  <Route path="/platos" element={<RequireAuth><PlatosAdmin/></RequireAuth>}/>
                   <Route path="/mesas/:mesaid/servicios/:servicioid/add" element={<RequireAuth><RealizarPedido/></RequireAuth>}/>
+              
+                  <Route path="/platos/:platoid" element={<RequireAdminAuth><EditarPlato/></RequireAdminAuth>}/>
+              
               </Routes>
           </BrowserRouter>
       </>
@@ -45,7 +53,7 @@ function App() {
           <div>
             <Link to="/" type='no-link'>Mi Restaurante</Link>
             <Link to="/mesas"> Mesas </Link>
-            <Link to="/platos"> Platos </Link>
+            <Link to="/platos"> Administración Platos </Link>
             <Link to="/logout"> Cerrar sesión </Link>
           </div>
           </> 

@@ -380,6 +380,26 @@ body {
   color: #db1b1b;
 }
 
+.red-green-button {
+  background-color: #db1b1b;
+  color: white;
+}
+
+.red-green-button:hover {
+  background-color: #17802d;
+  color: white;
+}
+
+.green-red-button {
+  background-color: #17802d;
+  color: white;
+}
+
+.green-red-button:hover {
+  background-color: #db1b1b;
+  color: white;
+}
+
 .success-msg {
   color:#17802d;
 }

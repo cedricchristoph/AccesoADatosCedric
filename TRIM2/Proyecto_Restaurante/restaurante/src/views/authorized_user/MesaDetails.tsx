@@ -68,12 +68,14 @@ export default function MesaDetails() {
                 let {data} = await axios.post(url + "/servicios", headers);
             } catch (error) {
                 console.log(error);
+                navigate("/connection_error")
                 return;
             }
             let {data} = await axios.get(url + "/servicio_actual", headers);
             let servicio : IServicio = data;
             let mesa : IMesa | undefined = state?.mesa;
             setState({mesa: mesa, servicioActual: servicio});
+            window.location.reload();
         }
         asyncCreateServicio();
     }
