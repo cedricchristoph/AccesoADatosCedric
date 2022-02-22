@@ -78,6 +78,18 @@ export default function MesaDetails() {
         asyncCreateServicio();
     }
 
+    function abrirServicio(event: React.MouseEvent<HTMLTableRowElement>) {
+        event.preventDefault();
+        let row = event.currentTarget as HTMLTableRowElement;
+        let id = row.id;
+        navigate(
+            "/mesas/" +
+            state?.mesa?.nummesa +
+            "/servicios/" +
+            id
+        );
+    }
+
     return (
         <>
             <div className="container">
@@ -108,13 +120,13 @@ export default function MesaDetails() {
                             return (
                                 <>
                                     {s.idservicio === state.servicioActual?.idservicio ? (
-                                        <tr className="clickable highlight">
+                                        <tr className="clickable highlight" id={s.idservicio + ""} onClick={abrirServicio}>
                                             <td>{s.fechacomienzo}</td>
                                             <td>{s.fechafin}</td>
                                             <td>{s.reservada}</td>
                                         </tr>
                                     ) : (
-                                        <tr className="clickable">
+                                        <tr className="clickable"  id={s.idservicio + ""} onClick={abrirServicio}>
                                             <td>{s.fechacomienzo}</td>
                                             <td>{s.fechafin}</td>
                                             <td>{s.reservada}</td>
