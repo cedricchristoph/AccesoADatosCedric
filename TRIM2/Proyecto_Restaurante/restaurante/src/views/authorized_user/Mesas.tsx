@@ -33,7 +33,8 @@ export default function Mesas () {
         <>
         <div className='container'>
             <h1>Mesas</h1>
-            {state?.map((m) => <MesaCard mesa={m} />)}
+            {state?.length === 0 ? <span className='loader'/> : state?.map((m) => <MesaCard mesa={m} />)}
+            
         </div>
         </>
     );

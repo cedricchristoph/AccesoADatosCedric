@@ -2,7 +2,7 @@
 import axios from "axios";
 import { stat } from "fs";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
 import IServicio from "../../model/entity/IServicio";
 import ApiUtil from "../../model/util/ApiUtil";
 import StringUtils from "../../model/util/StringUtils";
@@ -14,6 +14,7 @@ export default function ServicioDetails () {
 
     let {mesaid} = useParams();
     let {servicioid} = useParams();
+    let navigate = useNavigate();
 
     useEffect(() => {
         const asyncLoadServicio = async () => {
@@ -49,9 +50,16 @@ export default function ServicioDetails () {
         
     }
 
+    function nuevoPedido() {
+        navigate("/mesas/" + mesaid + "/servicios/" + servicioid + "/add");
+    }
+
     return (
         <>
         <div className="container">
+
+            {state?.servicio? 
+            <>
             <h1>Servicio <b>#{state?.servicio?.idservicio}</b></h1>
             <p>Servicio comenzó {state?.servicio?.fechacomienzo}</p>
             {state?.servicio?.fechafin?<p>Servicio finalizó: {state?.servicio.fechafin}</p>:<></>}
@@ -60,7 +68,7 @@ export default function ServicioDetails () {
             <br/>
             <h3>Pedidos realizados</h3>
             
-            <button className="submit-button">Realizar un nuevo pedido</button>
+            <button className="submit-button" onClick={nuevoPedido}>Realizar un nuevo pedido</button>
             
             <table>
                 <th>Producto pedido</th>
@@ -87,6 +95,15 @@ export default function ServicioDetails () {
                     <h3>TOTAL COBRADO: {state?.total} €</h3>
                 </>
                 }
+            </>
+            
+            : 
+            
+            <span className="loader"/> 
+            
+            }
+
+            
         </div>
         </>
     );

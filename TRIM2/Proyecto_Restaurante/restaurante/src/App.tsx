@@ -10,6 +10,7 @@ import VerCarta from './views/public/VerCarta';
 import Mesas from './views/authorized_user/Mesas';
 import MesaDetails from './views/authorized_user/MesaDetails';
 import ServicioDetails from './views/authorized_user/ServicioDetails';
+import RealizarPedido from './views/authorized_user/RealizarPedido';
 function App() {  
 
     const[tokenState, setTokenState] = useState<String>("");
@@ -29,6 +30,7 @@ function App() {
                   <Route path="/mesas/:mesaid" element={<RequireAuth><MesaDetails/></RequireAuth>}/>
                   <Route path="/mesas/:mesaid/servicios/:servicioid" element={<RequireAuth><ServicioDetails/></RequireAuth>}/>
                   <Route path="/platos" element={<RequireAuth><></></RequireAuth>}/>
+                  <Route path="/mesas/:mesaid/servicios/:servicioid/add" element={<RequireAuth><RealizarPedido/></RequireAuth>}/>
               </Routes>
           </BrowserRouter>
       </>
