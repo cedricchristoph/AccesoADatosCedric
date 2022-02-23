@@ -92,6 +92,10 @@ export default function MesaDetails() {
         );
     }
 
+    function editarMesa () {
+        navigate("/mesas/editar/" + mesaid);
+    }
+
     return (
         <>
             <div className="container">
@@ -99,6 +103,7 @@ export default function MesaDetails() {
                 <>
                 <h1>Mesa {state?.mesa?.nummesa}</h1>
                 <p>Ocupación máxima: {state?.mesa?.ocupantesmax} personas</p>
+                <button onClick={editarMesa}>Editar mesa</button><br/><br/>
                 {state?.servicioActual != null ? (
                     <>
                         <p>Mesa está en uso actualmente</p>

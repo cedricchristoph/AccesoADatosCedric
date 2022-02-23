@@ -16,6 +16,8 @@ import NoAuthorization from './views/NoAuthorization';
 import { RequireAdminAuth } from './components/RequireAdminAuth';
 import EditarPlato from './views/authorized_admin/EditarPlato';
 import AddPlato from './views/authorized_admin/AddPlato';
+import AddMesa from './views/authorized_admin/AddMesa';
+import EditMesa from './views/authorized_admin/EditMesa';
 function App() {  
 
     const[tokenState, setTokenState] = useState<String>("");
@@ -34,6 +36,8 @@ function App() {
 
                   <Route path="/mesas" element={<RequireAuth><Mesas/></RequireAuth>}/>
                   <Route path="/mesas/:mesaid" element={<RequireAuth><MesaDetails/></RequireAuth>}/>
+                  <Route path="/mesas/add" element={<RequireAdminAuth><AddMesa/></RequireAdminAuth>}/>
+                  <Route path="/mesas/editar/:mesaid" element={<RequireAdminAuth><EditMesa/></RequireAdminAuth>}/>
                   <Route path="/mesas/:mesaid/servicios/:servicioid" element={<RequireAuth><ServicioDetails/></RequireAuth>}/>
                   <Route path="/platos" element={<RequireAuth><PlatosAdmin/></RequireAuth>}/>
                   <Route path="/mesas/:mesaid/servicios/:servicioid/add" element={<RequireAuth><RealizarPedido/></RequireAuth>}/>

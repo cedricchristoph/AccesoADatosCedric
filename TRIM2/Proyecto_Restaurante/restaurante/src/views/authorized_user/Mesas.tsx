@@ -29,11 +29,16 @@ export default function Mesas () {
         asyncLoadMesas();
     }, []);
 
+    function addMesa() {
+        navigate("/mesas/add");
+    }
+
     return (
         <>
         <div className='container'>
             <h1>Mesas</h1>
-            {state?.length === 0 ? <span className='loader'/> : state?.map((m) => <MesaCard mesa={m} />)}
+            <button onClick={addMesa}>Añadir una mesa</button><br/><br/>
+            {state?.length === 0 || state == null ? <span className='loader'/> : state?.map((m) => <MesaCard mesa={m} />)}
             
         </div>
         </>
