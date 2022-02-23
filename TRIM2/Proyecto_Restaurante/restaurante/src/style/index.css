@@ -380,6 +380,20 @@ body {
   color: #db1b1b;
 }
 
+.red-button {
+  background-color: #db1b1b;
+  color: white;
+}
+
+.red-button:hover {
+  background-color: #c21515;
+  color: white;
+}
+.red-button:active {
+  background-color: #a71111;
+  color: white;
+}
+
 .red-green-button {
   background-color: #db1b1b;
   color: white;

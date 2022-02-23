@@ -1,8 +1,9 @@
 
 import axios from "axios";
 import { stat } from "fs";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Navigate, useNavigate, useParams } from "react-router-dom";
+import { EventEmitter } from "stream";
 import IServicio from "../../model/entity/IServicio";
 import ApiUtil from "../../model/util/ApiUtil";
 import StringUtils from "../../model/util/StringUtils";
@@ -17,11 +18,15 @@ export default function ServicioDetails () {
     let navigate = useNavigate();
 
     useEffect(() => {
+        let token:string = localStorage.getItem("token") as string;
+            const headers = {
+                headers: { Authorization: token }
+            }
         const asyncLoadServicio = async () => {
             let url = ApiUtil.getApiUrl() + "v2/mesas/" + mesaid + "/servicios/" + servicioid; 
-            let {data} = await axios.get(url);
+            let {data} = await axios.get(url, headers);
             let servicio: IServicio = data;
-            let totalResponse = await axios.get(url + "/total");
+            let totalResponse = await axios.get(url + "/total", headers);
             let total: Number = totalResponse.data;
             console.log(servicio);
             console.log(total);
@@ -29,6 +34,7 @@ export default function ServicioDetails () {
         }
         asyncLoadServicio();
     }, []);
+
 
     function pagarYTerminarServicio () {
         
@@ -52,6 +58,31 @@ export default function ServicioDetails () {
 
     function nuevoPedido() {
         navigate("/mesas/" + mesaid + "/servicios/" + servicioid + "/add");
+    }
+
+    function eliminarPedido(event: React.MouseEvent<HTMLButtonElement>) {
+        event.preventDefault();
+        let boton = event.currentTarget as HTMLButtonElement;
+        let id = boton.id
+        let token:string = localStorage.getItem("token") as string;
+            const headers = {
+                headers: { Authorization: token }
+            }
+        const asyncDelete = async () => {
+            await axios.delete(ApiUtil.getApiUrl() + "v2/mesas/" + mesaid + "/servicios/" + servicioid + "/detallesfactura/" + id);
+            let newState: IState = {total: state.total, addProduct: state.addProduct, servicio: state.servicio}
+            setState(newState);
+        }
+        asyncDelete();
+    }
+
+    
+    function editarPedido(event: React.MouseEvent<HTMLButtonElement>) {
+        event.preventDefault();
+        let boton = event.currentTarget as HTMLButtonElement;
+        let id = boton.id
+        navigate("/mesas/" + mesaid + "/servicios/" + servicioid + "/pedidos/" + id);
+
     }
 
     return (
@@ -81,8 +112,8 @@ export default function ServicioDetails () {
                     <td>{d.cantidad}</td>
                     <td>{d.preciounidad} €</td>
                     <td>
-                        <button>X</button>
-                        <button>Edit</button>
+                        <button id={d.iddetallefactura + ""} onClick={eliminarPedido}>X</button>
+                        <button id={d.iddetallefactura + ""} onClick={editarPedido}>Editar</button>
                     </td>
                 </tr>)}
             </table>

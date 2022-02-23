@@ -8,6 +8,7 @@ export default function PlatosAdmin() {
     const [stPlatos, setStPlatos] = useState<Array<IPlato>>();
 
     let navigate = useNavigate();
+    let refresh: Boolean = true;
 
     useEffect(() => {
         let token: string = localStorage.getItem("token") as string;
@@ -30,10 +31,11 @@ export default function PlatosAdmin() {
         loadPlatos();
     }, []);
 
+
     function selectPlato (event: React.MouseEvent<HTMLButtonElement>) {
         let boton = event.currentTarget as HTMLButtonElement;
         let idplato: Number = Number.parseInt(boton.id);
-        navigate("/platos/" + idplato);
+        navigate("/platos/editar/" + idplato);
     }
 
     function disponible(event: React.MouseEvent<HTMLButtonElement>) {
@@ -84,14 +86,15 @@ export default function PlatosAdmin() {
         asyncAgotado();
     }
 
+    function addPlato() {
+        navigate("/platos/add");
+    }
 
     return (
         <>
             <div className="container">
                 <h1>Administración de platos</h1>
-                <button>Mostrar disponibles</button>
-                <button>Mostrar agotados</button>
-                <button>Mostrar todos</button>
+                <button className="submit-button" onClick={addPlato}>Añadir nuevo plato</button>
                 <br /><br/>
                 {stPlatos?.map((p) => (
                     <>
