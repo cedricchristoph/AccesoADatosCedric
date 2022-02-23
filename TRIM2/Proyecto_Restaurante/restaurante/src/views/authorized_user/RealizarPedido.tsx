@@ -126,6 +126,10 @@ export default function RealizarPedido () {
         
     }
 
+    function resetSelection() {
+        setState({mesa: state.mesa, pedido: state.pedido, servicio: state.servicio, plato: null});
+    }
+
     return (
 
         <>
@@ -140,9 +144,14 @@ export default function RealizarPedido () {
             </> 
             : 
             <>
+            <div className="container border">
+                <p>Producto seleccionado</p>
+                <h3>{state.plato.nombre}</h3>
+                <button onClick={resetSelection}>Cambiar selección</button>
+            </div><br/>
             <h3>Seleccionar cantidad del producto</h3>
             <form onSubmit={crearPedido}>
-                <input type="text" id="cantidad" placeholder="Introducir cantidad"/>
+                <input type="text" id="cantidad" placeholder="Introducir cantidad"/><br/>
                 <input type="submit" className="submit-button" value="Realizar pedido"/>
             </form>
             </>

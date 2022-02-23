@@ -5,6 +5,11 @@ const getFormattedDate = (milis: any) => {
     return date + " " + time;
 }
 
+function formatDate(string: string){
+    let options = { year: 'numeric', month: 'long', day: 'numeric' };
+    return new Date(string).getTime();
+}
+
 const StringUtils = {
     getFormattedDate
 }

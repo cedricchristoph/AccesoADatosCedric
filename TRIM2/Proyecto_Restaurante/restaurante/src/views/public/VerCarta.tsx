@@ -24,7 +24,7 @@ export default function VerCarta () {
                 <div className='plato-card'>
                     <p><b>{p.nombre}</b></p>
                     <p>{p.descripcion}</p> 
-                    <h3>{p.preciounidad} €</h3>   
+                    {p.disponible === 0 ? <h3 className='error-msg'>Agotado</h3> : <h3>{p.preciounidad} €</h3>}
                 </div> <br/>
                 </>
             )}

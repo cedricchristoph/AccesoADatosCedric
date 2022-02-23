@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom';
+import VerCarta from './public/VerCarta';
 
 interface IProps {setTokenState: Function}
 export default function Logout(props: IProps) {
@@ -7,9 +8,9 @@ export default function Logout(props: IProps) {
 
     return (
     <>
-    {localStorage.removeItem("token")}
-    {props.setTokenState("")}
-    {navigate("/")}
+        {localStorage.removeItem("token")}
+        {props.setTokenState("")}
+        <VerCarta/>
     </>
     );
 

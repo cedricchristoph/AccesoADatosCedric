@@ -81,7 +81,7 @@ export default function ServicioDetails () {
         event.preventDefault();
         let boton = event.currentTarget as HTMLButtonElement;
         let id = boton.id
-        navigate("/mesas/" + mesaid + "/servicios/" + servicioid + "/pedidos/" + id);
+        navigate("/mesas/" + mesaid + "/servicios/" + servicioid + "/detallesfactura/editar/" + id);
 
     }
 
